@@ -34,4 +34,15 @@ public class Coordonnees
 		
 		return new Coordonnees(l, h);
 	}
+	
+	
+	
+	/**soustrait des coordonnées aux coordonnées courantes*/
+	public Coordonnees soustrait(Coordonnees coord)
+	{
+		int l = this.largeur - coord.getLargeur();
+		int h = this.hauteur - coord.getHauteur();
+		
+		return new Coordonnees(l, h);
+	}
 }
