@@ -29,10 +29,10 @@ public abstract class Robot
 	abstract void dégat(String cause);
 	
 	
-	/**attaque la cible de coordonnée c*/
+	/**attaque la cible de coordonnée c (pour piégeur)*/
 	abstract boolean attaque(Coordonnees c);
 	
-	/**attaque la cible*/
+	/**attaque la cible (pour tireur,char)*/
 	boolean attaque(Robot cible)
 	{
 		if(verifier_portée(cible.getCoord()))
@@ -56,11 +56,13 @@ public abstract class Robot
 		this.coord = coord;
 	}
 
-	public int getEnergie() {
+	public int getEnergie() 
+	{
 		return energie;
 	}
 
-	public void setEnergie(int energie) {
+	public void setEnergie(int energie) 
+	{
 		this.energie = energie;
 	}
 	
