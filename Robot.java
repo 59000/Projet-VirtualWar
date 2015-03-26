@@ -12,11 +12,11 @@ public abstract class Robot {
 	/** deplace le robot selon une direction */
 	abstract void deplacement(int direction);
 
-	/** augmente l'énergie du robot de 2 en 2 */
+	/** augmente l'energie du robot en base de 2 */
 	void regeneration() {
 		setEnergie(getEnergie()
 				+ (this.getCoord().equals(new Coordonnees(0, 0)) ? 2 : 0));
-		// pour la compréhension de tous : "identique aux lignes du dessous"
+		// pour la comprehension de tous : "identique aux lignes du dessous"
 
 		/*
 		 * if(this.getCoord().equals(new Coordonnees(0, 0))) { energie+=2; }
@@ -24,23 +24,22 @@ public abstract class Robot {
 	}
 
 	/** diminue l'energie du robot */
-	abstract void dégat(String cause);
+	abstract void degat(String cause);
 
-	/** attaque la cible de coordonnée c (pour piégeur) */
+	/** attaque la cible de coordonnee c (pour piegeur) */
 	abstract boolean attaque(Coordonnees c);
 
 	/** attaque la cible (pour tireur,char) */
 	boolean attaque(Robot cible) {
-		if (verifier_portée(cible.getCoord())) {
-			cible.dégat("cible");
+		if (verifier_portee(cible.getCoord())) {
+			cible.degat("cible");
 			return true;
 		}
 
 		return false;
 	}
-	
-	/** vérifie si le robot a la portée nécessaire pour tirer */
-	abstract protected boolean verifier_portée(Coordonnees c);
+
+	abstract protected boolean verifier_portee(Coordonnees c);
 
 	public Coordonnees getCoord() {
 		return coord;
@@ -65,4 +64,5 @@ public abstract class Robot {
 	public void setEquipe(int equipe) {
 		this.equipe = equipe;
 	}
+
 }
