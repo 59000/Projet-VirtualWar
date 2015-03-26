@@ -20,7 +20,7 @@ public abstract class Cellule extends Coordonnees {
 	}
 
 	public Robot getContenu() {
-		// je vois pas comment on detecte si return un robot dc ...
+		// Je ne sais pas detecter le return d'un robot
 		return null;
 	}
 
