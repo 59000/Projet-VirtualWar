@@ -14,8 +14,15 @@ public abstract class Robot
 	/** deplace le robot selon une diréction*/
 	abstract void deplacement(int direction);
 	
-	/**augmente l'energie du robot en base*/
-	abstract void regeneration();
+	/**augmente l'energie du robot en base de 2*/
+	void regeneration()
+	{
+		energie += this.getCoord().equals(new Coordonnees(0, 0)) ? 2:0;
+		/*if(this.getCoord().equals(new Coordonnees(0, 0)))
+		{
+			energie+=2;
+		}*/
+	}
 	
 	/**diminue l'energie du robot*/
 	void dégat(int valeur)
