@@ -17,7 +17,7 @@ public abstract class Robot
 	/**augmente l'energie du robot en base de 2*/
 	void regeneration()
 	{
-		energie += this.getCoord().equals(new Coordonnees(0, 0)) ? 2:0;
+		energie += this.getCoord().equals(new Coordonnees(0, 0)) ? 2:0;//pour la compréhansion de tous : "identique aux lignes du dessou"
 		/*if(this.getCoord().equals(new Coordonnees(0, 0)))
 		{
 			energie+=2;
