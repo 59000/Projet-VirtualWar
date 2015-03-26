@@ -38,7 +38,8 @@ public abstract class Robot {
 
 		return false;
 	}
-
+	
+	/** vérifie si le robot a la portée nécessaire pour tirer */
 	abstract protected boolean verifier_portée(Coordonnees c);
 
 	public Coordonnees getCoord() {
