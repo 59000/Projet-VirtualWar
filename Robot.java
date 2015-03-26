@@ -4,11 +4,11 @@ public abstract class Robot
 	private int equipe;
 	private int energie;
 	
-	public Robot(int equipe) 
+	public Robot(int equipe,int energie) 
 	{
 		setCoord(new Coordonnees(0, 0));
 		this.equipe = equipe;
-		energie = 0;
+		this.energie = energie;
 	}
 	
 	/** deplace le robot selon une diréction*/
