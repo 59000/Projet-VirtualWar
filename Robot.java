@@ -65,5 +65,4 @@ public abstract class Robot {
 	public void setEquipe(int equipe) {
 		this.equipe = equipe;
 	}
-	
 }
