@@ -1,7 +1,7 @@
 public class Tireur extends Robot {
 
-	public Tireur(int equipe) {
-		super(equipe, 40);
+	public Tireur(int equipe,int numero) {
+		super(equipe,numero, 40);
 	}
 
 	/**
