@@ -1,6 +1,6 @@
 public class Piegeur extends Robot {
-	public Piegeur(int equipe) {
-		super(equipe, 50);
+	public Piegeur(int equipe,int numero) {
+		super(equipe,numero, 50);
 	}
 
 	/**
