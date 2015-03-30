@@ -1,7 +1,7 @@
 public class Char extends Robot {
 
-	public Char(int equipe) {
-		super(equipe, 60);
+	public Char(int equipe,int numero) {
+		super(equipe,numero, 60);
 	}
 
 	/**
