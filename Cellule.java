@@ -1,6 +1,7 @@
-public abstract class Cellule extends Coordonnees {
+public /*abstract*/ class Cellule extends Coordonnees {//pas sur qu'on ai besoin du abstract
 	protected int mine;
 	protected int base;
+	protected Robot robot;
 	String image;
 
 	public Cellule(int largeur, int hauteur) {
@@ -20,19 +21,17 @@ public abstract class Cellule extends Coordonnees {
 	}
 
 	public Robot getContenu() {
-		// Je ne sais pas detecter le return d'un robot
-		return null;
+		return robot;
 	}
 
 	@Override
 	public String toString() {
-		return "Cellule [mine=" + mine + ", base=" + base + ", image=" + image
-				+ "]";
+		return "Cellule [mine=" + mine + ", base=" + base + ", image=" + image + ", robot=" + robot+ "]";
 	}
 
-	abstract void deplaceSur(Robot robot);
+	/*abstract void deplaceSur(Robot robot);
 
 	abstract void ajout(int equipes);
 
-	abstract void videCase();
+	abstract void videCase();*///pas sur qu'on ai besoin du abstract
 }
