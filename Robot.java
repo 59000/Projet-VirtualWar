@@ -2,11 +2,13 @@ public abstract class Robot {
 	private Coordonnees coord;
 	private int equipe;
 	private int energie;
+	private int numero;//le numero qui identifie le robot dans l'équipe
 
-	public Robot(int equipe, int energie) {
+	public Robot(int equipe,int numero, int energie) {
 		setCoord(new Coordonnees(0, 0));
 		this.setEquipe(equipe);
 		this.setEnergie(energie);
+		this.numero=numero;
 	}
 
 	/** deplace le robot selon une direction */
