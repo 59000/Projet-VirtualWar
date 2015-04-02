@@ -1,3 +1,4 @@
+
 public class Plateau 
 {
 	private Cellule[][] plateau;
@@ -22,8 +23,24 @@ public class Plateau
 		{
 			for (int l = 0; l < plateau[h].length; l++) 
 			{
-				areturn = "+--";//pas fini et marche pas
+				if(plateau[l][h].estBase()!=0)
+				{
+					areturn+="B";
+				}
+				else if(plateau[l][h].contienMine()!=0)
+				{
+					areturn+="M";
+				}
+				else if(plateau[l][h].getContenu()!=null)
+				{
+					areturn+="R";
+				}
+				else
+				{
+					areturn+=".";
+				}
 			}
+			areturn+="\n";
 		}
 		
 		return areturn;
@@ -32,9 +49,9 @@ public class Plateau
 	public static void main(String[] args) 
 	{
 		Plateau p = new Plateau(5, 5);
+		p.plateau[2][2].
 		
 		System.out.println(p);
 		
 	}
 }
-
