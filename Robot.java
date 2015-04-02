@@ -2,7 +2,7 @@ public abstract class Robot {
 	private Coordonnees coord;
 	private int equipe;
 	private int energie;
-	private int numero;//le numero qui identifie le robot dans l'équipe
+	private final int numero;//le numero qui identifie le robot dans l'équipe
 
 	public Robot(int equipe,int numero, int energie) {
 		setCoord(new Coordonnees(0, 0));
@@ -65,6 +65,11 @@ public abstract class Robot {
 
 	public void setEquipe(int equipe) {
 		this.equipe = equipe;
+	}
+
+	public int getNumero() 
+	{
+		return numero;
 	}
 
 }
