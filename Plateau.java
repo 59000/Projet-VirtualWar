@@ -89,20 +89,34 @@ public class Plateau
 		Plateau p = new Plateau(10, 10);
 		p.plateau[0][0].base=1;
 		p.plateau[9][9].base=2;
+		
+		Robot t1=new Tireur(1, 1);
+		Robot t2=new Tireur(2, 1);
+		Robot c1=new Char(1, 2);
+		Robot c2=new Char(2, 2);
+		Robot p1=new Piegeur(1, 3);
+		Robot p2=new Piegeur(2, 3);
+		
+		p.plateau[0][1].robot=t1;
+		p.plateau[0][2].robot=t2;
+		p.plateau[0][3].robot=p1;
+		p.plateau[0][4].robot=p2;
+		p.plateau[0][5].robot=c1;
+		p.plateau[0][6].robot=c2;
+		
 		System.out.println(p);
 		try 
 		{
-			Thread.sleep(4000);
+			Thread.sleep(1000);//dodo 1 sec
 		} 
 		catch (InterruptedException e) 
 		{
 			e.printStackTrace();
 		}
 		
-		Robot t1=new Tireur(1, 1);
-		Robot t2=new Tireur(2, 1);
-		
+		p1.deplacement(6);
+		c2.deplacement(6);
 		System.out.println(p);
-		
+		//mank les set de déplacement ds tt les classe
 	}
 }
