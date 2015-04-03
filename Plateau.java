@@ -23,17 +23,55 @@ public class Plateau
 		{
 			for (int l = 0; l < plateau[h].length; l++) 
 			{
-				if(plateau[l][h].estBase()!=0)
+				Cellule c = plateau[l][h];
+				if(c.estBase()==1)
 				{
 					areturn+="B";
 				}
-				else if(plateau[l][h].contienMine()!=0)
+				else if(c.estBase()==2)
+				{
+					areturn+="b";
+				}
+				else if(c.contienMine()==1)
 				{
 					areturn+="M";
 				}
-				else if(plateau[l][h].getContenu()!=null)
+				else if(c.contienMine()==2)
 				{
-					areturn+="R";
+					areturn+="m";
+				}
+				else if(c.getContenu()!=null)
+				{
+					if(c.getContenu().getEquipe()==1)
+					{
+						if(c.getContenu() instanceof Char)
+						{
+							areturn+="C";
+						}
+						else if(c.getContenu() instanceof Tireur)
+						{
+							areturn+="T";
+						}
+						else if(c.getContenu() instanceof Piegeur)
+						{
+							areturn+="P";
+						}
+					}
+					else
+					{
+						if(c.getContenu() instanceof Char)
+						{
+							areturn+="c";
+						}
+						else if(c.getContenu() instanceof Tireur)
+						{
+							areturn+="t";
+						}
+						else if(c.getContenu() instanceof Piegeur)
+						{
+							areturn+="p";
+						}
+					}
 				}
 				else
 				{
@@ -48,8 +86,21 @@ public class Plateau
 	
 	public static void main(String[] args) 
 	{
-		Plateau p = new Plateau(5, 5);
-		p.plateau[2][2].
+		Plateau p = new Plateau(10, 10);
+		p.plateau[0][0].base=1;
+		p.plateau[9][9].base=2;
+		System.out.println(p);
+		try 
+		{
+			Thread.sleep(4000);
+		} 
+		catch (InterruptedException e) 
+		{
+			e.printStackTrace();
+		}
+		
+		Robot t1=new Tireur(1, 1);
+		Robot t2=new Tireur(2, 1);
 		
 		System.out.println(p);
 		
