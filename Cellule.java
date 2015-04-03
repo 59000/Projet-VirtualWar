@@ -2,7 +2,7 @@ public /*abstract*/ class Cellule extends Coordonnees {//pas sur qu'on ai besoin
 	protected int mine;
 	protected int base;
 	protected Robot robot;
-	//String image; //inutile pour le momant
+	//String image; //inutile pour le moment
 
 	public Cellule(int largeur, int hauteur) {
 		super(largeur, hauteur);
