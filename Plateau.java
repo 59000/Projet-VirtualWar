@@ -114,8 +114,15 @@ public class Plateau
 			e.printStackTrace();
 		}
 		
+		
 		p1.deplacement(6);
+		
+		p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()].deplaceSur(p1);
+		p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()].videCase();
+		
+		p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()].videCase();
 		c2.deplacement(6);
+		p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()].deplaceSur(c2);
 		System.out.println(p);
 		//mank les set de déplacement ds tt les classe
 	}
