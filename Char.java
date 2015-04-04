@@ -10,16 +10,16 @@ public class Char extends Robot {
 	void deplacement(int direction) {
 		switch (direction) {
 		case 2:
-			super.getCoord().ajout(new Coordonnees(0, -2));// bas
+			super.setCoord(super.getCoord().ajout(new Coordonnees(0, -2)));// bas
 			break;
 		case 4:
-			super.getCoord().ajout(new Coordonnees(-2, 0));// gauche
+			super.setCoord(super.getCoord().ajout(new Coordonnees(-2, 0)));// gauche
 			break;
 		case 6:
-			super.getCoord().ajout(new Coordonnees(2, 0));// droite
+			super.setCoord(super.getCoord().ajout(new Coordonnees(2, 0)));// droite
 			break;
 		case 8:
-			super.getCoord().ajout(new Coordonnees(0, 2));// haut
+			super.setCoord(super.getCoord().ajout(new Coordonnees(0, 2)));// haut
 			break;
 		default:
 
