@@ -6,33 +6,33 @@ public class Piegeur extends Robot {
 	/**
 	 * direction comme sur la pavé numérique (5 est le centre) 2 le bas , 8 le haut ...
 	 */
-	void deplacement(int direction) {
+void deplacement(int direction) {
 		switch (direction) {
 		case 1:
-			super.getCoord().ajout(new Coordonnees(-1, -1));// bas gauche
+			super.setCoord(super.getCoord().ajout(new Coordonnees(-1, -1)));// bas gauche
 			break;
 		case 2:
-			super.getCoord().ajout(new Coordonnees(0, -1));// bas
+			super.setCoord(super.getCoord().ajout(new Coordonnees(0, -1)));// bas
 			break;
 		case 3:
-			super.getCoord().ajout(new Coordonnees(1, -1));// bas droite
+			super.setCoord(super.getCoord().ajout(new Coordonnees(1, -1)));// bas droite
 			break;
 		case 4:
-			super.getCoord().ajout(new Coordonnees(-1, 0));// gauche
+			super.setCoord(super.getCoord().ajout(new Coordonnees(-1, 0)));// gauche
 			break;
 		case 6:
-			super.getCoord().ajout(new Coordonnees(1, 0));// droite
+			super.setCoord(super.getCoord().ajout(new Coordonnees(1, 0)));// droite
 			break;
 		case 7:
-			super.getCoord().ajout(new Coordonnees(-1, 1));// haut gauche
+			super.setCoord(super.getCoord().ajout(new Coordonnees(-1, 1)));// haut gauche
 			break;
 		case 8:
-			super.getCoord().ajout(new Coordonnees(0, 1));// haut
+			super.setCoord(super.getCoord().ajout(new Coordonnees(0, 1)));// haut
 			break;
 		case 9:
-			super.getCoord().ajout(new Coordonnees(1, 1));// haut droite
+			super.setCoord(super.getCoord().ajout(new Coordonnees(1, 1)));// haut droite
 			break;
-
+			
 		default:
 
 			break;
