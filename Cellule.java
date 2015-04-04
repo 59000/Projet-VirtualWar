@@ -34,9 +34,19 @@ public /*abstract*/ class Cellule extends Coordonnees {//pas sur qu'on ai besoin
 		return "Cellule [mine=" + mine + ", base=" + base /*+ ", image=" + image*/ + ", robot=" + robot+ "]";
 	}
 
-	/*abstract void deplaceSur(Robot robot);
+	
+	void deplaceSur(Robot robot) {
+		if (robot.getCoord() == this.getCoordonnees()) {
+			this.robot = robot;
+		}
 
-	abstract void ajout(int equipes);
+	}
 
-	abstract void videCase();*///pas sur qu'on ai besoin du abstract
+	/*
+	 * 
+	 * 
+	 * abstract void ajout(int equipes);
+	 * 
+	 * abstract void videCase();
+	 */// pas sur qu'on ai besoin du abstract
 }
