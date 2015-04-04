@@ -1,8 +1,10 @@
-public /*abstract*/ class Cellule extends Coordonnees {//pas sur qu'on ai besoin du abstract
+public/* abstract */class Cellule extends Coordonnees {// pas sur qu'on ai besoin
+														// du abstract
 	protected int mine;
 	protected int base;
 	protected Robot robot;
-	//String image; //inutile pour le moment
+
+	// String image; //inutile pour le momant
 
 	public Cellule(int largeur, int hauteur) {
 		super(largeur, hauteur);
@@ -11,11 +13,10 @@ public /*abstract*/ class Cellule extends Coordonnees {//pas sur qu'on ai besoin
 	public int contienMine() {
 		return mine;
 	}
-	
-	/*public void set_mine(int mine)
-	{
-		this.mine=mine;
-	}*/
+
+	/*
+	 * public void set_mine(int mine) { this.mine=mine; }
+	 */
 
 	public int estBase() {
 		return base;
@@ -31,22 +32,26 @@ public /*abstract*/ class Cellule extends Coordonnees {//pas sur qu'on ai besoin
 
 	@Override
 	public String toString() {
-		return "Cellule [mine=" + mine + ", base=" + base /*+ ", image=" + image*/ + ", robot=" + robot+ "]";
+		return "Cellule [mine=" + mine + ", base=" + base /* + ", image=" + image */
+				+ ", robot=" + robot + "]";
 	}
 
-	
 	void deplaceSur(Robot robot) {
-		if (robot.getCoord() == this.getCoordonnees()) {
+		//if (robot.getCoord() == this.getCoordonnees()) {
 			this.robot = robot;
-		}
+		//}
 
 	}
-
+	void videCase()
+	{
+		this.mine=0;
+		this.robot=null;
+	}
 	/*
 	 * 
 	 * 
 	 * abstract void ajout(int equipes);
 	 * 
-	 * abstract void videCase();
+	 * abstract ;
 	 */// pas sur qu'on ai besoin du abstract
 }
