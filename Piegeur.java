@@ -1,3 +1,4 @@
+
 public class Piegeur extends Robot {
 	public Piegeur(int equipe,int numero) {
 		super(equipe,numero, 50);
@@ -6,7 +7,7 @@ public class Piegeur extends Robot {
 	/**
 	 * direction comme sur la pavé numérique (5 est le centre) 2 le bas , 8 le haut ...
 	 */
-void deplacement(int direction) {
+	void deplacement(int direction) {
 		switch (direction) {
 		case 1:
 			super.setCoord(super.getCoord().ajout(new Coordonnees(-1, -1)));// bas gauche
