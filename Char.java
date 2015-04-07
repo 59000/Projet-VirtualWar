@@ -16,7 +16,7 @@ public class Char extends Robot {
 			super.setCoord(super.getCoord().ajout(new Coordonnees(-2, 0)));// gauche
 			break;
 		case 6:
-			super.setCoord(super.getCoord().ajout(new Coordonnees(2, super.getCoord().getHauteur())));// droite
+			super.setCoord(super.getCoord().ajout(new Coordonnees(2, 0)));// droite
 			break;
 		case 8:
 			super.setCoord(super.getCoord().ajout(new Coordonnees(0, 2)));// haut
