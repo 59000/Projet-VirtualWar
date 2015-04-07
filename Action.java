@@ -1,8 +1,8 @@
 
 public abstract class Action {
-	
-	private Coordonnees coord ;
-	private Robot robot ;
+	/*Il reste a faire la methode getDirection qui renvoit un chemin pour aller a l'objectif*/
+	protected Coordonnees coord ;
+	protected Robot robot ;
 	
 	public Action (Robot robot ,Coordonnees coord){
 		this.robot=robot;
