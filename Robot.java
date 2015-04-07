@@ -1,5 +1,5 @@
 public abstract class Robot {
-	/*Rajouter les methodes abstract de l'uml sauf getType */
+	/*Supprimer les methodes inutiles et Rajouter les methodes abstract de l'uml sauf getType ainsi que les void  */
 	
 	private Coordonnees coord;
 	private int equipe;
@@ -14,26 +14,27 @@ public abstract class Robot {
 	}
 
 	/** deplace le robot selon une direction */
+	//enlever cette fonction dans les classes filles 
 	abstract void deplacement(int direction);
 
 	/** augmente l'energie du robot en base de 2 */
+	//ajouter l'enregie avec la constante REGENENBASE
 	void regeneration() {
 		setEnergie(getEnergie()
 				+ (this.getCoord().equals(new Coordonnees(0, 0)) ? 2 : 0));
-		// pour la comprehension de tous : "identique aux lignes du dessous"
-
-		/*
-		 * if(this.getCoord().equals(new Coordonnees(0, 0))) { energie+=2; }
-		 */
+	
 	}
 
 	/** diminue l'energie du robot */
+	//enlever cette fonction dans les classes filles 
 	abstract void degat(String cause);
 
 	/** attaque la cible de coordonnee c (pour piegeur) */
+	//enlever cette fonction dans les classes filles 
 	abstract boolean attaque(Coordonnees c);
 
 	/** attaque la cible (pour tireur,char) */
+	//enlever cette fonction dans les classes filles 
 	boolean attaque(Robot cible) {
 		if (verifier_portee(cible.getCoord())) {
 			cible.degat("cible");
@@ -42,7 +43,7 @@ public abstract class Robot {
 
 		return false;
 	}
-
+	//Enlever cette fonction dans les classe filles 
 	abstract protected boolean verifier_portee(Coordonnees c);
 
 	public Coordonnees getCoord() {
@@ -72,6 +73,22 @@ public abstract class Robot {
 	public int getNumero() 
 	{
 		return numero;
+	}
+	abstrat public boolean peutTirer();
+	abstract public int getCoutAction();
+	abstract public int getCoutDep();
+	abstract public int getDegatTir();
+	abstract public int getDegatMine();
+	abstract public List<Coordonnees> getDeplacement();
+	
+	public String toString(){
+		return null;
+	}
+	public void subitTir(){
+		
+	}
+	public void subitMine(){
+		
 	}
 
 }
