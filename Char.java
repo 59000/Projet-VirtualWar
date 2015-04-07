@@ -1,5 +1,5 @@
 public class Char extends Robot {
-
+/* Supprimer les methodes inutiles et utiliser les methodes des classes attaques et deplacements */
 	public Char(int equipe,int numero) {
 		super(equipe,numero, 60);
 	}
