@@ -1,5 +1,7 @@
 # Projet-VirtualWar
 C'est pas ma guerre !
 
-LapZ -> Question : Ce serait pas mieux d'organiser un peu tout le git avec un bin et un src ?
-        - Et en passant, où est l'UML ?
+Chef supreme -> Kevin , occupe toi de la classe Action , Deplacement et Plateau
+             -> Rudy , occupe toi de la classe Robot et Celulle
+             -> Quentn , occupe toi du Plateau
+             -> le chef supreme s'occupera de la paperasse ainsi que du commentage oui ce mot existe.
