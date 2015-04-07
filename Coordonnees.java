@@ -1,4 +1,6 @@
 public class Coordonnees {
+	/*Classe terminé : gg c'est la seule classe fini*/
+	
 	private int largeur;
 	private int hauteur;
 
