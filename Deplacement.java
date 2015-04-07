@@ -1,6 +1,6 @@
 
 public class Deplacement extends Action {
-	
+	/* Il faut finir la methode agit */
 	public Deplacement (Robot robot, Coordonnees coord){
 		super(robot,coord);
 	}
