@@ -1,5 +1,5 @@
 public class Tireur extends Robot {
-
+	/*Supprimer les methodes inutiles et utiliser les methodes Attaque et deplacement */
 	public Tireur(int equipe,int numero) {
 		super(equipe,numero, 40);
 	}
