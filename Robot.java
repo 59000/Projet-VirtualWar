@@ -1,4 +1,6 @@
 public abstract class Robot {
+	/*Rajouter les methodes abstract de l'uml sauf getType */
+	
 	private Coordonnees coord;
 	private int equipe;
 	private int energie;
