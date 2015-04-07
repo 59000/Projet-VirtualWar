@@ -1,5 +1,7 @@
-public/* abstract */class Cellule extends Coordonnees {// pas sur qu'on ai besoin
-														// du abstract
+public/* abstract */class Cellule extends Coordonnees {// pas sur qu'on ai besoin du abstract
+
+/*essayer de corriger les methodes deplacerSur ainsi que viderCase*/
+														
 	protected int mine;
 	protected int base;
 	protected Robot robot;
