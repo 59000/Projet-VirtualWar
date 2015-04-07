@@ -1,5 +1,6 @@
 
 public class Piegeur extends Robot {
+	/*Supprimer les methdes inutiles et utiliser les methodes des classes attaques et deplacement*/
 	public Piegeur(int equipe,int numero) {
 		super(equipe,numero, 50);
 	}
