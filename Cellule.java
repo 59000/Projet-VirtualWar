@@ -1,6 +1,6 @@
-public/* abstract */class Cellule extends Coordonnees {// pas sur qu'on ai besoin du abstract
+public class Cellule extends Coordonnees {
 
-/*essayer de corriger les methodes deplacerSur ainsi que viderCase*/
+/*essayer de corriger les methodes deplacerSur ainsi que viderCase et le void ajout*/
 														
 	protected int mine;
 	protected int base;
@@ -38,22 +38,18 @@ public/* abstract */class Cellule extends Coordonnees {// pas sur qu'on ai besoi
 				+ ", robot=" + robot + "]";
 	}
 
-	void deplaceSur(Robot robot) {
+	public void deplaceSur(Robot robot) {
 		//if (robot.getCoord() == this.getCoordonnees()) {
 			this.robot = robot;
 		//}
 
 	}
-	void videCase()
+	public void videCase()
 	{
 		this.mine=0;
 		this.robot=null;
 	}
-	/*
-	 * 
-	 * 
-	 * abstract void ajout(int equipes);
-	 * 
-	 * abstract ;
-	 */// pas sur qu'on ai besoin du abstract
+	public void ajout(int equipe){
+		
+	}
 }
