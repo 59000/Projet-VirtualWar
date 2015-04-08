@@ -1,5 +1,7 @@
+import java.util.List;
+
 public abstract class Robot {
-	/*Supprimer les methodes inutiles et Rajouter les methodes abstract de l'uml sauf getType ainsi que les void  */
+	/*implémenter les fonctions présentes*/
 	
 	private Coordonnees coord;
 	private int equipe;
@@ -13,38 +15,13 @@ public abstract class Robot {
 		this.numero=numero;
 	}
 
-	/** deplace le robot selon une direction */
-	//enlever cette fonction dans les classes filles 
-	abstract void deplacement(int direction);
+	
 
 	/** augmente l'energie du robot en base de 2 */
-	//ajouter l'enregie avec la constante REGENENBASE
 	void regeneration() {
-		setEnergie(getEnergie()
-				+ (this.getCoord().equals(new Coordonnees(0, 0)) ? 2 : 0));
-	
+		setEnergie(getEnergie()+ (this.getCoord().equals(new Coordonnees(0, 0)) ? Constante.REGENENBASE : 0));
+		// condition foireuse si la base est pas en 0.0 mais comment on récupére les coordoné de la base ?
 	}
-
-	/** diminue l'energie du robot */
-	//enlever cette fonction dans les classes filles 
-	abstract void degat(String cause);
-
-	/** attaque la cible de coordonnee c (pour piegeur) */
-	//enlever cette fonction dans les classes filles 
-	abstract boolean attaque(Coordonnees c);
-
-	/** attaque la cible (pour tireur,char) */
-	//enlever cette fonction dans les classes filles 
-	boolean attaque(Robot cible) {
-		if (verifier_portee(cible.getCoord())) {
-			cible.degat("cible");
-			return true;
-		}
-
-		return false;
-	}
-	//Enlever cette fonction dans les classe filles 
-	abstract protected boolean verifier_portee(Coordonnees c);
 
 	public Coordonnees getCoord() {
 		return coord;
@@ -74,16 +51,22 @@ public abstract class Robot {
 	{
 		return numero;
 	}
-	abstrat public boolean peutTirer();
+	abstract public boolean peutTirer();
 	abstract public int getCoutAction();
 	abstract public int getCoutDep();
 	abstract public int getDegatTir();
 	abstract public int getDegatMine();
 	abstract public List<Coordonnees> getDeplacement();
 	
-	public String toString(){
-		return null;
+	
+	@Override
+	public String toString() {
+		return "Robot [coord=" + coord + ", equipe=" + equipe +  ", numero=" + numero + ", energie="
+				+ energie + "]";
 	}
+
+
+
 	public void subitTir(){
 		
 	}
