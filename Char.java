@@ -1,71 +1,44 @@
-public class Char extends Robot {
-/* Supprimer les methodes inutiles et utiliser les methodes des classes attaques et deplacements */
+import java.util.List;
+
+public class Char extends Robot {/*implémenter*/
+	
 	public Char(int equipe,int numero) {
-		super(equipe,numero, 60);
+		super(equipe,numero, Constante.ENERGIECHAR);
 	}
 
-	/**
-	 * direction selon le pavé numérique (5 est le centre) 2 le bas , 8 le haut ...
-	 */
-	void deplacement(int direction) {
-		switch (direction) {
-		case 2:
-			super.setCoord(super.getCoord().ajout(new Coordonnees(0, -2)));// bas
-			break;
-		case 4:
-			super.setCoord(super.getCoord().ajout(new Coordonnees(-2, 0)));// gauche
-			break;
-		case 6:
-			super.setCoord(super.getCoord().ajout(new Coordonnees(2, 0)));// droite
-			break;
-		case 8:
-			super.setCoord(super.getCoord().ajout(new Coordonnees(0, 2)));// haut
-			break;
-		default:
-
-			break;
-		}
-	}
-
-	protected boolean verifier_portee(Coordonnees c) {
-		Coordonnees resultat = super.getCoord().soustrait(c);
-		boolean portee_haute = (resultat.getHauteur() <= 10 && resultat.getLargeur() == 0) ? true : false;
-		boolean portee_basse = (resultat.getHauteur() >= -10 && resultat.getLargeur() == 0) ? true : false;
-		boolean portee_gauche = (resultat.getLargeur() >= -10 && resultat.getHauteur() == 0) ? true : false;
-		boolean portee_droite = (resultat.getLargeur() <= 10 && resultat.getHauteur() == 0) ? true : false;
-
-		if (portee_haute || portee_basse || portee_gauche || portee_droite) {
-			return true;
-		}
+	@Override
+	public boolean peutTirer() {
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	void degat(String cause) {
-		switch (cause) {
-		case "attaque":
-			super.setEnergie(super.getEnergie() - 1);
-			break;
-		case "cible":
-			super.setEnergie(super.getEnergie() - 6);
-			break;
-		case "avance":
-			super.setEnergie(super.getEnergie() - 5);
-			break;
-
-		default:
-			break;
-		}
+	public int getCoutAction() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	@Override
-	boolean attaque(Coordonnees c) {
-		if (verifier_portee(c)) {
-
-			return true;
-		}
-
-		return false;
+	public int getCoutDep() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
+	@Override
+	public int getDegatTir() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int getDegatMine() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<Coordonnees> getDeplacement() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
