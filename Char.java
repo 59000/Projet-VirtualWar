@@ -1,7 +1,8 @@
 import java.util.List;
 
 public class Char extends Robot {/*implémenter*/
-	
+
+	/*faire les methodes peutTirer() et getDeplacement()*/
 	public Char(int equipe,int numero) {
 		super(equipe,numero, Constante.ENERGIECHAR);
 	}
@@ -15,19 +16,19 @@ public class Char extends Robot {/*implémenter*/
 	@Override
 	public int getCoutAction() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Constante.COUTTIRERCHAR;
 	}
 
 	@Override
 	public int getCoutDep() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Constante.COUTAVANCERCHAR;
 	}
 
 	@Override
 	public int getDegatTir() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Constante.DEGATCHAR;
 	}
 
 	@Override
