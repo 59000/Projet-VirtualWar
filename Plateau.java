@@ -1,6 +1,6 @@
 public class Plateau {
 	
-	/*Faire un joli Plateau comme dans l'exemple sur le jalon a rendre */
+	/*Faire un joli Plateau comme dans l'exemple sur le jalon a rendre  =- FAIT*/
 	private Cellule[][] plateau;
 
 	public Plateau(int largeur, int hauteur) {
@@ -14,9 +14,17 @@ public class Plateau {
 	}
 
 	public String toString() {
-		String areturn = "";
+		String areturn = ""; // String contenant l'affichage du pateau
 		for (int h = 0; h < plateau.length; h++) {
+			// Haut du plateau
+			for (int i = 0; i < plateau.length; i++) areturn += "+---";
+			areturn += "+\n";
+			
+			//Cellules
 			for (int l = 0; l < plateau[h].length; l++) {
+				// Encadrement gauche des cellules
+				areturn += "| ";
+				// Contenus de la cellule
 				Cellule c = plateau[l][h];
 				if (c.estBase() == 1) {
 					areturn += "B";
@@ -47,9 +55,15 @@ public class Plateau {
 				} else {
 					areturn += ".";
 				}
+				// Encadrement Droit du plateau
+				areturn += " ";
 			}
-			areturn += "\n";
+			areturn += "|\n";
 		}
+		
+		// Bas du plateau
+		for (int i = 0; i < plateau.length; i++) areturn += "+---";
+		areturn += "+\n";
 
 		return areturn;
 	}
@@ -80,7 +94,7 @@ public class Plateau {
 			e.printStackTrace();
 		}
 
-		p1.deplacement(6);
+	/*	p1.deplacement(6);
 
 		p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()]
 				.deplaceSur(p1);
@@ -93,6 +107,6 @@ public class Plateau {
 		p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()]
 				.deplaceSur(c2);
 		System.out.println(p);
-		// mank les set de déplacement ds tt les classe
+		// mank les set de déplacement ds tt les classe*/
 	}
 }

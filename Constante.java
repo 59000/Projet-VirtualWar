@@ -7,10 +7,10 @@ public class Constante {
 	
 	public static final int DEPLACEMENTTIREUR = 1;
 	public static final int DEPLACEMENTPIEGEUR = 1;
-	public static final int DEPLACEMENTCHAR = 1;
+	public static final int DEPLACEMENTCHAR = 2;
 	
 	
-	
+
 	public static final int ENERGIETIREUR = 40;
 	public static final int ENERGIEPIEGEUR = 50;
 	public static final int ENERGIECHAR = 60;

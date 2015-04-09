@@ -28,5 +28,14 @@ public class Attaque extends Action {
 
 
 
+	@Override
+	public void agit() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+
 	
 }

@@ -1,18 +1,18 @@
-
 public class Deplacement extends Action {
 	/* Il faut finir la methode agit */
-	public Deplacement (Robot robot, Coordonnees coord){
-		super(robot,coord);
+	public Deplacement(Robot robot, Coordonnees coord) {
+		super(robot, coord);
 	}
 
 	@Override
-	public void agit(Robot robot) {
-		if(this.robot instanceof Char){
-			this.robot.setCoord(this.robot.getCoord().ajout(new Coordonnees(0, -2)));
-			/* PAs du tout fini , c'etait juste un test pour voir si ça marche*/
+	public void agit() {
+		if (this.robot instanceof Char) {
+			this.robot.setCoord(this.robot.getCoord().ajout(coord));
+		} else if (this.robot instanceof Tireur) {
+			this.robot.setCoord(this.robot.getCoord().ajout(coord));
+		} else  if (this.robot instanceof Piegeur) {
+			this.robot.setCoord(this.robot.getCoord().ajout(coord));
 		}
-		
-	}
-	
 
+	}
 }
