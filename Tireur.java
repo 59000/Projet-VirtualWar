@@ -3,6 +3,8 @@ import java.util.List;
 public class Tireur extends Robot {
 
 	public Tireur(int equipe,int numero) {/*implémenter*/
+		
+		/*faire les methodes peutTirer() et getDeplacement()*/
 		super(equipe,numero, 40);
 	}
 
@@ -15,19 +17,19 @@ public class Tireur extends Robot {
 	@Override
 	public int getCoutAction() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Constante.COUTTIRERTIREUR;
 	}
 
 	@Override
 	public int getCoutDep() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Constante.COUTAVANCERTIREUR;
 	}
 
 	@Override
 	public int getDegatTir() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Constante.DEGATTIREUR;
 	}
 
 	@Override
