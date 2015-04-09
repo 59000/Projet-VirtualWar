@@ -2,6 +2,8 @@ import java.util.List;
 
 
 public class Piegeur extends Robot {/*implémenter*/
+	
+	/*faire les methodes peutTirer() et getDeplacement()*/
 	public Piegeur(int equipe,int numero) {
 		super(equipe,numero, 50);
 	}
@@ -15,13 +17,13 @@ public class Piegeur extends Robot {/*implémenter*/
 	@Override
 	public int getCoutAction() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Constante.COUTMINER;
 	}
 
 	@Override
 	public int getCoutDep() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Constante.COUTAVANCERPIEGEUR;
 	}
 
 	@Override
@@ -33,7 +35,7 @@ public class Piegeur extends Robot {/*implémenter*/
 	@Override
 	public int getDegatMine() {
 		// TODO Auto-generated method stub
-		return 0;
+		return Constante.DEGATPIEGEUR;
 	}
 
 	@Override
