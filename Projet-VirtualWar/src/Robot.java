@@ -70,8 +70,8 @@ public abstract class Robot {
 	public void subitTir(){
 		
 	}
-	public void subitMine(){
-		
+	public void subitMine() {
+		setEnergie(getEnergie()-Constante.DEGATPIEGEUR);
 	}
 
 }
