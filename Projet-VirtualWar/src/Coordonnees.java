@@ -1,6 +1,6 @@
 public class Coordonnees {
-	/*Classe terminé : gg c'est la seule classe fini*/
-	
+	/* Classe terminé : gg c'est la seule classe fini */
+
 	private int largeur;
 	private int hauteur;
 
@@ -19,6 +19,16 @@ public class Coordonnees {
 		return hauteur;
 	}
 
+	/** permet de changer la hauteur */
+	public void setHauteur(int h) {
+		hauteur = h;
+	}
+
+	/** permet de changer la largeur */
+	public void setLargeur(int l) {
+		largeur = l;
+	}
+
 	/** retourne les coordonnée sous la forme "[x;y]" */
 	public String toString() {
 		return "[" + this.largeur + ";" + this.hauteur + "]";
@@ -32,6 +42,4 @@ public class Coordonnees {
 		return new Coordonnees(l, h);
 	}
 
-	
-	
 }

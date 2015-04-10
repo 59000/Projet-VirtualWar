@@ -67,16 +67,11 @@ public abstract class Robot {
 
 
 
-	public void subitTir(Robot robot ) {
-		if(robot instanceof Char){
-			setEnergie(getEnergie()-Constante.DEGATCHAR);
-		}
-		else if (robot instanceof Tireur){
-			setEnergie(getEnergie()-Constante.DEGATTIREUR);
-		}
+	public void subitTir(){
+		
 	}
-	public void subitMine() {
-		setEnergie(getEnergie()-Constante.DEGATPIEGEUR);
+	public void subitMine(){
+		
 	}
 
 }

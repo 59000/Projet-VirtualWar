@@ -1,6 +1,6 @@
 public class Plateau {
-	
-	/*Faire un joli Plateau comme dans l'exemple sur le jalon a rendre  =- FAIT*/
+
+	/* Faire un joli Plateau comme dans l'exemple sur le jalon a rendre =- FAIT */
 	private Cellule[][] plateau;
 
 	public Plateau(int largeur, int hauteur) {
@@ -13,14 +13,32 @@ public class Plateau {
 		}
 	}
 
+	/**
+	 * Lance le deplacement du Robot
+	 * 
+	 * @param d
+	 */
+	public void deplacement(Deplacement d) {
+		// TODO FAIRE FONCTIONNER CETTE FONCTION DE M%@$% !!!!!!!
+		Coordonnees coordD = d.robot.getCoord();
+
+		plateau[coordD.getHauteur()][coordD.getLargeur()].robot = null;
+		/*
+		 * coordD.ajout(d.coord);
+		 * plateau[coordD.getHauteur()][coordD.getLargeur(
+		 * )].deplaceSur(d.robot);
+		 */
+	}
+
 	public String toString() {
 		String areturn = ""; // String contenant l'affichage du pateau
 		for (int h = 0; h < plateau.length; h++) {
 			// Haut du plateau
-			for (int i = 0; i < plateau.length; i++) areturn += "+---";
+			for (int i = 0; i < plateau.length; i++)
+				areturn += "+---";
 			areturn += "+\n";
-			
-			//Cellules
+
+			// Cellules
 			for (int l = 0; l < plateau[h].length; l++) {
 				// Encadrement gauche des cellules
 				areturn += "| ";
@@ -60,9 +78,10 @@ public class Plateau {
 			}
 			areturn += "|\n";
 		}
-		
+
 		// Bas du plateau
-		for (int i = 0; i < plateau.length; i++) areturn += "+---";
+		for (int i = 0; i < plateau.length; i++)
+			areturn += "+---";
 		areturn += "+\n";
 
 		return areturn;
@@ -81,6 +100,7 @@ public class Plateau {
 		Robot p2 = new Piegeur(2, 3);
 
 		p.plateau[0][1].robot = t1;
+		t1.setCoord(new Coordonnees(0, 1));
 		p.plateau[0][2].robot = t2;
 		p.plateau[0][3].robot = p1;
 		p.plateau[0][4].robot = p2;
@@ -94,19 +114,6 @@ public class Plateau {
 			e.printStackTrace();
 		}
 
-	/*	p1.deplacement(6);
-
-		p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()]
-				.deplaceSur(p1);
-		p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()]
-				.videCase();
-
-		p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()]
-				.videCase();
-		c2.deplacement(6);
-		p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()]
-				.deplaceSur(c2);
-		System.out.println(p);
-		// mank les set de déplacement ds tt les classe*/
+		p.deplacement(new Deplacement(t1, Constante.DROIT));
 	}
 }
