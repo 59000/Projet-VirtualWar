@@ -9,6 +9,11 @@ public class Constante {
 	public static final int DEPLACEMENTPIEGEUR = 1;
 	public static final int DEPLACEMENTCHAR = 2;
 	
+	public static final Coordonnees HAUT = new Coordonnees(0, -1);
+	public static final Coordonnees BAS = new Coordonnees(0, 1);
+	public static final Coordonnees GAUCHE = new Coordonnees(-1, 0);
+	public static final Coordonnees DROIT = new Coordonnees(1, 0);
+	
 	
 
 	public static final int ENERGIETIREUR = 40;
@@ -18,6 +23,8 @@ public class Constante {
 	
 	
 	public static final int REGENENBASE = 2;
+	
+	public static final int NBMINE = 10;
 	
 	
 	public static final int COUTMINER = -2;
@@ -33,6 +40,7 @@ public class Constante {
 	public static final int DEGATPIEGEUR = -2;
 	public static final int DEGATCHAR = 6;
 
-	
-
+	public static final int PASUNEBASE = 0;
+	public static final int BASE1 = 1;
+	public static final int BASE2 = 2;
 }
