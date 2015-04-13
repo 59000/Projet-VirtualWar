@@ -1,5 +1,5 @@
 public class Coordonnees {
-	/*Classe terminé : gg c'est la seule classe fini*/
+	/*Classe terminÃ© : gg c'est la seule classe fini*/
 	
 	private int largeur;
 	private int hauteur;
@@ -19,12 +19,12 @@ public class Coordonnees {
 		return hauteur;
 	}
 
-	/** retourne les coordonnée sous la forme "[x;y]" */
+	/** retourne les coordonnÃ©e sous la forme "[x;y]" */
 	public String toString() {
 		return "[" + this.largeur + ";" + this.hauteur + "]";
 	}
 
-	/** ajoute des coordonnées aux coordonnées courantes */
+	/** ajoute des coordonnÃ©es aux coordonnÃ©es courantes */
 	public Coordonnees ajout(Coordonnees coord) {
 		int l = (this.largeur + coord.getLargeur());
 		int h = (this.hauteur + coord.getHauteur());
@@ -32,6 +32,17 @@ public class Coordonnees {
 		return new Coordonnees(l, h);
 	}
 
-	
-	
+	int estBase(Coordonnees coord){
+	/*	if(Cellule.base == Constante.PASUNEBASE){
+			return 0;
+		}else if(Cellule.base == Constante.BASE1 ){
+			
+			return 1;
+		}else if(Cellule.base == Constante.BASE2){
+			return 2;
+		}
+		return 0;*/
+		return Cellule.base;
+	}
+		
 }
