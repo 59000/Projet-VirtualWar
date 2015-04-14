@@ -14,6 +14,10 @@ public class Constante {
 	public static final Coordonnees GAUCHE = new Coordonnees(-1, 0);
 	public static final Coordonnees DROIT = new Coordonnees(1, 0);
 	
+	public static final Coordonnees HAUTGAUCHE = new Coordonnees(-1, -1);
+	public static final Coordonnees BASGAUCHE = new Coordonnees(-1, 1);
+	public static final Coordonnees HAUTDROIT = new Coordonnees(1, -1);
+	public static final Coordonnees BASDROIT = new Coordonnees(1, 1);
 	
 
 	public static final int ENERGIETIREUR = 40;
