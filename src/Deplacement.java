@@ -1,5 +1,6 @@
 public class Deplacement extends Action {
 	/* Il faut finir la methode agit */
+	/**Deplace le robot selon sa portée de deplacement*/
 	public Deplacement(Robot robot, Coordonnees coord) {
 		super(robot, coord);
 		
@@ -18,7 +19,8 @@ public class Deplacement extends Action {
 		
 		this.agit();
 	}
-
+	
+	/**Methode qui permet le deplacement du robot appelé par le constructeur */
 	@Override
 	public void agit() {
 		if (this.robot instanceof Char) {
