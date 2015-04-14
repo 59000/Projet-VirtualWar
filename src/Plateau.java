@@ -1,8 +1,12 @@
+import java.util.Random;
+
 public class Plateau {
 
 	/* Faire un joli Plateau comme dans l'exemple sur le jalon a rendre =- FAIT */
+	private double pourcentage = 6.66;
 	private Cellule[][] plateau;
-
+	private Random Ran = new Random(100);
+	
 	public Plateau(int largeur, int hauteur) {
 		plateau = new Cellule[largeur][hauteur];
 
@@ -53,7 +57,9 @@ public class Plateau {
 							areturn += "p";
 						}
 					}
-				} else {
+				} else if(c.estObstacle() == true) {
+					areturn += "X";
+				}else{
 					areturn += " ";
 				}
 				// Encadrement Droit du plateau
@@ -69,6 +75,7 @@ public class Plateau {
 
 		return areturn;
 	}
+	
 	
 	
 
