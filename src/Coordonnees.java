@@ -5,7 +5,7 @@ public class Coordonnees {
 	/**@param hauteur */
 	private int hauteur;
 
-	/**Crée des Coordoonnees
+	/**Cree des Coordoonnees
 	 * 
 	 * @param largeur
 	 * @param hauteur
