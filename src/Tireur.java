@@ -2,26 +2,13 @@ import java.util.List;
 
 public class Tireur extends Robot {
 
-<<<<<<< HEAD
 	List<Coordonnees> coord;
-=======
->>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 	public Tireur(int equipe,int numero) {/*implÃ©menter*/
 		
 		/*faire les methodes peutTirer() et getDeplacement()*/
 		super(equipe,numero, 40);
 	}
-
 	@Override
-<<<<<<< HEAD
-=======
-	public boolean peutTirer() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
->>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 	public int getCoutAction() {
 		// TODO Auto-generated method stub
 		return Constante.COUTTIRERTIREUR;
@@ -48,7 +35,6 @@ public class Tireur extends Robot {
 	@Override
 	public List<Coordonnees> getDeplacement() {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
 		return coord;
 	}
 
@@ -66,9 +52,8 @@ public class Tireur extends Robot {
 			return true;
 		}
 			return false;
-=======
-		return null;
->>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
+
+		
 	}
 
 }
