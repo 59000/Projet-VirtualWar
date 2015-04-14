@@ -7,11 +7,11 @@ public class Deplacement extends Action {
 		int porte = 1;
 		
 		if (this.robot instanceof Char) {
-			porte = Constante.PORTEECHAR;
+			porte = Constante.DEPLACEMENTCHAR;
 		} else if (this.robot instanceof Tireur) {
-			porte = Constante.PORTEETIREUR;
+			porte = Constante.DEPLACEMENTTIREUR;
 		} else if (this.robot instanceof Piegeur) {
-			porte = Constante.PORTEEPIEGEUR;
+			porte = Constante.DEPLACEMENTPIEGEUR;
 		}
 		
 		this.coord.setHauteur((int) this.coord.getHauteur()*porte);
