@@ -105,4 +105,10 @@ public class Cellule extends Coordonnees {
 		}
 		return false;
 	}
+	/*
+	public Cellule chemin(){
+		while(){
+			
+		}
+		*/
 }
