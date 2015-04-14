@@ -35,4 +35,17 @@ public class Deplacement extends Action {
 		}
 
 	}
+	
+	/** Si Char bloquée, reviens à un déplacement simple */
+	public void charBloquee(Coordonnees coord){
+		if (coord.equals(Constante.HAUT)) {
+			this.robot.getCoord().ajout(Constante.BAS);
+		} else if (coord.equals(Constante.BAS)) {
+			this.robot.getCoord().ajout(Constante.HAUT);
+		} else if (coord.equals(Constante.GAUCHE)) {
+			this.robot.getCoord().ajout(Constante.DROIT);
+		} else if (coord.equals(Constante.DROIT)) {
+			this.robot.getCoord().ajout(Constante.GAUCHE);
+		}
+	}
 }
