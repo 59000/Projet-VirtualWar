@@ -106,26 +106,27 @@ public class Plateau {
 				if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()]
 								 [r.getCoord().getHauteur() + mvt.getHauteur()].estObstacle()) {
 					// Et que le deuxiéme non plus
-					if (!this.plateau[r.getCoord().getLargeur()+ mvt.getLargeur()]
-									 [r.getCoord().getHauteur()+ mvt.getHauteur()].estObstacle()) {
+					if (!this.plateau[r.getCoord().getLargeur()+ (2 * mvt.getLargeur())]
+									 [r.getCoord().getHauteur()+ (2 * mvt.getHauteur())].estObstacle()) {
 						// Fonctionnement normale de la fonction
 						this.plateau[r.getCoord().getLargeur()]
 									[r.getCoord().getHauteur()].videCase();
 						new Deplacement(r, mvt);
 						this.plateau[r.getCoord().getLargeur()]
 									[r.getCoord().getHauteur()].deplaceSur(r);
-					}
+					} else {
 					// Sinon, le déplacement se stoppe au premier déplacement
 					this.plateau[r.getCoord().getLargeur()]
 								[r.getCoord().getHauteur()].videCase();
-					new Deplacement(r, mvt).charBloquee(mvt); // Appelle la fonction qui réajuste le déplacement du char
+					new Deplacement(r, mvt);
+					Deplacement.charBloquee(r,mvt); // Appelle la fonction qui réajuste le déplacement du char
 					this.plateau[r.getCoord().getLargeur()]
 							[r.getCoord().getHauteur()].deplaceSur(r);
 					// Et un message qui précise que ce cas à eu lieu
 					System.out.println("Event : Le char a rencontrée un obstacle et a dû s'arrétée plus tôt.");
-				}
-				// Sinon, message d'érreur
-				else {
+					}
+				} else {
+					// Sinon, message d'érreur
 					System.out.println("Erreur : Un obstacle bloque le déplacement, déplacement annulée.");
 				}
 			}
@@ -164,7 +165,7 @@ public class Plateau {
 
 		Robot t1 = new Char(0, 0);
 		// Setter les coordonnées IMPÉRATIVEMENT
-		t1.setCoord(new Coordonnees(2, 2));
+		t1.setCoord(new Coordonnees(4, 4));
 
 		p.plateau[t1.getCoord().getLargeur()][t1.getCoord().getHauteur()]
 				.deplaceSur(t1);
