@@ -67,6 +67,12 @@ public class Plateau {
 
 		return areturn;
 	}
+	
+	public void deplaceRobot(Robot t1, Coordonnees mvt) {
+		this.plateau[t1.getCoord().getHauteur()][t1.getCoord().getLargeur()].robot = null;
+		new Deplacement(t1, mvt);
+		this.plateau[t1.getCoord().getHauteur()][t1.getCoord().getLargeur()].robot = t1;
+	}
 
 	public static void main(String[] args) {
 		Plateau p = new Plateau(10, 10);
@@ -94,19 +100,8 @@ public class Plateau {
 			e.printStackTrace();
 		}
 
-	/*	p1.deplacement(6);
+		p.deplaceRobot(t1, Constante.DROIT);
 
-		p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()]
-				.deplaceSur(p1);
-		p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()]
-				.videCase();
-
-		p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()]
-				.videCase();
-		c2.deplacement(6);
-		p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()]
-				.deplaceSur(c2);
 		System.out.println(p);
-		// mank les set de déplacement ds tt les classe*/
 	}
 }

@@ -44,5 +44,15 @@ public class Coordonnees {
 		return 0;*/
 		return Cellule.base;
 	}
+
+	public void setHauteur(int i) {
+		// TODO Auto-generated method stub
+		this.hauteur = i;
+	}
+	
+	public void setLargeur (int i) {
+		// TODO Auto-generated method stub
+		this.largeur = i;
+	}
 		
 }
