@@ -1,6 +1,11 @@
 public class Plateau {
+<<<<<<< HEAD
+
+	/* Faire un joli Plateau comme dans l'exemple sur le jalon a rendre =- FAIT */
+=======
 	
 	/*Faire un joli Plateau comme dans l'exemple sur le jalon a rendre  =- FAIT*/
+>>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 	private Cellule[][] plateau;
 
 	public Plateau(int largeur, int hauteur) {
@@ -17,10 +22,18 @@ public class Plateau {
 		String areturn = ""; // String contenant l'affichage du pateau
 		for (int h = 0; h < plateau.length; h++) {
 			// Haut du plateau
+<<<<<<< HEAD
+			for (int i = 0; i < plateau.length; i++)
+				areturn += "+---";
+			areturn += "+\n";
+
+			// Cellules
+=======
 			for (int i = 0; i < plateau.length; i++) areturn += "+---";
 			areturn += "+\n";
 			
 			//Cellules
+>>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 			for (int l = 0; l < plateau[h].length; l++) {
 				// Encadrement gauche des cellules
 				areturn += "| ";
@@ -53,26 +66,41 @@ public class Plateau {
 						}
 					}
 				} else {
+<<<<<<< HEAD
+					areturn += " ";
+=======
 					areturn += ".";
+>>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 				}
 				// Encadrement Droit du plateau
 				areturn += " ";
 			}
 			areturn += "|\n";
 		}
+<<<<<<< HEAD
+
+		// Bas du plateau
+		for (int i = 0; i < plateau.length; i++)
+			areturn += "+---";
+=======
 		
 		// Bas du plateau
 		for (int i = 0; i < plateau.length; i++) areturn += "+---";
+>>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 		areturn += "+\n";
 
 		return areturn;
 	}
 	
+<<<<<<< HEAD
+	
+=======
 	public void deplaceRobot(Robot t1, Coordonnees mvt) {
 		this.plateau[t1.getCoord().getHauteur()][t1.getCoord().getLargeur()].robot = null;
 		new Deplacement(t1, mvt);
 		this.plateau[t1.getCoord().getHauteur()][t1.getCoord().getLargeur()].robot = t1;
 	}
+>>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 
 	public static void main(String[] args) {
 		Plateau p = new Plateau(10, 10);
@@ -100,8 +128,25 @@ public class Plateau {
 			e.printStackTrace();
 		}
 
+<<<<<<< HEAD
+		/*
+		 * p1.deplacement(6);
+		 * 
+		 * p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()]
+		 * .deplaceSur(p1);
+		 * p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()]
+		 * .videCase();
+		 * 
+		 * p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()]
+		 * .videCase(); c2.deplacement(6);
+		 * p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()]
+		 * .deplaceSur(c2); System.out.println(p); // mank les set de
+		 * dÃ©placement ds tt les classe
+		 */
+=======
 		p.deplaceRobot(t1, Constante.DROIT);
 
 		System.out.println(p);
+>>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 	}
 }
