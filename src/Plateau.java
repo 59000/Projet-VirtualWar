@@ -76,48 +76,109 @@ public class Plateau {
 		return areturn;
 	}
 	
-	
-	
+	/**
+	 * Appelle les fonctions qui permettent de modéliser les déplacements.
+	 * Si Char = déplacement de 2 ou 1 si bloqué par un obstacles.
+	 * Sinon = déplacement de 1.
+	 * 
+	 * Si le robot arrive sur une mine, il se prend les dégats.
+	 * 
+	 * @param t1
+	 *            robot
+	 * @param mvt
+	 *            Constante de déplacement
+	 */
+	public void deplaceRobot(Robot r, Coordonnees mvt) {
+		// Si le robot est un Char
+		if (r instanceof Char) {
+			// Et que le mouvement demandée est un mouvement diagonales
+			if (mvt.equals(Constante.HAUTDROIT)
+					|| mvt.equals(Constante.HAUTGAUCHE)
+					|| mvt.equals(Constante.BASDROIT)
+					|| mvt.equals(Constante.BASGAUCHE)) {
+				// Renvoie un message d'erreur
+				System.out.println("Erreur : Un char ne peut se déplacer diagonalement");
+			}
+			// Sinon, fonctionnement normal de la fonction
+			else {
+				// Si le premier déplacement n'envoie pas le char sur un
+				// obstacle
+				if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()]
+								 [r.getCoord().getHauteur() + mvt.getHauteur()].estObstacle()) {
+					// Et que le deuxiéme non plus
+					if (!this.plateau[r.getCoord().getLargeur()+ mvt.getLargeur()]
+									 [r.getCoord().getHauteur()+ mvt.getHauteur()].estObstacle()) {
+						// Fonctionnement normale de la fonction
+						this.plateau[r.getCoord().getLargeur()]
+									[r.getCoord().getHauteur()].videCase();
+						new Deplacement(r, mvt);
+						this.plateau[r.getCoord().getLargeur()]
+									[r.getCoord().getHauteur()].deplaceSur(r);
+					}
+					// Sinon, le déplacement se stoppe au premier déplacement
+					this.plateau[r.getCoord().getLargeur()]
+								[r.getCoord().getHauteur()].videCase();
+					new Deplacement((Tireur) r, mvt);
+					this.plateau[r.getCoord().getLargeur()]
+							[r.getCoord().getHauteur()].deplaceSur(r);
+					// Et un message qui précise que ce cas à eu lieu
+					System.out.println("Event : Le char a rencontrée un obstacle et a dû s'arrétée plus tôt.");
+				}
+				// Sinon, message d'érreur
+				else {
+					System.out.println("Erreur : Un obstacle bloque le déplacement, déplacement annulée.");
+				}
+			}
+		}
+		
+		// Si le robot est autre qu'un char, fonctionnement normale de
+		// la fonction
+		else {
+			// Si le déplacement n'envoie pas le robot sur un obstacle
+			if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()]
+							 [r.getCoord().getHauteur() + mvt.getHauteur()].estObstacle()) {
+				this.plateau[r.getCoord().getLargeur()]
+							[r.getCoord().getHauteur()].videCase();
+				new Deplacement(r, mvt);
+				this.plateau[r.getCoord().getLargeur()]
+							[r.getCoord().getHauteur()].deplaceSur(r);
+			} else {
+				// Sinon, message d'érreur et annulation du déplacement
+				System.out.println("Erreur : Un obstacle bloque le déplacement, déplacement annulée.");
+			}
+		}
+		
+		// Si le robot se déplace qur une cellule miné
+		if (this.plateau[r.getCoord().getLargeur()]
+						[r.getCoord().getHauteur()].contienMine() != 0) {
+			// Le robot se prend les dégats et la mine disparaît
+			r.subitMine();
+			this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()].setMine(0);
+		}
+	}
 
 	public static void main(String[] args) {
 		Plateau p = new Plateau(10, 10);
 		p.plateau[0][0].base = 1;
 		p.plateau[9][9].base = 2;
 
-		Robot t1 = new Tireur(1, 1);
-		Robot t2 = new Tireur(2, 1);
-		Robot c1 = new Char(1, 2);
-		Robot c2 = new Char(2, 2);
-		Robot p1 = new Piegeur(1, 3);
-		Robot p2 = new Piegeur(2, 3);
+		Robot t1 = new Char(0, 0);
+		// Setter les coordonnées IMPÉRATIVEMENT
+		t1.setCoord(new Coordonnees(2, 2));
 
-		p.plateau[0][1].robot = t1;
-		p.plateau[0][2].robot = t2;
-		p.plateau[0][3].robot = p1;
-		p.plateau[0][4].robot = p2;
-		p.plateau[0][5].robot = c1;
-		p.plateau[0][6].robot = c2;
+		p.plateau[t1.getCoord().getLargeur()][t1.getCoord().getHauteur()]
+				.deplaceSur(t1);
 
 		System.out.println(p);
+
 		try {
 			Thread.sleep(1000);// dodo 1 sec
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 
-		/*
-		 * p1.deplacement(6);
-		 * 
-		 * p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()]
-		 * .deplaceSur(p1);
-		 * p.plateau[p1.getCoord().getLargeur()][p1.getCoord().getHauteur()]
-		 * .videCase();
-		 * 
-		 * p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()]
-		 * .videCase(); c2.deplacement(6);
-		 * p.plateau[c2.getCoord().getLargeur()][c2.getCoord().getHauteur()]
-		 * .deplaceSur(c2); System.out.println(p); // mank les set de
-		 * dÃ©placement ds tt les classe
-		 */
+		p.deplaceRobot(t1, Constante.HAUT);
+
+		System.out.println(p);		
 	}
 }
