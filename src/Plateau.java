@@ -1,4 +1,5 @@
 public class Plateau {
+
 	/* Faire un joli Plateau comme dans l'exemple sur le jalon a rendre =- FAIT */
 	private Cellule[][] plateau;
 
@@ -21,10 +22,6 @@ public class Plateau {
 			areturn += "+\n";
 
 			// Cellules
-			for (int i = 0; i < plateau.length; i++) areturn += "+---";
-			areturn += "+\n";
-			
-			//Cellules
 			for (int l = 0; l < plateau[h].length; l++) {
 				// Encadrement gauche des cellules
 				areturn += "| ";
@@ -57,9 +54,7 @@ public class Plateau {
 						}
 					}
 				} else {
-
 					areturn += " ";
-
 				}
 				// Encadrement Droit du plateau
 				areturn += " ";
@@ -67,22 +62,15 @@ public class Plateau {
 			areturn += "|\n";
 		}
 
-
 		// Bas du plateau
-		for (int i = 0; i < plateau.length; i++){
+		for (int i = 0; i < plateau.length; i++)
 			areturn += "+---";
-			
 		areturn += "+\n";
 
 		return areturn;
 	}
 	
 	
-	public void deplaceRobot(Robot t1, Coordonnees mvt) {
-		this.plateau[t1.getCoord().getHauteur()][t1.getCoord().getLargeur()].robot = null;
-		new Deplacement(t1, mvt);
-		this.plateau[t1.getCoord().getHauteur()][t1.getCoord().getLargeur()].robot = t1;
-	}
 
 	public static void main(String[] args) {
 		Plateau p = new Plateau(10, 10);
@@ -124,9 +112,5 @@ public class Plateau {
 		 * .deplaceSur(c2); System.out.println(p); // mank les set de
 		 * dÃ©placement ds tt les classe
 		 */
-		p.deplaceRobot(t1, Constante.DROIT);
-
-		System.out.println(p);
-
 	}
 }
