@@ -4,17 +4,17 @@ public abstract class Action {
 	 * a l'objectif
 	 */
 
-	/** @param coord */
+	/** @param Coordoonnees coord */
 	protected Coordonnees coord;
-	/** @param robot */
+	/** @param Robot robot */
 	protected Robot robot;
 
 	/**
 	 * Crée une instance de la classe action en precisant un robot et ses
 	 * coordonnées
 	 * 
-	 * @param robot
-	 * @param coord
+	 * @param Robot robot
+	 * @param Coodonnees coord
 	 */
 	public Action(Robot robot, Coordonnees coord) {
 		this.robot = robot;
