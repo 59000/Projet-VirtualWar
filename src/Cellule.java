@@ -6,7 +6,11 @@ public class Cellule extends Coordonnees {
 	 */
 
 	protected int mine;
+<<<<<<< HEAD
+	protected int base;
+=======
 	protected static int base;
+>>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 	protected Robot robot;
 
 	// String image; //inutile pour le momant
@@ -23,9 +27,13 @@ public class Cellule extends Coordonnees {
 		this.mine = mine;
 	}
 
+<<<<<<< HEAD
+
+=======
 	public int estBase() {
 		return base;
 	}
+>>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 
 	public Coordonnees getCoordonnees() {
 		return new Coordonnees(super.getLargeur(), super.getHauteur());
@@ -63,11 +71,29 @@ public class Cellule extends Coordonnees {
 		 * et la deuxieme en x 0 et y max
 		 */
 		if (b) {
+<<<<<<< HEAD
+			this.base = Constante.BASE1;
+
+		} else if (!b) {
+			this.base = Constante.BASE2;
+		}
+	}
+	public int estBase(Coordonnees c){
+		return this.base;
+		
+	}
+	public int estBase(){
+		return this.base;
+	}
+
+
+=======
 			Cellule.base = Constante.BASE1;
 
 		} else if (!b) {
 			Cellule.base = Constante.BASE2;
 		}
 	}
+>>>>>>> b06ce68ea1a3d83492f6585fad7070a9e5a1fc7c
 
 }
