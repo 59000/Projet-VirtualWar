@@ -37,15 +37,16 @@ public class Deplacement extends Action {
 	}
 	
 	/** Si Char bloquée, reviens à un déplacement simple */
-	public static void charBloquee(Robot r, Coordonnees coord){
+	public static Robot charBloquee(Robot r, Coordonnees coord){
 		if (coord.equals(Constante.HAUT)) {
-			r.getCoord().ajout(Constante.BAS);
+			r.getCoord().setHauteur(r.getCoord().getHauteur() + 1);
 		} else if (coord.equals(Constante.BAS)) {
-			r.getCoord().ajout(Constante.HAUT);
+			r.getCoord().setHauteur(r.getCoord().getHauteur() - 1);
 		} else if (coord.equals(Constante.GAUCHE)) {
-			r.getCoord().ajout(Constante.DROIT);
+			r.getCoord().setLargeur(r.getCoord().getLargeur() + 1);
 		} else if (coord.equals(Constante.DROIT)) {
-			r.getCoord().ajout(Constante.GAUCHE);
+			r.getCoord().setLargeur(r.getCoord().getLargeur() - 1);
 		}
+		return r;
 	}
 }
