@@ -2,7 +2,6 @@ import java.util.Random;
 
 public class Plateau {
 
-	/* Faire un joli Plateau comme dans l'exemple sur le jalon a rendre =- FAIT */
 	private double pourcentage = 6.66;
 	private Cellule[][] plateau;
 	private Random Ran = new Random(100);
@@ -17,6 +16,17 @@ public class Plateau {
 		}
 	}
 
+	void genere_obstacle()
+	{
+		for (int h = 0; h < plateau.length; h++) {
+			for (int l = 0; l < plateau[h].length; l++) {
+				if(plateau[l][h].estBase()==0)
+				{
+					plateau[l][h].cree_Obstacle();
+				}
+			}
+		}
+	}
 	public String toString() {
 		String areturn = ""; // String contenant l'affichage du pateau
 		for (int h = 0; h < plateau.length; h++) {
@@ -195,14 +205,17 @@ public class Plateau {
 		Plateau p = new Plateau(10, 10);
 		p.plateau[0][0].base = 1;
 		p.plateau[9][9].base = 2;
+		
+		p.genere_obstacle();
 
 		Robot t1 = new Piegeur(0, 0);
 		// Setter les coordonnées IMPÉRATIVEMENT
 		t1.setCoord(new Coordonnees(4, 4));
 
-		p.plateau[t1.getCoord().getLargeur()][t1.getCoord().getHauteur()]
-				.deplaceSur(t1);
-
+		p.plateau[t1.getCoord().getLargeur()][t1.getCoord().getHauteur()].deplaceSur(t1);
+		
+		p.plateau[1][1].cree_Obstacle();
+		
 		System.out.println(p);
 
 		try {

@@ -16,9 +16,10 @@ public class Cellule extends Coordonnees {
 	 */
 	protected Robot robot;
 	/** @param pourcentage */
-	double pourcentage = 15;
+	double pourcentage = 10;
 	/** @param ran */
 	Random ran = new Random();
+	boolean obstacle =false;
 
 	// String image; //inutile pour le momant
 	/**
@@ -100,15 +101,17 @@ public class Cellule extends Coordonnees {
 
 	/** Verifie si la case actuelle est un obstacle */
 	public boolean estObstacle() {
+		return obstacle;
+	}
+	public void cree_Obstacle() {
 		if (this.ran.nextInt(100) <= pourcentage) {
-			return true;
+			obstacle= true;
 		}
-		return false;
 	}
 	/*
 	public Cellule chemin(){
 		while(){
-			
+			pas fait ici
 		}
 		*/
 }
