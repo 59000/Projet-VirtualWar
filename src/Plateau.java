@@ -6,7 +6,7 @@ public class Plateau {
 	private double pourcentage = 6.66;
 	private Cellule[][] plateau;
 	private Random Ran = new Random(100);
-	
+
 	public Plateau(int largeur, int hauteur) {
 		plateau = new Cellule[largeur][hauteur];
 
@@ -57,9 +57,9 @@ public class Plateau {
 							areturn += "p";
 						}
 					}
-				} else if(c.estObstacle() == true) {
+				} else if (c.estObstacle() == true) {
 					areturn += "X";
-				}else{
+				} else {
 					areturn += " ";
 				}
 				// Encadrement Droit du plateau
@@ -75,11 +75,11 @@ public class Plateau {
 
 		return areturn;
 	}
-	
+
 	/**
-	 * Appelle les fonctions qui permettent de modéliser les déplacements.
-	 * Si Char = déplacement de 2 ou 1 si bloqué par un obstacles.
-	 * Sinon = déplacement de 1.
+	 * Appelle les fonctions qui permettent de modéliser les déplacements. Si
+	 * Char = déplacement de 2 ou 1 si bloqué par un obstacles. Sinon =
+	 * déplacement de 1.
 	 * 
 	 * Si le robot arrive sur une mine, il se prend les dégats.
 	 * 
@@ -101,60 +101,87 @@ public class Plateau {
 			}
 			// Sinon, fonctionnement normal de la fonction
 			else {
-				// Si le premier déplacement n'envoie pas le char sur un
-				// obstacle
-				if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()]
-								 [r.getCoord().getHauteur() + mvt.getHauteur()].estObstacle()) {
-					// Et que le deuxiéme non plus
-					if (!this.plateau[r.getCoord().getLargeur()+ (2 * mvt.getLargeur())]
-									 [r.getCoord().getHauteur()+ (2 * mvt.getHauteur())].estObstacle()) {
-						// Fonctionnement normale de la fonction
-						this.plateau[r.getCoord().getLargeur()]
-									[r.getCoord().getHauteur()].videCase();
-						new Deplacement(r, mvt);
-						this.plateau[r.getCoord().getLargeur()]
-									[r.getCoord().getHauteur()].deplaceSur(r);
+				// Si le déplacement de 1 n'amène pas au dehors des bords du
+				// plateau
+				if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
+						&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
+					// Et si le premier déplacement n'envoie pas le char sur un
+					// obstacle
+					if (!this.plateau[r.getCoord().getLargeur()+ mvt.getLargeur()]
+									 [r.getCoord().getHauteur()+ mvt.getHauteur()].estObstacle()) {
+						// Et que le deuxiéme non plus
+						if (r.getCoord().getLargeur() + (2 * mvt.getLargeur()) >= 0
+								&& r.getCoord().getLargeur()+ (2 * mvt.getLargeur()) < this.plateau.length) {
+							
+							if (!this.plateau[r.getCoord().getLargeur()+ (2 * mvt.getLargeur())]
+											 [r.getCoord().getHauteur() + (2 * mvt.getHauteur())].estObstacle()) {
+								// Fonctionnement normale de la fonction
+								this.plateau[r.getCoord().getLargeur()][r
+										.getCoord().getHauteur()].videCase();
+								new Deplacement(r, mvt);
+								this.plateau[r.getCoord().getLargeur()][r
+										.getCoord().getHauteur()].deplaceSur(r);
+							} 
+							
+						} else {
+							// Sinon, le déplacement se stoppe au premier
+							// déplacement
+							this.plateau[r.getCoord().getLargeur()][r
+									.getCoord().getHauteur()].videCase();
+							new Deplacement(r, mvt);
+							r = Deplacement.charBloquee(r, mvt); // Appelle la fonction qui réajuste le
+																	// déplacement du char
+							this.plateau[r.getCoord().getLargeur()]
+										[r.getCoord().getHauteur()].deplaceSur(r);
+							// Et un message qui précise que ce cas à eu lieu
+							System.out.println("Event : Le char a rencontrée un obstacle et a dû s'arrétée plus tôt.");
+						}
+						
 					} else {
-					// Sinon, le déplacement se stoppe au premier déplacement
-					this.plateau[r.getCoord().getLargeur()]
-								[r.getCoord().getHauteur()].videCase();
-					new Deplacement(r, mvt);
-					r = Deplacement.charBloquee(r,mvt); // Appelle la fonction qui réajuste le déplacement du char
-					this.plateau[r.getCoord().getLargeur()]
-							[r.getCoord().getHauteur()].deplaceSur(r);
-					// Et un message qui précise que ce cas à eu lieu
-					System.out.println("Event : Le char a rencontrée un obstacle et a dû s'arrétée plus tôt.");
+						// Sinon, un obstacle empêche le déplacement
+						System.out.println("Erreur : Un obstacle bloque le déplacement, déplacement annulée.");
 					}
+					
 				} else {
-					// Sinon, message d'érreur
-					System.out.println("Erreur : Un obstacle bloque le déplacement, déplacement annulée.");
+					// Sinon, les limites du plateau empêche le déplacement
+					System.out.println("Erreur : Déplacement en dehors des limites de la map.");
 				}
 			}
 		}
-		
+
 		// Si le robot est autre qu'un char, fonctionnement normale de
 		// la fonction
 		else {
-			// Si le déplacement n'envoie pas le robot sur un obstacle
-			if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()]
-							 [r.getCoord().getHauteur() + mvt.getHauteur()].estObstacle()) {
-				this.plateau[r.getCoord().getLargeur()]
-							[r.getCoord().getHauteur()].videCase();
-				new Deplacement(r, mvt);
-				this.plateau[r.getCoord().getLargeur()]
-							[r.getCoord().getHauteur()].deplaceSur(r);
+			// Si le déplacement de 1 n'amène pas au dehors des bords du
+			// plateau
+			if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
+					&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
+				// Si le déplacement n'envoie pas le robot sur un obstacle
+				if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()]
+								 [r.getCoord().getHauteur() + mvt.getHauteur()].estObstacle()) {
+					this.plateau[r.getCoord().getLargeur()]
+								[r.getCoord().getHauteur()].videCase();
+					new Deplacement(r, mvt);
+					this.plateau[r.getCoord().getLargeur()]
+								[r.getCoord().getHauteur()].deplaceSur(r);
+				} else {
+					// Sinon, message d'érreur et annulation du déplacement
+					System.out
+						.println("Erreur : Un obstacle bloque le déplacement, déplacement annulée.");
+				}
+				// Sinon, les limites de la map emêchent le déplacement
 			} else {
-				// Sinon, message d'érreur et annulation du déplacement
-				System.out.println("Erreur : Un obstacle bloque le déplacement, déplacement annulée.");
+				System.out.println("Erreur : Les limites de la map empêchent le déplacement.");
 			}
-		}
-		
+		} 
+
 		// Si le robot se déplace qur une cellule miné
-		if (this.plateau[r.getCoord().getLargeur()]
-						[r.getCoord().getHauteur()].contienMine() != 0) {
+		if (this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()]
+				.contienMine() != 0) {
 			// Le robot se prend les dégats et la mine disparaît
 			r.subitMine();
-			this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()].setMine(0);
+			this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()]
+					.setMine(0);
 		}
 	}
 
@@ -163,7 +190,7 @@ public class Plateau {
 		p.plateau[0][0].base = 1;
 		p.plateau[9][9].base = 2;
 
-		Robot t1 = new Char(0, 0);
+		Robot t1 = new Piegeur(0, 0);
 		// Setter les coordonnées IMPÉRATIVEMENT
 		t1.setCoord(new Coordonnees(4, 4));
 
@@ -180,6 +207,6 @@ public class Plateau {
 
 		p.deplaceRobot(t1, Constante.HAUT);
 
-		System.out.println(p);		
+		System.out.println(p);
 	}
 }
