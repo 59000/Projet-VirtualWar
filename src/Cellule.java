@@ -16,7 +16,7 @@ public class Cellule extends Coordonnees {
 	 */
 	protected Robot robot;
 	/** @param pourcentage */
-	double pourcentage = 10;
+	double pourcentage = 15;
 	/** @param ran */
 	Random ran = new Random();
 	boolean obstacle =false;
@@ -107,6 +107,19 @@ public class Cellule extends Coordonnees {
 		if (this.ran.nextInt(100) <= pourcentage) {
 			obstacle= true;
 		}
+		else
+		{
+			obstacle=false;
+		}
+	}
+	
+	Cellule getCellule(Coordonnees c)
+	{
+		if(this.getCoordonnees().equals(c))
+		{
+			return this;
+		}
+		return null;
 	}
 	/*
 	public Cellule chemin(){

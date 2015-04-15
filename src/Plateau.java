@@ -1,9 +1,11 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Plateau {
 
 	private double pourcentage = 6.66;
-	private Cellule[][] plateau;
+	public Cellule[][] plateau;
 	private Random Ran = new Random(100);
 
 	public Plateau(int largeur, int hauteur) {
@@ -14,6 +16,60 @@ public class Plateau {
 				plateau[l][h] = new Cellule(l, h);
 			}
 		}
+	}
+	
+	boolean ya_chemin(Cellule base1)
+	{
+		List<Cellule> li = new ArrayList<Cellule>();
+		for (int h = 0; h < this.plateau.length; h++) 
+		{
+			for (int l = 0; l < this.plateau[h].length; l++) 
+			{
+				
+				if(!this.plateau[h][l].estObstacle())
+				{
+					li.add(this.plateau[h][l]);
+				}
+			}
+		}
+		
+		for (Cellule cellule : li) 
+		{
+			
+			Cellule temp =cellule.getCellule(cellule.getCoordonnees().ajout(Constante.DROIT));
+			Cellule vois_droit = cette_case_est_valide(temp) ? temp : cellule;
+			
+			temp =cellule.getCellule(cellule.getCoordonnees().ajout(Constante.BAS));
+			Cellule vois_bas = cette_case_est_valide(temp) ? temp : cellule;
+			
+			temp =cellule.getCellule(cellule.getCoordonnees().ajout(Constante.GAUCHE));
+			Cellule vois_gauche  = cette_case_est_valide(temp) ? temp : cellule;
+			
+			temp =cellule.getCellule(cellule.getCoordonnees().ajout(Constante.HAUT));
+			Cellule vois_haut = cette_case_est_valide(temp) ? temp : cellule;
+			
+			if(vois_haut.estBase()==Constante.BASE2||vois_bas.estBase()==Constante.BASE2||vois_droit.estBase()==Constante.BASE2||vois_gauche.estBase()==Constante.BASE2)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	static private boolean cette_case_est_valide(Cellule c)
+	{
+		try
+		{
+			if(c.estBase()==Constante.BASE2)
+			{
+				return true;
+			}
+		}catch(NullPointerException e)
+		{
+			return false;
+		}
+		return false;//compil auto
 	}
 
 	void genere_obstacle()
@@ -206,7 +262,13 @@ public class Plateau {
 		p.plateau[0][0].base = 1;
 		p.plateau[9][9].base = 2;
 		
-		p.genere_obstacle();
+		int test =0;
+		while(p.ya_chemin(p.plateau[0][0])&&test<50000)
+		{
+			p.genere_obstacle();
+			//System.out.println(test);
+			test++;
+		}
 
 		Robot t1 = new Piegeur(0, 0);
 		// Setter les coordonnées IMPÉRATIVEMENT
