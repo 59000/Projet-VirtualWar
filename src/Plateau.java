@@ -119,7 +119,7 @@ public class Plateau {
 					this.plateau[r.getCoord().getLargeur()]
 								[r.getCoord().getHauteur()].videCase();
 					new Deplacement(r, mvt);
-					Deplacement.charBloquee(r,mvt); // Appelle la fonction qui réajuste le déplacement du char
+					r = Deplacement.charBloquee(r,mvt); // Appelle la fonction qui réajuste le déplacement du char
 					this.plateau[r.getCoord().getLargeur()]
 							[r.getCoord().getHauteur()].deplaceSur(r);
 					// Et un message qui précise que ce cas à eu lieu
