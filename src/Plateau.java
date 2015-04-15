@@ -108,13 +108,17 @@ public class Plateau {
 					// Et si le premier déplacement n'envoie pas le char sur un
 					// obstacle
 					if (!this.plateau[r.getCoord().getLargeur()+ mvt.getLargeur()]
-									 [r.getCoord().getHauteur()+ mvt.getHauteur()].estObstacle()) {
+									 [r.getCoord().getHauteur()+ mvt.getHauteur()].estObstacle()
+									 && this.plateau[r.getCoord().getLargeur()+ mvt.getLargeur()]
+									 [r.getCoord().getHauteur()+ mvt.getHauteur()].robot == null) {
 						// Et que le deuxiéme non plus
 						if (r.getCoord().getLargeur() + (2 * mvt.getLargeur()) >= 0
 								&& r.getCoord().getLargeur()+ (2 * mvt.getLargeur()) < this.plateau.length) {
 							
 							if (!this.plateau[r.getCoord().getLargeur()+ (2 * mvt.getLargeur())]
-											 [r.getCoord().getHauteur() + (2 * mvt.getHauteur())].estObstacle()) {
+											 [r.getCoord().getHauteur() + (2 * mvt.getHauteur())].estObstacle()
+											 && this.plateau[r.getCoord().getLargeur()+ (2 * mvt.getLargeur())]
+											 [r.getCoord().getHauteur() + (2 * mvt.getHauteur())].robot == null) {
 								// Fonctionnement normale de la fonction
 								this.plateau[r.getCoord().getLargeur()][r
 										.getCoord().getHauteur()].videCase();
@@ -158,7 +162,9 @@ public class Plateau {
 					&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
 				// Si le déplacement n'envoie pas le robot sur un obstacle
 				if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()]
-								 [r.getCoord().getHauteur() + mvt.getHauteur()].estObstacle()) {
+						 [r.getCoord().getHauteur() + mvt.getHauteur()].estObstacle()
+						 && this.plateau[r.getCoord().getLargeur()+ mvt.getLargeur()]
+						 [r.getCoord().getHauteur()+ mvt.getHauteur()].robot == null) {
 					this.plateau[r.getCoord().getLargeur()]
 								[r.getCoord().getHauteur()].videCase();
 					new Deplacement(r, mvt);
