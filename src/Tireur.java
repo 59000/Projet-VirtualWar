@@ -12,7 +12,7 @@ public class Tireur extends Robot {
 	 */
 	public Tireur(int equipe, int numero) {
 
-		super(equipe, numero, 40);
+		super(equipe, numero, Constante.ENERGIETIREUR);
 	}
 	/**Retourne le cout d'action du tireur */
 	@Override
@@ -65,6 +65,9 @@ public class Tireur extends Robot {
 		}
 		return false;
 
+	}
+	public String toString(){
+		return "Tireur "+super.toString();
 	}
 
 }
