@@ -43,7 +43,7 @@ public class Menu {
 				i = scan.nextInt();
 				if (nbrRobotEquipe + i > 5) {
 					System.out
-							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommancez !");
+							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommencez !");
 					break;
 				}
 				for (int j = 0; j < i; j++) {
@@ -60,7 +60,7 @@ public class Menu {
 				i = scan.nextInt();
 				if (nbrRobotEquipe + i > 5) {
 					System.out
-							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommancez !");
+							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommencez !");
 					break;
 				}
 				for (int j = 0; j < i; j++) {
@@ -77,7 +77,7 @@ public class Menu {
 				i = scan.nextInt();
 				if (nbrRobotEquipe + i > 5) {
 					System.out
-							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommancez !");
+							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommencez !");
 					break;
 				}
 				for (int j = 0; j < i; j++) {
