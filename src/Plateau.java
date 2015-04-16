@@ -143,58 +143,58 @@ public class Plateau {
 	}
 
 	/**
-	 * Appelle les fonctions qui permettent de modéliser les déplacements. Si
-	 * Char = déplacement de 2 ou 1 si bloqué par un obstacles. Sinon =
-	 * déplacement de 1.
+	 * Appelle les fonctions qui permettent de modÃ©liser les dÃ©placements. Si
+	 * Char = dÃ©placement de 2 ou 1 si bloquÃ© par un obstacles. Sinon =
+	 * dÃ©placement de 1.
 	 * 
-	 * Si le robot arrive sur une mine, il se prend les dégats.
+	 * Si le robot arrive sur une mine, il se prend les dÃ©gats.
 	 * 
 	 * @param t1
 	 *            robot
 	 * @param mvt
-	 *            Constante de déplacement
+	 *            Constante de dÃ©placement
 	 */
 	public void deplaceRobot(Robot r, Coordonnees mvt) {
 		// Si le robot est un Char
 		if (r instanceof Char) {
-			// Et que le mouvement demandée est un mouvement diagonales
+			// Et que le mouvement demandÃ©e est un mouvement diagonales
 			if (mvt.equals(Constante.HAUTDROIT)
 					|| mvt.equals(Constante.HAUTGAUCHE)
 					|| mvt.equals(Constante.BASDROIT)
 					|| mvt.equals(Constante.BASGAUCHE)) {
 				// Renvoie un message d'erreur
 				System.out
-						.println("Erreur : Un char ne peut se déplacer diagonalement");
+						.println("Erreur : Un char ne peut se deplacer diagonalement");
 			}
 			// Sinon, fonctionnement normal de la fonction
 			else {
-				// Si le premier déplacement n'amène pas au dehors des bords du
+				// Si le premier dÃ©placement n'amÃ¨ne pas au dehors des bords du
 				// plateau
 				if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
 						&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
-					// Et si le premier déplacement n'envoie pas le char sur un
+					// Et si le premier dÃ©placement n'envoie pas le char sur un
 					// obstacle
 					if (!this.plateau[r.getCoord().getLargeur()
 							+ mvt.getLargeur()][r.getCoord().getHauteur()
 							+ mvt.getHauteur()].estObstacle()) {
 
-						// 1er déplacement du char
+						// 1er dÃ©placement du char
 						this.plateau[r.getCoord().getLargeur()][r.getCoord()
 								.getHauteur()].videCase();
 						new Deplacement(r, mvt);
 						this.plateau[r.getCoord().getLargeur()][r.getCoord()
 								.getHauteur()].deplaceSur(r);
 
-						// Si le robot se déplace sur une mine
+						// Si le robot se dÃ©place sur une mine
 						this.deplaceSurMine(r);
 
-						// 2éme déplacement
-						// Si le second déplacement n'amène pas au dehors des
+						// 2Ã©me dÃ©placement
+						// Si le second dÃ©placement n'amÃ¨ne pas au dehors des
 						// bords du
 						// plateau
 						if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
 								&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
-							// Et si le second déplacement n'envoie pas le char
+							// Et si le second dÃ©placement n'envoie pas le char
 							// sur un
 							// obstacle
 							if (!this.plateau[r.getCoord().getLargeur()
@@ -202,36 +202,36 @@ public class Plateau {
 									.getHauteur() + mvt.getHauteur()]
 									.estObstacle()) {
 
-								// 2éme déplacement du char
+								// 2Ã©me dÃ©placement du char
 								this.plateau[r.getCoord().getLargeur()][r
 										.getCoord().getHauteur()].videCase();
 								new Deplacement(r, mvt);
 								this.plateau[r.getCoord().getLargeur()][r
 										.getCoord().getHauteur()].deplaceSur(r);
 							} else {
-								// Sinon, un obstacle empêche le second
-								// déplacement
+								// Sinon, un obstacle empÃªche le second
+								// dÃ©placement
 								System.out
-										.println("Event : Le char a rencontrée un obstacle sur son chemin et a dûs se stopper.");
+										.println("Event : Le char a rencontre un obstacle sur son chemin et a du se stopper.");
 							}
 
 						} else {
-							// Sinon, les limites du plateau empêche le second
-							// déplacement
+							// Sinon, les limites du plateau empÃªche le second
+							// dÃ©placement
 							System.out
-									.println("Event : Le char a dûs s'arrêter pour ne pas tomber.");
+									.println("Event : Le char a du s'arrÃªter pour ne pas tomber.");
 						}
 
 					} else {
-						// Sinon, un obstacle empêche le déplacement
+						// Sinon, un obstacle empÃªche le dÃ©placement
 						System.out
-								.println("Erreur : Un obstacle bloque le déplacement, déplacement annulée.");
+								.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
 					}
 
 				} else {
-					// Sinon, les limites du plateau empêche le déplacement
+					// Sinon, les limites du plateau empÃªche le dÃ©placement
 					System.out
-							.println("Erreur : Déplacement en dehors des limites de la map.");
+							.println("Erreur : Deplacement en dehors des limites de la map.");
 				}
 			}
 		}
@@ -239,11 +239,11 @@ public class Plateau {
 		// Si le robot est autre qu'un char, fonctionnement normale de
 		// la fonction
 		else {
-			// Si le déplacement de 1 n'amène pas au dehors des bords du
+			// Si le dÃ©placement de 1 n'amÃ¨ne pas au dehors des bords du
 			// plateau
 			if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
 					&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
-				// Si le déplacement n'envoie pas le robot sur un obstacle
+				// Si le dÃ©placement n'envoie pas le robot sur un obstacle
 				if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()][r
 						.getCoord().getHauteur() + mvt.getHauteur()]
 						.estObstacle()) {
@@ -255,40 +255,40 @@ public class Plateau {
 							.getHauteur()].deplaceSur(r);
 
 				} else {
-					// Sinon, message d'érreur et annulation du déplacement
+					// Sinon, message d'Ã©rreur et annulation du dÃ©placement
 					System.out
-							.println("Erreur : Un obstacle bloque le déplacement, déplacement annulée.");
+							.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
 				}
-				// Sinon, les limites de la map emêchent le déplacement
+				// Sinon, les limites de la map emÃªchent le dÃ©placement
 			} else {
 				System.out
-						.println("Erreur : Les limites de la map empêchent le déplacement.");
+						.println("Erreur : Les limites de la map empechent le deplacement.");
 			}
 		}
 
-		// Si le robot se déplace sur une mine
+		// Si le robot se dÃ©place sur une mine
 		this.deplaceSurMine(r);
 	}
 
 	/**
-	 * Permet de provoquer les dégats sur le robot si la cellule sur laquelle
-	 * elle se déplace est une mine
+	 * Permet de provoquer les dÃ©gats sur le robot si la cellule sur laquelle
+	 * elle se dÃ©place est une mine
 	 * 
 	 * @param r
 	 *            robot
 	 */
 	public void deplaceSurMine(Robot r) {
-		// Si le robot se déplace qur une cellule miné
+		// Si le robot se dÃ©place qur une cellule minÃ©
 		if (this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()]
 				.contienMine() != 0) {
-			// Le robot se prend les dégats et la mine disparaît
+			// Le robot se prend les dÃ©gats et la mine disparaÃ®t
 			r.subitMine();
 			this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()]
 					.setMine(0);
 		}
 	}
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		Plateau p = new Plateau(10, 10);
 		p.plateau[0][0].base = 1;
 		p.plateau[9][9].base = 2;
@@ -302,7 +302,7 @@ public class Plateau {
 		}
 
 		Robot t1 = new Piegeur(0, 0);
-		// Setter les coordonnées IMPÉRATIVEMENT
+		// Setter les coordonnÃ©es IMPÃ‰RATIVEMENT
 		t1.setCoord(new Coordonnees(4, 4));
 
 		p.plateau[t1.getCoord().getLargeur()][t1.getCoord().getHauteur()].deplaceSur(t1);
@@ -320,5 +320,5 @@ public class Plateau {
 		p.deplaceRobot(t1, Constante.HAUT);
 
 		System.out.println(p);
-	}
+	}*/
 }
