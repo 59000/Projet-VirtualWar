@@ -8,7 +8,7 @@ public class Piegeur extends Robot {/*implÃƒÂ©menter*/
 	/*faire les methodes peutTirer() et getDeplacement()*/
 	/**Crée un Robot piegeur avec son numéro et son equipe */
 	public Piegeur(int equipe,int numero) {
-		super(equipe,numero, 40);
+		super(equipe,numero, Constante.ENERGIEPIEGEUR);
 	}
 	/**Teste si le robot peut poser une mine sur une certaine cellule*/
 	@Override
@@ -62,5 +62,8 @@ public class Piegeur extends Robot {/*implÃƒÂ©menter*/
 	void regeneration(){
 		super.regeneration();
 		nbMine = Constante.NBMINE;
+	}
+	public String toString(){
+		return "Piegeur" +super.toString();
 	}
 }
