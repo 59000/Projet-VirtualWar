@@ -1,6 +1,6 @@
 import java.util.List;
 
-public class Char extends Robot {/*implÃ©menter*/
+public class Char extends Robot {
 
 	/**@param coord */
 	List<Coordonnees> coord;
@@ -65,4 +65,11 @@ public class Char extends Robot {/*implÃ©menter*/
 		return coord;
 
 	}
+
+	@Override
+	public String toString() {
+		return "Char   " + super.toString();
+	}
+	
+	
 }
