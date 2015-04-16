@@ -96,12 +96,12 @@ public class Menu {
 			System.out.println(p);
 
 			System.out
-					.println("+-----------------------------------------------------+");
+					.println("+-------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot.length; j++) {
 				System.out.println("| " + equipeRobot[j].toString() + " |");
 			}
 			System.out
-					.println("+-----------------------------------------------------+");
+					.println("+-------------------------------------------------------+");
 
 			System.out
 					.println("Quel action souhaitez-vous ? \n - 1. Deplacement \n "
