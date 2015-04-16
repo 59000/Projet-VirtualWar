@@ -75,7 +75,7 @@ public abstract class Robot {
 
 	@Override
 	public String toString() {
-		return "Robot [coord=" + coord + ", equipe=" + equipe + ", numero="
+		return " [coord=" + coord + ", equipe=" + equipe + ", numero="
 				+ numero + ", energie=" + energie + "]";
 	}
 	/**Gere la perte de point de vie du robot par des tirs */
