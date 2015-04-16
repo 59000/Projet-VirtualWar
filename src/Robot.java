@@ -1,7 +1,7 @@
 import java.util.List;
 
 public abstract class Robot {
-	/* implÃ©menter les fonctions prÃ©sentes */
+	/* implÃƒÂ©menter les fonctions prÃƒÂ©sentes */
 	/**@param coord */
 	protected Coordonnees coord;
 	/**@param equipe */
@@ -75,8 +75,15 @@ public abstract class Robot {
 
 	@Override
 	public String toString() {
-		return " [coord=" + coord + ", equipe=" + equipe + ", numero="
-				+ numero + ", energie=" + energie + "]";
+		String s;
+		if(energie<10){
+			s=" [coord=" + coord + ", equipe=" + equipe + ", numero="
+					+ numero + ", energie=" + energie + " ]";
+		}else{
+			s=" [coord=" + coord + ", equipe=" + equipe + ", numero="
+					+ numero + ", energie=" + energie + "]";
+		}
+		return s;
 	}
 	/**Gere la perte de point de vie du robot par des tirs */
 	public void subitTir(Robot robot) {
