@@ -67,7 +67,7 @@ public class Tireur extends Robot {
 
 	}
 	public String toString(){
-		return "Tireur "+super.toString()+"\t\t";
+		return "Tireur "+super.toString()+"\t ";
 	}
 
 }
