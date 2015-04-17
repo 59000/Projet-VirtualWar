@@ -64,6 +64,6 @@ public class Piegeur extends Robot {/*implÃƒÂ©menter*/
 		nbMine = Constante.NBMINE;
 	}
 	public String toString(){
-		return "Piegeur" +super.toString();
+		return "Piegeur" +super.toString()+"mines="+nbMine;
 	}
 }
