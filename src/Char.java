@@ -68,7 +68,7 @@ public class Char extends Robot {
 
 	@Override
 	public String toString() {
-		return "Char   " + super.toString();
+		return "Char   " + super.toString()+"\t\t";
 	}
 	
 	
