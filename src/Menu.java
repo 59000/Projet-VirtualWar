@@ -34,7 +34,7 @@ public class Menu {
 		while (nbrRobotEquipe < 5) {
 			System.out
 					.println(" Constituez les equipes ! \n - 1. Tireur \n - 2. Piegeur \n - 3.Char \n\n Il reste "
-							+ (5 - nbrRobotEquipe) + " robots a  placer.");
+							+ (5 - nbrRobotEquipe) + " robots aÂ  placer.");
 			int robot = scan.nextInt();
 			int i;
 			switch (robot) {
@@ -113,7 +113,7 @@ public class Menu {
 				System.out
 						.println("Quel Robot (numero) voulez-vous deplacer ?");
 				i = scan.nextInt();
-				System.out.println("Dans quel direction ?");
+				System.out.println("Dans quel direction ? (haut,bas,gauche,droit,hautgauche,hautdroit,basgauche,basdroit)");
 				String msg = scan.next();
 				switch (msg) {
 				case "haut":
@@ -148,5 +148,6 @@ public class Menu {
 				System.out.println("Non Disponible");
 			}
 		}
+		scan.close();
 	}
 }
