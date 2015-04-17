@@ -119,14 +119,17 @@ public class Menu
 						case "bas":
 							p.plateau[cell_attaquant.ajout(Constante.BAS).getLargeur()][cell_attaquant.ajout(Constante.BAS).getHauteur()].setMine(equipe_active+1);
 							attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTMINER);
+							((Piegeur) attaquant).nbMine-=1;
 							break;
 						case "gauche":
 							p.plateau[cell_attaquant.ajout(Constante.GAUCHE).getLargeur()][cell_attaquant.ajout(Constante.GAUCHE).getHauteur()].setMine(equipe_active+1);
 							attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTMINER);
+							((Piegeur) attaquant).nbMine-=1;
 							break;
 						case "droit":
 							p.plateau[cell_attaquant.ajout(Constante.DROIT).getLargeur()][cell_attaquant.ajout(Constante.DROIT).getHauteur()].setMine(equipe_active+1);
 							attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTMINER);
+							((Piegeur) attaquant).nbMine-=1;
 							break;
 						}
 					}
