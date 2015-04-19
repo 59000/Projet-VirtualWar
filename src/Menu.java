@@ -44,9 +44,17 @@ public class Menu {
 			System.out
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot[0].length; j++) {
-
-				System.out.println("| " + equipeRobot[0][j].toString() + "|"
-						+ "| " + equipeRobot[1][j].toString() + "|");
+				if (equipeRobot[0][j] == null) {
+					System.out.println("|                                   |"
+							+ "| " + equipeRobot[1][j].toString() + "|");
+				} else if (equipeRobot[1][j] == null) {
+					System.out.println("| " + equipeRobot[0][j].toString()
+							+ "|"
+							+ "|                                            |");
+				} else {
+					System.out.println("| " + equipeRobot[0][j].toString()
+							+ "|" + "| " + equipeRobot[1][j].toString() + "|");
+				}
 			}
 			System.out
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
@@ -65,7 +73,11 @@ public class Menu {
 
 					try {
 						i = scan.nextInt();
-						equipeRobot[equipe_active][i].getNumero();
+						if (equipeRobot[equipe_active][i] != null) {
+							equipeRobot[equipe_active][i].getNumero();
+						} else {
+							System.out.println("Ce Robot est mort !");
+						}
 						flag = false;
 					} catch (InputMismatchException e) {
 						System.out.println("Erreur : Entier attendu");
@@ -78,45 +90,49 @@ public class Menu {
 
 					}
 				}
-				System.out
-						.println("Equipe "
-								+ (equipe_active + 1)
-								+ ": Dans quel direction ? (haut,bas,gauche,droit,hautgauche,hautdroit,basgauche,basdroit)");
-				String msg = scan.next();
 
-				switch (msg) {
-				case "haut":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.HAUT);
-					break;
-				case "bas":
-					p.deplaceRobot(equipeRobot[equipe_active][i], Constante.BAS);
-					break;
-				case "gauche":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.GAUCHE);
-					break;
-				case "droit":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.DROIT);
-					break;
-				case "hautgauche":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.HAUTGAUCHE);
-					break;
-				case "hautdroit":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.HAUTDROIT);
-					break;
-				case "basgauche":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.BASGAUCHE);
-					break;
-				case "basdroit":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.BASDROIT);
-					break;
+				if (equipeRobot[equipe_active][i] != null) {
+					System.out
+							.println("Equipe "
+									+ (equipe_active + 1)
+									+ ": Dans quel direction ? (haut,bas,gauche,droit,hautgauche,hautdroit,basgauche,basdroit)");
+					String msg = scan.next();
 
+					switch (msg) {
+					case "haut":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUT);
+						break;
+					case "bas":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BAS);
+						break;
+					case "gauche":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.GAUCHE);
+						break;
+					case "droit":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.DROIT);
+						break;
+					case "hautgauche":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTGAUCHE);
+						break;
+					case "hautdroit":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTDROIT);
+						break;
+					case "basgauche":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASGAUCHE);
+						break;
+					case "basdroit":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASDROIT);
+						break;
+
+					}
 				}
 
 			} else if (i == 3) {
@@ -126,134 +142,146 @@ public class Menu {
 				System.out.println("Equipe " + (equipe_active + 1)
 						+ ": Quel Robot (numero) voulez-vous faire attaquer ?");
 				Robot attaquant = equipeRobot[equipe_active][scan.nextInt()];
-				if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
-						.getCoord().getHauteur()].estBase() == attaquant
-						.getEquipe()) {
-					System.out
-							.println("Erreur : une attaque depuis une base est impossible");
-				} else {
-					if (attaquant instanceof Piegeur) {
+				if (attaquant != null) {
+					if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
+							.getCoord().getHauteur()].estBase() == attaquant
+							.getEquipe()) {
 						System.out
-								.println("Equipe "
-										+ (equipe_active + 1)
-										+ ": dans quelle direction le piÃƒÆ’Ã‚Â©geur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
-						Cellule cell_attaquant = p.plateau[attaquant.getCoord()
-								.getLargeur()][attaquant.getCoord()
-								.getHauteur()];
-						String dir = scan.next();
-						switch (dir) {
-						case "haut":
-							p.plateau[cell_attaquant.ajout(Constante.HAUT)
-									.getLargeur()][cell_attaquant.ajout(
-									Constante.HAUT).getHauteur()]
-									.setMine(equipe_active + 1);
-							attaquant.setEnergie(attaquant.getEnergie()
-									+ Constante.COUTMINER);
-							((Piegeur) attaquant).nbMine -= 1;
-							break;
-						case "bas":
-							p.plateau[cell_attaquant.ajout(Constante.BAS)
-									.getLargeur()][cell_attaquant.ajout(
-									Constante.BAS).getHauteur()]
-									.setMine(equipe_active + 1);
-							attaquant.setEnergie(attaquant.getEnergie()
-									+ Constante.COUTMINER);
-							((Piegeur) attaquant).nbMine -= 1;
-							break;
-						case "gauche":
-							p.plateau[cell_attaquant.ajout(Constante.GAUCHE)
-									.getLargeur()][cell_attaquant.ajout(
-									Constante.GAUCHE).getHauteur()]
-									.setMine(equipe_active + 1);
-							attaquant.setEnergie(attaquant.getEnergie()
-									+ Constante.COUTMINER);
-							((Piegeur) attaquant).nbMine -= 1;
-							break;
-						case "droit":
-							p.plateau[cell_attaquant.ajout(Constante.DROIT)
-									.getLargeur()][cell_attaquant.ajout(
-									Constante.DROIT).getHauteur()]
-									.setMine(equipe_active + 1);
-							attaquant.setEnergie(attaquant.getEnergie()
-									+ Constante.COUTMINER);
-							((Piegeur) attaquant).nbMine -= 1;
-							break;
-						case "hautgauche":
-							p.plateau[cell_attaquant
-									.ajout(Constante.HAUTGAUCHE).getLargeur()][cell_attaquant
-									.ajout(Constante.HAUTGAUCHE).getHauteur()]
-									.setMine(equipe_active + 1);
-							attaquant.setEnergie(attaquant.getEnergie()
-									+ Constante.COUTMINER);
-							((Piegeur) attaquant).nbMine -= 1;
-							break;
-
-						case "hautdroit":
-							p.plateau[cell_attaquant.ajout(Constante.HAUTDROIT)
-									.getLargeur()][cell_attaquant.ajout(
-									Constante.HAUTDROIT).getHauteur()]
-									.setMine(equipe_active + 1);
-							attaquant.setEnergie(attaquant.getEnergie()
-									+ Constante.COUTMINER);
-							((Piegeur) attaquant).nbMine -= 1;
-							break;
-						case "basgauche":
-							p.plateau[cell_attaquant.ajout(Constante.BASGAUCHE)
-									.getLargeur()][cell_attaquant.ajout(
-									Constante.BASGAUCHE).getHauteur()]
-									.setMine(equipe_active + 1);
-							attaquant.setEnergie(attaquant.getEnergie()
-									+ Constante.COUTMINER);
-							((Piegeur) attaquant).nbMine -= 1;
-							break;
-						case "basdroit":
-							p.plateau[cell_attaquant.ajout(Constante.BASDROIT)
-									.getLargeur()][cell_attaquant.ajout(
-									Constante.BASDROIT).getHauteur()]
-									.setMine(equipe_active + 1);
-							attaquant.setEnergie(attaquant.getEnergie()
-									+ Constante.COUTMINER);
-							((Piegeur) attaquant).nbMine -= 1;
-							break;
-
-						}
-
+								.println("Erreur : une attaque depuis une base est impossible");
 					} else {
+						if (attaquant instanceof Piegeur) {
+							System.out
+									.println("Equipe "
+											+ (equipe_active + 1)
+											+ ": dans quelle direction le piÃƒÆ’Ã‚Â©geur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
+							Cellule cell_attaquant = p.plateau[attaquant
+									.getCoord().getLargeur()][attaquant
+									.getCoord().getHauteur()];
+							String dir = scan.next();
+							switch (dir) {
+							case "haut":
+								p.plateau[cell_attaquant.ajout(Constante.HAUT)
+										.getLargeur()][cell_attaquant.ajout(
+										Constante.HAUT).getHauteur()]
+										.setMine(equipe_active + 1);
+								attaquant.setEnergie(attaquant.getEnergie()
+										+ Constante.COUTMINER);
+								((Piegeur) attaquant).nbMine -= 1;
+								break;
+							case "bas":
+								p.plateau[cell_attaquant.ajout(Constante.BAS)
+										.getLargeur()][cell_attaquant.ajout(
+										Constante.BAS).getHauteur()]
+										.setMine(equipe_active + 1);
+								attaquant.setEnergie(attaquant.getEnergie()
+										+ Constante.COUTMINER);
+								((Piegeur) attaquant).nbMine -= 1;
+								break;
+							case "gauche":
+								p.plateau[cell_attaquant
+										.ajout(Constante.GAUCHE).getLargeur()][cell_attaquant
+										.ajout(Constante.GAUCHE).getHauteur()]
+										.setMine(equipe_active + 1);
+								attaquant.setEnergie(attaquant.getEnergie()
+										+ Constante.COUTMINER);
+								((Piegeur) attaquant).nbMine -= 1;
+								break;
+							case "droit":
+								p.plateau[cell_attaquant.ajout(Constante.DROIT)
+										.getLargeur()][cell_attaquant.ajout(
+										Constante.DROIT).getHauteur()]
+										.setMine(equipe_active + 1);
+								attaquant.setEnergie(attaquant.getEnergie()
+										+ Constante.COUTMINER);
+								((Piegeur) attaquant).nbMine -= 1;
+								break;
+							case "hautgauche":
+								p.plateau[cell_attaquant.ajout(
+										Constante.HAUTGAUCHE).getLargeur()][cell_attaquant
+										.ajout(Constante.HAUTGAUCHE)
+										.getHauteur()]
+										.setMine(equipe_active + 1);
+								attaquant.setEnergie(attaquant.getEnergie()
+										+ Constante.COUTMINER);
+								((Piegeur) attaquant).nbMine -= 1;
+								break;
 
-						System.out
-								.println("Equipe "
-										+ (equipe_active + 1)
-										+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
-						Robot cible = equipeRobot[equipe_passive][scan
-								.nextInt()];
-						if (attaquant instanceof Tireur) {
-							if (attaquant.peutTirer(cible.getCoord())
-									&& !p.tir_travers_obstacle(attaquant, cible)) {
+							case "hautdroit":
+								p.plateau[cell_attaquant.ajout(
+										Constante.HAUTDROIT).getLargeur()][cell_attaquant
+										.ajout(Constante.HAUTDROIT)
+										.getHauteur()]
+										.setMine(equipe_active + 1);
 								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTTIRERTIREUR);
-								cible.setEnergie(cible.getEnergie()
-										+ Constante.DEGATTIREUR);
-							} else {
-								System.out.println("Erreur : Tir impossible");
+										+ Constante.COUTMINER);
+								((Piegeur) attaquant).nbMine -= 1;
+								break;
+							case "basgauche":
+								p.plateau[cell_attaquant.ajout(
+										Constante.BASGAUCHE).getLargeur()][cell_attaquant
+										.ajout(Constante.BASGAUCHE)
+										.getHauteur()]
+										.setMine(equipe_active + 1);
+								attaquant.setEnergie(attaquant.getEnergie()
+										+ Constante.COUTMINER);
+								((Piegeur) attaquant).nbMine -= 1;
+								break;
+							case "basdroit":
+								p.plateau[cell_attaquant.ajout(
+										Constante.BASDROIT).getLargeur()][cell_attaquant
+										.ajout(Constante.BASDROIT).getHauteur()]
+										.setMine(equipe_active + 1);
+								attaquant.setEnergie(attaquant.getEnergie()
+										+ Constante.COUTMINER);
+								((Piegeur) attaquant).nbMine -= 1;
+								break;
+
 							}
-						} else if (attaquant instanceof Char) {
-							if (attaquant.peutTirer(cible.getCoord())
-									&& !p.tir_travers_obstacle(attaquant, cible)) {
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTTIRERCHAR);
-								cible.setEnergie(cible.getEnergie()
-										+ Constante.DEGATCHAR);
-							} else {
-								System.out.println("Erreur : Tir impossible");
+
+						} else {
+
+							System.out
+									.println("Equipe "
+											+ (equipe_active + 1)
+											+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
+							Robot cible = equipeRobot[equipe_passive][scan
+									.nextInt()];
+							if (attaquant instanceof Tireur) {
+								if (attaquant.peutTirer(cible.getCoord())
+										&& !p.tir_travers_obstacle(attaquant,
+												cible)) {
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTTIRERTIREUR);
+									cible.setEnergie(cible.getEnergie()
+											+ Constante.DEGATTIREUR);
+								} else {
+									System.out
+											.println("Erreur : Tir impossible");
+								}
+							} else if (attaquant instanceof Char) {
+								if (attaquant.peutTirer(cible.getCoord())
+										&& !p.tir_travers_obstacle(attaquant,
+												cible)) {
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTTIRERCHAR);
+									cible.setEnergie(cible.getEnergie()
+											+ Constante.DEGATCHAR);
+								} else {
+									System.out
+											.println("Erreur : Tir impossible");
+								}
 							}
 						}
 					}
+				} else {
+					System.out.println("Ce Robot est mort !");
 				}
 			} else {
 				System.out.println("Non Disponible");
 			}
 			equipe_passive = equipe_active;
 			equipe_active = ++equipe_active % 2;
+			miseAJourJeu(equipeRobot, p.plateau);
 		}
 		scan.close();
 	}
@@ -324,5 +352,32 @@ public class Menu {
 			}
 		}
 		return areturn;
+	}
+
+	/**
+	 * Regenere ou detruit un robot
+	 * 
+	 * @param equipe
+	 * @param p
+	 */
+	public static void miseAJourJeu(Robot[][] equipe, Cellule[][] p) {
+		for (int i = 0; i < equipe.length; i++) {
+			for (int j = 0; j < equipe[i].length; j++) {
+				if (equipe[i][j] != null && equipe[i][j].robotMort()) {
+					equipe[i][j] = null;
+				} else if (equipe[i][j] != null
+						&& i == 0
+						&& equipe[i][j].getCoord()
+								.equals(new Coordonnees(0, 0))) {
+					equipe[0][j].regeneration(p);
+				} else if (equipe[i][j] != null
+						&& i == 1
+						&& equipe[i][j].getCoord().equals(
+								new Coordonnees(p.length - 1,
+										p[p.length - 1].length - 1))) {
+					equipe[1][j].regeneration(p);
+				}
+			}
+		}
 	}
 }
