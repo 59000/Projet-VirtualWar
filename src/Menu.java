@@ -131,7 +131,30 @@ public class Menu
 							attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTMINER);
 							((Piegeur) attaquant).nbMine-=1;
 							break;
+						case "hautgauche":
+							p.plateau[cell_attaquant.ajout(Constante.HAUTGAUCHE).getLargeur()][cell_attaquant.ajout(Constante.HAUTGAUCHE).getHauteur()].setMine(equipe_active+1);
+							attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTMINER);
+							((Piegeur) attaquant).nbMine-=1;
+							break;
+							
+						case "hautdroit":
+							p.plateau[cell_attaquant.ajout(Constante.HAUTDROIT).getLargeur()][cell_attaquant.ajout(Constante.HAUTDROIT).getHauteur()].setMine(equipe_active+1);
+							attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTMINER);
+							((Piegeur) attaquant).nbMine-=1;
+							break;
+						case "basgauche":
+							p.plateau[cell_attaquant.ajout(Constante.BASGAUCHE).getLargeur()][cell_attaquant.ajout(Constante.BASGAUCHE).getHauteur()].setMine(equipe_active+1);
+							attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTMINER);
+							((Piegeur) attaquant).nbMine-=1;
+							break;
+						case "basdroite":
+							p.plateau[cell_attaquant.ajout(Constante.BASDROIT).getLargeur()][cell_attaquant.ajout(Constante.BASDROIT).getHauteur()].setMine(equipe_active+1);
+							attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTMINER);
+							((Piegeur) attaquant).nbMine-=1;
+							break;
+						
 						}
+						
 					}
 					else
 					{
