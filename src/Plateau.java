@@ -4,9 +4,7 @@ import java.util.Random;
 
 public class Plateau {
 
-	private double pourcentage = 6.66;
 	public Cellule[][] plateau;
-	private Random Ran = new Random(100);
 
 	public Plateau(int largeur, int hauteur) {
 		plateau = new Cellule[largeur][hauteur];
@@ -18,46 +16,46 @@ public class Plateau {
 		}
 	}
 	
-	boolean ya_chemin(Cellule base1)
+	List<Cellule> ya_chemin(Cellule base1)
 	{
-		List<Cellule> li = new ArrayList<Cellule>();
-		for (int h = 0; h < this.plateau.length; h++) 
+		Random r = new Random();
+		List<Cellule> areturn = new ArrayList<Cellule>();
+		
+		boolean base2_attainte=false;
+		Cellule cellule_active = base1;
+		
+		while (!base2_attainte) 
 		{
-			for (int l = 0; l < this.plateau[h].length; l++) 
-			{
-				
-				if(!this.plateau[h][l].estObstacle())
+			int bd = r.nextInt(2)+1;
+			if(bd == 1)
+			{	
+				if(this.cette_case_est_valide(this.getCellule(cellule_active.getCoordonnees().ajout(Constante.BAS))))
 				{
-					li.add(this.plateau[h][l]);
+					cellule_active=this.getCellule(cellule_active.getCoordonnees().ajout(Constante.BAS));
+					areturn.add(cellule_active);
 				}
 			}
-		}
-		
-		for (Cellule cellule : li) 
-		{
 			
-			Cellule temp =cellule.getCellule(cellule.getCoordonnees().ajout(Constante.DROIT));
-			Cellule vois_droit = cette_case_est_valide(temp) ? temp : cellule;
-			
-			temp =cellule.getCellule(cellule.getCoordonnees().ajout(Constante.BAS));
-			Cellule vois_bas = cette_case_est_valide(temp) ? temp : cellule;
-			
-			temp =cellule.getCellule(cellule.getCoordonnees().ajout(Constante.GAUCHE));
-			Cellule vois_gauche  = cette_case_est_valide(temp) ? temp : cellule;
-			
-			temp =cellule.getCellule(cellule.getCoordonnees().ajout(Constante.HAUT));
-			Cellule vois_haut = cette_case_est_valide(temp) ? temp : cellule;
-			
-			if(vois_haut.estBase()==Constante.BASE2||vois_bas.estBase()==Constante.BASE2||vois_droit.estBase()==Constante.BASE2||vois_gauche.estBase()==Constante.BASE2)
+			if(bd == 2)
 			{
-				return true;
+				if(this.cette_case_est_valide(this.getCellule(cellule_active.getCoordonnees().ajout(Constante.DROIT))))
+				{
+					cellule_active=this.getCellule(cellule_active.getCoordonnees().ajout(Constante.DROIT));
+					areturn.add(cellule_active);
+				}
+			}
+			if(cellule_active.estBase() == Constante.BASE2)
+			{
+				base2_attainte = true;
 			}
 		}
 		
-		return false;
+		
+		return areturn;
 	}
 	
-	static private boolean cette_case_est_valide(Cellule c)
+	
+	private boolean cette_case_est_valide(Cellule c)
 	{
 		try
 		{
@@ -69,14 +67,17 @@ public class Plateau {
 		{
 			return false;
 		}
-		return false;//compil auto
+		return true;//compil auto
 	}
 
-	void genere_obstacle()
+	void genere_obstacle(Cellule base1)
 	{
-		for (int h = 0; h < plateau.length; h++) {
-			for (int l = 0; l < plateau[h].length; l++) {
-				if(plateau[l][h].estBase()==0)
+		List<Cellule> chemin = this.ya_chemin(base1);
+		for (int h = 0; h < plateau.length; h++) 
+		{
+			for (int l = 0; l < plateau[h].length; l++) 
+			{
+				if(plateau[l][h].estBase()==0 && !chemin.contains(plateau[l][h]))
 				{
 					plateau[l][h].cree_Obstacle();
 				}
@@ -143,21 +144,21 @@ public class Plateau {
 	}
 
 	/**
-	 * Appelle les fonctions qui permettent de modÃ©liser les dÃ©placements. Si
-	 * Char = dÃ©placement de 2 ou 1 si bloquÃ© par un obstacles. Sinon =
-	 * dÃ©placement de 1.
+	 * Appelle les fonctions qui permettent de modÃƒÂ©liser les dÃƒÂ©placements. Si
+	 * Char = dÃƒÂ©placement de 2 ou 1 si bloquÃƒÂ© par un obstacles. Sinon =
+	 * dÃƒÂ©placement de 1.
 	 * 
-	 * Si le robot arrive sur une mine, il se prend les dÃ©gats.
+	 * Si le robot arrive sur une mine, il se prend les dÃƒÂ©gats.
 	 * 
 	 * @param t1
 	 *            robot
 	 * @param mvt
-	 *            Constante de dÃ©placement
+	 *            Constante de dÃƒÂ©placement
 	 */
 	public void deplaceRobot(Robot r, Coordonnees mvt) {
 		// Si le robot est un Char
 		if (r instanceof Char) {
-			// Et que le mouvement demandÃ©e est un mouvement diagonales
+			// Et que le mouvement demandÃƒÂ©e est un mouvement diagonales
 			if (mvt.equals(Constante.HAUTDROIT)
 					|| mvt.equals(Constante.HAUTGAUCHE)
 					|| mvt.equals(Constante.BASDROIT)
@@ -168,33 +169,33 @@ public class Plateau {
 			}
 			// Sinon, fonctionnement normal de la fonction
 			else {
-				// Si le premier dÃ©placement n'amÃ¨ne pas au dehors des bords du
+				// Si le premier dÃƒÂ©placement n'amÃƒÂ¨ne pas au dehors des bords du
 				// plateau
 				if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
 						&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
-					// Et si le premier dÃ©placement n'envoie pas le char sur un
+					// Et si le premier dÃƒÂ©placement n'envoie pas le char sur un
 					// obstacle
 					if (!this.plateau[r.getCoord().getLargeur()
 							+ mvt.getLargeur()][r.getCoord().getHauteur()
 							+ mvt.getHauteur()].estObstacle()) {
 
-						// 1er dÃ©placement du char
+						// 1er dÃƒÂ©placement du char
 						this.plateau[r.getCoord().getLargeur()][r.getCoord()
 								.getHauteur()].videCase();
 						new Deplacement(r, mvt);
 						this.plateau[r.getCoord().getLargeur()][r.getCoord()
 								.getHauteur()].deplaceSur(r);
 
-						// Si le robot se dÃ©place sur une mine
+						// Si le robot se dÃƒÂ©place sur une mine
 						this.deplaceSurMine(r);
 
-						// 2Ã©me dÃ©placement
-						// Si le second dÃ©placement n'amÃ¨ne pas au dehors des
+						// 2ÃƒÂ©me dÃƒÂ©placement
+						// Si le second dÃƒÂ©placement n'amÃƒÂ¨ne pas au dehors des
 						// bords du
 						// plateau
 						if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
 								&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
-							// Et si le second dÃ©placement n'envoie pas le char
+							// Et si le second dÃƒÂ©placement n'envoie pas le char
 							// sur un
 							// obstacle
 							if (!this.plateau[r.getCoord().getLargeur()
@@ -202,34 +203,34 @@ public class Plateau {
 									.getHauteur() + mvt.getHauteur()]
 									.estObstacle()) {
 
-								// 2Ã©me dÃ©placement du char
+								// 2ÃƒÂ©me dÃƒÂ©placement du char
 								this.plateau[r.getCoord().getLargeur()][r
 										.getCoord().getHauteur()].videCase();
 								new Deplacement(r, mvt);
 								this.plateau[r.getCoord().getLargeur()][r
 										.getCoord().getHauteur()].deplaceSur(r);
 							} else {
-								// Sinon, un obstacle empÃªche le second
-								// dÃ©placement
+								// Sinon, un obstacle empÃƒÂªche le second
+								// dÃƒÂ©placement
 								System.out
 										.println("Event : Le char a rencontre un obstacle sur son chemin et a du se stopper.");
 							}
 
 						} else {
-							// Sinon, les limites du plateau empÃªche le second
-							// dÃ©placement
+							// Sinon, les limites du plateau empÃƒÂªche le second
+							// dÃƒÂ©placement
 							System.out
-									.println("Event : Le char a du s'arrÃªter pour ne pas tomber.");
+									.println("Event : Le char a du s'arrÃƒÂªter pour ne pas tomber.");
 						}
 
 					} else {
-						// Sinon, un obstacle empÃªche le dÃ©placement
+						// Sinon, un obstacle empÃƒÂªche le dÃƒÂ©placement
 						System.out
 								.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
 					}
 
 				} else {
-					// Sinon, les limites du plateau empÃªche le dÃ©placement
+					// Sinon, les limites du plateau empÃƒÂªche le dÃƒÂ©placement
 					System.out
 							.println("Erreur : Deplacement en dehors des limites de la map.");
 				}
@@ -239,11 +240,11 @@ public class Plateau {
 		// Si le robot est autre qu'un char, fonctionnement normale de
 		// la fonction
 		else {
-			// Si le dÃ©placement de 1 n'amÃ¨ne pas au dehors des bords du
+			// Si le dÃƒÂ©placement de 1 n'amÃƒÂ¨ne pas au dehors des bords du
 			// plateau
 			if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
 					&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
-				// Si le dÃ©placement n'envoie pas le robot sur un obstacle
+				// Si le dÃƒÂ©placement n'envoie pas le robot sur un obstacle
 				if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()][r
 						.getCoord().getHauteur() + mvt.getHauteur()]
 						.estObstacle()) {
@@ -255,70 +256,51 @@ public class Plateau {
 							.getHauteur()].deplaceSur(r);
 
 				} else {
-					// Sinon, message d'Ã©rreur et annulation du dÃ©placement
+					// Sinon, message d'ÃƒÂ©rreur et annulation du dÃƒÂ©placement
 					System.out
 							.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
 				}
-				// Sinon, les limites de la map emÃªchent le dÃ©placement
+				// Sinon, les limites de la map emÃƒÂªchent le dÃƒÂ©placement
 			} else {
 				System.out
 						.println("Erreur : Les limites de la map empechent le deplacement.");
 			}
 		}
 
-		// Si le robot se dÃ©place sur une mine
+		// Si le robot se dÃƒÂ©place sur une mine
 		this.deplaceSurMine(r);
 	}
 
 	/**
-	 * Permet de provoquer les dÃ©gats sur le robot si la cellule sur laquelle
-	 * elle se dÃ©place est une mine
+	 * Permet de provoquer les dÃƒÂ©gats sur le robot si la cellule sur laquelle
+	 * elle se dÃƒÂ©place est une mine
 	 * 
 	 * @param r
 	 *            robot
 	 */
 	public void deplaceSurMine(Robot r) {
-		// Si le robot se dÃ©place qur une cellule minÃ©
+		// Si le robot se dÃƒÂ©place qur une cellule minÃƒÂ©
 		if (this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()]
 				.contienMine() != 0) {
-			// Le robot se prend les dÃ©gats et la mine disparaÃ®t
+			// Le robot se prend les dÃƒÂ©gats et la mine disparaÃƒÂ®t
 			r.subitMine();
 			this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()]
 					.setMine(0);
 		}
 	}
-
-	/*public static void main(String[] args) {
-		Plateau p = new Plateau(10, 10);
-		p.plateau[0][0].base = 1;
-		p.plateau[9][9].base = 2;
-		
-		int test =0;
-		while(p.ya_chemin(p.plateau[0][0])&&test<50000)
+	
+	Cellule getCellule(Coordonnees c)
+	{
+		for (int h = 0; h < this.plateau.length; h++) 
 		{
-			p.genere_obstacle();
-			//System.out.println(test);
-			test++;
+			for (int l = 0; l < this.plateau[h].length; l++) 
+			{
+				if(this.plateau[l][h].getCoordonnees().equals(c))
+				{
+					return this.plateau[l][h];
+				}
+			}
 		}
-
-		Robot t1 = new Piegeur(0, 0);
-		// Setter les coordonnÃ©es IMPÃ‰RATIVEMENT
-		t1.setCoord(new Coordonnees(4, 4));
-
-		p.plateau[t1.getCoord().getLargeur()][t1.getCoord().getHauteur()].deplaceSur(t1);
-		
-		p.plateau[1][1].cree_Obstacle();
-		
-		System.out.println(p);
-
-		try {
-			Thread.sleep(1000);// dodo 1 sec
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-
-		p.deplaceRobot(t1, Constante.HAUT);
-
-		System.out.println(p);
-	}*/
+		return null;
+	}
 }
