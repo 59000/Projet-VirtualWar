@@ -104,7 +104,7 @@ public class Cellule extends Coordonnees {
 		return obstacle;
 	}
 	public void cree_Obstacle() {
-		if (this.ran.nextInt(100) <= pourcentage) 
+		if (this.ran.nextInt(100) < pourcentage) 
 		{
 			obstacle= true;
 		}
