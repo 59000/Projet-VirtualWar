@@ -1,7 +1,7 @@
 public abstract class Action {
 	/*
 	 * Il reste a faire la methode getDirection qui renvoit un chemin pour aller
-	 * a l'objectif
+	 * a objectif
 	 */
 
 	/** @param Coordoonnees coord */
@@ -10,8 +10,8 @@ public abstract class Action {
 	protected Robot robot;
 
 	/**
-	 * Crée une instance de la classe action en precisant un robot et ses
-	 * coordonnées
+	 * Cree une instance de la classe action en precisant un robot et ses
+	 * coordonnees
 	 * 
 	 * @param Robot robot
 	 * @param Coodonnees coord
@@ -30,7 +30,7 @@ public abstract class Action {
 	 * public Coordonnees getDirection(){ return null; }
 	 */
 	/**
-	 * Retourne une case ciblé par le joueur pour attaquer ou se deplacer
+	 * Retourne une case cible par le joueur pour attaquer ou se deplacer
 	 * 
 	 * @return Coordonnees
 	 */
