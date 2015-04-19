@@ -1,12 +1,12 @@
 import java.util.List;
 
-public class Piegeur extends Robot {/*implÃƒÆ’Ã‚Â©menter*/
+public class Piegeur extends Robot {
 	/**@param coord */
 	private List<Coordonnees> coord;
 	/**@param NBMINE */
 	int nbMine = Constante.NBMINE;
 	/*faire les methodes peutTirer() et getDeplacement()*/
-	/**CrÃ©e un Robot piegeur avec son numÃ©ro et son equipe */
+	/**Cree un Robot piegeur avec son numero et son equipe */
 	public Piegeur(int equipe,int numero) {
 		super(equipe,numero, Constante.ENERGIEPIEGEUR);
 	}
@@ -50,7 +50,7 @@ public class Piegeur extends Robot {/*implÃƒÆ’Ã‚Â©menter*/
 		// TODO Auto-generated method stub
 		return Constante.DEGATPIEGEUR;
 	}
-	/**Retourne l'ensemble des deplacements pour acceder a une coordonnÃ©es
+	/**Retourne l'ensemble des deplacements pour acceder a une coordonnees
 	 * @return coord;
 	 *  */
 	@Override
