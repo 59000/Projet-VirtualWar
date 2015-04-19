@@ -30,6 +30,8 @@ public class Constante {
 	
 	public static final int NBMINE = 10;
 	
+	public static final int POURCENTAGEOBSTACLE = 15;
+	
 	
 	public static final int COUTMINER = -2;
 	public static final int COUTTIRERTIREUR = -2;
