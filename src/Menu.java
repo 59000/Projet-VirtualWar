@@ -10,7 +10,7 @@ public class Menu {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
 		int taille = 0;
-		while (taille < 5 || taille > 10) {
+		while (taille < 3 || taille > 10) {
 			System.out
 					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
 			taille = scan.nextInt();
@@ -25,7 +25,7 @@ public class Menu {
 		int nb_robot_voulu;
 		do {
 			System.out
-					.println("combien de robot voulez vous dans vos ÃƒÂ©quipes ?");
+					.println("combien de robot voulez vous dans vos ÃƒÆ’Ã‚Â©quipes ?");
 			nb_robot_voulu = scan.nextInt();
 		} while (nb_robot_voulu > 5 || nb_robot_voulu < 1);
 
@@ -59,23 +59,23 @@ public class Menu {
 
 			if (i == 1) {
 				boolean flag = true;
-				while(flag){
-				System.out.println("Equipe " + (equipe_active + 1)
-						+ ": Quel Robot (numero) voulez-vous deplacer ?");
-										
-					try{
+				while (flag) {
+					System.out.println("Equipe " + (equipe_active + 1)
+							+ ": Quel Robot (numero) voulez-vous deplacer ?");
+
+					try {
 						i = scan.nextInt();
 						equipeRobot[equipe_active][i].getNumero();
-						flag=false;
-					}catch(InputMismatchException eb){
+						flag = false;
+					} catch (InputMismatchException e) {
 						System.out.println("Erreur : Entier attendu");
-						flag=true;
-						i=0;
-					}catch(ArrayIndexOutOfBoundsException e){
+						flag = true;
+						i = 0;
+					} catch (ArrayIndexOutOfBoundsException e) {
 						System.out.println("Erreur : Robot non existant");
-						flag=true;
-						i=0;
-					
+						flag = true;
+						i = 0;
+
 					}
 				}
 				System.out
@@ -90,8 +90,7 @@ public class Menu {
 							Constante.HAUT);
 					break;
 				case "bas":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.BAS);
+					p.deplaceRobot(equipeRobot[equipe_active][i], Constante.BAS);
 					break;
 				case "gauche":
 					p.deplaceRobot(equipeRobot[equipe_active][i],
@@ -124,19 +123,20 @@ public class Menu {
 				System.out.println("Fin du jeu !");
 				jeu = false;
 			} else if (i == 2) {
-				System.out.println("Equipe " + (equipe_active+1)
+				System.out.println("Equipe " + (equipe_active + 1)
 						+ ": Quel Robot (numero) voulez-vous faire attaquer ?");
 				Robot attaquant = equipeRobot[equipe_active][scan.nextInt()];
 				if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
 						.getCoord().getHauteur()].estBase() == attaquant
 						.getEquipe()) {
-					System.out.println("Erreur : une attaque depuis une base est impossible");
+					System.out
+							.println("Erreur : une attaque depuis une base est impossible");
 				} else {
 					if (attaquant instanceof Piegeur) {
 						System.out
 								.println("Equipe "
 										+ (equipe_active + 1)
-										+ ": dans quelle direction le piÃƒÂ©geur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
+										+ ": dans quelle direction le piÃƒÆ’Ã‚Â©geur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
 						Cellule cell_attaquant = p.plateau[attaquant.getCoord()
 								.getLargeur()][attaquant.getCoord()
 								.getHauteur()];
@@ -220,27 +220,30 @@ public class Menu {
 
 					} else {
 
-						System.out.println("Equipe "+ (equipe_active + 1)+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
-						Robot cible = equipeRobot[equipe_passive][scan.nextInt()];
-						if(attaquant instanceof Tireur)
-						{System.out.println(p.tir_travers_obstacle(attaquant,cible));//------------------------------------------------------------------------------
-							if(attaquant.peutTirer(cible.getCoord())&&!p.tir_travers_obstacle(attaquant,cible))
-							{
-								attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTTIRERTIREUR);
-								cible.setEnergie(cible.getEnergie() + Constante.DEGATTIREUR);
-							}
-							else
-							{
+						System.out
+								.println("Equipe "
+										+ (equipe_active + 1)
+										+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
+						Robot cible = equipeRobot[equipe_passive][scan
+								.nextInt()];
+						if (attaquant instanceof Tireur) {
+							if (attaquant.peutTirer(cible.getCoord())
+									&& !p.tir_travers_obstacle(attaquant, cible)) {
+								attaquant.setEnergie(attaquant.getEnergie()
+										+ Constante.COUTTIRERTIREUR);
+								cible.setEnergie(cible.getEnergie()
+										+ Constante.DEGATTIREUR);
+							} else {
 								System.out.println("Erreur : Tir impossible");
 							}
-						}
-						else if(attaquant instanceof Char)
-						{System.out.println(p.tir_travers_obstacle(attaquant,cible));//------------------------------------------------------------------------------
-							if(attaquant.peutTirer(cible.getCoord())&&!p.tir_travers_obstacle(attaquant,cible))
-							{
-								attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTTIRERCHAR);
-								cible.setEnergie(cible.getEnergie() + Constante.DEGATCHAR);
-							}else{
+						} else if (attaquant instanceof Char) {
+							if (attaquant.peutTirer(cible.getCoord())
+									&& !p.tir_travers_obstacle(attaquant, cible)) {
+								attaquant.setEnergie(attaquant.getEnergie()
+										+ Constante.COUTTIRERCHAR);
+								cible.setEnergie(cible.getEnergie()
+										+ Constante.DEGATCHAR);
+							} else {
 								System.out.println("Erreur : Tir impossible");
 							}
 						}
@@ -255,7 +258,8 @@ public class Menu {
 		scan.close();
 	}
 
-	static Robot[] constituer_equipe(Scanner scan, int plateau_1er_dim,int plateau_2em_dim, int nb_robot_voulu, int equipe) {
+	static Robot[] constituer_equipe(Scanner scan, int plateau_1er_dim,
+			int plateau_2em_dim, int nb_robot_voulu, int equipe) {
 		Coordonnees base = (equipe == 1) ? new Coordonnees(0, 0)
 				: new Coordonnees(plateau_1er_dim - 1, plateau_2em_dim - 1);
 		Robot[] areturn = new Robot[nb_robot_voulu];
@@ -266,7 +270,7 @@ public class Menu {
 							+ equipe
 							+ " ! \n - 1. Tireur \n - 2. Piegeur \n - 3.Char \n\n Il reste "
 							+ (nb_robot_voulu - nbrRobotEquipe)
-							+ " robots aÃƒâ€šÃ‚Â  placer.");
+							+ " robots a placer.");
 			int robot = scan.nextInt();
 			int i;
 			switch (robot) {
@@ -274,7 +278,8 @@ public class Menu {
 				System.out.println("Combien de Tireur souhaitez-vous ?");
 				i = scan.nextInt();
 				if (nbrRobotEquipe + i > nb_robot_voulu) {
-					System.out.println("Erreur, vous n'avez pas le bon nombre de robot, Recommencez !");
+					System.out
+							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommencez !");
 					break;
 				}
 				for (int j = 0; j < i; j++) {
