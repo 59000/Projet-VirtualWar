@@ -16,7 +16,7 @@ public class Cellule extends Coordonnees {
 	 */
 	protected Robot robot;
 	/** @param pourcentage */
-	double pourcentage = Constante.POURCENTAGE_OBSTACLES;
+	double pourcentage = Constante.POURCENTAGEOBSTACLE;
 	/** @param ran */
 	Random ran = new Random();
 	boolean obstacle =false;
