@@ -18,14 +18,14 @@ public class Menu {
 
 		Plateau p = new Plateau(taille, taille);
 
-		p.plateau[0][0].base = 1;
-		p.plateau[taille - 1][taille - 1].base = 2;
+		p.plateau[0][0].base = Constante.BASE1;
+		p.plateau[taille - 1][taille - 1].base = Constante.BASE2;
 		p.genere_obstacle(p.plateau[0][0]);
 
 		int nb_robot_voulu;
 		do {
 			System.out
-					.println("combien de robot voulez vous dans vos Ã©quipes ?");
+					.println("combien de robot voulez vous dans vos ÃƒÂ©quipes ?");
 			nb_robot_voulu = scan.nextInt();
 		} while (nb_robot_voulu > 5 || nb_robot_voulu < 1);
 
@@ -34,8 +34,6 @@ public class Menu {
 						p.plateau[0].length, nb_robot_voulu, 1),
 				Menu.constituer_equipe(scan, p.plateau.length,
 						p.plateau[0].length, nb_robot_voulu, 2) };
-		// Robot[] equipe2Robot =
-		// Menu.constituer_equipe(scan,p.plateau.length,p.plateau[0].length,nb_robot_voulu,2);
 
 		boolean jeu = true;
 		int equipe_passive = 0;
@@ -132,14 +130,13 @@ public class Menu {
 				if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
 						.getCoord().getHauteur()].estBase() == attaquant
 						.getEquipe()) {
-					System.out
-							.println("Erreur : une attaque depuis une base est impossible");
+					System.out.println("Erreur : une attaque depuis une base est impossible");
 				} else {
 					if (attaquant instanceof Piegeur) {
 						System.out
 								.println("Equipe "
 										+ (equipe_active + 1)
-										+ ": dans quelle direction le piÃ©geur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
+										+ ": dans quelle direction le piÃƒÂ©geur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
 						Cellule cell_attaquant = p.plateau[attaquant.getCoord()
 								.getLargeur()][attaquant.getCoord()
 								.getHauteur()];
@@ -223,35 +220,30 @@ public class Menu {
 
 					} else {
 
-						System.out
-								.println("Equipe "
-										+ (equipe_active + 1)
-										+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
+						System.out.println("Equipe "+ (equipe_active + 1)+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
 						Robot cible = equipeRobot[equipe_passive][scan.nextInt()];
-						if(attaquant instanceof Tireur){
-							if(attaquant.peutTirer(cible.getCoord())){
+						if(attaquant instanceof Tireur)
+						{System.out.println(p.tir_travers_obstacle(attaquant,cible));//------------------------------------------------------------------------------
+							if(attaquant.peutTirer(cible.getCoord())&&!p.tir_travers_obstacle(attaquant,cible))
+							{
 								attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTTIRERTIREUR);
 								cible.setEnergie(cible.getEnergie() + Constante.DEGATTIREUR);
-							}else{
+							}
+							else
+							{
 								System.out.println("Erreur : Tir impossible");
 							}
 						}
-						else if(attaquant instanceof Char){
-							if(attaquant.peutTirer(cible.getCoord())){
+						else if(attaquant instanceof Char)
+						{System.out.println(p.tir_travers_obstacle(attaquant,cible));//------------------------------------------------------------------------------
+							if(attaquant.peutTirer(cible.getCoord())&&!p.tir_travers_obstacle(attaquant,cible))
+							{
 								attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTTIRERCHAR);
 								cible.setEnergie(cible.getEnergie() + Constante.DEGATCHAR);
 							}else{
 								System.out.println("Erreur : Tir impossible");
 							}
 						}
-						// -----------------------------------------------------------------------------------------------reste
-						// cettte attque la a faire
-						// mais 1h30 alr dodo
-						// --------------------------------------------reste
-						// aussi a gerer les exception et le menu sera je pense
-						// fini
-						// -------------------------------a non regen de energie
-						// et mines et supr le robot qui a energie <=0
 					}
 				}
 			} else {
@@ -263,8 +255,7 @@ public class Menu {
 		scan.close();
 	}
 
-	static Robot[] constituer_equipe(Scanner scan, int plateau_1er_dim,
-			int plateau_2em_dim, int nb_robot_voulu, int equipe) {
+	static Robot[] constituer_equipe(Scanner scan, int plateau_1er_dim,int plateau_2em_dim, int nb_robot_voulu, int equipe) {
 		Coordonnees base = (equipe == 1) ? new Coordonnees(0, 0)
 				: new Coordonnees(plateau_1er_dim - 1, plateau_2em_dim - 1);
 		Robot[] areturn = new Robot[nb_robot_voulu];
@@ -275,7 +266,7 @@ public class Menu {
 							+ equipe
 							+ " ! \n - 1. Tireur \n - 2. Piegeur \n - 3.Char \n\n Il reste "
 							+ (nb_robot_voulu - nbrRobotEquipe)
-							+ " robots aÃ‚Â  placer.");
+							+ " robots aÃƒâ€šÃ‚Â  placer.");
 			int robot = scan.nextInt();
 			int i;
 			switch (robot) {
@@ -283,8 +274,7 @@ public class Menu {
 				System.out.println("Combien de Tireur souhaitez-vous ?");
 				i = scan.nextInt();
 				if (nbrRobotEquipe + i > nb_robot_voulu) {
-					System.out
-							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommencez !");
+					System.out.println("Erreur, vous n'avez pas le bon nombre de robot, Recommencez !");
 					break;
 				}
 				for (int j = 0; j < i; j++) {
