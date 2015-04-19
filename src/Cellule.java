@@ -19,7 +19,7 @@ public class Cellule extends Coordonnees {
 	double pourcentage = Constante.POURCENTAGEOBSTACLE;
 	/** @param ran */
 	Random ran = new Random();
-	boolean obstacle =false;
+	boolean obstacle = false;
 
 	// String image; //inutile pour le momant
 	/**
@@ -55,7 +55,7 @@ public class Cellule extends Coordonnees {
 	@Override
 	public String toString() {
 		return "Cellule [mine=" + mine + ", base=" + base /* + ", image=" + image */
-				+ ", robot=" + robot + " coord"+super.toString() +"]";
+				+ ", robot=" + robot + " coord" + super.toString() + "]";
 	}
 
 	/** Deplace le robot sur la celulle actuelle */
@@ -77,7 +77,7 @@ public class Cellule extends Coordonnees {
 		this.robot.setEquipe(equipe);
 	}
 
-	/** Permet de CrÃ©e une base */
+	/** Permet de CrÃƒÂ©e une base */
 	void creeBase(boolean b) {
 
 		if (b) {
@@ -88,7 +88,7 @@ public class Cellule extends Coordonnees {
 		}
 	}
 
-	/** Teste si la cellule est une base en fonction des coordonnÃ©es */
+	/** Teste si la cellule est une base en fonction des coordonnees */
 	public int estBase(Coordonnees c) {
 		return this.base;
 
@@ -103,20 +103,13 @@ public class Cellule extends Coordonnees {
 	public boolean estObstacle() {
 		return obstacle;
 	}
+
 	public void cree_Obstacle() {
-		if (this.ran.nextInt(100) < pourcentage) 
-		{
-			obstacle= true;
-		}
-		else
-		{
-			obstacle=false;
+		if (this.ran.nextInt(100) < pourcentage) {
+			obstacle = true;
+		} else {
+			obstacle = false;
 		}
 	}
-	/*
-	public Cellule chemin(){
-		while(){
-			pas fait ici
-		}
-		*/
+
 }
