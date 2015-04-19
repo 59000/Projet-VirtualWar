@@ -107,35 +107,29 @@ public abstract class Robot {
 	public void subitMine() {
 		setEnergie(getEnergie() + Constante.DEGATPIEGEUR);
 	}
-	public boolean  robotMort(Robot robot){
+	public boolean  peutAction (Robot robot){
 		if(robot instanceof Char){
 			if(robot.getEnergie() <= Constante.COUTAVANCERCHAR || robot.getEnergie() <= Constante.COUTTIRERCHAR){
 				return true;
 			}				
-			else if(robot.getEnergie() <= 0){
-				cellule.videCase();
-				return true;
-			}
+			
 		}
 		else if(robot instanceof Tireur){
 			if(robot.getEnergie() >= Constante.COUTAVANCERTIREUR || robot.getEnergie() >= Constante.COUTTIRERTIREUR){
 				return true; 
-			}
-			else if(robot.getEnergie() <= 0){
-				cellule.videCase();
-				return true;
 			}
 		}
 		else if(robot instanceof Piegeur){
 			if(robot.getEnergie() >= Constante.COUTAVANCERPIEGEUR || robot.getEnergie() >= Constante.COUTMINER){
 				return true;
 			}
-
-			else if(robot.getEnergie() <= 0){
-				cellule.videCase();
-				return true;
-			}
 		}
 		return false;
 	}	
+	public boolean robotMort(Robot robot){
+		if(robot.getEnergie() <= 0){
+			return true;
+		}
+		return false;
+	}
 }
