@@ -10,7 +10,7 @@ public class Menu {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
 		int taille = 0;
-		while (taille < 3 || taille > 10) {
+		while (taille < 5 || taille > 10) {
 			System.out
 					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
 			taille = scan.nextInt();
