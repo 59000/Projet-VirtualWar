@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -12,18 +13,14 @@ public class Menu {
 		while (taille < 5 || taille > 10) {
 			System.out
 					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
-			taille = 5;// scan.nextInt();--------------------------------------------------------------------------------------------------------------------------------------------------------------
+			taille = scan.nextInt();
 		}
 
 		Plateau p = new Plateau(taille, taille);
 
 		p.plateau[0][0].base = 1;
 		p.plateau[taille - 1][taille - 1].base = 2;
-
-		/*
-		 * int test =0; while(p.ya_chemin(p.plateau[0][0])&&test<50000) {
-		 * p.genere_obstacle(); System.out.println(test); test++; }
-		 */
+		p.genere_obstacle(p.plateau[0][0]);
 
 		int nb_robot_voulu;
 		do {
@@ -41,7 +38,7 @@ public class Menu {
 		// Menu.constituer_equipe(scan,p.plateau.length,p.plateau[0].length,nb_robot_voulu,2);
 
 		boolean jeu = true;
-		int equipe_pasive = 0;
+		int equipe_passive = 0;
 		int equipe_active = 0;
 		while (jeu) {
 			System.out.println(p);
@@ -63,21 +60,40 @@ public class Menu {
 			int i = scan.nextInt();
 
 			if (i == 1) {
+				boolean flag = true;
+				while(flag){
 				System.out.println("Equipe " + (equipe_active + 1)
 						+ ": Quel Robot (numero) voulez-vous deplacer ?");
-				i = scan.nextInt();
+										
+					try{
+						i = scan.nextInt();
+						equipeRobot[equipe_active][i].getNumero();
+						flag=false;
+					}catch(InputMismatchException eb){
+						System.out.println("Erreur : Entier attendu");
+						flag=true;
+						i=0;
+					}catch(ArrayIndexOutOfBoundsException e){
+						System.out.println("Erreur : Robot non existant");
+						flag=true;
+						i=0;
+					
+					}
+				}
 				System.out
 						.println("Equipe "
 								+ (equipe_active + 1)
 								+ ": Dans quel direction ? (haut,bas,gauche,droit,hautgauche,hautdroit,basgauche,basdroit)");
 				String msg = scan.next();
+
 				switch (msg) {
 				case "haut":
 					p.deplaceRobot(equipeRobot[equipe_active][i],
 							Constante.HAUT);
 					break;
 				case "bas":
-					p.deplaceRobot(equipeRobot[equipe_active][i], Constante.BAS);
+					p.deplaceRobot(equipeRobot[equipe_active][i],
+							Constante.BAS);
 					break;
 				case "gauche":
 					p.deplaceRobot(equipeRobot[equipe_active][i],
@@ -103,12 +119,14 @@ public class Menu {
 					p.deplaceRobot(equipeRobot[equipe_active][i],
 							Constante.BASDROIT);
 					break;
+
 				}
+
 			} else if (i == 3) {
 				System.out.println("Fin du jeu !");
 				jeu = false;
 			} else if (i == 2) {
-				System.out.println("Equipe " + equipe_active
+				System.out.println("Equipe " + (equipe_active+1)
 						+ ": Quel Robot (numero) voulez-vous faire attaquer ?");
 				Robot attaquant = equipeRobot[equipe_active][scan.nextInt()];
 				if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
@@ -209,11 +227,27 @@ public class Menu {
 								.println("Equipe "
 										+ (equipe_active + 1)
 										+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
-						Robot cible = equipeRobot[equipe_pasive][scan.nextInt()];
-						System.out.println(cible);// -----------------------------------------------------------------------------------------------reste
-													// cettte attque la a faire
-													// mais 1h30 alr dodo
-						// ---------------------------------------------reste
+						Robot cible = equipeRobot[equipe_passive][scan.nextInt()];
+						if(attaquant instanceof Tireur){
+							if(attaquant.peutTirer(cible.getCoord())){
+								attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTTIRERTIREUR);
+								cible.setEnergie(cible.getEnergie() + Constante.DEGATTIREUR);
+							}else{
+								System.out.println("Erreur : Tir impossible");
+							}
+						}
+						else if(attaquant instanceof Char){
+							if(attaquant.peutTirer(cible.getCoord())){
+								attaquant.setEnergie(attaquant.getEnergie()+Constante.COUTTIRERCHAR);
+								cible.setEnergie(cible.getEnergie() + Constante.DEGATCHAR);
+							}else{
+								System.out.println("Erreur : Tir impossible");
+							}
+						}
+						// -----------------------------------------------------------------------------------------------reste
+						// cettte attque la a faire
+						// mais 1h30 alr dodo
+						// --------------------------------------------reste
 						// aussi a gerer les exception et le menu sera je pense
 						// fini
 						// -------------------------------a non regen de energie
@@ -223,7 +257,7 @@ public class Menu {
 			} else {
 				System.out.println("Non Disponible");
 			}
-			equipe_pasive = equipe_active;
+			equipe_passive = equipe_active;
 			equipe_active = ++equipe_active % 2;
 		}
 		scan.close();
