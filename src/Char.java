@@ -72,7 +72,7 @@ public class Char extends Robot {
 	}
 
 	/**
-	 * Retourne l'ensemble des deplacements pour acceder a une coordonnÃ©es
+	 * Retourne l'ensemble des deplacements pour acceder a une coordonnÃƒÂ©es
 	 * 
 	 * @return coord;
 	 * */
@@ -85,7 +85,7 @@ public class Char extends Robot {
 
 	@Override
 	public String toString() {
-		return "Char   " + super.toString();
+		return "Char   " + super.toString()+"         ";
 	}
 
 }
