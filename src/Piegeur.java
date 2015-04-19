@@ -59,8 +59,8 @@ public class Piegeur extends Robot {
 		return coord;
 	}
 	/**Regeneration de la sante et des mines pour le piegeur */
-	void regeneration(){
-		super.regeneration();
+	void regeneration(Cellule[][] p){
+		super.regeneration(p);
 		nbMine = Constante.NBMINE;
 	}
 	public String toString(){
