@@ -144,21 +144,21 @@ public class Plateau {
 	}
 
 	/**
-	 * Appelle les fonctions qui permettent de modÃƒÂ©liser les dÃƒÂ©placements. Si
-	 * Char = dÃƒÂ©placement de 2 ou 1 si bloquÃƒÂ© par un obstacles. Sinon =
-	 * dÃƒÂ©placement de 1.
+	 * Appelle les fonctions qui permettent de modÃƒÆ’Ã‚Â©liser les dÃƒÆ’Ã‚Â©placements. Si
+	 * Char = dÃƒÆ’Ã‚Â©placement de 2 ou 1 si bloquÃƒÆ’Ã‚Â© par un obstacles. Sinon =
+	 * dÃƒÆ’Ã‚Â©placement de 1.
 	 * 
-	 * Si le robot arrive sur une mine, il se prend les dÃƒÂ©gats.
+	 * Si le robot arrive sur une mine, il se prend les dÃƒÆ’Ã‚Â©gats.
 	 * 
 	 * @param t1
 	 *            robot
 	 * @param mvt
-	 *            Constante de dÃƒÂ©placement
+	 *            Constante de dÃƒÆ’Ã‚Â©placement
 	 */
 	public void deplaceRobot(Robot r, Coordonnees mvt) {
 		// Si le robot est un Char
 		if (r instanceof Char) {
-			// Et que le mouvement demandÃƒÂ©e est un mouvement diagonales
+			// Et que le mouvement demandÃƒÆ’Ã‚Â©e est un mouvement diagonales
 			if (mvt.equals(Constante.HAUTDROIT)
 					|| mvt.equals(Constante.HAUTGAUCHE)
 					|| mvt.equals(Constante.BASDROIT)
@@ -169,68 +169,61 @@ public class Plateau {
 			}
 			// Sinon, fonctionnement normal de la fonction
 			else {
-				// Si le premier dÃƒÂ©placement n'amÃƒÂ¨ne pas au dehors des bords du
-				// plateau
-				if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
-						&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
-					// Et si le premier dÃƒÂ©placement n'envoie pas le char sur un
+					// Si le premier deplacement n'amene pas au dehors des bords du plateau
+				if ((r.getCoord().getLargeur() + mvt.getLargeur() >= 0 && r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau[0].length)
+						&&(r.getCoord().getHauteur() + mvt.getHauteur() >= 0 && r.getCoord().getHauteur() + mvt.getHauteur() < this.plateau.length)) {
+					// Et si le premier dÃƒÆ’Ã‚Â©placement n'envoie pas le char sur un
 					// obstacle
-					if (!this.plateau[r.getCoord().getLargeur()
-							+ mvt.getLargeur()][r.getCoord().getHauteur()
-							+ mvt.getHauteur()].estObstacle()) {
+					if (!this.plateau[r.getCoord().getLargeur()+ mvt.getLargeur()][r.getCoord().getHauteur()+ mvt.getHauteur()].estObstacle()) {
 
-						// 1er dÃƒÂ©placement du char
+						// 1er dÃƒÆ’Ã‚Â©placement du char
 						this.plateau[r.getCoord().getLargeur()][r.getCoord()
 								.getHauteur()].videCase();
 						new Deplacement(r, mvt);
 						this.plateau[r.getCoord().getLargeur()][r.getCoord()
 								.getHauteur()].deplaceSur(r);
 
-						// Si le robot se dÃƒÂ©place sur une mine
+						// Si le robot se dÃƒÆ’Ã‚Â©place sur une mine
 						this.deplaceSurMine(r);
 
-						// 2ÃƒÂ©me dÃƒÂ©placement
-						// Si le second dÃƒÂ©placement n'amÃƒÂ¨ne pas au dehors des
-						// bords du
-						// plateau
-						if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
-								&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
-							// Et si le second dÃƒÂ©placement n'envoie pas le char
+						// 2eme deplacement
+						// Si le second deplacement n'amene pas au dehors des bords du plateau
+						if ((r.getCoord().getLargeur() + mvt.getLargeur() >= 0 && r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau[0].length)
+								&&(r.getCoord().getHauteur() + mvt.getHauteur() >= 0 && r.getCoord().getHauteur() + mvt.getHauteur() < this.plateau.length)) {
+							// Et si le second deplacement n'envoie pas le char
 							// sur un
 							// obstacle
-							if (!this.plateau[r.getCoord().getLargeur()
-									+ mvt.getLargeur()][r.getCoord()
-									.getHauteur() + mvt.getHauteur()]
-									.estObstacle()) {
+							if (!this.plateau[r.getCoord().getLargeur()+ mvt.getLargeur()][r.getCoord().getHauteur() + mvt.getHauteur()].estObstacle()) 
+							{
 
-								// 2ÃƒÂ©me dÃƒÂ©placement du char
+								// 2ÃƒÆ’Ã‚Â©me dÃƒÆ’Ã‚Â©placement du char
 								this.plateau[r.getCoord().getLargeur()][r
 										.getCoord().getHauteur()].videCase();
 								new Deplacement(r, mvt);
 								this.plateau[r.getCoord().getLargeur()][r
 										.getCoord().getHauteur()].deplaceSur(r);
 							} else {
-								// Sinon, un obstacle empÃƒÂªche le second
-								// dÃƒÂ©placement
+								// Sinon, un obstacle empeche le second
+								// deplacement
 								System.out
 										.println("Event : Le char a rencontre un obstacle sur son chemin et a du se stopper.");
 							}
 
 						} else {
-							// Sinon, les limites du plateau empÃƒÂªche le second
-							// dÃƒÂ©placement
+							// Sinon, les limites du plateau empÃƒÆ’Ã‚Âªche le second
+							// deplacement
 							System.out
-									.println("Event : Le char a du s'arrÃƒÂªter pour ne pas tomber.");
+									.println("Event : Le char a du s'arreter pour ne pas fuir.");
 						}
 
 					} else {
-						// Sinon, un obstacle empÃƒÂªche le dÃƒÂ©placement
+						// Sinon, un obstacle empÃƒÆ’Ã‚Âªche le dÃƒÆ’Ã‚Â©placement
 						System.out
 								.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
 					}
 
 				} else {
-					// Sinon, les limites du plateau empÃƒÂªche le dÃƒÂ©placement
+					// Sinon, les limites du plateau empÃƒÆ’Ã‚Âªche le dÃƒÆ’Ã‚Â©placement
 					System.out
 							.println("Erreur : Deplacement en dehors des limites de la map.");
 				}
@@ -240,11 +233,11 @@ public class Plateau {
 		// Si le robot est autre qu'un char, fonctionnement normale de
 		// la fonction
 		else {
-			// Si le dÃƒÂ©placement de 1 n'amÃƒÂ¨ne pas au dehors des bords du
+			// Si le dÃƒÆ’Ã‚Â©placement de 1 n'amÃƒÆ’Ã‚Â¨ne pas au dehors des bords du
 			// plateau
-			if (r.getCoord().getLargeur() + mvt.getLargeur() >= 0
-					&& r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau.length) {
-				// Si le dÃƒÂ©placement n'envoie pas le robot sur un obstacle
+			if ((r.getCoord().getLargeur() + mvt.getLargeur() >= 0 && r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau[0].length)
+					&&(r.getCoord().getHauteur() + mvt.getHauteur() >= 0 && r.getCoord().getHauteur() + mvt.getHauteur() < this.plateau.length)) {
+				// Si le dÃƒÆ’Ã‚Â©placement n'envoie pas le robot sur un obstacle
 				if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()][r
 						.getCoord().getHauteur() + mvt.getHauteur()]
 						.estObstacle()) {
@@ -256,36 +249,35 @@ public class Plateau {
 							.getHauteur()].deplaceSur(r);
 
 				} else {
-					// Sinon, message d'ÃƒÂ©rreur et annulation du dÃƒÂ©placement
+					// Sinon, message d'ÃƒÆ’Ã‚Â©rreur et annulation du dÃƒÆ’Ã‚Â©placement
 					System.out
 							.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
 				}
-				// Sinon, les limites de la map emÃƒÂªchent le dÃƒÂ©placement
+				// Sinon, les limites de la map emÃƒÆ’Ã‚Âªchent le dÃƒÆ’Ã‚Â©placement
 			} else {
 				System.out
 						.println("Erreur : Les limites de la map empechent le deplacement.");
 			}
 		}
 
-		// Si le robot se dÃƒÂ©place sur une mine
+		// Si le robot se dÃƒÆ’Ã‚Â©place sur une mine
 		this.deplaceSurMine(r);
 	}
 
 	/**
-	 * Permet de provoquer les dÃƒÂ©gats sur le robot si la cellule sur laquelle
-	 * elle se dÃƒÂ©place est une mine
+	 * Permet de provoquer les dÃƒÆ’Ã‚Â©gats sur le robot si la cellule sur laquelle
+	 * elle se dÃƒÆ’Ã‚Â©place est une mine
 	 * 
 	 * @param r
 	 *            robot
 	 */
 	public void deplaceSurMine(Robot r) {
-		// Si le robot se dÃƒÂ©place qur une cellule minÃƒÂ©
+		// Si le robot se deplace qur une cellule mine'
 		if (this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()]
 				.contienMine() != 0) {
-			// Le robot se prend les dÃƒÂ©gats et la mine disparaÃƒÂ®t
+			// Le robot se prend les degats et la mine disparaet
 			r.subitMine();
-			this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()]
-					.setMine(0);
+			this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()].setMine(0);
 		}
 	}
 	
@@ -302,5 +294,62 @@ public class Plateau {
 			}
 		}
 		return null;
+	}
+	
+	public boolean tir_travers_obstacle(Robot attaquant,Robot cible)
+	{
+		int porte_attaquant = (attaquant instanceof Tireur) ?Constante.PORTEETIREUR : Constante.PORTEECHAR;
+		Coordonnees variables;
+		if(attaquant.getCoord().getLargeur()==cible.getCoord().getLargeur())
+		{
+			if(attaquant.getCoord().getHauteur()<cible.getCoord().getHauteur())//bas
+			{
+				for (int i = 1; i <= porte_attaquant; i++) 
+				{
+					variables = new Coordonnees(attaquant.getCoord().getHauteur()+i, attaquant.getCoord().getLargeur());
+					if(this.getCellule(variables).estObstacle() || this.getCellule(variables).getContenu()!=null)
+					{
+						return true;
+					}
+				}
+			}
+			else if(attaquant.getCoord().getHauteur()>cible.getCoord().getLargeur())//haut
+			{
+				for (int i = 1; i <= porte_attaquant; i++) 
+				{
+					variables = new Coordonnees(attaquant.getCoord().getHauteur()-i, attaquant.getCoord().getLargeur());
+					if(this.getCellule(variables).estObstacle() || this.getCellule(variables).getContenu()!=null)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		else
+		{
+			if(attaquant.getCoord().getLargeur()<cible.getCoord().getLargeur())//droite
+			{
+				for (int i = 1; i <= porte_attaquant; i++) 
+				{
+					variables = new Coordonnees(attaquant.getCoord().getHauteur(), attaquant.getCoord().getLargeur()+i);
+					if(this.getCellule(variables).estObstacle() || this.getCellule(variables).getContenu()!=null)
+					{
+						return true;
+					}
+				}
+			}
+			else if(attaquant.getCoord().getLargeur()>cible.getCoord().getLargeur())//gauche
+			{
+				for (int i = 1; i <= porte_attaquant; i++) 
+				{
+					variables = new Coordonnees(attaquant.getCoord().getHauteur(), attaquant.getCoord().getLargeur()-i);
+					if(this.getCellule(variables).estObstacle() || this.getCellule(variables).getContenu()!=null)
+					{
+						return true;
+					}
+				}
+			}
+		}
+		return false;
 	}
 }
