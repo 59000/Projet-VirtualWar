@@ -16,7 +16,7 @@ public class Cellule extends Coordonnees {
 	 */
 	protected Robot robot;
 	/** @param pourcentage */
-	double pourcentage = 15;
+	double pourcentage = Constante.POURCENTAGE_OBSTACLES;
 	/** @param ran */
 	Random ran = new Random();
 	boolean obstacle =false;
@@ -55,7 +55,7 @@ public class Cellule extends Coordonnees {
 	@Override
 	public String toString() {
 		return "Cellule [mine=" + mine + ", base=" + base /* + ", image=" + image */
-				+ ", robot=" + robot + "]";
+				+ ", robot=" + robot + " coord"+super.toString() +"]";
 	}
 
 	/** Deplace le robot sur la celulle actuelle */
@@ -77,7 +77,7 @@ public class Cellule extends Coordonnees {
 		this.robot.setEquipe(equipe);
 	}
 
-	/** Permet de Crée une base */
+	/** Permet de CrÃ©e une base */
 	void creeBase(boolean b) {
 
 		if (b) {
@@ -88,7 +88,7 @@ public class Cellule extends Coordonnees {
 		}
 	}
 
-	/** Teste si la cellule est une base en fonction des coordonnées */
+	/** Teste si la cellule est une base en fonction des coordonnÃ©es */
 	public int estBase(Coordonnees c) {
 		return this.base;
 
@@ -104,22 +104,14 @@ public class Cellule extends Coordonnees {
 		return obstacle;
 	}
 	public void cree_Obstacle() {
-		if (this.ran.nextInt(100) <= pourcentage) {
+		if (this.ran.nextInt(100) <= pourcentage) 
+		{
 			obstacle= true;
 		}
 		else
 		{
 			obstacle=false;
 		}
-	}
-	
-	Cellule getCellule(Coordonnees c)
-	{
-		if(this.getCoordonnees().equals(c))
-		{
-			return this;
-		}
-		return null;
 	}
 	/*
 	public Cellule chemin(){
