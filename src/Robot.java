@@ -28,8 +28,9 @@ public abstract class Robot {
 	}
 
 	/** augmente l'energie du robot en base de 2 */
-	void regeneration() {
-		if (cellule.estBase(this.getCoord()) == this.equipe) {
+	void regeneration(Cellule[][] p) {
+		if (p[this.getCoord().getLargeur()][this.getCoord().getHauteur()]
+				.estBase(this.getCoord()) == this.equipe) {
 			setEnergie(getEnergie() + Constante.REGENENBASE);
 		}
 	}
@@ -126,8 +127,8 @@ public abstract class Robot {
 		}
 		return false;
 	}	
-	public boolean robotMort(Robot robot){
-		if(robot.getEnergie() <= 0){
+	public boolean robotMort(){
+		if(this.getEnergie() <= 0){
 			return true;
 		}
 		return false;
