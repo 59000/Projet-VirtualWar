@@ -33,7 +33,7 @@ public class Constante {
 	
 	public static final int COUTMINER = -2;
 	public static final int COUTTIRERTIREUR = -2;
-	public static final int COUTTIRERCHAR = 1;
+	public static final int COUTTIRERCHAR = -1;
 	public static final int COUTAVANCERTIREUR = -1;
 	public static final int COUTAVANCERPIEGEUR = -5;
 	public static final int COUTAVANCERCHAR = -5;
@@ -42,7 +42,7 @@ public class Constante {
 	
 	public static final int DEGATTIREUR = -3;
 	public static final int DEGATPIEGEUR = -2;
-	public static final int DEGATCHAR = 6;
+	public static final int DEGATCHAR = -6;
 
 	public static final int PASUNEBASE = 0;
 	public static final int BASE1 = 1;
