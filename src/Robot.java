@@ -1,19 +1,20 @@
 import java.util.List;
 
 public abstract class Robot {
-	/* implÃƒÂ©menter les fonctions prÃƒÂ©sentes */
-	/**@param coord */
+
+	/** @param coord */
 	protected Coordonnees coord;
-	/**@param equipe */
+	/** @param equipe */
 	protected int equipe;
-	/**@param energie */
+	/** @param energie */
 	protected int energie;
-	/**@param numero */
+	/** @param numero */
 	protected final int numero;
-	/**@param cellule*/
+	/** @param cellule */
 	Cellule cellule;
 
-	/**Cree un robot avec equipe, numero et energie
+	/**
+	 * Cree un robot avec equipe, numero et energie
 	 * 
 	 * @param equipe
 	 * @param numero
@@ -28,35 +29,42 @@ public abstract class Robot {
 
 	/** augmente l'energie du robot en base de 2 */
 	void regeneration() {
-		if(cellule.estBase(this.getCoord())==this.equipe){
-			setEnergie(Constante.REGENENBASE);
+		if (cellule.estBase(this.getCoord()) == this.equipe) {
+			setEnergie(getEnergie() + Constante.REGENENBASE);
 		}
-	}	
-	/**@return coord*/
+	}
+
+	/** @return coord */
 	public Coordonnees getCoord() {
 		return coord;
 	}
-	/**Met les coordonnees placees en parametre*/
+
+	/** Met les coordonnees placees en parametre */
 	public void setCoord(Coordonnees coord) {
 		this.coord = coord;
 	}
-	/**@return energie*/
+
+	/** @return energie */
 	public int getEnergie() {
 		return energie;
 	}
-	/**Met l'energie placee en parametre*/
+
+	/** Met l'energie placee en parametre */
 	public void setEnergie(int energie) {
 		this.energie = energie;
 	}
-	/**@return equipe*/
+
+	/** @return equipe */
 	public int getEquipe() {
 		return equipe;
 	}
-	/**Met l'equipe placee en parametre */
+
+	/** Met l'equipe placee en parametre */
 	public void setEquipe(int equipe) {
 		this.equipe = equipe;
 	}
-	/**@return numero*/
+
+	/** @return numero */
 	public int getNumero() {
 		return numero;
 	}
@@ -76,26 +84,28 @@ public abstract class Robot {
 	@Override
 	public String toString() {
 		String s;
-		if(energie<10){
-			s=" [coord=" + coord + ", equipe=" + equipe + ", numero="
+		if (energie < 10) {
+			s = " [coord=" + coord + ", equipe=" + equipe + ", numero="
 					+ numero + ", energie=" + energie + " ]";
-		}else{
-			s=" [coord=" + coord + ", equipe=" + equipe + ", numero="
+		} else {
+			s = " [coord=" + coord + ", equipe=" + equipe + ", numero="
 					+ numero + ", energie=" + energie + "]";
 		}
 		return s;
 	}
-	/**Gere la perte de point de vie du robot par des tirs */
+
+	/** Gere la perte de point de vie du robot par des tirs */
 	public void subitTir(Robot robot) {
 		if (robot instanceof Char) {
-			setEnergie(getEnergie() - Constante.DEGATCHAR);
+			setEnergie(getEnergie() + Constante.DEGATCHAR);
 		} else if (robot instanceof Tireur) {
-			setEnergie(getEnergie() - Constante.DEGATTIREUR);
+			setEnergie(getEnergie() + Constante.DEGATTIREUR);
 		}
 	}
-	/**Gere la perte de point de vie du robot par des mines */
+
+	/** Gere la perte de point de vie du robot par des mines */
 	public void subitMine() {
-		setEnergie(getEnergie() - Constante.DEGATPIEGEUR);
+		setEnergie(getEnergie() + Constante.DEGATPIEGEUR);
 	}
 
 }
