@@ -1,10 +1,15 @@
+package Robot;
 import java.util.List;
+
+import Constante.Constante;
+import Plateau.Cellule;
+import Plateau.Coordonnees;
 
 public class Piegeur extends Robot {
 	/**@param coord */
 	private List<Coordonnees> coord;
 	/**@param NBMINE */
-	int nbMine = Constante.NBMINE;
+	public int nbMine = Constante.NBMINE;
 	/*faire les methodes peutTirer() et getDeplacement()*/
 	/**Cree un Robot piegeur avec son numero et son equipe */
 	public Piegeur(int equipe,int numero) {
@@ -59,7 +64,7 @@ public class Piegeur extends Robot {
 		return coord;
 	}
 	/**Regeneration de la sante et des mines pour le piegeur */
-	void regeneration(Cellule[][] p){
+	public void regeneration(Cellule[][] p){
 		super.regeneration(p);
 		nbMine = Constante.NBMINE;
 	}
