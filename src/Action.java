@@ -1,3 +1,7 @@
+package Action;
+import Plateau.Coordonnees;
+import Robot.Robot;
+
 public abstract class Action {
 	/*
 	 * Il reste a faire la methode getDirection qui renvoit un chemin pour aller
