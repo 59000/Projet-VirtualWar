@@ -1,5 +1,16 @@
+package Menu;
+import Constante.Constante;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import Plateau.Cellule;
+import Plateau.Coordonnees;
+import Plateau.Plateau;
+import Robot.Char;
+import Robot.Piegeur;
+import Robot.Robot;
+import Robot.Tireur;
 
 public class Menu {
 
@@ -153,7 +164,7 @@ public class Menu {
 							System.out
 									.println("Equipe "
 											+ (equipe_active + 1)
-											+ ": dans quelle direction le piÃƒÆ’Ã‚Â©geur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
+											+ ": dans quelle direction le piÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©geur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
 							Cellule cell_attaquant = p.plateau[attaquant
 									.getCoord().getLargeur()][attaquant
 									.getCoord().getHauteur()];
