@@ -1,5 +1,13 @@
+package Action;
+import Constante.Constante;
+import Plateau.Coordonnees;
+import Robot.Char;
+import Robot.Piegeur;
+import Robot.Robot;
+import Robot.Tireur;
+
 public class Deplacement extends Action {
-	/**Deplace le robot selon sa portée de deplacement*/
+	/**Deplace le robot selon sa portÃ©e de deplacement*/
 	public Deplacement(Robot robot, Coordonnees coord) {
 		super(robot, coord);
 	
@@ -9,7 +17,7 @@ public class Deplacement extends Action {
 		this.agit();
 	}
 	
-	/**Methode qui permet le deplacement du robot appelé par le constructeur */
+	/**Methode qui permet le deplacement du robot appelÃ© par le constructeur */
 	@Override
 	public void agit() {
 		if (this.robot instanceof Char) {
