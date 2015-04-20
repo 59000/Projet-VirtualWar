@@ -1,9 +1,19 @@
+package Plateau;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import Robot.Char;
+import Robot.Piegeur;
+import Robot.Robot;
+import Robot.Tireur;
+import Action.Action;
+import Action.Deplacement;
+import Constante.Constante;
+
 public class Plateau {
-	
+
 	public Cellule[][] plateau;
 
 	public Plateau(int largeur, int hauteur) {
@@ -15,75 +25,64 @@ public class Plateau {
 			}
 		}
 	}
-	
-	List<Cellule> ya_chemin(Cellule base1)
-	{
+
+	List<Cellule> ya_chemin(Cellule base1) {
 		Random r = new Random();
 		List<Cellule> areturn = new ArrayList<Cellule>();
-		
-		boolean base2_attainte=false;
+
+		boolean base2_attainte = false;
 		Cellule cellule_active = base1;
-		
-		while (!base2_attainte) 
-		{
-			int bd = r.nextInt(2)+1;
-			if(bd == 1)
-			{	
-				if(this.cette_case_est_valide(this.getCellule(cellule_active.getCoordonnees().ajout(Constante.BAS))))
-				{
-					cellule_active=this.getCellule(cellule_active.getCoordonnees().ajout(Constante.BAS));
+
+		while (!base2_attainte) {
+			int bd = r.nextInt(2) + 1;
+			if (bd == 1) {
+				if (this.cette_case_est_valide(this.getCellule(cellule_active
+						.getCoordonnees().ajout(Constante.BAS)))) {
+					cellule_active = this.getCellule(cellule_active
+							.getCoordonnees().ajout(Constante.BAS));
 					areturn.add(cellule_active);
 				}
 			}
-			
-			if(bd == 2)
-			{
-				if(this.cette_case_est_valide(this.getCellule(cellule_active.getCoordonnees().ajout(Constante.DROIT))))
-				{
-					cellule_active=this.getCellule(cellule_active.getCoordonnees().ajout(Constante.DROIT));
+
+			if (bd == 2) {
+				if (this.cette_case_est_valide(this.getCellule(cellule_active
+						.getCoordonnees().ajout(Constante.DROIT)))) {
+					cellule_active = this.getCellule(cellule_active
+							.getCoordonnees().ajout(Constante.DROIT));
 					areturn.add(cellule_active);
 				}
 			}
-			if(cellule_active.estBase() == Constante.BASE2)
-			{
+			if (cellule_active.estBase() == Constante.BASE2) {
 				base2_attainte = true;
 			}
 		}
-		
-		
+
 		return areturn;
 	}
-	
-	
-	private boolean cette_case_est_valide(Cellule c)
-	{
-		try
-		{
-			if(c.estBase()==Constante.BASE2)
-			{
+
+	private boolean cette_case_est_valide(Cellule c) {
+		try {
+			if (c.estBase() == Constante.BASE2) {
 				return true;
 			}
-		}catch(NullPointerException e)
-		{
+		} catch (NullPointerException e) {
 			return false;
 		}
-		return true;//compil auto
+		return true;// compil auto
 	}
 
-	void genere_obstacle(Cellule base1)
-	{
+	public void genere_obstacle(Cellule base1) {
 		List<Cellule> chemin = this.ya_chemin(base1);
-		for (int h = 0; h < plateau.length; h++) 
-		{
-			for (int l = 0; l < plateau[h].length; l++) 
-			{
-				if(plateau[l][h].estBase()==0 && !chemin.contains(plateau[l][h]))
-				{
+		for (int h = 0; h < plateau.length; h++) {
+			for (int l = 0; l < plateau[h].length; l++) {
+				if (plateau[l][h].estBase() == 0
+						&& !chemin.contains(plateau[l][h])) {
 					plateau[l][h].cree_Obstacle();
 				}
 			}
 		}
 	}
+
 	public String toString() {
 		String areturn = ""; // String contenant l'affichage du pateau
 		for (int h = 0; h < plateau.length; h++) {
@@ -169,12 +168,17 @@ public class Plateau {
 			}
 			// Sinon, fonctionnement normal de la fonction
 			else {
-					// Si le premier deplacement n'amene pas au dehors des bords du plateau
-				if ((r.getCoord().getLargeur() + mvt.getLargeur() >= 0 && r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau[0].length)
-						&&(r.getCoord().getHauteur() + mvt.getHauteur() >= 0 && r.getCoord().getHauteur() + mvt.getHauteur() < this.plateau.length)) {
+				// Si le premier deplacement n'amene pas au dehors des bords du
+				// plateau
+				if ((r.getCoord().getLargeur() + mvt.getLargeur() >= 0 && r
+						.getCoord().getLargeur() + mvt.getLargeur() < this.plateau[0].length)
+						&& (r.getCoord().getHauteur() + mvt.getHauteur() >= 0 && r
+								.getCoord().getHauteur() + mvt.getHauteur() < this.plateau.length)) {
 					// Et si le premier deplacement n'envoie pas le char sur un
 					// obstacle
-					if (!this.plateau[r.getCoord().getLargeur()+ mvt.getLargeur()][r.getCoord().getHauteur()+ mvt.getHauteur()].estObstacle()) {
+					if (!this.plateau[r.getCoord().getLargeur()
+							+ mvt.getLargeur()][r.getCoord().getHauteur()
+							+ mvt.getHauteur()].estObstacle()) {
 
 						// 1er deplacement du char
 						this.plateau[r.getCoord().getLargeur()][r.getCoord()
@@ -187,14 +191,20 @@ public class Plateau {
 						this.deplaceSurMine(r);
 
 						// 2eme deplacement
-						// Si le second deplacement n'amene pas au dehors des bords du plateau
-						if ((r.getCoord().getLargeur() + mvt.getLargeur() >= 0 && r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau[0].length)
-								&&(r.getCoord().getHauteur() + mvt.getHauteur() >= 0 && r.getCoord().getHauteur() + mvt.getHauteur() < this.plateau.length)) {
+						// Si le second deplacement n'amene pas au dehors des
+						// bords du plateau
+						if ((r.getCoord().getLargeur() + mvt.getLargeur() >= 0 && r
+								.getCoord().getLargeur() + mvt.getLargeur() < this.plateau[0].length)
+								&& (r.getCoord().getHauteur()
+										+ mvt.getHauteur() >= 0 && r.getCoord()
+										.getHauteur() + mvt.getHauteur() < this.plateau.length)) {
 							// Et si le second deplacement n'envoie pas le char
 							// sur un
 							// obstacle
-							if (!this.plateau[r.getCoord().getLargeur()+ mvt.getLargeur()][r.getCoord().getHauteur() + mvt.getHauteur()].estObstacle()) 
-							{
+							if (!this.plateau[r.getCoord().getLargeur()
+									+ mvt.getLargeur()][r.getCoord()
+									.getHauteur() + mvt.getHauteur()]
+									.estObstacle()) {
 
 								// 2eme deplacement du char
 								this.plateau[r.getCoord().getLargeur()][r
@@ -235,9 +245,12 @@ public class Plateau {
 		else {
 			// Si le deplacement de 1 n'amene pas au dehors des bords du
 			// plateau
-			if ((r.getCoord().getLargeur() + mvt.getLargeur() >= 0 && r.getCoord().getLargeur() + mvt.getLargeur() < this.plateau[0].length)
-					&&(r.getCoord().getHauteur() + mvt.getHauteur() >= 0 && r.getCoord().getHauteur() + mvt.getHauteur() < this.plateau.length)) {
-				// Si le deplacement n'envoie pas le robot sur un obstacle ou une base adverse
+			if ((r.getCoord().getLargeur() + mvt.getLargeur() >= 0 && r
+					.getCoord().getLargeur() + mvt.getLargeur() < this.plateau[0].length)
+					&& (r.getCoord().getHauteur() + mvt.getHauteur() >= 0 && r
+							.getCoord().getHauteur() + mvt.getHauteur() < this.plateau.length)) {
+				// Si le deplacement n'envoie pas le robot sur un obstacle ou
+				// une base adverse
 				if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()][r
 						.getCoord().getHauteur() + mvt.getHauteur()]
 						.estObstacle()) {
@@ -277,74 +290,70 @@ public class Plateau {
 				.contienMine() != 0) {
 			// Le robot se prend les degats et la mine disparaet
 			r.subitMine();
-			this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()].setMine(0);
+			this.plateau[r.getCoord().getLargeur()][r.getCoord().getHauteur()]
+					.setMine(0);
 		}
 	}
-	
-	Cellule getCellule(Coordonnees c)
-	{
-		for (int h = 0; h < this.plateau.length; h++) 
-		{
-			for (int l = 0; l < this.plateau[h].length; l++) 
-			{
-				if(this.plateau[l][h].getCoordonnees().equals(c))
-				{
+
+	Cellule getCellule(Coordonnees c) {
+		for (int h = 0; h < this.plateau.length; h++) {
+			for (int l = 0; l < this.plateau[h].length; l++) {
+				if (this.plateau[l][h].getCoordonnees().equals(c)) {
 					return this.plateau[l][h];
 				}
 			}
 		}
-		return new Cellule(0,0);
+		return new Cellule(0, 0);
 	}
-	
-	public boolean tir_travers_obstacle(Robot attaquant,Robot cible)
-	{
-		int porte_attaquant = (attaquant instanceof Tireur) ?Constante.PORTEETIREUR : Constante.PORTEECHAR;
+
+	public boolean tir_travers_obstacle(Robot attaquant, Robot cible) {
+		int porte_attaquant = (attaquant instanceof Tireur) ? Constante.PORTEETIREUR
+				: Constante.PORTEECHAR;
 		Coordonnees variables;
-		if(attaquant.getCoord().getLargeur()==cible.getCoord().getLargeur())
-		{
-			if(attaquant.getCoord().getHauteur()<cible.getCoord().getHauteur())//bas
+		if (attaquant.getCoord().getLargeur() == cible.getCoord().getLargeur()) {
+			if (attaquant.getCoord().getHauteur() < cible.getCoord()
+					.getHauteur())// bas
 			{
-				for (int i = 1; i <= porte_attaquant; i++) 
-				{
-					variables = new Coordonnees(attaquant.getCoord().getHauteur()+i, attaquant.getCoord().getLargeur());
-					if(this.getCellule(variables).estObstacle() /*|| this.getCellule(variables).getContenu()!=cible*/)
-					{
+				for (int i = 0; i <= porte_attaquant; i++) {
+					variables = new Coordonnees(attaquant.getCoord()
+							.getHauteur() + i, attaquant.getCoord()
+							.getLargeur());
+					if (this.getCellule(variables).estObstacle()) {
+						return true;
+					}
+				}
+			} else if (attaquant.getCoord().getHauteur() > cible.getCoord()
+					.getLargeur())// haut
+			{
+				for (int i = 0; i <= porte_attaquant; i++) {
+					variables = new Coordonnees(attaquant.getCoord()
+							.getHauteur() - i, attaquant.getCoord()
+							.getLargeur());
+					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
 				}
 			}
-			else if(attaquant.getCoord().getHauteur()>cible.getCoord().getLargeur())//haut
+		} else {
+			if (attaquant.getCoord().getLargeur() < cible.getCoord()
+					.getLargeur())// droite
 			{
-				for (int i = 1; i <= porte_attaquant; i++) 
-				{
-					variables = new Coordonnees(attaquant.getCoord().getHauteur()-i, attaquant.getCoord().getLargeur());
-					if(this.getCellule(variables).estObstacle() /*|| this.getCellule(variables).getContenu()!=cible*/)
-					{
+				for (int i = 0; i <= porte_attaquant; i++) {
+					variables = new Coordonnees(attaquant.getCoord()
+							.getHauteur(), attaquant.getCoord().getLargeur()
+							+ i);
+					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
 				}
-			}
-		}
-		else
-		{
-			if(attaquant.getCoord().getLargeur()<cible.getCoord().getLargeur())//droite
+			} else if (attaquant.getCoord().getLargeur() > cible.getCoord()
+					.getLargeur())// gauche
 			{
-				for (int i = 1; i <= porte_attaquant; i++) 
-				{
-					variables = new Coordonnees(attaquant.getCoord().getHauteur(), attaquant.getCoord().getLargeur()+i);
-					if(this.getCellule(variables).estObstacle() /*|| this.getCellule(variables).getContenu()!=cible*/)
-					{
-						return true;
-					}
-				}
-			}
-			else if(attaquant.getCoord().getLargeur()>cible.getCoord().getLargeur())//gauche
-			{
-				for (int i = 1; i <= porte_attaquant; i++) 
-				{
-					variables = new Coordonnees(attaquant.getCoord().getHauteur(), attaquant.getCoord().getLargeur()-i);
-					if(this.getCellule(variables).estObstacle() /*|| this.getCellule(variables).getContenu()!=cible*/)
-					{
+				for (int i = 0; i <= porte_attaquant; i++) {
+					variables = new Coordonnees(attaquant.getCoord()
+							.getHauteur(), attaquant.getCoord().getLargeur()
+							- i);
+					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
 				}
@@ -352,6 +361,5 @@ public class Plateau {
 		}
 		return false;
 	}
-	
-	
+
 }
