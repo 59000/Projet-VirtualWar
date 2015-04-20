@@ -25,7 +25,7 @@ public class Menu {
 		int nb_robot_voulu;
 		do {
 			System.out
-					.println("combien de robot voulez vous dans vos ÃƒÆ’Ã‚Â©quipes ?");
+					.println("combien de robot voulez vous dans vos equipes ?");
 			nb_robot_voulu = scan.nextInt();
 		} while (nb_robot_voulu > 5 || nb_robot_voulu < 1);
 
