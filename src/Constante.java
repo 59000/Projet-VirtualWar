@@ -1,3 +1,6 @@
+package Constante;
+import Plateau.Coordonnees;
+
 public class Constante {
 	
 	public static final int PORTEETIREUR = 3;
