@@ -28,12 +28,28 @@ public abstract class Robot {
 	}
 
 	/** augmente l'energie du robot en base de 2 */
-	void regeneration(Cellule[][] p) {
-		if (p[this.getCoord().getLargeur()][this.getCoord().getHauteur()]
-				.estBase(this.getCoord()) == this.equipe) {
-			setEnergie(getEnergie() + Constante.REGENENBASE);
+	public void regeneration(Cellule[][] p) {
+		if (this instanceof Char) {
+			if (p[this.getCoord().getLargeur()][this.getCoord().getHauteur()]
+					.estBase(this.getCoord()) == this.equipe
+					&& getEnergie() < Constante.ENERGIECHAR) {
+				setEnergie(getEnergie() + Constante.REGENENBASE);
+			}
+		} else if (this instanceof Tireur) {
+			if (p[this.getCoord().getLargeur()][this.getCoord().getHauteur()]
+					.estBase(this.getCoord()) == this.equipe
+					&& getEnergie() < Constante.ENERGIETIREUR) {
+				setEnergie(getEnergie() + Constante.REGENENBASE);
+			}
+		} else if (this instanceof Piegeur){
+			if (p[this.getCoord().getLargeur()][this.getCoord().getHauteur()]
+					.estBase(this.getCoord()) == this.equipe
+					&& getEnergie() < Constante.ENERGIEPIEGEUR) {
+				setEnergie(getEnergie() + Constante.REGENENBASE);
+			}
 		}
 	}
+	
 
 	/** @return coord */
 	public Coordonnees getCoord() {
