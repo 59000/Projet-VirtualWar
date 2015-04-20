@@ -1,4 +1,8 @@
+package Robot;
 import java.util.List;
+
+import Constante.Constante;
+import Plateau.Coordonnees;
 
 public class Char extends Robot {
 
