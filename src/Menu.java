@@ -164,7 +164,7 @@ public class Menu {
 							System.out
 									.println("Equipe "
 											+ (equipe_active + 1)
-											+ ": dans quelle direction le piÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â©geur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
+											+ ": dans quelle direction le piegeur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
 							Cellule cell_attaquant = p.plateau[attaquant
 									.getCoord().getLargeur()][attaquant
 									.getCoord().getHauteur()];
