@@ -1,4 +1,10 @@
+package Robot;
+
 import java.util.List;
+
+import Constante.Constante;
+import Plateau.Cellule;
+import Plateau.Coordonnees;
 
 public abstract class Robot {
 
@@ -49,7 +55,6 @@ public abstract class Robot {
 			}
 		}
 	}
-	
 
 	/** @return coord */
 	public Coordonnees getCoord() {
@@ -124,27 +129,30 @@ public abstract class Robot {
 	public void subitMine() {
 		setEnergie(getEnergie() + Constante.DEGATPIEGEUR);
 	}
-	public boolean  peutAction (Robot robot){
-		if(robot instanceof Char){
-			if(robot.getEnergie() <= Constante.COUTAVANCERCHAR || robot.getEnergie() <= Constante.COUTTIRERCHAR){
+
+	public boolean peutAction(Robot robot) {
+		if (robot instanceof Char) {
+			if (robot.getEnergie() <= Constante.COUTAVANCERCHAR
+					|| robot.getEnergie() <= Constante.COUTTIRERCHAR) {
 				return true;
-			}				
-			
-		}
-		else if(robot instanceof Tireur){
-			if(robot.getEnergie() >= Constante.COUTAVANCERTIREUR || robot.getEnergie() >= Constante.COUTTIRERTIREUR){
-				return true; 
 			}
-		}
-		else if(robot instanceof Piegeur){
-			if(robot.getEnergie() >= Constante.COUTAVANCERPIEGEUR || robot.getEnergie() >= Constante.COUTMINER){
+
+		} else if (robot instanceof Tireur) {
+			if (robot.getEnergie() >= Constante.COUTAVANCERTIREUR
+					|| robot.getEnergie() >= Constante.COUTTIRERTIREUR) {
+				return true;
+			}
+		} else if (robot instanceof Piegeur) {
+			if (robot.getEnergie() >= Constante.COUTAVANCERPIEGEUR
+					|| robot.getEnergie() >= Constante.COUTMINER) {
 				return true;
 			}
 		}
 		return false;
-	}	
-	public boolean robotMort(){
-		if(this.getEnergie() <= 0){
+	}
+
+	public boolean robotMort() {
+		if (this.getEnergie() <= 0) {
 			return true;
 		}
 		return false;
