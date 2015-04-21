@@ -1,4 +1,5 @@
 package Menu;
+
 import Constante.Constante;
 
 import java.util.InputMismatchException;
@@ -56,12 +57,15 @@ public class Menu {
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot[0].length; j++) {
 				if (equipeRobot[0][j] == null) {
-					System.out.println("|                                   |"
-							+ "| " + equipeRobot[1][j].toString() + "|");
+					System.out
+							.println("|                                                               |"
+									+ "| " + equipeRobot[1][j].toString() + "|");
 				} else if (equipeRobot[1][j] == null) {
-					System.out.println("| " + equipeRobot[0][j].toString()
-							+ "|"
-							+ "|                                            |");
+					System.out
+							.println("| "
+									+ equipeRobot[0][j].toString()
+									+ "|"
+									+ "|                                                               |");
 				} else {
 					System.out.println("| " + equipeRobot[0][j].toString()
 							+ "|" + "| " + equipeRobot[1][j].toString() + "|");
@@ -293,6 +297,8 @@ public class Menu {
 			equipe_passive = equipe_active;
 			equipe_active = ++equipe_active % 2;
 			miseAJourJeu(equipeRobot, p.plateau);
+			jeu = finDeJeu(equipeRobot);
+
 		}
 		scan.close();
 	}
@@ -375,6 +381,8 @@ public class Menu {
 		for (int i = 0; i < equipe.length; i++) {
 			for (int j = 0; j < equipe[i].length; j++) {
 				if (equipe[i][j] != null && equipe[i][j].robotMort()) {
+					p[equipe[i][j].getCoord().getLargeur()][equipe[i][j]
+							.getCoord().getHauteur()].videCase();
 					equipe[i][j] = null;
 				} else if (equipe[i][j] != null
 						&& i == 0
@@ -390,5 +398,26 @@ public class Menu {
 				}
 			}
 		}
+	}
+
+	public static boolean finDeJeu(Robot[][] equipe) {
+		for (int i = 0; i < equipe.length; i++) {
+			int nbMort = 0;
+			for (int j = 0; j < equipe[i].length; j++) {
+				if (equipe[i][j] == null) {
+					nbMort++;
+				}
+			}
+			if (nbMort == equipe[i].length) {
+				if (i == 0) {
+					System.out.println("L'equipe 2 Gagne");
+					return false;
+				} else if (i == 1) {
+					System.out.println("L'equipe 1 Gagne");
+					return false;
+				}
+			}
+		}
+		return true;
 	}
 }
