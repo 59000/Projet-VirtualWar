@@ -38,19 +38,19 @@ public abstract class Robot {
 		if (this instanceof Char) {
 			if (p[this.getCoord().getLargeur()][this.getCoord().getHauteur()]
 					.estBase(this.getCoord()) == this.equipe
-					&& getEnergie() < Constante.ENERGIECHAR) {
+					&& getEnergie() < Constante.ENERGIECHAR - 1) {
 				setEnergie(getEnergie() + Constante.REGENENBASE);
 			}
 		} else if (this instanceof Tireur) {
 			if (p[this.getCoord().getLargeur()][this.getCoord().getHauteur()]
 					.estBase(this.getCoord()) == this.equipe
-					&& getEnergie() < Constante.ENERGIETIREUR) {
+					&& getEnergie() < Constante.ENERGIETIREUR - 1) {
 				setEnergie(getEnergie() + Constante.REGENENBASE);
 			}
-		} else if (this instanceof Piegeur){
+		} else if (this instanceof Piegeur) {
 			if (p[this.getCoord().getLargeur()][this.getCoord().getHauteur()]
 					.estBase(this.getCoord()) == this.equipe
-					&& getEnergie() < Constante.ENERGIEPIEGEUR) {
+					&& getEnergie() < Constante.ENERGIEPIEGEUR - 1) {
 				setEnergie(getEnergie() + Constante.REGENENBASE);
 			}
 		}
