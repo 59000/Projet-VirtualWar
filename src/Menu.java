@@ -56,17 +56,25 @@ public class Menu {
 			System.out
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot[0].length; j++) {
-				if (equipeRobot[0][j] == null) {
+				if(equipeRobot[1][j] == null && equipeRobot[0][j] == null)
+				{
 					System.out
-							.println("|                                                               |"
-									+ "| " + equipeRobot[1][j].toString() + "|");
+					.println("|                  robot n°"+j+"                                    |"
+							+"|                  robot n°"+j+"                                    |");
+				
 				} else if (equipeRobot[1][j] == null) {
 					System.out
 							.println("| "
 									+ equipeRobot[0][j].toString()
 									+ "|"
-									+ "|                                                               |");
-				} else {
+									+ "|                  robot n°"+j+"                                    |");
+				} 
+				else if (equipeRobot[0][j] == null) {
+					System.out
+					.println("|                  robot n°"+j+"                                    |"
+							+ "| " + equipeRobot[1][j].toString() + "|");
+				}
+				else {
 					System.out.println("| " + equipeRobot[0][j].toString()
 							+ "|" + "| " + equipeRobot[1][j].toString() + "|");
 				}
