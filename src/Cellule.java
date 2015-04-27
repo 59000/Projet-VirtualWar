@@ -115,5 +115,10 @@ public class Cellule extends Coordonnees {
 			obstacle = false;
 		}
 	}
-
+	public boolean superposition(Robot r){
+		if(this.estObstacle()|| this.estBase() != r.getEquipe() && this.estBase() != 0 || this.robot != null ){
+			return false;
+		}
+		return true;
+	}	
 }
