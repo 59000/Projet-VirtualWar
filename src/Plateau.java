@@ -8,11 +8,11 @@ import Robot.Char;
 import Robot.Piegeur;
 import Robot.Robot;
 import Robot.Tireur;
-import Action.Action;
 import Action.Deplacement;
 import Constante.Constante;
 
 public class Plateau {
+
 
 	public Cellule[][] plateau;
 
@@ -154,7 +154,7 @@ public class Plateau {
 	 * @param mvt
 	 *            Constante de deplacement
 	 */
-	public void deplaceRobot(Robot r, Coordonnees mvt) {
+	public void deplaceRobot(Robot r, Coordonnees mvt ) {
 		// Si le robot est un Char
 		if (r instanceof Char) {
 			// Et que le mouvement demandee est un mouvement diagonales
@@ -176,9 +176,9 @@ public class Plateau {
 								.getCoord().getHauteur() + mvt.getHauteur() < this.plateau.length)) {
 					// Et si le premier deplacement n'envoie pas le char sur un
 					// obstacle
-					if (!this.plateau[r.getCoord().getLargeur()
+					if (this.plateau[r.getCoord().getLargeur()
 							+ mvt.getLargeur()][r.getCoord().getHauteur()
-							+ mvt.getHauteur()].estObstacle()) {
+							+ mvt.getHauteur()].superposition(r)) {
 
 						// 1er deplacement du char
 						this.plateau[r.getCoord().getLargeur()][r.getCoord()
@@ -201,10 +201,10 @@ public class Plateau {
 							// Et si le second deplacement n'envoie pas le char
 							// sur un
 							// obstacle
-							if (!this.plateau[r.getCoord().getLargeur()
+							if (this.plateau[r.getCoord().getLargeur()
 									+ mvt.getLargeur()][r.getCoord()
 									.getHauteur() + mvt.getHauteur()]
-									.estObstacle()) {
+									.superposition(r)) {
 
 								// 2eme deplacement du char
 								this.plateau[r.getCoord().getLargeur()][r
@@ -251,9 +251,9 @@ public class Plateau {
 							.getCoord().getHauteur() + mvt.getHauteur() < this.plateau.length)) {
 				// Si le deplacement n'envoie pas le robot sur un obstacle ou
 				// une base adverse
-				if (!this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()][r
+				if (this.plateau[r.getCoord().getLargeur() + mvt.getLargeur()][r
 						.getCoord().getHauteur() + mvt.getHauteur()]
-						.estObstacle()) {
+						.superposition(r)) {
 
 					this.plateau[r.getCoord().getLargeur()][r.getCoord()
 							.getHauteur()].videCase();
