@@ -20,7 +20,7 @@ public class Cellule extends Coordonnees {
 	 */
 	protected Robot robot;
 	/** @param pourcentage */
-	double pourcentage = Constante.POURCENTAGEOBSTACLE;
+	public static double pourcentage = Constante.POURCENTAGEOBSTACLE;
 	/** @param ran */
 	Random ran = new Random();
 	boolean obstacle = false;
