@@ -5,6 +5,8 @@ import Constante.Constante;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import Plateau.Cellule;
 import Plateau.Coordonnees;
 import Plateau.Plateau;
@@ -19,6 +21,26 @@ public class Menu {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+	String mode =	JOptionPane.showInputDialog("1: Joueur Vs Joueur \n 2: Joueur Vs Ia \n 3: Ia vs Ia");
+		if(mode.equals("1")){
+			joueurVsJoueur();
+		}
+		else if (mode.equals("2")){
+			//joueurVsIa();
+			System.out.println("Indisponible pour le moment");
+		}
+		else if(mode.equals("3")){
+			//iaVsIa();
+			System.out.println("Indisponible pour le moment");
+
+		}
+		else{
+			System.out.println("Choix incorrect, veuillez recommencer");
+			main(args);
+		}
+	}
+	
+	public static void joueurVsJoueur(){
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
 		int taille = 0;
