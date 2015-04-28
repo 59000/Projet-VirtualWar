@@ -21,26 +21,24 @@ public class Menu {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-	String mode =	JOptionPane.showInputDialog("1: Joueur Vs Joueur \n 2: Joueur Vs Ia \n 3: Ia vs Ia");
-		if(mode.equals("1")){
+		String mode = JOptionPane
+				.showInputDialog("1: Joueur Vs Joueur \n 2: Joueur Vs Ia \n 3: Ia vs Ia");
+		if (mode.equals("1")) {
 			joueurVsJoueur();
-		}
-		else if (mode.equals("2")){
-			//joueurVsIa();
+		} else if (mode.equals("2")) {
+			// joueurVsIa();
 			System.out.println("Indisponible pour le moment");
-		}
-		else if(mode.equals("3")){
-			//iaVsIa();
+		} else if (mode.equals("3")) {
+			// iaVsIa();
 			System.out.println("Indisponible pour le moment");
 
-		}
-		else{
+		} else {
 			System.out.println("Choix incorrect, veuillez recommencer");
 			main(args);
 		}
 	}
-	
-	public static void joueurVsJoueur(){
+
+	public static void joueurVsJoueur() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
 		int taille = 0;
@@ -49,7 +47,13 @@ public class Menu {
 					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
 			taille = scan.nextInt();
 		}
-
+		int obs= -1;
+		while(obs <0 || obs >100){
+			System.out.println("Combien de pourcentages d'obstacles voulez vous ?");
+			obs= scan.nextInt();
+		}
+		Cellule.pourcentage = obs;
+		
 		Plateau p = new Plateau(taille, taille);
 
 		p.plateau[0][0].base = Constante.BASE1;
@@ -78,25 +82,21 @@ public class Menu {
 			System.out
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot[0].length; j++) {
-				if(equipeRobot[1][j] == null && equipeRobot[0][j] == null)
-				{
-					System.out
-					.println("|                  robot n°"+j+"                                    |"
-							+"|                  robot n°"+j+"                                    |");
-				
+				if (equipeRobot[1][j] == null && equipeRobot[0][j] == null) {
+					System.out.println("|                  robot n°" + j
+							+ "                                    |"
+							+ "|                  robot n°" + j
+							+ "                                    |");
+
 				} else if (equipeRobot[1][j] == null) {
-					System.out
-							.println("| "
-									+ equipeRobot[0][j].toString()
-									+ "|"
-									+ "|                  robot n°"+j+"                                    |");
-				} 
-				else if (equipeRobot[0][j] == null) {
-					System.out
-					.println("|                  robot n°"+j+"                                    |"
-							+ "| " + equipeRobot[1][j].toString() + "|");
-				}
-				else {
+					System.out.println("| " + equipeRobot[0][j].toString()
+							+ "|" + "|                  robot n°" + j
+							+ "                                    |");
+				} else if (equipeRobot[0][j] == null) {
+					System.out.println("|                  robot n°" + j
+							+ "                                    |" + "| "
+							+ equipeRobot[1][j].toString() + "|");
+				} else {
 					System.out.println("| " + equipeRobot[0][j].toString()
 							+ "|" + "| " + equipeRobot[1][j].toString() + "|");
 				}
