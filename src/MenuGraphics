@@ -1,0 +1,42 @@
+package Menu;
+
+import javax.swing.JOptionPane;
+
+public class MenuGraphic {
+
+	
+	
+	public static void main(String[] args) {
+		String mode = JOptionPane
+				.showInputDialog("1: Joueur Vs Joueur \n 2: Joueur Vs Ia \n 3: Ia vs Ia");
+		try {
+			if (mode.equals("1")) {
+				Menu.joueurVsJoueur();
+			} else if (mode.equals("2")) {
+				// joueurVsIa();
+				JOptionPane.showMessageDialog(null, "En travaux");
+				main(args);
+			} else if (mode.equals("3")) {
+				// iaVsIa();
+				JOptionPane.showMessageDialog(null, "En travaux");
+				main(args);
+			} else {
+				JOptionPane.showMessageDialog(null, "Choix incorrect, veuillez recommencer");
+				main(args);
+			}
+		} catch (NullPointerException e) {
+			System.out.println("Vous avez choisis la pillule rouge...");
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			System.exit(1);
+			// TODO: handle exception
+		}
+		
+		
+		
+	}
+}
