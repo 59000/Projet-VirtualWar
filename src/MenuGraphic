@@ -25,13 +25,8 @@ public class MenuGraphic {
 				main(args);
 			}
 		} catch (NullPointerException e) {
-			System.out.println("Vous avez choisis la pillule rouge...");
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
+			
+				JOptionPane.showMessageDialog(null, "Vous avez choisis la pillule rouge...");
 			System.exit(1);
 			// TODO: handle exception
 		}
