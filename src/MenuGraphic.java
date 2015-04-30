@@ -8,9 +8,12 @@ import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MenuGraphic  {
@@ -42,7 +45,41 @@ public class MenuGraphic  {
 		panel1.setBackground(Color.yellow);
 		panel1.setPreferredSize(new Dimension(50,50));
 		panel1.add(lab1);
-		
+		panel1.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getButton() == e.BUTTON1){
+					Menu.joueurVsJoueur();
+					
+				}
+			}
+		});
 		
 		
 		
@@ -53,6 +90,41 @@ public class MenuGraphic  {
 		panel2.setPreferredSize(new Dimension(50,50));
 		panel2.add(lab2);
 		
+		panel2.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getButton() == e.BUTTON1){
+				//	Menu.joueurVsIa();
+					JOptionPane.showMessageDialog(null, "Indisponible pour le moment");
+				}
+			}
+		});
 		
 		
 		
@@ -63,13 +135,49 @@ public class MenuGraphic  {
 		panel3.setPreferredSize(new Dimension(50,50));
 		panel3.add(lab3);
 		
+		panel3.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getButton() == e.BUTTON1){
+//					Menu.iaVsIa();
+					JOptionPane.showMessageDialog(null, "Indisponible pour le moment");
+					
+					
+				}
+			}
+		});
 		
 		
-		
-		 panel.add(panel1,gbc);
+		panel.add(panel1,gbc);
 		 panel.add(panel2,gbc);
 		 panel.add(panel3,gbc);
-		/*gbc.gridx = 0;
+	/*	gbc.gridx = 0;
 		gbc.gridy = 0;
 		
 		
@@ -91,19 +199,6 @@ public class MenuGraphic  {
 		
 		fenetre.setVisible(true);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	
