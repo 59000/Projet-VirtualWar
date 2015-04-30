@@ -37,7 +37,12 @@ public class Menu {
 			main(args);
 		}
 	}
-
+	public static void joueurVsIa(){
+		
+	}
+	public static void iaVsIa(){
+		
+	}
 	public static void joueurVsJoueur() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
