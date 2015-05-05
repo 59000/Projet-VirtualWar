@@ -1,12 +1,16 @@
 package Menu;
 
-import Constante.Constante;
+import ia.Aleatoire;
 
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
 
 import javax.swing.JOptionPane;
+import javax.swing.plaf.SliderUI;
 
+import Action.Deplacement;
+import Constante.Constante;
 import Plateau.Cellule;
 import Plateau.Coordonnees;
 import Plateau.Plateau;
@@ -20,28 +24,119 @@ public class Menu {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
-		String mode = JOptionPane
-				.showInputDialog("1: Joueur Vs Joueur \n 2: Joueur Vs Ia \n 3: Ia vs Ia");
-		if (mode.equals("1")) {
-			joueurVsJoueur();
-		} else if (mode.equals("2")) {
-			// joueurVsIa();
-			System.out.println("Indisponible pour le moment");
-		} else if (mode.equals("3")) {
-			// iaVsIa();
-			System.out.println("Indisponible pour le moment");
 
-		} else {
-			System.out.println("Choix incorrect, veuillez recommencer");
-			main(args);
-		}
-	}
 	public static void joueurVsIa(){
 		
 	}
 	public static void iaVsIa(){
+		Aleatoire equipe1 = new Aleatoire(1);
+		Aleatoire equipe2 = new Aleatoire(2);
+		Random r = new Random();
 		
+		
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Bienvenue Dans VIRTUAL WAR !");
+		int taille = 0;
+		while (taille < 5 || taille > 10) {
+			System.out
+					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
+			taille = scan.nextInt();
+		}
+		int obs= -1;
+		while(obs <0 || obs >100){
+			System.out.println("Combien de pourcentages d'obstacles voulez vous ?");
+			obs= scan.nextInt();
+		}
+		Cellule.pourcentage = obs;
+		
+		Plateau p = new Plateau(taille, taille);
+
+		p.plateau[0][0].base = Constante.BASE1;
+		p.plateau[taille - 1][taille - 1].base = Constante.BASE2;
+		p.genere_obstacle(p.plateau[0][0]);
+		
+		int nb_robot = r.nextInt(5)+1;
+		Robot[][] equipeRobot = {
+		equipe1.constitution_equipes(nb_robot),
+		equipe2.constitution_equipes(nb_robot)};
+		
+		for (int i = 0; i < equipeRobot[0].length; i++) {
+			equipeRobot[0][i].setCoord(new Coordonnees(0, 0));
+			equipeRobot[1][i].setCoord(new Coordonnees(taille-1, taille-1));
+		}
+		
+		
+		boolean jeu = true;
+		
+		while (jeu) {
+			System.out.println(p);
+
+			System.out
+					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
+			for (int j = 0; j < equipeRobot[0].length; j++) {
+				if (equipeRobot[1][j] == null && equipeRobot[0][j] == null) {
+					System.out.println("|                  robot n°" + j
+							+ "                                    |"
+							+ "|                  robot n°" + j
+							+ "                                    |");
+
+				} else if (equipeRobot[1][j] == null) {
+					System.out.println("| " + equipeRobot[0][j].toString()
+							+ "|" + "|                  robot n°" + j
+							+ "                                    |");
+				} else if (equipeRobot[0][j] == null) {
+					System.out.println("|                  robot n°" + j
+							+ "                                    |" + "| "
+							+ equipeRobot[1][j].toString() + "|");
+				} else {
+					System.out.println("| " + equipeRobot[0][j].toString()
+							+ "|" + "| " + equipeRobot[1][j].toString() + "|");
+				}
+			}
+			System.out
+					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
+			
+			Robot robot_actuel = equipe1.selection_robot_actif();
+			Robot robot_actuel2 = equipe2.selection_robot_actif();
+			
+			if(equipe1.selection_action() == 1){
+				p.deplaceRobot(robot_actuel, equipe1.selection_direction_deplacement(robot_actuel));
+				System.out.println(robot_actuel);
+				
+			}
+			else if(equipe1.selection_action()== 2){
+				if(equipe1.selection_robot_actif() instanceof Piegeur){
+					// indisponible
+				}
+				else{
+					//equipe1.selection_robot_cible(equipe2.selection_robot_actif());
+					// je sais pas faire lel
+				}
+			}
+			if(equipe2.selection_action() == 1){
+				p.deplaceRobot(robot_actuel2, equipe2.selection_direction_deplacement(robot_actuel2));
+				System.out.println(robot_actuel2);
+			}
+			else if(equipe2.selection_action()== 2){
+				if(equipe2.selection_robot_actif() instanceof Piegeur){
+					// indisponible
+				}
+				else{
+					//equipe2.selection_robot_cible(equipe1.selection_robot_actif());
+					// je sais pas faire lel
+				}
+			}
+			try {
+				Thread.sleep(5);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			miseAJourJeu(equipeRobot, p.plateau);
+			jeu = finDeJeu(equipeRobot);
+		}
+		
+
 	}
 	public static void joueurVsJoueur() {
 		Scanner scan = new Scanner(System.in);
