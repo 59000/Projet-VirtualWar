@@ -1,37 +1,36 @@
-
 package ia;
 
 import java.util.Random;
+
+import Constante.Constante;
+import Menu.Menu;
+import Menu.MenuGraphic;
+import Plateau.Coordonnees;
 import Robot.Char;
 import Robot.Piegeur;
 import Robot.Robot;
 import Robot.Tireur;
 
-public class aleatoire extends IA
-{
+public class Aleatoire extends IA {
 	Random r = new Random();
-	
-	public aleatoire(int equipe) 
-	{
+
+	public Aleatoire(int equipe) {
 		super(equipe);
 	}
 
 	@Override
-	Robot[] constitution_equipes(int nb_robot) 
-	{
+	public Robot[] constitution_equipes(int nb_robot) {
 		Robot[] areturn = new Robot[nb_robot];
-		for (int i = 0; i <nb_robot; i++) 
-		{
-			switch (r.nextInt(3)) 
-			{
-				case 0:
-					areturn[i]=new Tireur(equipe, i);
+		for (int i = 0; i < nb_robot; i++) {
+			switch (r.nextInt(3)) {
+			case 0:
+				areturn[i] = new Tireur(equipe, i);
 				break;
-				case 1:
-					areturn[i]=new Piegeur(equipe, i);
+			case 1:
+				areturn[i] = new Piegeur(equipe, i);
 				break;
-				case 2:
-					areturn[i]=new Char(equipe, i);
+			case 2:
+				areturn[i] = new Char(equipe, i);
 				break;
 			}
 		}
@@ -40,71 +39,63 @@ public class aleatoire extends IA
 	}
 
 	@Override
-	int selection_action() 
-	{
-		return (r.nextInt(2)+1);
+	public int selection_action() {
+		return (r.nextInt(2) + 1);
 	}
 
 	@Override
-	Robot selection_robot_actif() 
-	{
-		return robots[r.nextInt(robots.length)];
-	}
-
-	@Override
-	String selection_direction_deplacement(Robot robot) 
-	{
-		if(robot instanceof Char)
-		{
-			switch (r.nextInt(4)) 
-			{
-				case 0:
-					return "haut";
-				case 1:
-					return "bas";
-				case 2:
-					return "gauche";
-				case 3:
-					return "droit";
-			}
+	public Robot selection_robot_actif() {
+		int nbRobot = r.nextInt(robots.length);
+		if (robots[nbRobot] == null) {
+			return selection_robot_actif();
 		}
-		else
-		{
-			switch (r.nextInt(8)) 
-			{
+		return robots[nbRobot];
+	}
+
+	@Override
+	public Coordonnees selection_direction_deplacement(Robot robot) {
+		if (robot instanceof Char) {
+			switch (r.nextInt(4)) {
 			case 0:
-				return "haut";
+				return Constante.HAUT;
 			case 1:
-				return "bas";
+				return Constante.BAS;
 			case 2:
-				return "gauche";
+				return Constante.GAUCHE;
 			case 3:
-				return "droit";
+				return Constante.DROIT;
+			}
+		} else {
+			switch (r.nextInt(8)) {
+			case 0:
+				return Constante.HAUT;
+			case 1:
+				return Constante.BAS;
+			case 2:
+				return Constante.GAUCHE;
+			case 3:
+				return Constante.DROIT;
 			case 4:
-				return "basgauche";
+				return Constante.HAUTGAUCHE;
 			case 5:
-				return "basdroit";
+				return Constante.HAUTDROIT;
 			case 6:
-				return "hautgauche";
+				return Constante.BASGAUCHE;
 			case 7:
-				return "hautdroit";
+				return Constante.BASDROIT;
 			}
 		}
 		return null;// compilateur autoritaire
 	}
 
 	@Override
-	String selection_direction_attaque(Piegeur p) 
-	{
+	public Coordonnees selection_direction_attaque(Piegeur p) {
 		return selection_direction_deplacement(p);
 	}
 
 	@Override
-	int selection_robot_cible(Robot robot) 
-	{
+	public int selection_robot_cible(Robot robot) {
 		return r.nextInt(robots.length);
 	}
-	
-	
-	
+
 }
