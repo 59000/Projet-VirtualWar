@@ -3,8 +3,6 @@ package ia;
 import java.util.Random;
 
 import Constante.Constante;
-import Menu.Menu;
-import Menu.MenuGraphic;
 import Plateau.Coordonnees;
 import Robot.Char;
 import Robot.Piegeur;
