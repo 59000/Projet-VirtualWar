@@ -2,7 +2,6 @@ package Menu;
 
 
 
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
@@ -74,7 +73,7 @@ public class MenuGraphic  {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				if(e.getButton() == e.BUTTON1){
+				if(e.getButton() == MouseEvent.BUTTON1){
 					Menu.joueurVsJoueur();
 					
 				}
@@ -119,7 +118,7 @@ public class MenuGraphic  {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				if(e.getButton() == e.BUTTON1){
+				if(e.getButton() == MouseEvent.BUTTON1){
 				//	Menu.joueurVsIa();
 					JOptionPane.showMessageDialog(null, "Indisponible pour le moment");
 				}
@@ -164,7 +163,7 @@ public class MenuGraphic  {
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
-				if(e.getButton() == e.BUTTON1){
+				if(e.getButton() == MouseEvent.BUTTON1){
 					Menu.iaVsIa();
 				
 					
