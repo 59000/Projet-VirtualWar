@@ -5,6 +5,7 @@ import ia.Aleatoire;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+
 import Constante.Constante;
 import Plateau.Cellule;
 import Plateau.Coordonnees;
@@ -33,8 +34,7 @@ public class Menu {
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
 		int taille = 0;
 		while (taille < 5 || taille > 10) {
-			System.out
-					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
+			System.out.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
 			taille = scan.nextInt();
 		}
 		int obs= -1;
@@ -64,6 +64,13 @@ public class Menu {
 		boolean jeu = true;
 		
 		while (jeu) {
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
 			System.out.println(p);
 
 			System.out
