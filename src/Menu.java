@@ -77,17 +77,17 @@ public class Menu {
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot[0].length; j++) {
 				if (equipeRobot[1][j] == null && equipeRobot[0][j] == null) {
-					System.out.println("|                  robot nÂ°" + j
+					System.out.println("|                  robot n°" + j
 							+ "                                    |"
-							+ "|                  robot nÂ°" + j
+							+ "|                  robot n°" + j
 							+ "                                    |");
 
 				} else if (equipeRobot[1][j] == null) {
 					System.out.println("| " + equipeRobot[0][j].toString()
-							+ "|" + "|                  robot nÂ°" + j
+							+ "|" + "|                  robot n°" + j
 							+ "                                    |");
 				} else if (equipeRobot[0][j] == null) {
-					System.out.println("|                  robot nÂ°" + j
+					System.out.println("|                  robot n°" + j
 							+ "                                    |" + "| "
 							+ equipeRobot[1][j].toString() + "|");
 				} else {
@@ -108,7 +108,103 @@ public class Menu {
 			}
 			else if(equipe1.selection_action()== 2){
 				if(equipe1.selection_robot_actif() instanceof Piegeur){
-					// indisponible
+					Robot attaquant = equipeRobot[0][r.nextInt(nb_robot)];
+					if (attaquant != null) {
+						if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
+								.getCoord().getHauteur()].estBase() == attaquant
+								.getEquipe()) {
+							System.out
+									.println("Erreur : une attaque depuis une base est impossible");
+						} else {
+							if (attaquant instanceof Piegeur) {
+								
+								Cellule cell_attaquant = p.plateau[attaquant
+										.getCoord().getLargeur()][attaquant
+										.getCoord().getHauteur()];
+								int dir = r.nextInt(8);
+								switch (dir) {
+								case 0:
+									p.plateau[cell_attaquant.ajout(Constante.HAUT)
+											.getLargeur()][cell_attaquant.ajout(
+											Constante.HAUT).getHauteur()]
+											.setMine(1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+									break;
+								case 1:
+									p.plateau[cell_attaquant.ajout(Constante.BAS)
+											.getLargeur()][cell_attaquant.ajout(
+											Constante.BAS).getHauteur()]
+											.setMine(1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+									break;
+								case 2:
+									p.plateau[cell_attaquant
+											.ajout(Constante.GAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.GAUCHE).getHauteur()]
+											.setMine(1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+									break;
+								case 3:
+									p.plateau[cell_attaquant.ajout(Constante.DROIT)
+											.getLargeur()][cell_attaquant.ajout(
+											Constante.DROIT).getHauteur()]
+											.setMine(1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+									break;
+								case 4:
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUTGAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUTGAUCHE)
+											.getHauteur()]
+											.setMine(1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+									break;
+
+								case 5:
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUTDROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUTDROIT)
+											.getHauteur()]
+											.setMine(1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+									break;
+								case 6:
+									p.plateau[cell_attaquant.ajout(
+											Constante.BASGAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.BASGAUCHE)
+											.getHauteur()]
+											.setMine(1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+									break;
+								case 7:
+									p.plateau[cell_attaquant.ajout(
+											Constante.BASDROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.BASDROIT).getHauteur()]
+											.setMine(1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+									break;
+
+								}
+							}
+						}
+					}
+
 				}
 				else{
 					//equipe1.selection_robot_cible(equipe2.selection_robot_actif());
@@ -128,18 +224,13 @@ public class Menu {
 					// je sais pas faire lel
 				}
 			}
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+		
 			miseAJourJeu(equipeRobot, p.plateau);
 			jeu = finDeJeu(equipeRobot);
 			
 			scan.close();
 		}
-		
+		System.exit(0);
 
 	}
 	public static void joueurVsJoueur() {
@@ -187,17 +278,17 @@ public class Menu {
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot[0].length; j++) {
 				if (equipeRobot[1][j] == null && equipeRobot[0][j] == null) {
-					System.out.println("|                  robot nÂ°" + j
+					System.out.println("|                  robot n°" + j
 							+ "                                    |"
-							+ "|                  robot nÂ°" + j
+							+ "|                  robot n°" + j
 							+ "                                    |");
 
 				} else if (equipeRobot[1][j] == null) {
 					System.out.println("| " + equipeRobot[0][j].toString()
-							+ "|" + "|                  robot nÂ°" + j
+							+ "|" + "|                  robot n°" + j
 							+ "                                    |");
 				} else if (equipeRobot[0][j] == null) {
-					System.out.println("|                  robot nÂ°" + j
+					System.out.println("|                  robot n°" + j
 							+ "                                    |" + "| "
 							+ equipeRobot[1][j].toString() + "|");
 				} else {
@@ -435,9 +526,10 @@ public class Menu {
 
 		}
 		scan.close();
+		System.exit(0);
 	}
 
-	static Robot[] constituer_equipe(Scanner scan, int plateau_1er_dim,
+	public static Robot[] constituer_equipe(Scanner scan, int plateau_1er_dim,
 			int plateau_2em_dim, int nb_robot_voulu, int equipe) {
 		Coordonnees base = (equipe == 1) ? new Coordonnees(0, 0)
 				: new Coordonnees(plateau_1er_dim - 1, plateau_2em_dim - 1);
