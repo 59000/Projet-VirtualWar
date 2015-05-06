@@ -5,11 +5,6 @@ import ia.Aleatoire;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
-
-import javax.swing.JOptionPane;
-import javax.swing.plaf.SliderUI;
-
-import Action.Deplacement;
 import Constante.Constante;
 import Plateau.Cellule;
 import Plateau.Coordonnees;
@@ -75,17 +70,17 @@ public class Menu {
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot[0].length; j++) {
 				if (equipeRobot[1][j] == null && equipeRobot[0][j] == null) {
-					System.out.println("|                  robot n°" + j
+					System.out.println("|                  robot nÂ°" + j
 							+ "                                    |"
-							+ "|                  robot n°" + j
+							+ "|                  robot nÂ°" + j
 							+ "                                    |");
 
 				} else if (equipeRobot[1][j] == null) {
 					System.out.println("| " + equipeRobot[0][j].toString()
-							+ "|" + "|                  robot n°" + j
+							+ "|" + "|                  robot nÂ°" + j
 							+ "                                    |");
 				} else if (equipeRobot[0][j] == null) {
-					System.out.println("|                  robot n°" + j
+					System.out.println("|                  robot nÂ°" + j
 							+ "                                    |" + "| "
 							+ equipeRobot[1][j].toString() + "|");
 				} else {
@@ -134,6 +129,8 @@ public class Menu {
 			}
 			miseAJourJeu(equipeRobot, p.plateau);
 			jeu = finDeJeu(equipeRobot);
+			
+			scan.close();
 		}
 		
 
@@ -183,17 +180,17 @@ public class Menu {
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot[0].length; j++) {
 				if (equipeRobot[1][j] == null && equipeRobot[0][j] == null) {
-					System.out.println("|                  robot n°" + j
+					System.out.println("|                  robot nÂ°" + j
 							+ "                                    |"
-							+ "|                  robot n°" + j
+							+ "|                  robot nÂ°" + j
 							+ "                                    |");
 
 				} else if (equipeRobot[1][j] == null) {
 					System.out.println("| " + equipeRobot[0][j].toString()
-							+ "|" + "|                  robot n°" + j
+							+ "|" + "|                  robot nÂ°" + j
 							+ "                                    |");
 				} else if (equipeRobot[0][j] == null) {
-					System.out.println("|                  robot n°" + j
+					System.out.println("|                  robot nÂ°" + j
 							+ "                                    |" + "| "
 							+ equipeRobot[1][j].toString() + "|");
 				} else {
