@@ -163,7 +163,7 @@ public class Plateau {
 					|| mvt.equals(Constante.BASDROIT)
 					|| mvt.equals(Constante.BASGAUCHE)) {
 				// Renvoie un message d'erreur
-				System.out
+				System.err
 						.println("Erreur : Un char ne peut se deplacer diagonalement");
 			}
 			// Sinon, fonctionnement normal de la fonction
@@ -215,26 +215,26 @@ public class Plateau {
 							} else {
 								// Sinon, un obstacle empeche le second
 								// deplacement
-								System.out
+								System.err
 										.println("Event : Le char a rencontre un obstacle sur son chemin et a du se stopper.");
 							}
 
 						} else {
 							// Sinon, les limites du plateau empeche le second
 							// deplacement
-							System.out
+							System.err
 									.println("Event : Le char a du s'arreter pour ne pas fuir.");
 						}
 
 					} else {
 						// Sinon, un obstacle empeche le deplacement
-						System.out
+						System.err
 								.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
 					}
 
 				} else {
 					// Sinon, les limites du plateau empeche le deplacement
-					System.out
+					System.err
 							.println("Erreur : Deplacement en dehors des limites de la map.");
 				}
 			}
@@ -263,12 +263,12 @@ public class Plateau {
 
 				} else {
 					// Sinon, message d'erreur et annulation du deplacement
-					System.out
+					System.err
 							.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
 				}
 				// Sinon, les limites de la map empechent le deplacement
 			} else {
-				System.out
+				System.err
 						.println("Erreur : Les limites de la map empechent le deplacement.");
 			}
 		}
