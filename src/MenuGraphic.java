@@ -119,8 +119,8 @@ public class MenuGraphic  {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getButton() == MouseEvent.BUTTON1){
-				//	Menu.joueurVsIa();
-					JOptionPane.showMessageDialog(null, "Indisponible pour le moment");
+					Menu.joueurVsIa();
+					
 				}
 			}
 		});
