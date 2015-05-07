@@ -2,8 +2,11 @@ package Menu;
 
 import ia.Aleatoire;
 import ia.IA;
+
 import java.util.InputMismatchException;
+import java.util.Random;
 import java.util.Scanner;
+
 import Constante.Constante;
 import Plateau.Cellule;
 import Plateau.Coordonnees;
@@ -19,21 +22,7 @@ public class Menu {
 	 * @param args
 	 */
 
-	public static void joueurVsIa(){
-		
-	}
-	public static void iaVsIa(){
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	public static void joueurVsIa() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
 		int taille = 0;
@@ -42,13 +31,14 @@ public class Menu {
 					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
 			taille = scan.nextInt();
 		}
-		int obs= -1;
-		while(obs <0 || obs >100){
-			System.out.println("Combien de pourcentages d'obstacles voulez vous ?");
-			obs= scan.nextInt();
+		int obs = -1;
+		while (obs < 0 || obs > 100) {
+			System.out
+					.println("Combien de pourcentages d'obstacles voulez vous ?");
+			obs = scan.nextInt();
 		}
 		Cellule.pourcentage = obs;
-		
+
 		Plateau p = new Plateau(taille, taille);
 
 		p.plateau[0][0].base = Constante.BASE1;
@@ -57,20 +47,412 @@ public class Menu {
 
 		int nb_robot_voulu;
 		do {
-			System.out.println("combien de robot voulez vous dans vos equipes ?");
+			System.out
+					.println("combien de robot voulez vous dans vos equipes ?");
 			nb_robot_voulu = scan.nextInt();
 		} while (nb_robot_voulu > 5 || nb_robot_voulu < 1);
-		
-		
-		scan.close();
-		
-		IA[] equipe=new IA[]{new Aleatoire(1),new Aleatoire(2)};
-		
-		Robot[][] equipeRobot = {equipe[0].constitution_equipes(nb_robot_voulu),equipe[1].constitution_equipes(nb_robot_voulu)};
+
+		IA ia = new Aleatoire(2);
+		Robot[][] equipeRobot = {
+				Menu.constituer_equipe(scan, p.plateau.length,
+						p.plateau[0].length, nb_robot_voulu, 1),
+				ia.constitution_equipes(nb_robot_voulu) };
+		for (int i = 0; i < equipeRobot[0].length; i++) {
+			equipeRobot[0][i].setCoord(new Coordonnees(0, 0));
+			equipeRobot[1][i].setCoord(new Coordonnees(taille - 1, taille - 1));
+		}
+		boolean jeu = true;
+		int equipe_passive = 0;
+		int equipe_active = 0;
+		while (jeu) {
+			System.out.println(p);
+
+			System.out
+					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
+			for (int j = 0; j < equipeRobot[0].length; j++) {
+				if (equipeRobot[1][j] == null && equipeRobot[0][j] == null) {
+					System.out.println("|                  robot " + j
+							+ " mort                                 |"
+							+ "|                  robot " + j
+							+ " mort                                 |");
+
+				} else if (equipeRobot[1][j] == null) {
+					System.out.println("| " + equipeRobot[0][j].toString()
+							+ "|" + "|                  robot " + j
+							+ " mort                                 |");
+				} else if (equipeRobot[0][j] == null) {
+					System.out.println("|                  robot " + j
+							+ " mort                                 |" + "| "
+							+ equipeRobot[1][j].toString() + "|");
+				} else {
+					System.out.println("| " + equipeRobot[0][j].toString()
+							+ "|" + "| " + equipeRobot[1][j].toString() + "|");
+				}
+			}
+			System.out
+					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
+
+			System.out.println("Equipe " + (equipe_active + 1)
+					+ ": Quel action souhaitez-vous ? \n - 1. Deplacement \n "
+					+ "- 2. Attaquez \n - 3. Quittez le jeu.");
+			int i;
+			if (equipe_active == 0) {
+				i = scan.nextInt();
+			} else {
+				i = ia.selection_action();
+			}
+			if (i == 1) {
+				boolean flag = true;
+				while (flag) {
+					System.out.println("Equipe " + (equipe_active + 1)
+							+ ": Quel Robot (numero) voulez-vous deplacer ?");
+
+					try {
+						if (equipe_active == 0) {
+							i = scan.nextInt();
+						} else {
+							i = ia.selection_robot_actif().getNumero();
+						}
+						if (equipeRobot[equipe_active][i] != null) {
+							equipeRobot[equipe_active][i].getNumero();
+						} else {
+							System.err.println("Ce Robot est mort !");
+						}
+						flag = false;
+					} catch (InputMismatchException e) {
+						System.err.println("Erreur : Entier attendu");
+						flag = true;
+						i = 0;
+					} catch (ArrayIndexOutOfBoundsException e) {
+						System.err.println("Erreur : Robot non existant");
+						flag = true;
+						i = 0;
+					}
+				}
+			}
+			if (equipeRobot[equipe_active][i] != null) {
+				System.out
+						.println("Equipe "
+								+ (equipe_active + 1)
+								+ ": Dans quel direction ? (haut,bas,gauche,droit,hautgauche,hautdroit,basgauche,basdroit)");
+				String msg;
+				if(equipe_active==0){
+					 msg = scan.next();
+				}else{
+				 msg =ia.selection_direction_deplacement(equipeRobot[equipe_active][i]);// scan.next();
+				}
+				switch (msg) {
+				case "haut":
+					p.deplaceRobot(equipeRobot[equipe_active][i],
+							Constante.HAUT);
+					break;
+				case "bas":
+					p.deplaceRobot(equipeRobot[equipe_active][i],
+							Constante.BAS);
+					break;
+				case "gauche":
+					p.deplaceRobot(equipeRobot[equipe_active][i],
+							Constante.GAUCHE);
+					break;
+				case "droit":
+					p.deplaceRobot(equipeRobot[equipe_active][i],
+							Constante.DROIT);
+					break;
+				case "hautgauche":
+					p.deplaceRobot(equipeRobot[equipe_active][i],
+							Constante.HAUTGAUCHE);
+					break;
+				case "hautdroit":
+					p.deplaceRobot(equipeRobot[equipe_active][i],
+							Constante.HAUTDROIT);
+					break;
+				case "basgauche":
+					p.deplaceRobot(equipeRobot[equipe_active][i],
+							Constante.BASGAUCHE);
+					break;
+				case "basdroit":
+					p.deplaceRobot(equipeRobot[equipe_active][i],
+							Constante.BASDROIT);
+					break;
+
+				}
+				
+			}else if (i == 3) {
+				System.out.println("Fin du jeu !");
+				jeu = false;
+			} else if (i == 2) {
+				System.out.println("Equipe " + (equipe_active + 1)
+						+ ": Quel Robot (numero) voulez-vous faire attaquer ?");
+				Robot attaquant;
+				if(equipe_active ==0){
+					attaquant = equipeRobot[equipe_active][scan.nextInt()];
+				}else{
+				attaquant = equipeRobot[equipe_active][ia.selection_robot_actif().getNumero()];
+				}
+				
+				if (attaquant != null) {
+					if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
+							.getCoord().getHauteur()].estBase() == attaquant
+							.getEquipe()) {
+						System.err
+								.println("Erreur : une attaque depuis une base est impossible");
+					} else {
+						if (attaquant instanceof Piegeur) {
+							System.out
+									.println("Equipe "
+											+ (equipe_active + 1)
+											+ ": dans quelle direction le piegeur doit il poser sa mine ?(haut,bas,gauche,droit,basgauche,basdroit,hautgauche,hautdroit)");
+							Cellule cell_attaquant = p.plateau[attaquant
+									.getCoord().getLargeur()][attaquant
+									.getCoord().getHauteur()];
+							String dir;
+							if(equipe_active==0){
+								dir = scan.next();
+							}else{
+							 dir = ia.selection_direction_attaque((Piegeur) attaquant);// scan.next();
+							}
+							switch (dir) {
+							case "haut":
+								if (cell_attaquant.ajout(Constante.HAUT)
+										.getHauteur() >= 0) {
+
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUT).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUT).getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
+								}
+								break;
+							case "bas":
+								if (cell_attaquant.ajout(Constante.BAS)
+										.getHauteur() <= p.plateau.length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.BAS).getLargeur()][cell_attaquant
+											.ajout(Constante.BAS).getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
+								}
+								break;
+
+							case "gauche":
+								if (cell_attaquant.ajout(Constante.GAUCHE)
+										.getLargeur() >= 0) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.GAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.GAUCHE)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
+								}
+								break;
+							case "droit":
+								if (cell_attaquant.ajout(Constante.DROIT)
+										.getLargeur() <= p.plateau[0].length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.DROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.DROIT)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
+								}
+								break;
+							case "hautgauche":
+								if (cell_attaquant.ajout(Constante.HAUT)
+										.getHauteur() >= 0
+										&& cell_attaquant.ajout(
+												Constante.GAUCHE).getLargeur() >= 0) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUTGAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUTGAUCHE)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
+								}
+								break;
+
+							case "hautdroit":
+								if (cell_attaquant.ajout(Constante.HAUT)
+										.getHauteur() >= 0
+										&& cell_attaquant
+												.ajout(Constante.DROIT)
+												.getLargeur() <= p.plateau[0].length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUTDROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUTDROIT)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
+								}
+								break;
+							case "basgauche":
+								if (cell_attaquant.ajout(Constante.BAS)
+										.getHauteur() <= p.plateau.length - 1
+										&& cell_attaquant.ajout(
+												Constante.GAUCHE).getLargeur() >= 0) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.BASGAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.BASGAUCHE)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
+								}
+								break;
+							case "basdroit":
+								if (cell_attaquant.ajout(Constante.BAS)
+										.getHauteur() <= p.plateau.length - 1
+										&& cell_attaquant
+												.ajout(Constante.DROIT)
+												.getLargeur() <= p.plateau[0].length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.BASDROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.BASDROIT)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
+								}
+								break;
+
+							}
+
+						} else {
+
+							System.out
+									.println("Equipe "
+											+ (equipe_active + 1)
+											+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
+							Robot cible;
+							if(equipe_active == 0){
+								cible = equipeRobot[equipe_active][scan.nextInt()];
+							}else{
+								cible = equipeRobot[equipe_passive][ia.selection_robot_cible(attaquant)];
+							}
+							if (attaquant instanceof Tireur && cible != null) {
+								if (attaquant.peutTirer(cible.getCoord())
+										&& !p.tir_travers_obstacle(attaquant,
+												cible)) {
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTTIRERTIREUR);
+									cible.setEnergie(cible.getEnergie()
+											+ Constante.DEGATTIREUR);
+								} else {
+									System.err
+											.println("Erreur : Tir impossible");
+								}
+							} else if (attaquant instanceof Char
+									&& cible != null) {
+								if (attaquant.peutTirer(cible.getCoord())
+										&& !p.tir_travers_obstacle(attaquant,
+												cible)) {
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTTIRERCHAR);
+									cible.setEnergie(cible.getEnergie()
+											+ Constante.DEGATCHAR);
+								} else {
+									System.err
+											.println("Erreur : Tir impossible");
+								}
+							}
+						}
+					}
+				} else {
+					System.err.println("Ce Robot est mort !");
+				}
+			} else {
+				System.out.println("Non Disponible");
+			}
+			equipe_passive = equipe_active;
+			equipe_active = ++equipe_active % 2;
+			miseAJourJeu(equipeRobot, p.plateau);
+			jeu = finDeJeu(equipeRobot);
+
+		}
+
+	}
 	
-		for(int i =0; i<equipeRobot[0].length;i++){
-			equipeRobot[0][i].setCoord(new Coordonnees(0,0));
-			equipeRobot[1][i].setCoord(new Coordonnees(taille -1,taille -1));
+		
+
+	
+
+	public static void iaVsIa() {								/**---------------------------------------------------------------------------------*/
+		Random r = new Random();
+		Scanner scan = new Scanner(System.in);
+		System.out.println("Bienvenue Dans VIRTUAL WAR !");
+		int taille = 0;
+		while (taille < 5 || taille > 10) {
+			System.out
+					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
+			taille = scan.nextInt();
+		}
+		int obs = -1;
+		while (obs < 0 || obs > 100) {
+			System.out
+					.println("Combien de pourcentages d'obstacles voulez vous ?");
+			obs = scan.nextInt();
+		}
+		Cellule.pourcentage = obs;
+
+		Plateau p = new Plateau(taille, taille);
+
+		p.plateau[0][0].base = Constante.BASE1;
+		p.plateau[taille - 1][taille - 1].base = Constante.BASE2;
+		p.genere_obstacle(p.plateau[0][0]);
+
+		int nb_robot_voulu;
+		do {
+			nb_robot_voulu = r.nextInt(5) + 1;
+		} while (nb_robot_voulu > 5 || nb_robot_voulu < 1);
+
+		scan.close();
+
+		IA[] equipe = new IA[] { new Aleatoire(1), new Aleatoire(2) };
+
+		Robot[][] equipeRobot = {
+				equipe[0].constitution_equipes(nb_robot_voulu),
+				equipe[1].constitution_equipes(nb_robot_voulu) };
+
+		for (int i = 0; i < equipeRobot[0].length; i++) {
+			equipeRobot[0][i].setCoord(new Coordonnees(0, 0));
+			equipeRobot[1][i].setCoord(new Coordonnees(taille - 1, taille - 1));
 		}
 
 		boolean jeu = true;
@@ -108,7 +490,7 @@ public class Menu {
 					+ ": Quel action souhaitez-vous ? \n - 1. Deplacement \n "
 					+ "- 2. Attaquez \n - 3. Quittez le jeu.");
 
-			int i = equipe[equipe_active].selection_action();//scan.nextInt();
+			int i = equipe[equipe_active].selection_action();// scan.nextInt();
 
 			if (i == 1) {
 				boolean flag = true;
@@ -117,7 +499,8 @@ public class Menu {
 							+ ": Quel Robot (numero) voulez-vous deplacer ?");
 
 					try {
-						i = equipe[equipe_active].selection_robot_actif().getNumero();//scan.nextInt();
+						i = equipe[equipe_active].selection_robot_actif()
+								.getNumero();// scan.nextInt();
 						if (equipeRobot[equipe_active][i] != null) {
 							equipeRobot[equipe_active][i].getNumero();
 						} else {
@@ -141,7 +524,8 @@ public class Menu {
 							.println("Equipe "
 									+ (equipe_active + 1)
 									+ ": Dans quel direction ? (haut,bas,gauche,droit,hautgauche,hautdroit,basgauche,basdroit)");
-					String msg = equipe[equipe_active].selection_direction_deplacement(equipeRobot[equipe_active][i]);//scan.next();
+					String msg = equipe[equipe_active]
+							.selection_direction_deplacement(equipeRobot[equipe_active][i]);// scan.next();
 
 					switch (msg) {
 					case "haut":
@@ -180,13 +564,14 @@ public class Menu {
 					}
 				}
 
-			} else if (i == 3) {
+			}else if (i == 3) {
 				System.out.println("Fin du jeu !");
 				jeu = false;
 			} else if (i == 2) {
 				System.out.println("Equipe " + (equipe_active + 1)
 						+ ": Quel Robot (numero) voulez-vous faire attaquer ?");
-				Robot attaquant = equipeRobot[equipe_active][equipe[equipe_active].selection_robot_actif().getNumero()];
+				Robot attaquant = equipeRobot[equipe_active][equipe[equipe_active]
+						.selection_robot_actif().getNumero()];
 				if (attaquant != null) {
 					if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
 							.getCoord().getHauteur()].estBase() == attaquant
@@ -202,118 +587,146 @@ public class Menu {
 							Cellule cell_attaquant = p.plateau[attaquant
 									.getCoord().getLargeur()][attaquant
 									.getCoord().getHauteur()];
-							String dir = equipe[equipe_active].selection_direction_attaque((Piegeur) attaquant);//scan.next();
+							String dir = equipe[equipe_active]
+									.selection_direction_attaque((Piegeur) attaquant);// scan.next();
 							switch (dir) {
 							case "haut":
-								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0){
-									
-								
-								p.plateau[cell_attaquant.ajout(Constante.HAUT)
-										.getLargeur()][cell_attaquant.ajout(
-										Constante.HAUT).getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}
-								else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.HAUT)
+										.getHauteur() >= 0) {
+
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUT).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUT).getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 							case "bas":
-								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1){
-								p.plateau[cell_attaquant.ajout(Constante.BAS)
-										.getLargeur()][cell_attaquant.ajout(
-										Constante.BAS).getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.BAS)
+										.getHauteur() <= p.plateau.length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.BAS).getLargeur()][cell_attaquant
+											.ajout(Constante.BAS).getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
-								
+
 							case "gauche":
-								if(cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
-								p.plateau[cell_attaquant
-										.ajout(Constante.GAUCHE).getLargeur()][cell_attaquant
-										.ajout(Constante.GAUCHE).getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.GAUCHE)
+										.getLargeur() >= 0) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.GAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.GAUCHE)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 							case "droit":
-								if(cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
-								p.plateau[cell_attaquant.ajout(Constante.DROIT)
-										.getLargeur()][cell_attaquant.ajout(
-										Constante.DROIT).getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.DROIT)
+										.getLargeur() <= p.plateau[0].length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.DROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.DROIT)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 							case "hautgauche":
-								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0 && cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
-								p.plateau[cell_attaquant.ajout(
-										Constante.HAUTGAUCHE).getLargeur()][cell_attaquant
-										.ajout(Constante.HAUTGAUCHE)
-										.getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.HAUT)
+										.getHauteur() >= 0
+										&& cell_attaquant.ajout(
+												Constante.GAUCHE).getLargeur() >= 0) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUTGAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUTGAUCHE)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 
 							case "hautdroit":
-								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0 && cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
-								p.plateau[cell_attaquant.ajout(
-										Constante.HAUTDROIT).getLargeur()][cell_attaquant
-										.ajout(Constante.HAUTDROIT)
-										.getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.HAUT)
+										.getHauteur() >= 0
+										&& cell_attaquant
+												.ajout(Constante.DROIT)
+												.getLargeur() <= p.plateau[0].length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUTDROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUTDROIT)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 							case "basgauche":
-								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1 && cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
-								p.plateau[cell_attaquant.ajout(
-										Constante.BASGAUCHE).getLargeur()][cell_attaquant
-										.ajout(Constante.BASGAUCHE)
-										.getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.BAS)
+										.getHauteur() <= p.plateau.length - 1
+										&& cell_attaquant.ajout(
+												Constante.GAUCHE).getLargeur() >= 0) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.BASGAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.BASGAUCHE)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 							case "basdroit":
-								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1 && cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
-								p.plateau[cell_attaquant.ajout(
-										Constante.BASDROIT).getLargeur()][cell_attaquant
-										.ajout(Constante.BASDROIT).getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.BAS)
+										.getHauteur() <= p.plateau.length - 1
+										&& cell_attaquant
+												.ajout(Constante.DROIT)
+												.getLargeur() <= p.plateau[0].length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.BASDROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.BASDROIT)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 
@@ -325,7 +738,8 @@ public class Menu {
 									.println("Equipe "
 											+ (equipe_active + 1)
 											+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
-							Robot cible = equipeRobot[equipe_passive][equipe[equipe_active].selection_robot_cible(attaquant)];
+							Robot cible = equipeRobot[equipe_passive][equipe[equipe_active]
+									.selection_robot_cible(attaquant)];
 							if (attaquant instanceof Tireur && cible != null) {
 								if (attaquant.peutTirer(cible.getCoord())
 										&& !p.tir_travers_obstacle(attaquant,
@@ -338,7 +752,8 @@ public class Menu {
 									System.err
 											.println("Erreur : Tir impossible");
 								}
-							} else if (attaquant instanceof Char && cible != null) {
+							} else if (attaquant instanceof Char
+									&& cible != null) {
 								if (attaquant.peutTirer(cible.getCoord())
 										&& !p.tir_travers_obstacle(attaquant,
 												cible)) {
@@ -365,27 +780,9 @@ public class Menu {
 			jeu = finDeJeu(equipeRobot);
 
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
+
 	public static void joueurVsJoueur() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
@@ -395,13 +792,14 @@ public class Menu {
 					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
 			taille = scan.nextInt();
 		}
-		int obs= -1;
-		while(obs <0 || obs >100){
-			System.out.println("Combien de pourcentages d'obstacles voulez vous ?");
-			obs= scan.nextInt();
+		int obs = -1;
+		while (obs < 0 || obs > 100) {
+			System.out
+					.println("Combien de pourcentages d'obstacles voulez vous ?");
+			obs = scan.nextInt();
 		}
 		Cellule.pourcentage = obs;
-		
+
 		Plateau p = new Plateau(taille, taille);
 
 		p.plateau[0][0].base = Constante.BASE1;
@@ -553,115 +951,142 @@ public class Menu {
 							String dir = scan.next();
 							switch (dir) {
 							case "haut":
-								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0){
-									
-								
-								p.plateau[cell_attaquant.ajout(Constante.HAUT)
-										.getLargeur()][cell_attaquant.ajout(
-										Constante.HAUT).getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}
-								else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.HAUT)
+										.getHauteur() >= 0) {
+
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUT).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUT).getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 							case "bas":
-								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1){
-								p.plateau[cell_attaquant.ajout(Constante.BAS)
-										.getLargeur()][cell_attaquant.ajout(
-										Constante.BAS).getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.BAS)
+										.getHauteur() <= p.plateau.length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.BAS).getLargeur()][cell_attaquant
+											.ajout(Constante.BAS).getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
-								
+
 							case "gauche":
-								if(cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
-								p.plateau[cell_attaquant
-										.ajout(Constante.GAUCHE).getLargeur()][cell_attaquant
-										.ajout(Constante.GAUCHE).getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.GAUCHE)
+										.getLargeur() >= 0) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.GAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.GAUCHE)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 							case "droit":
-								if(cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
-								p.plateau[cell_attaquant.ajout(Constante.DROIT)
-										.getLargeur()][cell_attaquant.ajout(
-										Constante.DROIT).getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.DROIT)
+										.getLargeur() <= p.plateau[0].length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.DROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.DROIT)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 							case "hautgauche":
-								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0 && cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
-								p.plateau[cell_attaquant.ajout(
-										Constante.HAUTGAUCHE).getLargeur()][cell_attaquant
-										.ajout(Constante.HAUTGAUCHE)
-										.getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.HAUT)
+										.getHauteur() >= 0
+										&& cell_attaquant.ajout(
+												Constante.GAUCHE).getLargeur() >= 0) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUTGAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUTGAUCHE)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 
 							case "hautdroit":
-								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0 && cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
-								p.plateau[cell_attaquant.ajout(
-										Constante.HAUTDROIT).getLargeur()][cell_attaquant
-										.ajout(Constante.HAUTDROIT)
-										.getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.HAUT)
+										.getHauteur() >= 0
+										&& cell_attaquant
+												.ajout(Constante.DROIT)
+												.getLargeur() <= p.plateau[0].length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.HAUTDROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.HAUTDROIT)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 							case "basgauche":
-								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1 && cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
-								p.plateau[cell_attaquant.ajout(
-										Constante.BASGAUCHE).getLargeur()][cell_attaquant
-										.ajout(Constante.BASGAUCHE)
-										.getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.BAS)
+										.getHauteur() <= p.plateau.length - 1
+										&& cell_attaquant.ajout(
+												Constante.GAUCHE).getLargeur() >= 0) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.BASGAUCHE).getLargeur()][cell_attaquant
+											.ajout(Constante.BASGAUCHE)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 							case "basdroit":
-								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1 && cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
-								p.plateau[cell_attaquant.ajout(
-										Constante.BASDROIT).getLargeur()][cell_attaquant
-										.ajout(Constante.BASDROIT).getHauteur()]
-										.setMine(equipe_active + 1);
-								attaquant.setEnergie(attaquant.getEnergie()
-										+ Constante.COUTMINER);
-								((Piegeur) attaquant).nbMine -= 1;
-								}else{
-									System.err.println("La mine doit être dans le plateau");
+								if (cell_attaquant.ajout(Constante.BAS)
+										.getHauteur() <= p.plateau.length - 1
+										&& cell_attaquant
+												.ajout(Constante.DROIT)
+												.getLargeur() <= p.plateau[0].length - 1) {
+									p.plateau[cell_attaquant.ajout(
+											Constante.BASDROIT).getLargeur()][cell_attaquant
+											.ajout(Constante.BASDROIT)
+											.getHauteur()]
+											.setMine(equipe_active + 1);
+									attaquant.setEnergie(attaquant.getEnergie()
+											+ Constante.COUTMINER);
+									((Piegeur) attaquant).nbMine -= 1;
+								} else {
+									System.err
+											.println("La mine doit Ãªtre dans le plateau");
 								}
 								break;
 
