@@ -69,6 +69,13 @@ public class Piegeur extends Robot {
 		nbMine = Constante.NBMINE;
 	}
 	public String toString(){
-		return "Piegeur" +super.toString()+" mines="+nbMine;
+		String s;
+		if(nbMine == 10){
+			s="Piegeur" +super.toString()+" mines="+nbMine;
+		}
+		else{
+			s="Piegeur" +super.toString()+" mines="+nbMine+" ";
+		}
+		return s;
 	}
 }
