@@ -1,6 +1,5 @@
 package ia;
 
-import Plateau.Coordonnees;
 import Robot.Piegeur;
 import Robot.Robot;
 
@@ -14,13 +13,14 @@ public abstract class IA
 		this.equipe=equipe;
 	}
 	
-	abstract Robot[] constitution_equipes(int nb_robot);
+	public abstract Robot[] constitution_equipes(int nb_robot);
 	/** @return 1 deplacement,2 attaque*/
-	abstract int selection_action();
-	abstract Robot selection_robot_actif();
-	abstract Coordonnees selection_direction_deplacement(Robot robot);
-	abstract Coordonnees selection_direction_attaque(Piegeur p);
+	public abstract int selection_action();
+	public abstract Robot selection_robot_actif();
+	public abstract String selection_direction_deplacement(Robot robot);
+	public abstract String selection_direction_attaque(Piegeur p);
 	/**@return numero du robot cible*/
-	abstract int selection_robot_cible(Robot robot);
+	public abstract int selection_robot_cible(Robot robot);
 }
+
 
