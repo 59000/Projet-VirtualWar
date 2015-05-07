@@ -1,9 +1,6 @@
 package ia;
 
 import java.util.Random;
-
-import Constante.Constante;
-import Plateau.Coordonnees;
 import Robot.Char;
 import Robot.Piegeur;
 import Robot.Robot;
@@ -51,43 +48,43 @@ public class Aleatoire extends IA {
 	}
 
 	@Override
-	public Coordonnees selection_direction_deplacement(Robot robot) {
+	public String selection_direction_deplacement(Robot robot) {
 		if (robot instanceof Char) {
 			switch (r.nextInt(4)) {
 			case 0:
-				return Constante.HAUT;
+				return "haut";
 			case 1:
-				return Constante.BAS;
+				return "bas";
 			case 2:
-				return Constante.GAUCHE;
+				return "gauche";
 			case 3:
-				return Constante.DROIT;
+				return "droit";
 			}
 		} else {
 			switch (r.nextInt(8)) {
 			case 0:
-				return Constante.HAUT;
+				return "haut";
 			case 1:
-				return Constante.BAS;
+				return "bas";
 			case 2:
-				return Constante.GAUCHE;
+				return "gauche";
 			case 3:
-				return Constante.DROIT;
+				return "droit";
 			case 4:
-				return Constante.HAUTGAUCHE;
+				return "hautgauche";
 			case 5:
-				return Constante.HAUTDROIT;
+				return "hautdroit";
 			case 6:
-				return Constante.BASGAUCHE;
+				return "basgauche";
 			case 7:
-				return Constante.BASDROIT;
+				return "basdroit";
 			}
 		}
 		return null;// compilateur autoritaire
 	}
 
 	@Override
-	public Coordonnees selection_direction_attaque(Piegeur p) {
+	public String selection_direction_attaque(Piegeur p) {
 		return selection_direction_deplacement(p);
 	}
 
