@@ -67,11 +67,11 @@ public class Menu {
 		IA[] equipe=new IA[]{new Aleatoire(1),new Aleatoire(2)};
 		
 		Robot[][] equipeRobot = {equipe[0].constitution_equipes(nb_robot_voulu),equipe[1].constitution_equipes(nb_robot_voulu)};
-				/*{
-				Menu.constituer_equipe(scan, p.plateau.length,
-						p.plateau[0].length, nb_robot_voulu, 1),
-				Menu.constituer_equipe(scan, p.plateau.length,
-						p.plateau[0].length, nb_robot_voulu, 2) };*/
+	
+		for(int i =0; i<equipeRobot[0].length;i++){
+			equipeRobot[0][i].setCoord(new Coordonnees(0,0));
+			equipeRobot[1][i].setCoord(new Coordonnees(taille -1,taille -1));
+		}
 
 		boolean jeu = true;
 		int equipe_passive = 0;
@@ -83,18 +83,18 @@ public class Menu {
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot[0].length; j++) {
 				if (equipeRobot[1][j] == null && equipeRobot[0][j] == null) {
-					System.out.println("|                  robot nÂ°" + j
-							+ "                                    |"
-							+ "|                  robot nÂ°" + j
-							+ "                                    |");
+					System.out.println("|                  robot " + j
+							+ " mort                                 |"
+							+ "|                  robot " + j
+							+ " mort                                 |");
 
 				} else if (equipeRobot[1][j] == null) {
 					System.out.println("| " + equipeRobot[0][j].toString()
-							+ "|" + "|                  robot nÂ°" + j
-							+ "                                    |");
+							+ "|" + "|                  robot " + j
+							+ " mort                                 |");
 				} else if (equipeRobot[0][j] == null) {
-					System.out.println("|                  robot nÂ°" + j
-							+ "                                    |" + "| "
+					System.out.println("|                  robot " + j
+							+ " mort                                 |" + "| "
 							+ equipeRobot[1][j].toString() + "|");
 				} else {
 					System.out.println("| " + equipeRobot[0][j].toString()
@@ -121,15 +121,15 @@ public class Menu {
 						if (equipeRobot[equipe_active][i] != null) {
 							equipeRobot[equipe_active][i].getNumero();
 						} else {
-							System.out.println("Ce Robot est mort !");
+							System.err.println("Ce Robot est mort !");
 						}
 						flag = false;
 					} catch (InputMismatchException e) {
-						System.out.println("Erreur : Entier attendu");
+						System.err.println("Erreur : Entier attendu");
 						flag = true;
 						i = 0;
 					} catch (ArrayIndexOutOfBoundsException e) {
-						System.out.println("Erreur : Robot non existant");
+						System.err.println("Erreur : Robot non existant");
 						flag = true;
 						i = 0;
 
@@ -191,7 +191,7 @@ public class Menu {
 					if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
 							.getCoord().getHauteur()].estBase() == attaquant
 							.getEquipe()) {
-						System.out
+						System.err
 								.println("Erreur : une attaque depuis une base est impossible");
 					} else {
 						if (attaquant instanceof Piegeur) {
@@ -205,6 +205,9 @@ public class Menu {
 							String dir = equipe[equipe_active].selection_direction_attaque((Piegeur) attaquant);//scan.next();
 							switch (dir) {
 							case "haut":
+								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0){
+									
+								
 								p.plateau[cell_attaquant.ajout(Constante.HAUT)
 										.getLargeur()][cell_attaquant.ajout(
 										Constante.HAUT).getHauteur()]
@@ -212,8 +215,13 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}
+								else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 							case "bas":
+								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1){
 								p.plateau[cell_attaquant.ajout(Constante.BAS)
 										.getLargeur()][cell_attaquant.ajout(
 										Constante.BAS).getHauteur()]
@@ -221,8 +229,13 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
+								
 							case "gauche":
+								if(cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
 								p.plateau[cell_attaquant
 										.ajout(Constante.GAUCHE).getLargeur()][cell_attaquant
 										.ajout(Constante.GAUCHE).getHauteur()]
@@ -230,8 +243,12 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 							case "droit":
+								if(cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
 								p.plateau[cell_attaquant.ajout(Constante.DROIT)
 										.getLargeur()][cell_attaquant.ajout(
 										Constante.DROIT).getHauteur()]
@@ -239,8 +256,12 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 							case "hautgauche":
+								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0 && cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
 								p.plateau[cell_attaquant.ajout(
 										Constante.HAUTGAUCHE).getLargeur()][cell_attaquant
 										.ajout(Constante.HAUTGAUCHE)
@@ -249,9 +270,13 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 
 							case "hautdroit":
+								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0 && cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
 								p.plateau[cell_attaquant.ajout(
 										Constante.HAUTDROIT).getLargeur()][cell_attaquant
 										.ajout(Constante.HAUTDROIT)
@@ -260,8 +285,12 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 							case "basgauche":
+								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1 && cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
 								p.plateau[cell_attaquant.ajout(
 										Constante.BASGAUCHE).getLargeur()][cell_attaquant
 										.ajout(Constante.BASGAUCHE)
@@ -270,8 +299,12 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 							case "basdroit":
+								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1 && cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
 								p.plateau[cell_attaquant.ajout(
 										Constante.BASDROIT).getLargeur()][cell_attaquant
 										.ajout(Constante.BASDROIT).getHauteur()]
@@ -279,6 +312,9 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 
 							}
@@ -290,7 +326,7 @@ public class Menu {
 											+ (equipe_active + 1)
 											+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
 							Robot cible = equipeRobot[equipe_passive][equipe[equipe_active].selection_robot_cible(attaquant)];
-							if (attaquant instanceof Tireur) {
+							if (attaquant instanceof Tireur && cible != null) {
 								if (attaquant.peutTirer(cible.getCoord())
 										&& !p.tir_travers_obstacle(attaquant,
 												cible)) {
@@ -299,10 +335,10 @@ public class Menu {
 									cible.setEnergie(cible.getEnergie()
 											+ Constante.DEGATTIREUR);
 								} else {
-									System.out
+									System.err
 											.println("Erreur : Tir impossible");
 								}
-							} else if (attaquant instanceof Char) {
+							} else if (attaquant instanceof Char && cible != null) {
 								if (attaquant.peutTirer(cible.getCoord())
 										&& !p.tir_travers_obstacle(attaquant,
 												cible)) {
@@ -311,14 +347,14 @@ public class Menu {
 									cible.setEnergie(cible.getEnergie()
 											+ Constante.DEGATCHAR);
 								} else {
-									System.out
+									System.err
 											.println("Erreur : Tir impossible");
 								}
 							}
 						}
 					}
 				} else {
-					System.out.println("Ce Robot est mort !");
+					System.err.println("Ce Robot est mort !");
 				}
 			} else {
 				System.out.println("Non Disponible");
@@ -395,18 +431,18 @@ public class Menu {
 					.println("+---------------------------------------------------------------++---------------------------------------------------------------+");
 			for (int j = 0; j < equipeRobot[0].length; j++) {
 				if (equipeRobot[1][j] == null && equipeRobot[0][j] == null) {
-					System.out.println("|                  robot nÂ°" + j
-							+ "                                    |"
-							+ "|                  robot nÂ°" + j
-							+ "                                    |");
+					System.out.println("|                  robot " + j
+							+ " mort                                 |"
+							+ "|                  robot " + j
+							+ " mort                                 |");
 
 				} else if (equipeRobot[1][j] == null) {
 					System.out.println("| " + equipeRobot[0][j].toString()
-							+ "|" + "|                  robot nÂ°" + j
-							+ "                                    |");
+							+ "|" + "|                  robot " + j
+							+ " mort                                 |");
 				} else if (equipeRobot[0][j] == null) {
-					System.out.println("|                  robot nÂ°" + j
-							+ "                                    |" + "| "
+					System.out.println("|                  robot " + j
+							+ " mort                                 |" + "| "
 							+ equipeRobot[1][j].toString() + "|");
 				} else {
 					System.out.println("| " + equipeRobot[0][j].toString()
@@ -433,15 +469,15 @@ public class Menu {
 						if (equipeRobot[equipe_active][i] != null) {
 							equipeRobot[equipe_active][i].getNumero();
 						} else {
-							System.out.println("Ce Robot est mort !");
+							System.err.println("Ce Robot est mort !");
 						}
 						flag = false;
 					} catch (InputMismatchException e) {
-						System.out.println("Erreur : Entier attendu");
+						System.err.println("Erreur : Entier attendu");
 						flag = true;
 						i = 0;
 					} catch (ArrayIndexOutOfBoundsException e) {
-						System.out.println("Erreur : Robot non existant");
+						System.err.println("Erreur : Robot non existant");
 						flag = true;
 						i = 0;
 
@@ -503,7 +539,7 @@ public class Menu {
 					if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
 							.getCoord().getHauteur()].estBase() == attaquant
 							.getEquipe()) {
-						System.out
+						System.err
 								.println("Erreur : une attaque depuis une base est impossible");
 					} else {
 						if (attaquant instanceof Piegeur) {
@@ -517,6 +553,9 @@ public class Menu {
 							String dir = scan.next();
 							switch (dir) {
 							case "haut":
+								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0){
+									
+								
 								p.plateau[cell_attaquant.ajout(Constante.HAUT)
 										.getLargeur()][cell_attaquant.ajout(
 										Constante.HAUT).getHauteur()]
@@ -524,8 +563,13 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}
+								else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 							case "bas":
+								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1){
 								p.plateau[cell_attaquant.ajout(Constante.BAS)
 										.getLargeur()][cell_attaquant.ajout(
 										Constante.BAS).getHauteur()]
@@ -533,8 +577,13 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
+								
 							case "gauche":
+								if(cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
 								p.plateau[cell_attaquant
 										.ajout(Constante.GAUCHE).getLargeur()][cell_attaquant
 										.ajout(Constante.GAUCHE).getHauteur()]
@@ -542,8 +591,12 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 							case "droit":
+								if(cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
 								p.plateau[cell_attaquant.ajout(Constante.DROIT)
 										.getLargeur()][cell_attaquant.ajout(
 										Constante.DROIT).getHauteur()]
@@ -551,8 +604,12 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 							case "hautgauche":
+								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0 && cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
 								p.plateau[cell_attaquant.ajout(
 										Constante.HAUTGAUCHE).getLargeur()][cell_attaquant
 										.ajout(Constante.HAUTGAUCHE)
@@ -561,9 +618,13 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 
 							case "hautdroit":
+								if(cell_attaquant.ajout(Constante.HAUT).getHauteur() >= 0 && cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
 								p.plateau[cell_attaquant.ajout(
 										Constante.HAUTDROIT).getLargeur()][cell_attaquant
 										.ajout(Constante.HAUTDROIT)
@@ -572,8 +633,12 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 							case "basgauche":
+								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1 && cell_attaquant.ajout(Constante.GAUCHE).getLargeur() >= 0){
 								p.plateau[cell_attaquant.ajout(
 										Constante.BASGAUCHE).getLargeur()][cell_attaquant
 										.ajout(Constante.BASGAUCHE)
@@ -582,8 +647,12 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 							case "basdroit":
+								if(cell_attaquant.ajout(Constante.BAS).getHauteur() <= p.plateau.length-1 && cell_attaquant.ajout(Constante.DROIT).getLargeur() <= p.plateau[0].length-1){
 								p.plateau[cell_attaquant.ajout(
 										Constante.BASDROIT).getLargeur()][cell_attaquant
 										.ajout(Constante.BASDROIT).getHauteur()]
@@ -591,6 +660,9 @@ public class Menu {
 								attaquant.setEnergie(attaquant.getEnergie()
 										+ Constante.COUTMINER);
 								((Piegeur) attaquant).nbMine -= 1;
+								}else{
+									System.err.println("La mine doit être dans le plateau");
+								}
 								break;
 
 							}
@@ -612,7 +684,7 @@ public class Menu {
 									cible.setEnergie(cible.getEnergie()
 											+ Constante.DEGATTIREUR);
 								} else {
-									System.out
+									System.err
 											.println("Erreur : Tir impossible");
 								}
 							} else if (attaquant instanceof Char) {
@@ -624,14 +696,14 @@ public class Menu {
 									cible.setEnergie(cible.getEnergie()
 											+ Constante.DEGATCHAR);
 								} else {
-									System.out
+									System.err
 											.println("Erreur : Tir impossible");
 								}
 							}
 						}
 					}
 				} else {
-					System.out.println("Ce Robot est mort !");
+					System.err.println("Ce Robot est mort !");
 				}
 			} else {
 				System.out.println("Non Disponible");
@@ -665,7 +737,7 @@ public class Menu {
 				System.out.println("Combien de Tireur souhaitez-vous ?");
 				i = scan.nextInt();
 				if (nbrRobotEquipe + i > nb_robot_voulu) {
-					System.out
+					System.err
 							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommencez !");
 					break;
 				}
@@ -681,7 +753,7 @@ public class Menu {
 				System.out.println("Combien de Piegeur souhaitez-vous ?");
 				i = scan.nextInt();
 				if (nbrRobotEquipe + i > nb_robot_voulu) {
-					System.out
+					System.err
 							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommencez !");
 					break;
 				}
@@ -697,7 +769,7 @@ public class Menu {
 				System.out.println("Combien de Char souhaitez-vous ?");
 				i = scan.nextInt();
 				if (nbrRobotEquipe + i > nb_robot_voulu) {
-					System.out
+					System.err
 							.println("Erreur, vous n'avez pas le bon nombre de robot, Recommencez !");
 					break;
 				}
