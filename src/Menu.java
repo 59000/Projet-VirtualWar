@@ -62,9 +62,11 @@ public class Menu {
 			equipeRobot[1][i].setCoord(new Coordonnees(taille - 1, taille - 1));
 		}
 		boolean jeu = true;
+		
 		int equipe_passive = 0;
 		int equipe_active = 0;
 		while (jeu) {
+			boolean changementDequipe = true;
 			System.out.println(p);
 
 			System.out
@@ -117,14 +119,17 @@ public class Menu {
 							equipeRobot[equipe_active][i].getNumero();
 						} else {
 							System.err.println("Ce Robot est mort !");
+							changementDequipe = false;
 						}
 						flag = false;
 					} catch (InputMismatchException e) {
 						System.err.println("Erreur : Entier attendu");
+						changementDequipe = false;
 						flag = true;
 						i = 0;
 					} catch (ArrayIndexOutOfBoundsException e) {
 						System.err.println("Erreur : Robot non existant");
+						changementDequipe = false;
 						flag = true;
 						i = 0;
 					}
@@ -142,36 +147,52 @@ public class Menu {
 					}
 					switch (msg) {
 					case "haut":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUT)){
+							changementDequipe =false;
+						}
 						break;
 					case "bas":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BAS);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BAS)){
+							changementDequipe =false;
+						}
 						break;
 					case "gauche":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.GAUCHE);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.GAUCHE)){
+							changementDequipe =false;
+						}
 						break;
 					case "droit":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.DROIT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.DROIT)){
+							changementDequipe =false;
+						}
 						break;
 					case "hautgauche":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTGAUCHE);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTGAUCHE)){
+							changementDequipe =false;
+						}
 						break;
 					case "hautdroit":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTDROIT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTDROIT)){
+							changementDequipe =false;
+						}
 						break;
 					case "basgauche":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASGAUCHE);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASGAUCHE)){
+							changementDequipe =false;
+						}
 						break;
 					case "basdroit":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASDROIT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASDROIT)){
+							changementDequipe =false;
+						}
 						break;
 
 					}
@@ -197,6 +218,7 @@ public class Menu {
 							.getEquipe()) {
 						System.err
 								.println("Erreur : une attaque depuis une base est impossible");
+						changementDequipe = false;
 					} else {
 						if (attaquant instanceof Piegeur) {
 							System.out
@@ -227,6 +249,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "bas":
@@ -242,6 +265,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 
@@ -259,6 +283,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "droit":
@@ -275,6 +300,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "hautgauche":
@@ -293,6 +319,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 
@@ -313,6 +340,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "basgauche":
@@ -331,6 +359,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "basdroit":
@@ -350,6 +379,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 
@@ -363,7 +393,7 @@ public class Menu {
 											+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
 							Robot cible;
 							if (equipe_active == 0) {
-								cible = equipeRobot[equipe_active][scan
+								cible = equipeRobot[equipe_passive][scan
 										.nextInt()];
 							} else {
 								cible = equipeRobot[equipe_passive][ia
@@ -380,6 +410,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("Erreur : Tir impossible");
+									changementDequipe = false;
 								}
 							} else if (attaquant instanceof Char
 									&& cible != null) {
@@ -393,20 +424,23 @@ public class Menu {
 								} else {
 									System.err
 											.println("Erreur : Tir impossible");
-									System.err
-									.println("le pb envoi ici");
+									changementDequipe = false;
 								}
 							}
 						}
 					}
 				} else {
 					System.err.println("Ce Robot est mort !");
+					changementDequipe = false;
 				}
 			} else {
 				System.out.println("Non Disponible");
+				changementDequipe = false;
 			}
+			if(changementDequipe){
 			equipe_passive = equipe_active;
 			equipe_active = ++equipe_active % 2;
+			}
 			miseAJourJeu(equipeRobot, p.plateau);
 			jeu = finDeJeu(equipeRobot);
 
@@ -464,6 +498,7 @@ public class Menu {
 		int equipe_passive = 0;
 		int equipe_active = 0;
 		while (jeu) {
+			boolean changementDequipe = true;
 			System.out.println(p);
 
 			System.out
@@ -510,14 +545,17 @@ public class Menu {
 							equipeRobot[equipe_active][i].getNumero();
 						} else {
 							System.err.println("Ce Robot est mort !");
+							changementDequipe = false;
 						}
 						flag = false;
 					} catch (InputMismatchException e) {
 						System.err.println("Erreur : Entier attendu");
+						changementDequipe = false;
 						flag = true;
 						i = 0;
 					} catch (ArrayIndexOutOfBoundsException e) {
 						System.err.println("Erreur : Robot non existant");
+						changementDequipe = false;
 						flag = true;
 						i = 0;
 
@@ -534,36 +572,52 @@ public class Menu {
 
 					switch (msg) {
 					case "haut":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUT)){
+							changementDequipe =false;
+						}
 						break;
 					case "bas":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BAS);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BAS)){
+							changementDequipe =false;
+						}
 						break;
 					case "gauche":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.GAUCHE);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.GAUCHE)){
+							changementDequipe =false;
+						}
 						break;
 					case "droit":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.DROIT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.DROIT)){
+							changementDequipe =false;
+						}
 						break;
 					case "hautgauche":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTGAUCHE);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTGAUCHE)){
+							changementDequipe =false;
+						}
 						break;
 					case "hautdroit":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTDROIT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTDROIT)){
+							changementDequipe =false;
+						}
 						break;
 					case "basgauche":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASGAUCHE);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASGAUCHE)){
+							changementDequipe =false;
+						}
 						break;
 					case "basdroit":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASDROIT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASDROIT)){
+							changementDequipe =false;
+						}
 						break;
 
 					}
@@ -583,6 +637,7 @@ public class Menu {
 							.getEquipe()) {
 						System.err
 								.println("Erreur : une attaque depuis une base est impossible");
+						changementDequipe = false;
 					} else {
 						if (attaquant instanceof Piegeur) {
 							System.out
@@ -609,6 +664,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "bas":
@@ -624,6 +680,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 
@@ -641,6 +698,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "droit":
@@ -657,6 +715,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "hautgauche":
@@ -675,6 +734,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 
@@ -695,6 +755,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "basgauche":
@@ -713,6 +774,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "basdroit":
@@ -732,9 +794,9 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
-
 							}
 
 						} else {
@@ -756,6 +818,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("Erreur : Tir impossible");
+									changementDequipe = false;
 								}
 							} else if (attaquant instanceof Char
 									&& cible != null) {
@@ -769,18 +832,23 @@ public class Menu {
 								} else {
 									System.err
 											.println("Erreur : Tir impossible");
+									changementDequipe = false;
 								}
 							}
 						}
 					}
 				} else {
 					System.err.println("Ce Robot est mort !");
+					changementDequipe = false;
 				}
 			} else {
 				System.out.println("Non Disponible");
+				changementDequipe = false;
 			}
+			if(changementDequipe){
 			equipe_passive = equipe_active;
 			equipe_active = ++equipe_active % 2;
+			}
 			miseAJourJeu(equipeRobot, p.plateau);
 			jeu = finDeJeu(equipeRobot);
 
@@ -828,6 +896,7 @@ public class Menu {
 		int equipe_passive = 0;
 		int equipe_active = 0;
 		while (jeu) {
+			boolean changementDequipe = true;
 			System.out.println(p);
 
 			System.out
@@ -873,14 +942,17 @@ public class Menu {
 							equipeRobot[equipe_active][i].getNumero();
 						} else {
 							System.err.println("Ce Robot est mort !");
+							changementDequipe = false;
 						}
 						flag = false;
 					} catch (InputMismatchException e) {
 						System.err.println("Erreur : Entier attendu");
+						changementDequipe = false;
 						flag = true;
 						i = 0;
 					} catch (ArrayIndexOutOfBoundsException e) {
 						System.err.println("Erreur : Robot non existant");
+						changementDequipe = false;
 						flag = true;
 						i = 0;
 
@@ -896,38 +968,53 @@ public class Menu {
 
 					switch (msg) {
 					case "haut":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUT)){
+							changementDequipe =false;
+						}
 						break;
 					case "bas":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BAS);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BAS)){
+							changementDequipe =false;
+						}
 						break;
 					case "gauche":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.GAUCHE);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.GAUCHE)){
+							changementDequipe =false;
+						}
 						break;
 					case "droit":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.DROIT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.DROIT)){
+							changementDequipe =false;
+						}
 						break;
 					case "hautgauche":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTGAUCHE);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTGAUCHE)){
+							changementDequipe =false;
+						}
 						break;
 					case "hautdroit":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTDROIT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTDROIT)){
+							changementDequipe =false;
+						}
 						break;
 					case "basgauche":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASGAUCHE);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASGAUCHE)){
+							changementDequipe =false;
+						}
 						break;
 					case "basdroit":
-						p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASDROIT);
+						if(p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASDROIT)){
+							changementDequipe =false;
+						}
 						break;
-
 					}
 				}
 
@@ -944,6 +1031,7 @@ public class Menu {
 							.getEquipe()) {
 						System.err
 								.println("Erreur : une attaque depuis une base est impossible");
+						changementDequipe = false;
 					} else {
 						if (attaquant instanceof Piegeur) {
 							System.out
@@ -969,6 +1057,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "bas":
@@ -984,6 +1073,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 
@@ -1001,6 +1091,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "droit":
@@ -1017,6 +1108,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "hautgauche":
@@ -1035,6 +1127,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 
@@ -1055,6 +1148,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "basgauche":
@@ -1073,6 +1167,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
 							case "basdroit":
@@ -1092,9 +1187,9 @@ public class Menu {
 								} else {
 									System.err
 											.println("La mine doit etre dans le plateau");
+									changementDequipe = false;
 								}
 								break;
-
 							}
 
 						} else {
@@ -1116,6 +1211,7 @@ public class Menu {
 								} else {
 									System.err
 											.println("Erreur : Tir impossible");
+									changementDequipe = false;
 								}
 							} else if (attaquant instanceof Char) {
 								if (attaquant.peutTirer(cible.getCoord())
@@ -1128,18 +1224,24 @@ public class Menu {
 								} else {
 									System.err
 											.println("Erreur : Tir impossible");
+									changementDequipe = false;
 								}
 							}
 						}
 					}
 				} else {
 					System.err.println("Ce Robot est mort !");
+					changementDequipe = false;
 				}
 			} else {
 				System.out.println("Non Disponible");
+				changementDequipe = false;
 			}
+			if(changementDequipe){
+					
 			equipe_passive = equipe_active;
 			equipe_active = ++equipe_active % 2;
+			}
 			miseAJourJeu(equipeRobot, p.plateau);
 			jeu = finDeJeu(equipeRobot);
 
