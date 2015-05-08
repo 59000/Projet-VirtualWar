@@ -154,7 +154,8 @@ public class Plateau {
 	 * @param mvt
 	 *            Constante de deplacement
 	 */
-	public void deplaceRobot(Robot r, Coordonnees mvt ) {
+	public boolean deplaceRobot(Robot r, Coordonnees mvt ) {
+		boolean erreur = false;
 		// Si le robot est un Char
 		if (r instanceof Char) {
 			// Et que le mouvement demandee est un mouvement diagonales
@@ -165,6 +166,7 @@ public class Plateau {
 				// Renvoie un message d'erreur
 				System.err
 						.println("Erreur : Un char ne peut se deplacer diagonalement");
+				erreur =true;
 			}
 			// Sinon, fonctionnement normal de la fonction
 			else {
@@ -217,6 +219,7 @@ public class Plateau {
 								// deplacement
 								System.err
 										.println("Event : Le char a rencontre un obstacle sur son chemin et a du se stopper.");
+								erreur =true;
 							}
 
 						} else {
@@ -224,18 +227,22 @@ public class Plateau {
 							// deplacement
 							System.err
 									.println("Event : Le char a du s'arreter pour ne pas fuir.");
+							erreur =true;
 						}
 
 					} else {
 						// Sinon, un obstacle empeche le deplacement
 						System.err
 								.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
+						erreur =true;
 					}
 
 				} else {
 					// Sinon, les limites du plateau empeche le deplacement
 					System.err
 							.println("Erreur : Deplacement en dehors des limites de la map.");
+					erreur =true;
+					
 				}
 			}
 		}
@@ -265,16 +272,19 @@ public class Plateau {
 					// Sinon, message d'erreur et annulation du deplacement
 					System.err
 							.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
+					erreur =true;
 				}
 				// Sinon, les limites de la map empechent le deplacement
 			} else {
 				System.err
 						.println("Erreur : Les limites de la map empechent le deplacement.");
+				erreur =true;
 			}
 		}
 
 		// Si le robot se deplace sur une mine
 		this.deplaceSurMine(r);
+		return erreur;
 	}
 
 	/**
