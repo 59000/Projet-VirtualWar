@@ -129,67 +129,68 @@ public class Menu {
 						i = 0;
 					}
 				}
-			}
-			if (equipeRobot[equipe_active][i] != null) {
-				System.out
-						.println("Equipe "
-								+ (equipe_active + 1)
-								+ ": Dans quel direction ? (haut,bas,gauche,droit,hautgauche,hautdroit,basgauche,basdroit)");
-				String msg;
-				if(equipe_active==0){
-					 msg = scan.next();
-				}else{
-				 msg =ia.selection_direction_deplacement(equipeRobot[equipe_active][i]);// scan.next();
-				}
-				switch (msg) {
-				case "haut":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.HAUT);
-					break;
-				case "bas":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.BAS);
-					break;
-				case "gauche":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.GAUCHE);
-					break;
-				case "droit":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.DROIT);
-					break;
-				case "hautgauche":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.HAUTGAUCHE);
-					break;
-				case "hautdroit":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.HAUTDROIT);
-					break;
-				case "basgauche":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.BASGAUCHE);
-					break;
-				case "basdroit":
-					p.deplaceRobot(equipeRobot[equipe_active][i],
-							Constante.BASDROIT);
-					break;
+				if (equipeRobot[equipe_active][i] != null) {
+					System.out
+							.println("Equipe "
+									+ (equipe_active + 1)
+									+ ": Dans quel direction ? (haut,bas,gauche,droit,hautgauche,hautdroit,basgauche,basdroit)");
+					String msg;
+					if (equipe_active == 0) {
+						msg = scan.next();
+					} else {
+						msg = ia.selection_direction_deplacement(equipeRobot[equipe_active][i]);// scan.next();
+					}
+					switch (msg) {
+					case "haut":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUT);
+						break;
+					case "bas":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BAS);
+						break;
+					case "gauche":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.GAUCHE);
+						break;
+					case "droit":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.DROIT);
+						break;
+					case "hautgauche":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTGAUCHE);
+						break;
+					case "hautdroit":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTDROIT);
+						break;
+					case "basgauche":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASGAUCHE);
+						break;
+					case "basdroit":
+						p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASDROIT);
+						break;
 
+					}
 				}
-				
-			}else if (i == 3) {
+
+			} else if (i == 3) {
 				System.out.println("Fin du jeu !");
 				jeu = false;
 			} else if (i == 2) {
 				System.out.println("Equipe " + (equipe_active + 1)
 						+ ": Quel Robot (numero) voulez-vous faire attaquer ?");
 				Robot attaquant;
-				if(equipe_active ==0){
+				if (equipe_active == 0) {
 					attaquant = equipeRobot[equipe_active][scan.nextInt()];
-				}else{
-				attaquant = equipeRobot[equipe_active][ia.selection_robot_actif().getNumero()];
+				} else {
+					attaquant = equipeRobot[equipe_active][ia
+							.selection_robot_actif().getNumero()];
 				}
-				
+
 				if (attaquant != null) {
 					if (p.plateau[attaquant.getCoord().getLargeur()][attaquant
 							.getCoord().getHauteur()].estBase() == attaquant
@@ -206,10 +207,10 @@ public class Menu {
 									.getCoord().getLargeur()][attaquant
 									.getCoord().getHauteur()];
 							String dir;
-							if(equipe_active==0){
+							if (equipe_active == 0) {
 								dir = scan.next();
-							}else{
-							 dir = ia.selection_direction_attaque((Piegeur) attaquant);// scan.next();
+							} else {
+								dir = ia.selection_direction_attaque((Piegeur) attaquant);// scan.next();
 							}
 							switch (dir) {
 							case "haut":
@@ -225,7 +226,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "bas":
@@ -240,7 +241,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 
@@ -257,7 +258,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "droit":
@@ -273,7 +274,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "hautgauche":
@@ -291,7 +292,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 
@@ -311,7 +312,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "basgauche":
@@ -329,7 +330,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "basdroit":
@@ -348,7 +349,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 
@@ -361,10 +362,12 @@ public class Menu {
 											+ (equipe_active + 1)
 											+ ": Quel Robot adverse (numero) sera la cible de l'attaque ?");
 							Robot cible;
-							if(equipe_active == 0){
-								cible = equipeRobot[equipe_active][scan.nextInt()];
-							}else{
-								cible = equipeRobot[equipe_passive][ia.selection_robot_cible(attaquant)];
+							if (equipe_active == 0) {
+								cible = equipeRobot[equipe_active][scan
+										.nextInt()];
+							} else {
+								cible = equipeRobot[equipe_passive][ia
+										.selection_robot_cible(attaquant)];
 							}
 							if (attaquant instanceof Tireur && cible != null) {
 								if (attaquant.peutTirer(cible.getCoord())
@@ -390,6 +393,8 @@ public class Menu {
 								} else {
 									System.err
 											.println("Erreur : Tir impossible");
+									System.err
+									.println("le pb envoi ici");
 								}
 							}
 						}
@@ -408,12 +413,12 @@ public class Menu {
 		}
 
 	}
-	
-		
 
-	
-
-	public static void iaVsIa() {								/**---------------------------------------------------------------------------------*/
+	public static void iaVsIa() {
+		/**
+		 * --------------------------------------------------------------------
+		 * -------------
+		 */
 		Random r = new Random();
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
@@ -564,7 +569,7 @@ public class Menu {
 					}
 				}
 
-			}else if (i == 3) {
+			} else if (i == 3) {
 				System.out.println("Fin du jeu !");
 				jeu = false;
 			} else if (i == 2) {
@@ -603,7 +608,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "bas":
@@ -618,7 +623,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 
@@ -635,7 +640,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "droit":
@@ -651,7 +656,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "hautgauche":
@@ -669,7 +674,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 
@@ -689,7 +694,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "basgauche":
@@ -707,7 +712,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "basdroit":
@@ -726,7 +731,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 
@@ -963,7 +968,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "bas":
@@ -978,7 +983,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 
@@ -995,7 +1000,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "droit":
@@ -1011,7 +1016,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "hautgauche":
@@ -1029,7 +1034,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 
@@ -1049,7 +1054,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "basgauche":
@@ -1067,7 +1072,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 							case "basdroit":
@@ -1086,7 +1091,7 @@ public class Menu {
 									((Piegeur) attaquant).nbMine -= 1;
 								} else {
 									System.err
-											.println("La mine doit Ãªtre dans le plateau");
+											.println("La mine doit etre dans le plateau");
 								}
 								break;
 
