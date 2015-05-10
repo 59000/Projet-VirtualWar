@@ -4,7 +4,7 @@ import Robot.Piegeur;
 import Robot.Robot;
 import Robot.Tireur;
 
-public class RST_ia extends IA //++++++++++++++++++++++cette ia ne marche que en equipe 2 et sans obstacles+++++++++++++++++++++++(pour l'instant)+++++++++
+public class RST_ia extends IA //++++++++++++++++++++++cette ia ne marche que en equipe 2 et sans obstacles++++++++++++++++++++++++++++++++
 {
 	/* accessible ds ia
 	int equipe;
@@ -75,7 +75,14 @@ public class RST_ia extends IA //++++++++++++++++++++++cette ia ne marche que en
 				int compteur2=(compteur-8)%(robots.length+1);
 				if(compteur2<robots.length)
 				{
-					action = 2;
+					if(robots[0] != null)
+					{
+						action = 2;
+					}
+					else
+					{
+						action = 1;
+					}
 				}
 				else
 				{
@@ -84,8 +91,10 @@ public class RST_ia extends IA //++++++++++++++++++++++cette ia ne marche que en
 			}
 			return action;
 		}
-		
-		return -42;
+		else
+		{
+			return (compteur%2==0)?1:2;
+		}
 	}
 
 	@Override
@@ -112,11 +121,31 @@ public class RST_ia extends IA //++++++++++++++++++++++cette ia ne marche que en
 			}
 			else
 			{
-				areturn = robots[0];
+				if(robots[0] != null)
+				{
+					areturn = robots[0];
+				}
+				else
+				{
+					for (int i = 2; i < robots.length; i++) 
+					{
+						if(robots[i] != null)
+						{
+							areturn = robots[i];
+						}
+					}
+					if(areturn == null)
+					{
+						areturn = robots[2];
+					}
+				}
 			}
 			return areturn;
 		}
-		return null;
+		else
+		{
+			return robots[0];
+		}
 	}
 
 	@Override
@@ -142,7 +171,6 @@ public class RST_ia extends IA //++++++++++++++++++++++cette ia ne marche que en
 			}
 			else
 			{
-				System.out.println("**********************************************************************************************"+compteur2%4);
 				switch (compteur2%4) 
 				{
 					case 0:
@@ -163,7 +191,45 @@ public class RST_ia extends IA //++++++++++++++++++++++cette ia ne marche que en
 			}
 			return areturn;
 		}
-		return null;
+		else
+		{
+			String areturn = "";
+			switch (compteur2%11) 
+			{
+				case 0:
+					areturn="hautgauche";
+				break;
+				case 1://et maintenant
+					areturn="haut";
+				break;
+				case 2:
+					areturn="haut";
+				break;
+				case 3:
+					areturn="bas";
+				break;
+				case 4:
+					areturn="bas";
+				break;
+				case 5:
+					areturn="gauche";
+				break;
+				case 6:
+					areturn="droit";
+				break;
+				case 7:
+					areturn="gauche";
+				break;
+				case 8:
+					areturn="droit";//A
+				break;//B
+				//START
+				//hum konami code non ? ;-)
+			}
+			compteur2++;
+			compteur++;
+			return areturn;
+		}
 	}
 
 	@Override
@@ -197,14 +263,27 @@ public class RST_ia extends IA //++++++++++++++++++++++cette ia ne marche que en
 				return "hautdroit";
 			}
 		}
+		else
+		{
+			compteur++;
+			return "hautgauche";//pas de piegeur dans ce cas ...
+		}
 		return null;
 	}
 
 	@Override
 	public int selection_robot_cible(Robot robot) 
 	{
-		compteur++;
-		return (compteur-8)%(robots.length);
+		if(robots.length>=2)
+		{
+			compteur++;
+			return (compteur-8)%(robots.length);
+		}
+		else
+		{
+			compteur++;
+			return 0;
+		}
 	}
 
 }
