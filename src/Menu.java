@@ -2,6 +2,7 @@ package Menu;
 
 import ia.Aleatoire;
 import ia.IA;
+import ia.RST_ia;
 
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -45,15 +46,36 @@ public class Menu {
 		p.plateau[0][0].base = Constante.BASE1;
 		p.plateau[taille - 1][taille - 1].base = Constante.BASE2;
 		p.genere_obstacle(p.plateau[0][0]);
-
+		
+		
+			
 		int nb_robot_voulu;
 		do {
 			System.out
 					.println("combien de robot voulez vous dans vos equipes ?");
 			nb_robot_voulu = scan.nextInt();
-		} while (nb_robot_voulu > 5 || nb_robot_voulu < 1);
-
-		IA ia = new Aleatoire(2);
+		} while (nb_robot_voulu > 5 || nb_robot_voulu < 1);	
+		IA ia;
+		if(Cellule.pourcentage == 0){
+			
+			String diff;
+			do {
+				System.out
+						.println("Selection du mode de difficulte (facile ou normal)");
+				diff = scan.next();
+			} while (!diff.equals("facile") && !diff.equals("normal"));
+			
+			
+			
+			if (diff.equals("facile")) {
+				ia = new Aleatoire(2);
+			} else { 
+				ia = new RST_ia(2);
+			}
+		}
+		else{
+		ia = new Aleatoire(2);
+		}
 		Robot[][] equipeRobot = {
 				Menu.constituer_equipe(scan, p.plateau.length,
 						p.plateau[0].length, nb_robot_voulu, 1),
@@ -866,13 +888,17 @@ public class Menu {
 		while (taille < 5 || taille > 10) {
 			System.out
 					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
+			
 			taille = scan.nextInt();
 		}
 		int obs = -1;
 		while (obs < 0 || obs > 100) {
 			System.out
 					.println("Combien de pourcentages d'obstacles voulez vous ?");
-			obs = scan.nextInt();
+		
+				obs = scan.nextInt();
+			
+			
 		}
 		Cellule.pourcentage = obs;
 
