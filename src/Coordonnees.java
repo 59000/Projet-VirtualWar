@@ -56,7 +56,7 @@ public class Coordonnees {
 		// TODO Auto-generated method stub
 		this.largeur = i;
 	}
-	/** VÃ©rifie que deux coordonÃ©es sont egaux */
+	/** Verifie que deux coordonees sont egales */
 	public boolean equals(Coordonnees coord) {
 		// TODO Auto-generated method stub
 		return (this.hauteur == coord.hauteur && this.largeur == coord.largeur);
