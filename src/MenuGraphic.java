@@ -16,7 +16,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MenuGraphic  {
-	//NORAJ DE MON CODAGE !!
+	/*NORAJ DE MON CODAGE !!*/
+	/** Cree un menu graphique avec 3 boutons disponibles et qui lance le mode de jeu correspondant*/
 	public MenuGraphic() {
 		// TODO Auto-generated constructor stub
 		int dimX = 500;
@@ -28,9 +29,6 @@ public class MenuGraphic  {
 		fenetre.setLocation((int)(width*0.40),(int)(height*0.30));
 		fenetre.setPreferredSize(new Dimension(dimX,dimY));
 		JPanel panel = new JPanel();
-		/*LEL*/JLabel lel = new JLabel("L'IHM SA SUCK", JLabel.CENTER);
-		panel.add(lel);
-		panel.setPreferredSize(new Dimension(100,100));
 		panel.setBackground(Color.BLACK);
 		panel.setLayout(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
@@ -176,21 +174,7 @@ public class MenuGraphic  {
 		panel.add(panel1,gbc);
 		 panel.add(panel2,gbc);
 		 panel.add(panel3,gbc);
-	/*	gbc.gridx = 0;
-		gbc.gridy = 0;
-		
-		
-		gbc.gridheight = 1;
-	    gbc.gridwidth = 1;
-	    gbc.gridx = 2;
-	    panel.add(panel1,gbc);
-	    
-	    gbc.gridx = 4;
-	    
-	    panel.add(panel2,gbc);
-	    gbc.gridx = 6;
-	    panel.add(panel3,gbc);
-		*/
+
 		fenetre.setContentPane(panel);
 		
 		fenetre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -208,29 +192,7 @@ public class MenuGraphic  {
 	
 	
 	public static void main(String[] args) {
-		/*String mode = JOptionPane
-				.showInputDialog("1: Joueur Vs Joueur \n 2: Joueur Vs Ia \n 3: Ia vs Ia");
-		try {
-			if (mode.equals("1")) {
-				Menu.joueurVsJoueur();
-			} else if (mode.equals("2")) {
-				// joueurVsIa();
-				JOptionPane.showMessageDialog(null, "En travaux");
-				main(args);
-			} else if (mode.equals("3")) {
-				// iaVsIa();
-				JOptionPane.showMessageDialog(null, "En travaux");
-				main(args);
-			} else {
-				JOptionPane.showMessageDialog(null, "Choix incorrect, veuillez recommencer");
-				main(args);
-			}
-		} catch (NullPointerException e) {
-			
-				JOptionPane.showMessageDialog(null, "Vous avez choisis la pillule rouge...");
-			System.exit(1);
-			// TODO: handle exception
-		}*/
+
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 	        public void run() {
 	          new MenuGraphic();
