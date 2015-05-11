@@ -107,7 +107,7 @@ public class Cellule extends Coordonnees {
 	public boolean estObstacle() {
 		return obstacle;
 	}
-
+	/**Cree des obstacles en fonction du pourcentage  */
 	public void cree_Obstacle() {
 		if (this.ran.nextInt(100) < pourcentage) {
 			obstacle = true;
@@ -115,6 +115,7 @@ public class Cellule extends Coordonnees {
 			obstacle = false;
 		}
 	}
+	/**Determine si un robot est sur un robot , une base ou un obstacle */
 	public boolean superposition(Robot r){
 		if(this.estObstacle()|| this.estBase() != r.getEquipe() && this.estBase() != 0 || this.robot != null ){
 			return false;
