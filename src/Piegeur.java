@@ -7,7 +7,7 @@ import Plateau.Coordonnees;
 
 public class Piegeur extends Robot {
 	/**@param coord */
-	private List<Coordonnees> coord;
+	List<Coordonnees> coord;
 	/**@param NBMINE */
 	public int nbMine = Constante.NBMINE;
 	/*faire les methodes peutTirer() et getDeplacement()*/
