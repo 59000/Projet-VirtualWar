@@ -109,7 +109,7 @@ public class RST_ia extends IA {
 						}
 					}
 					if (areturn == null) {
-						areturn = robots[2];
+						areturn = robots[1];
 					}
 				}
 			}
