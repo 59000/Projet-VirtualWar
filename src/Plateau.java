@@ -13,9 +13,10 @@ import Constante.Constante;
 
 public class Plateau {
 
-
+	
 	public Cellule[][] plateau;
-
+	
+	/**Cree une instance de Plateau avec une largeur et une hauteur  */
 	public Plateau(int largeur, int hauteur) {
 		plateau = new Cellule[largeur][hauteur];
 
@@ -25,7 +26,8 @@ public class Plateau {
 			}
 		}
 	}
-
+	/**Determine si un chemin est valide 
+	 * @return areturn */
 	List<Cellule> ya_chemin(Cellule base1) {
 		Random r = new Random();
 		List<Cellule> areturn = new ArrayList<Cellule>();
@@ -59,7 +61,7 @@ public class Plateau {
 
 		return areturn;
 	}
-
+	/**Determine si la case actuelle est la base 2 */
 	private boolean cette_case_est_valide(Cellule c) {
 		try {
 			if (c.estBase() == Constante.BASE2) {
@@ -70,7 +72,7 @@ public class Plateau {
 		}
 		return true;// compil auto
 	}
-
+	/**Permet de generer aleatoirement les obstacles avec au moins un chemin valide */
 	public void genere_obstacle(Cellule base1) {
 		List<Cellule> chemin = this.ya_chemin(base1);
 		for (int h = 0; h < plateau.length; h++) {
@@ -82,7 +84,7 @@ public class Plateau {
 			}
 		}
 	}
-
+	
 	public String toString() {
 		String areturn = ""; // String contenant l'affichage du pateau
 		for (int h = 0; h < plateau.length; h++) {
@@ -304,8 +306,10 @@ public class Plateau {
 					.setMine(0);
 		}
 	}
-
-	Cellule getCellule(Coordonnees c) {
+	/** Retourne la cellule aux coordonnnes passe en parametre
+	 * @param c
+	 * @return new Cellule(0,0) */
+	public Cellule getCellule(Coordonnees c) {
 		for (int h = 0; h < this.plateau.length; h++) {
 			for (int l = 0; l < this.plateau[h].length; l++) {
 				if (this.plateau[l][h].getCoordonnees().equals(c)) {
@@ -315,7 +319,9 @@ public class Plateau {
 		}
 		return new Cellule(0, 0);
 	}
-
+	/**Determine si le robot attaque un autre robot a travers un obstacle
+	 * @param attaquant
+	 * @param cible */
 	public boolean tir_travers_obstacle(Robot attaquant, Robot cible) {
 		int porte_attaquant = (attaquant instanceof Tireur) ? Constante.PORTEETIREUR
 				: Constante.PORTEECHAR;
