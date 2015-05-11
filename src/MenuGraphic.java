@@ -12,7 +12,6 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MenuGraphic  {
@@ -47,31 +46,33 @@ public class MenuGraphic  {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel1.setBackground(Color.yellow);
 			}
 			
 			@Override
-			public void mousePressed(MouseEvent e) {
+			public void mousePressed(MouseEvent e) 
+			{
 				// TODO Auto-generated method stub
-				
+				panel1.setBackground(Color.blue);
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel1.setBackground(Color.yellow);
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel1.setBackground(Color.orange);
 			}
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getButton() == MouseEvent.BUTTON1){
+					fenetre.setVisible(false);
 					Menu.joueurVsJoueur();
 					
 				}
@@ -92,31 +93,32 @@ public class MenuGraphic  {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel2.setBackground(Color.yellow);
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel2.setBackground(Color.blue);
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel2.setBackground(Color.yellow);
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel2.setBackground(Color.orange);
 			}
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getButton() == MouseEvent.BUTTON1){
+					fenetre.setVisible(false);
 					Menu.joueurVsIa();
 					
 				}
@@ -137,31 +139,32 @@ public class MenuGraphic  {
 			@Override
 			public void mouseReleased(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel3.setBackground(Color.yellow);
 			}
 			
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel3.setBackground(Color.blue);
 			}
 			
 			@Override
 			public void mouseExited(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel3.setBackground(Color.yellow);
 			}
 			
 			@Override
 			public void mouseEntered(MouseEvent e) {
 				// TODO Auto-generated method stub
-				
+				panel3.setBackground(Color.orange);
 			}
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getButton() == MouseEvent.BUTTON1){
+					fenetre.setVisible(false);
 					Menu.iaVsIa();
 				
 					
