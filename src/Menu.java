@@ -1392,10 +1392,11 @@ public class Menu {
 			if (nbMort == equipe[i].length) {
 				if (i == 0) {
 					System.out.println("L'equipe 2 Gagne");
-					return false;
+					System.exit(0);
+				
 				} else if (i == 1) {
 					System.out.println("L'equipe 1 Gagne");
-					return false;
+					System.exit(0);
 				}
 			}
 		}
