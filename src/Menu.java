@@ -22,6 +22,7 @@ public class Menu {
 	 * @param args
 	 */
 
+	/** Lance le mode de jeu Joueur Contre IA */
 	public static void joueurVsIa() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
@@ -62,7 +63,7 @@ public class Menu {
 			equipeRobot[1][i].setCoord(new Coordonnees(taille - 1, taille - 1));
 		}
 		boolean jeu = true;
-		
+
 		int equipe_passive = 0;
 		int equipe_active = 0;
 		while (jeu) {
@@ -147,51 +148,51 @@ public class Menu {
 					}
 					switch (msg) {
 					case "haut":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUT)) {
+							changementDequipe = false;
 						}
 						break;
 					case "bas":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BAS)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BAS)) {
+							changementDequipe = false;
 						}
 						break;
 					case "gauche":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.GAUCHE)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.GAUCHE)) {
+							changementDequipe = false;
 						}
 						break;
 					case "droit":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.DROIT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.DROIT)) {
+							changementDequipe = false;
 						}
 						break;
 					case "hautgauche":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTGAUCHE)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTGAUCHE)) {
+							changementDequipe = false;
 						}
 						break;
 					case "hautdroit":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTDROIT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTDROIT)) {
+							changementDequipe = false;
 						}
 						break;
 					case "basgauche":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASGAUCHE)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASGAUCHE)) {
+							changementDequipe = false;
 						}
 						break;
 					case "basdroit":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASDROIT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASDROIT)) {
+							changementDequipe = false;
 						}
 						break;
 
@@ -437,9 +438,9 @@ public class Menu {
 				System.out.println("Non Disponible");
 				changementDequipe = false;
 			}
-			if(changementDequipe){
-			equipe_passive = equipe_active;
-			equipe_active = ++equipe_active % 2;
+			if (changementDequipe) {
+				equipe_passive = equipe_active;
+				equipe_active = ++equipe_active % 2;
 			}
 			miseAJourJeu(equipeRobot, p.plateau);
 			jeu = finDeJeu(equipeRobot);
@@ -448,6 +449,7 @@ public class Menu {
 
 	}
 
+	/** Lance le mode de jeu IA Contre IA */
 	public static void iaVsIa() {
 		/**
 		 * --------------------------------------------------------------------
@@ -572,51 +574,51 @@ public class Menu {
 
 					switch (msg) {
 					case "haut":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUT)) {
+							changementDequipe = false;
 						}
 						break;
 					case "bas":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BAS)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BAS)) {
+							changementDequipe = false;
 						}
 						break;
 					case "gauche":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.GAUCHE)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.GAUCHE)) {
+							changementDequipe = false;
 						}
 						break;
 					case "droit":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.DROIT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.DROIT)) {
+							changementDequipe = false;
 						}
 						break;
 					case "hautgauche":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTGAUCHE)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTGAUCHE)) {
+							changementDequipe = false;
 						}
 						break;
 					case "hautdroit":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTDROIT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTDROIT)) {
+							changementDequipe = false;
 						}
 						break;
 					case "basgauche":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASGAUCHE)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASGAUCHE)) {
+							changementDequipe = false;
 						}
 						break;
 					case "basdroit":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASDROIT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASDROIT)) {
+							changementDequipe = false;
 						}
 						break;
 
@@ -845,9 +847,9 @@ public class Menu {
 				System.out.println("Non Disponible");
 				changementDequipe = false;
 			}
-			if(changementDequipe){
-			equipe_passive = equipe_active;
-			equipe_active = ++equipe_active % 2;
+			if (changementDequipe) {
+				equipe_passive = equipe_active;
+				equipe_active = ++equipe_active % 2;
 			}
 			miseAJourJeu(equipeRobot, p.plateau);
 			jeu = finDeJeu(equipeRobot);
@@ -856,6 +858,7 @@ public class Menu {
 
 	}
 
+	/** Lance le mode de jeu Joueur Contre Joueur */
 	public static void joueurVsJoueur() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
@@ -968,51 +971,51 @@ public class Menu {
 
 					switch (msg) {
 					case "haut":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUT)) {
+							changementDequipe = false;
 						}
 						break;
 					case "bas":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BAS)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BAS)) {
+							changementDequipe = false;
 						}
 						break;
 					case "gauche":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.GAUCHE)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.GAUCHE)) {
+							changementDequipe = false;
 						}
 						break;
 					case "droit":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.DROIT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.DROIT)) {
+							changementDequipe = false;
 						}
 						break;
 					case "hautgauche":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTGAUCHE)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTGAUCHE)) {
+							changementDequipe = false;
 						}
 						break;
 					case "hautdroit":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.HAUTDROIT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.HAUTDROIT)) {
+							changementDequipe = false;
 						}
 						break;
 					case "basgauche":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASGAUCHE)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASGAUCHE)) {
+							changementDequipe = false;
 						}
 						break;
 					case "basdroit":
-						if(p.deplaceRobot(equipeRobot[equipe_active][i],
-								Constante.BASDROIT)){
-							changementDequipe =false;
+						if (p.deplaceRobot(equipeRobot[equipe_active][i],
+								Constante.BASDROIT)) {
+							changementDequipe = false;
 						}
 						break;
 					}
@@ -1237,10 +1240,10 @@ public class Menu {
 				System.out.println("Non Disponible");
 				changementDequipe = false;
 			}
-			if(changementDequipe){
-					
-			equipe_passive = equipe_active;
-			equipe_active = ++equipe_active % 2;
+			if (changementDequipe) {
+
+				equipe_passive = equipe_active;
+				equipe_active = ++equipe_active % 2;
 			}
 			miseAJourJeu(equipeRobot, p.plateau);
 			jeu = finDeJeu(equipeRobot);
@@ -1249,6 +1252,11 @@ public class Menu {
 		scan.close();
 	}
 
+	/**
+	 * Permet de constituer equipe manuellement @param scan @param
+	 * plateau_1er_dim @param plateau_2em_dim @param nb_robot_voulu @param
+	 * equipe
+	 */
 	static Robot[] constituer_equipe(Scanner scan, int plateau_1er_dim,
 			int plateau_2em_dim, int nb_robot_voulu, int equipe) {
 		Coordonnees base = (equipe == 1) ? new Coordonnees(0, 0)
@@ -1346,6 +1354,7 @@ public class Menu {
 		}
 	}
 
+	/** Detecte si le jeu est fini et declare equipe gagnante @param equipe */
 	public static boolean finDeJeu(Robot[][] equipe) {
 		for (int i = 0; i < equipe.length; i++) {
 			int nbMort = 0;
