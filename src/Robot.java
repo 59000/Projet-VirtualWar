@@ -130,6 +130,7 @@ public abstract class Robot {
 		setEnergie(getEnergie() + Constante.DEGATPIEGEUR);
 	}
 
+	/** Determine si le robot peut faire un deplacement ou une action */
 	public boolean peutAction(Robot robot) {
 		if (robot instanceof Char) {
 			if (robot.getEnergie() <= Constante.COUTAVANCERCHAR
@@ -150,7 +151,7 @@ public abstract class Robot {
 		}
 		return false;
 	}
-
+	/** Determine si le robot est mort ou non */
 	public boolean robotMort() {
 		if (this.getEnergie() <= 0) {
 			return true;
