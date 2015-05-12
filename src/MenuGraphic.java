@@ -3,10 +3,12 @@ package Menu;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -19,12 +21,16 @@ public class MenuGraphic  {
 		Dimension ecran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int hauteur_ecran = (int)ecran.getHeight();
 		int largeur_ecran  = (int)ecran.getWidth(); 
-		fen.setLocation((int)(largeur_ecran*0.40),(int)(hauteur_ecran*0.30));
-		fen.setPreferredSize(new Dimension(500,500));
+		fen.setLocation((int)(largeur_ecran*0.20),(int)(hauteur_ecran*0.30));
+		fen.setPreferredSize(new Dimension(900,300));
+		fen.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		fen.setResizable(false);
 		
 		fen.getContentPane().setBackground(Color.black);
-		JLabel motd = new JLabel("selectionner votre mode de jeu :",JLabel.CENTER);
+		JLabel motd = new JLabel("Selection du mode de jeu ",JLabel.CENTER);
 		motd.setForeground(Color.LIGHT_GRAY);
+		motd.setFont(new Font("arial", Font.PLAIN, 50));
+		
 		fen.getContentPane().add(motd,BorderLayout.NORTH);
 		
 		JPanel panel = new JPanel();
@@ -49,7 +55,7 @@ public class MenuGraphic  {
 			public void mousePressed(MouseEvent e) 
 			{
 				// TODO Auto-generated method stub
-				panel1.setBackground(Color.blue);
+				panel1.setBackground(Color.white);
 			}
 			
 			@Override
@@ -99,7 +105,7 @@ public class MenuGraphic  {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				panel2.setBackground(Color.blue);
+				panel2.setBackground(Color.white);
 			}
 			
 			@Override
@@ -147,7 +153,7 @@ public class MenuGraphic  {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-				panel3.setBackground(Color.blue);
+				panel3.setBackground(Color.white);
 			}
 			
 			@Override
