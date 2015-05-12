@@ -15,9 +15,23 @@ import javax.swing.JPanel;
 
 public class MenuGraphic  {
 	/*NORAJ DE MON CODAGE !!*/
+	
+	
+	/* Probleme de tir impossible
+	 * regler la taille du plateau avec x y
+	 * bouton fin du jeu bug
+	 * test unitaire a mettre dans le projet
+	 * 
+	 */
+	
+	
+	
+	
+					
+	
 	/** Cree un menu graphique avec 3 boutons disponibles et qui lance le mode de jeu correspondant*/
 	public MenuGraphic() {
-		JFrame fen = new JFrame("VirtalWar");
+		final JFrame fen = new JFrame("VirtalWar");
 		Dimension ecran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int hauteur_ecran = (int)ecran.getHeight();
 		int largeur_ecran  = (int)ecran.getWidth(); 
@@ -37,7 +51,7 @@ public class MenuGraphic  {
 		panel.setBackground(Color.BLACK);
 		panel.setLayout(new GridBagLayout());
 		
-		JPanel panel1 = new JPanel();
+		final JPanel panel1 = new JPanel();
 		JLabel lab1 = new JLabel("PvP",JLabel.CENTER);
 		panel1.setLayout(new GridLayout());
 		panel1.setBackground(Color.yellow);
@@ -87,7 +101,7 @@ public class MenuGraphic  {
 		panel_remplissage.setPreferredSize(new Dimension(50,50));
 		panel.add(panel_remplissage);
 				
-		JPanel panel2 = new JPanel();
+		final JPanel panel2 = new JPanel();
 		JLabel lab2 = new JLabel("PvIa",JLabel.CENTER);
 		panel2.setLayout(new GridLayout());
 		panel2.setBackground(Color.YELLOW);
@@ -135,7 +149,7 @@ public class MenuGraphic  {
 		panel_remplissage2.setPreferredSize(new Dimension(50,50));
 		panel.add(panel_remplissage2);
 		
-		JPanel panel3 = new JPanel();
+		final JPanel panel3 = new JPanel();
 		JLabel lab3 = new JLabel("IaVIa",JLabel.CENTER);
 		panel3.setLayout(new GridLayout());
 		panel3.setBackground(Color.yellow);
