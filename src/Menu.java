@@ -955,7 +955,7 @@ public class Menu {
 
 			System.out.println("Equipe " + (equipe_active + 1)
 					+ ": Quel action souhaitez-vous ? \n - 1. Deplacement \n "
-					+ "- 2. Attaquez \n - 3. Quittez le jeu.");
+					+ "- 2. Attaquez \n - 3. Abandon");
 
 			int i = scan.nextInt();
 
@@ -1049,7 +1049,8 @@ public class Menu {
 
 			} else if (i == 3) {
 				System.out.println("Fin du jeu !");
-				jeu = false;
+				System.out.println("Equipe "+ (equipe_active + 1)  +" a perdu");
+				System.exit(0);
 			} else if (i == 2) {
 				System.out.println("Equipe " + (equipe_active + 1)
 						+ ": Quel Robot (numero) voulez-vous faire attaquer ?");
@@ -1393,7 +1394,6 @@ public class Menu {
 				if (i == 0) {
 					System.out.println("L'equipe 2 Gagne");
 					System.exit(0);
-				
 				} else if (i == 1) {
 					System.out.println("L'equipe 1 Gagne");
 					System.exit(0);
