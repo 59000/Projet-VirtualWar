@@ -13,10 +13,9 @@ import Constante.Constante;
 
 public class Plateau {
 
-	
 	public Cellule[][] plateau;
-	
-	/**Cree une instance de Plateau avec une largeur et une hauteur  */
+
+	/** Cree une instance de Plateau avec une largeur et une hauteur */
 	public Plateau(int largeur, int hauteur) {
 		plateau = new Cellule[largeur][hauteur];
 
@@ -26,8 +25,12 @@ public class Plateau {
 			}
 		}
 	}
-	/**Determine si un chemin est valide 
-	 * @return areturn */
+
+	/**
+	 * Determine si un chemin est valide
+	 * 
+	 * @return areturn
+	 */
 	List<Cellule> ya_chemin(Cellule base1) {
 		Random r = new Random();
 		List<Cellule> areturn = new ArrayList<Cellule>();
@@ -61,7 +64,8 @@ public class Plateau {
 
 		return areturn;
 	}
-	/**Determine si la case actuelle est la base 2 */
+
+	/** Determine si la case actuelle est la base 2 */
 	private boolean cette_case_est_valide(Cellule c) {
 		try {
 			if (c.estBase() == Constante.BASE2) {
@@ -72,7 +76,11 @@ public class Plateau {
 		}
 		return true;// compil auto
 	}
-	/**Permet de generer aleatoirement les obstacles avec au moins un chemin valide */
+
+	/**
+	 * Permet de generer aleatoirement les obstacles avec au moins un chemin
+	 * valide
+	 */
 	public void genere_obstacle(Cellule base1) {
 		List<Cellule> chemin = this.ya_chemin(base1);
 		for (int h = 0; h < plateau.length; h++) {
@@ -84,7 +92,7 @@ public class Plateau {
 			}
 		}
 	}
-	
+
 	public String toString() {
 		String areturn = ""; // String contenant l'affichage du pateau
 		for (int h = 0; h < plateau.length; h++) {
@@ -156,7 +164,7 @@ public class Plateau {
 	 * @param mvt
 	 *            Constante de deplacement
 	 */
-	public boolean deplaceRobot(Robot r, Coordonnees mvt ) {
+	public boolean deplaceRobot(Robot r, Coordonnees mvt) {
 		boolean erreur = false;
 		// Si le robot est un Char
 		if (r instanceof Char) {
@@ -168,7 +176,7 @@ public class Plateau {
 				// Renvoie un message d'erreur
 				System.err
 						.println("Erreur : Un char ne peut se deplacer diagonalement");
-				erreur =true;
+				erreur = true;
 			}
 			// Sinon, fonctionnement normal de la fonction
 			else {
@@ -221,7 +229,7 @@ public class Plateau {
 								// deplacement
 								System.err
 										.println("Event : Le char a rencontre un obstacle sur son chemin et a du se stopper.");
-								erreur =true;
+								
 							}
 
 						} else {
@@ -229,22 +237,22 @@ public class Plateau {
 							// deplacement
 							System.err
 									.println("Event : Le char a du s'arreter pour ne pas fuir.");
-							erreur =true;
+							
 						}
 
 					} else {
 						// Sinon, un obstacle empeche le deplacement
 						System.err
 								.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
-						erreur =true;
+						erreur = true;
 					}
 
 				} else {
 					// Sinon, les limites du plateau empeche le deplacement
 					System.err
 							.println("Erreur : Deplacement en dehors des limites de la map.");
-					erreur =true;
-					
+					erreur = true;
+
 				}
 			}
 		}
@@ -274,13 +282,13 @@ public class Plateau {
 					// Sinon, message d'erreur et annulation du deplacement
 					System.err
 							.println("Erreur : Un obstacle bloque le deplacement, deplacement annule.");
-					erreur =true;
+					erreur = true;
 				}
 				// Sinon, les limites de la map empechent le deplacement
 			} else {
 				System.err
 						.println("Erreur : Les limites de la map empechent le deplacement.");
-				erreur =true;
+				erreur = true;
 			}
 		}
 
@@ -306,9 +314,13 @@ public class Plateau {
 					.setMine(0);
 		}
 	}
-	/** Retourne la cellule aux coordonnnes passe en parametre
+
+	/**
+	 * Retourne la cellule aux coordonnnes passe en parametre
+	 * 
 	 * @param c
-	 * @return new Cellule(0,0) */
+	 * @return new Cellule(0,0)
+	 */
 	public Cellule getCellule(Coordonnees c) {
 		for (int h = 0; h < this.plateau.length; h++) {
 			for (int l = 0; l < this.plateau[h].length; l++) {
@@ -319,9 +331,13 @@ public class Plateau {
 		}
 		return new Cellule(0, 0);
 	}
-	/**Determine si le robot attaque un autre robot a travers un obstacle
+
+	/**
+	 * Determine si le robot attaque un autre robot a travers un obstacle
+	 * 
 	 * @param attaquant
-	 * @param cible */
+	 * @param cible
+	 */
 	public boolean tir_travers_obstacle(Robot attaquant, Robot cible) {
 		int porte_attaquant = (attaquant instanceof Tireur) ? Constante.PORTEETIREUR
 				: Constante.PORTEECHAR;
@@ -334,23 +350,28 @@ public class Plateau {
 					variables = new Coordonnees(attaquant.getCoord()
 							.getHauteur() + i, attaquant.getCoord()
 							.getLargeur());
+						
 					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
+
 				}
 			} else if (attaquant.getCoord().getHauteur() > cible.getCoord()
 					.getLargeur())// haut
 			{
 				for (int i = 0; i <= porte_attaquant; i++) {
-					variables = new Coordonnees(attaquant.getCoord()
-							.getHauteur() - i, attaquant.getCoord()
+					variables = new Coordonnees((attaquant.getCoord()
+							.getHauteur() - i), attaquant.getCoord()
 							.getLargeur());
+						
 					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
+
 				}
 			}
-		} else {
+		} else if (attaquant.getCoord().getHauteur() == cible.getCoord()
+				.getHauteur()) {
 			if (attaquant.getCoord().getLargeur() < cible.getCoord()
 					.getLargeur())// droite
 			{
@@ -358,17 +379,20 @@ public class Plateau {
 					variables = new Coordonnees(attaquant.getCoord()
 							.getHauteur(), attaquant.getCoord().getLargeur()
 							+ i);
+			
 					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
+
 				}
 			} else if (attaquant.getCoord().getLargeur() > cible.getCoord()
 					.getLargeur())// gauche
 			{
 				for (int i = 0; i <= porte_attaquant; i++) {
 					variables = new Coordonnees(attaquant.getCoord()
-							.getHauteur(), attaquant.getCoord().getLargeur()
-							- i);
+							.getHauteur(), (attaquant.getCoord().getLargeur()
+							- i));
+		
 					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
