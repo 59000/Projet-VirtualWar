@@ -15,20 +15,7 @@ import javax.swing.JPanel;
 
 public class MenuGraphic  {
 	/*NORAJ DE MON CODAGE !!*/
-	
-	
-	/* Probleme de tir impossible
-	 * regler la taille du plateau avec x y
-	 * bouton fin du jeu bug
-	 * test unitaire a mettre dans le projet
-	 * 
-	 */
-	
-	
-	
-	
-					
-	
+
 	/** Cree un menu graphique avec 3 boutons disponibles et qui lance le mode de jeu correspondant*/
 	public MenuGraphic() {
 		final JFrame fen = new JFrame("VirtalWar");
