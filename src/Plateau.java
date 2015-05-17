@@ -229,7 +229,7 @@ public class Plateau {
 								// deplacement
 								System.err
 										.println("Event : Le char a rencontre un obstacle sur son chemin et a du se stopper.");
-								
+
 							}
 
 						} else {
@@ -237,7 +237,7 @@ public class Plateau {
 							// deplacement
 							System.err
 									.println("Event : Le char a du s'arreter pour ne pas fuir.");
-							
+
 						}
 
 					} else {
@@ -350,7 +350,7 @@ public class Plateau {
 					variables = new Coordonnees(attaquant.getCoord()
 							.getHauteur() + i, attaquant.getCoord()
 							.getLargeur());
-						
+
 					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
@@ -363,7 +363,7 @@ public class Plateau {
 					variables = new Coordonnees((attaquant.getCoord()
 							.getHauteur() - i), attaquant.getCoord()
 							.getLargeur());
-						
+
 					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
@@ -379,7 +379,7 @@ public class Plateau {
 					variables = new Coordonnees(attaquant.getCoord()
 							.getHauteur(), attaquant.getCoord().getLargeur()
 							+ i);
-			
+
 					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
@@ -390,9 +390,9 @@ public class Plateau {
 			{
 				for (int i = 0; i <= porte_attaquant; i++) {
 					variables = new Coordonnees(attaquant.getCoord()
-							.getHauteur(), (attaquant.getCoord().getLargeur()
-							- i));
-		
+							.getHauteur(),
+							(attaquant.getCoord().getLargeur() - i));
+
 					if (this.getCellule(variables).estObstacle()) {
 						return true;
 					}
