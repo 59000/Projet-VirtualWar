@@ -6,16 +6,20 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class MenuGraphic  {
 	/*NORAJ DE MON CODAGE !!*/
-
+	ImageIcon img = new ImageIcon("fond.png");
+	
 	/** Cree un menu graphique avec 3 boutons disponibles et qui lance le mode de jeu correspondant*/
 	public MenuGraphic() {
 		final JFrame fen = new JFrame("VirtalWar");
@@ -23,22 +27,164 @@ public class MenuGraphic  {
 		int hauteur_ecran = (int)ecran.getHeight();
 		int largeur_ecran  = (int)ecran.getWidth(); 
 		fen.setLocation((int)(largeur_ecran*0.20),(int)(hauteur_ecran*0.30));
-		fen.setPreferredSize(new Dimension(900,300));
+		fen.setContentPane(new PanelFond());
+		fen.setPreferredSize(new Dimension(850,500));
 		fen.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		fen.setResizable(false);
 		
 		fen.getContentPane().setBackground(Color.black);
-		JLabel motd = new JLabel("Selection du mode de jeu ",JLabel.CENTER);
+		JLabel motd = new JLabel("VIRTUAL WAR ",JLabel.CENTER);
 		motd.setForeground(Color.LIGHT_GRAY);
 		motd.setFont(new Font("arial", Font.PLAIN, 50));
 		
-		fen.getContentPane().add(motd,BorderLayout.NORTH);
+		
+		
+		
+		
+		
+		
 		
 		JPanel panel = new JPanel();
-		panel.setBackground(Color.BLACK);
-		panel.setLayout(new GridBagLayout());
 		
-		final JPanel panel1 = new JPanel();
+		panel.setBackground(Color.BLACK);
+		panel.setLayout(new GridLayout(6,1));
+	
+		
+		JButton boutton1= new JButton();
+		boutton1.setLayout(new GridLayout());
+		boutton1.setPreferredSize(new Dimension(200,30));
+		boutton1.setText("PVP");
+		boutton1.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) 
+			{
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getButton() == MouseEvent.BUTTON1){
+					fen.setVisible(false);
+					Menu.joueurVsJoueur();
+					
+				}
+			}
+		});
+		
+		JButton boutton2= new JButton();
+		boutton2.setLayout(new GridLayout());
+		boutton2.setPreferredSize(new Dimension(200,30));
+		boutton2.setText("PvIA");
+		boutton2.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getButton() == MouseEvent.BUTTON1){
+					fen.setVisible(false);
+					Menu.joueurVsIa();
+				}
+			}
+		});
+
+		JButton boutton3= new JButton();
+		boutton3.setLayout(new GridLayout());
+		boutton3.setPreferredSize(new Dimension(200,30));
+		boutton3.setText("IAvIA");
+		boutton3.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getButton() == MouseEvent.BUTTON1){
+					fen.setVisible(false);
+					Menu.iaVsIa();
+				}
+			}
+		});
+		
+		
+		
+		JLabel labs1 = new JLabel();
+		JLabel labs2= new JLabel();
+		
+		panel.add(motd);
+	
+		panel.add(boutton1);
+		panel.add(labs1);
+		panel.add(boutton2);
+		panel.add(labs2);
+		panel.add(boutton3);
+		
+	/*	final JPanel panel1 = new JPanel();
 		JLabel lab1 = new JLabel("PvP",JLabel.CENTER);
 		panel1.setLayout(new GridLayout());
 		panel1.setBackground(Color.yellow);
@@ -82,9 +228,9 @@ public class MenuGraphic  {
 			}
 		});
 		panel.add(panel1);
-		/*NORAJ DE MON NOMAGE !!!*/
+		
 		JPanel panel_remplissage = new JPanel();
-		panel_remplissage.setBackground(Color.black);
+		panel_remplissage.setBackground(new Color(25,15,2,255));
 		panel_remplissage.setPreferredSize(new Dimension(50,50));
 		panel.add(panel_remplissage);
 				
@@ -132,7 +278,7 @@ public class MenuGraphic  {
 		});
 		panel.add(panel2);
 		JPanel panel_remplissage2 = new JPanel();
-		panel_remplissage2.setBackground(Color.black);
+		panel_remplissage2.setBackground(new Color(25,15,2,255));	
 		panel_remplissage2.setPreferredSize(new Dimension(50,50));
 		panel.add(panel_remplissage2);
 		
@@ -178,7 +324,7 @@ public class MenuGraphic  {
 				}
 			}
 		});
-		panel.add(panel3);
+		panel.add(panel3);*/
 		
 		fen.getContentPane().add(panel,BorderLayout.CENTER);
 		
