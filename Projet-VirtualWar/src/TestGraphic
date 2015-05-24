@@ -1,0 +1,155 @@
+package Menu;
+
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.GridLayout;
+
+import javax.swing.BorderFactory;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import Constante.Constante;
+import Plateau.Cellule;
+import Plateau.Plateau;
+
+@SuppressWarnings("serial")
+public class TestGraphic extends JFrame {
+
+	// | Attributs : |
+	/** Le plateau de jeu */
+	Plateau p;
+	/** Le plateau qui s'affichent à l'écran */
+	JLabel[][] cellule;
+
+	// | Constructeurs : |
+	/**
+	 * Constructeurs du menu
+	 */
+	public TestGraphic() {
+		// Pourcentage d'obstacles
+		Cellule.pourcentage = 50;
+		// Crée le plateau (taille fixe pour test)
+		p = new Plateau(10, 10);
+		// Crée les obstacles
+		// p.genere_obstacle(p.plateau[0][0]);
+		// Crée le plateau affichable en fonction du plateau de jeu
+		cellule = new JLabel[p.plateau.length][p.plateau[0].length];
+
+		p.plateau[6][6].cree_Obstacle();
+		p.plateau[5][5].setMine(1);
+		p.plateau[4][4].setMine(2);
+
+		// Place les bases
+		p.plateau[0][0].base = Constante.BASE1;
+		p.plateau[p.plateau.length - 1][p.plateau[0].length - 1].base = Constante.BASE2;
+
+		// Paramétre la JFrame en une taille assez grande pour afficher le
+		// plateau
+		this.setPreferredSize(new Dimension(p.plateau.length * 50,
+				p.plateau[0].length * 50));
+		// Crée la JPanel qui contient le plateau affichable
+		JPanel pan = updatePanel(cellule, p.plateau);
+
+		// Parametre pour afficher le plateau
+		this.add(pan);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.pack();
+		this.setVisible(true);
+
+	}
+
+	// | Methodes : |
+
+	public JPanel updatePanel(JLabel[][] cellule, Cellule[][] plateau) {
+		JPanel pan = new JPanel();
+		pan.setLayout(new GridLayout(p.plateau.length, p.plateau[0].length));
+		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+
+		updatePlateau(cellule, plateau);
+
+		for (int i = 0; i < cellule.length; i++) {
+			for (int j = 0; j < cellule[0].length; j++) {
+				pan.add(cellule[i][j]);
+			}
+		}
+
+		return pan;
+	}
+
+	/**
+	 * Met à jour le plateau affichable à partir des informations du plateau de
+	 * jeu
+	 * 
+	 * @param cellule
+	 *            : le plateau affichable à mettre à jour
+	 * @param p
+	 *            : le plateau de jeu
+	 * @return cellule : le plateau affichable mis à jour
+	 */
+	public JLabel[][] updatePlateau(JLabel[][] cellule, Cellule[][] plateau) {
+		for (int i = 0; i < plateau.length; i++) {
+			for (int j = 0; j < plateau[0].length; j++) {
+				// La cellule est une base de l'equipe 1
+				if (plateau[i][j].estBase() == 1) {
+					cellule[i][j] = new JLabel("B");
+					cellule[i][j].setOpaque(true);
+					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
+					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
+					cellule[i][j].setBorder(BorderFactory
+							.createLineBorder(Color.BLACK));
+				}
+				// La cellule est une base de l'equipe 2
+				else if (plateau[i][j].estBase() == 2) {
+					cellule[i][j] = new JLabel("b");
+					cellule[i][j].setOpaque(true);
+					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
+					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
+					cellule[i][j].setBorder(BorderFactory
+							.createLineBorder(Color.BLACK));
+				}
+				// La cellule est un obstavle
+				else if (plateau[i][j].estObstacle() == true) {
+					cellule[i][j] = new JLabel();
+					cellule[i][j].setOpaque(true);
+					cellule[i][j].setBackground(Color.BLACK);
+				}
+				// La cellule est une mine de l'equipe 1
+				else if (plateau[i][j].contienMine() == 1) {
+					cellule[i][j] = new JLabel("M");
+					cellule[i][j].setOpaque(true);
+					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
+					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
+					cellule[i][j].setBorder(BorderFactory
+							.createLineBorder(Color.BLACK));
+				}
+				// La cellule est une mine de l'equipe 2
+				else if (plateau[i][j].contienMine() == 2) {
+					cellule[i][j] = new JLabel("m");
+					cellule[i][j].setOpaque(true);
+					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
+					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
+					cellule[i][j].setBorder(BorderFactory
+							.createLineBorder(Color.BLACK));
+				}
+				// Sinon
+				else {
+					cellule[i][j] = new JLabel();
+					cellule[i][j].setOpaque(true);
+					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
+					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
+					cellule[i][j].setBorder(BorderFactory
+							.createLineBorder(Color.BLACK));
+				}
+			}
+		}
+
+		return cellule;
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		new TestGraphic();
+	}
+
+}
