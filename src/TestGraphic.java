@@ -3,8 +3,10 @@ package Menu;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -12,6 +14,7 @@ import javax.swing.JPanel;
 import Constante.Constante;
 import Plateau.Cellule;
 import Plateau.Plateau;
+import Robot.Char;
 import Robot.Piegeur;
 import Robot.Tireur;
 
@@ -21,7 +24,7 @@ public class TestGraphic extends JFrame {
 	// | Attributs : |
 	/** Le plateau de jeu */
 	Plateau p;
-	/** Le plateau qui s'affichent à l'écran */
+	/** Le plateau qui s'affichent Ã  l'Ã©cran */
 	JLabel[][] cellule;
 
 	// | Constructeurs : |
@@ -31,26 +34,29 @@ public class TestGraphic extends JFrame {
 	public TestGraphic() {
 		// Pourcentage d'obstacles
 		Cellule.pourcentage = 50;
-		// Crée le plateau (taille fixe pour test)
+		// CrÃ©e le plateau (taille fixe pour test)
 		p = new Plateau(10, 10);
-		// Crée les obstacles
-		// p.genere_obstacle(p.plateau[0][0]);
-		// Crée le plateau affichable en fonction du plateau de jeu
+		// CrÃ©e le plateau affichable en fonction du plateau de jeu
 		cellule = new JLabel[p.plateau.length][p.plateau[0].length];
-
-		p.plateau[6][6].cree_Obstacle();
-		p.plateau[5][5].setMine(1);
-		p.plateau[4][4].setMine(2);
 
 		// Place les bases
 		p.plateau[0][0].base = Constante.BASE1;
 		p.plateau[p.plateau.length - 1][p.plateau[0].length - 1].base = Constante.BASE2;
+		// CrÃ©e les obstacles
+		// p.genere_obstacle(p.plateau[0][0]);
+		
+		p.plateau[2][2].setRobot(new Tireur(1, 0));
+		p.plateau[2][3].setRobot(new Tireur(2, 0));
+		p.plateau[2][4].setRobot(new Piegeur(1, 0));
+		p.plateau[2][5].setRobot(new Piegeur(2, 0));
+		p.plateau[2][6].setRobot(new Char(1, 0));
+		p.plateau[2][7].setRobot(new Char(2, 0));
 
-		// Paramétre la JFrame en une taille assez grande pour afficher le
+		// ParamÃ©tre la JFrame en une taille assez grande pour afficher le
 		// plateau
 		this.setPreferredSize(new Dimension(p.plateau.length * 50,
 				p.plateau[0].length * 50));
-		// Crée la JPanel qui contient le plateau affichable
+		// CrÃ©e la JPanel qui contient le plateau affichable
 		JPanel pan = updatePanel(cellule, p.plateau);
 
 		// Parametre pour afficher le plateau
@@ -64,7 +70,7 @@ public class TestGraphic extends JFrame {
 	// | Methodes : |
 
 	public JPanel updatePanel(JLabel[][] cellule, Cellule[][] plateau) {
-		JPanel pan = new JPanel();
+		JPanel pan = new Panel();
 		pan.setLayout(new GridLayout(p.plateau.length, p.plateau[0].length));
 		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
@@ -80,14 +86,14 @@ public class TestGraphic extends JFrame {
 	}
 
 	/**
-	 * Met à jour le plateau affichable à partir des informations du plateau de
-	 * jeu
+	 * Met Ã  jour le plateau affichable Ã  partir des informations du plateau
+	 * de jeu
 	 * 
 	 * @param cellule
-	 *            : le plateau affichable à mettre à jour
+	 *            : le plateau affichable Ã  mettre Ã  jour
 	 * @param p
 	 *            : le plateau de jeu
-	 * @return cellule : le plateau affichable mis à jour
+	 * @return cellule : le plateau affichable mis Ã  jour
 	 */
 	public JLabel[][] updatePlateau(JLabel[][] cellule, Cellule[][] plateau) {
 		for (int i = 0; i < plateau.length; i++) {
@@ -95,7 +101,6 @@ public class TestGraphic extends JFrame {
 				// La cellule est une base de l'equipe 1
 				if (plateau[i][j].estBase() == 1) {
 					cellule[i][j] = new JLabel("B");
-					cellule[i][j].setOpaque(true);
 					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
 					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
 					cellule[i][j].setBorder(BorderFactory
@@ -104,7 +109,6 @@ public class TestGraphic extends JFrame {
 				// La cellule est une base de l'equipe 2
 				else if (plateau[i][j].estBase() == 2) {
 					cellule[i][j] = new JLabel("b");
-					cellule[i][j].setOpaque(true);
 					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
 					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
 					cellule[i][j].setBorder(BorderFactory
@@ -112,14 +116,13 @@ public class TestGraphic extends JFrame {
 				}
 				// La cellule est un obstavle
 				else if (plateau[i][j].estObstacle() == true) {
-					cellule[i][j] = new JLabel();
+					cellule[i][j] = new JLabel("");
 					cellule[i][j].setOpaque(true);
 					cellule[i][j].setBackground(Color.BLACK);
 				}
 				// La cellule est une mine de l'equipe 1
 				else if (plateau[i][j].contienMine() == 1) {
 					cellule[i][j] = new JLabel("M");
-					cellule[i][j].setOpaque(true);
 					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
 					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
 					cellule[i][j].setBorder(BorderFactory
@@ -128,7 +131,6 @@ public class TestGraphic extends JFrame {
 				// La cellule est une mine de l'equipe 2
 				else if (plateau[i][j].contienMine() == 2) {
 					cellule[i][j] = new JLabel("m");
-					cellule[i][j].setOpaque(true);
 					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
 					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
 					cellule[i][j].setBorder(BorderFactory
@@ -136,12 +138,13 @@ public class TestGraphic extends JFrame {
 				}
 				// La cellule contient un robot
 				else if (plateau[i][j].getContenu() != null) {
-					// La cellule contient un robot de l'équipe 1
-					if (plateau[i][j].getContenu().getEnergie() == 1) {
+					// La cellule contient un robot de l'Ã©quipe 1
+					if (plateau[i][j].getContenu().getEquipe() == 1) {
 						// La cellue contient un tireur
 						if (plateau[i][j].getContenu() instanceof Tireur) {
 							cellule[i][j] = new JLabel("T");
-							cellule[i][j].setOpaque(true);
+							ImageIcon img = new ImageIcon("images/tireur1.png");
+							cellule[i][j].setIcon(img);
 							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
 							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
 							cellule[i][j].setBorder(BorderFactory
@@ -150,7 +153,8 @@ public class TestGraphic extends JFrame {
 						// La cellule contient un piegeur
 						else if (plateau[i][j].getContenu() instanceof Piegeur) {
 							cellule[i][j] = new JLabel("P");
-							cellule[i][j].setOpaque(true);
+							ImageIcon img = new ImageIcon("images/piegeur1.png");
+							cellule[i][j].setIcon(img);
 							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
 							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
 							cellule[i][j].setBorder(BorderFactory
@@ -159,19 +163,21 @@ public class TestGraphic extends JFrame {
 						// La cellule contient un char
 						else {
 							cellule[i][j] = new JLabel("C");
-							cellule[i][j].setOpaque(true);
+							ImageIcon img = new ImageIcon("images/char1.png");
+							cellule[i][j].setIcon(img);
 							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
 							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
 							cellule[i][j].setBorder(BorderFactory
 									.createLineBorder(Color.BLACK));
 						}
 					}
-					// La cellule contient un robot de l'équipe 2
-					else if (plateau[i][j].getContenu().getEnergie() == 2) {
+					// La cellule contient un robot de l'Ã©quipe 2
+					else if (plateau[i][j].getContenu().getEquipe() == 2) {
 						// La cellue contient un tireur
 						if (plateau[i][j].getContenu() instanceof Tireur) {
 							cellule[i][j] = new JLabel("t");
-							cellule[i][j].setOpaque(true);
+							ImageIcon img = new ImageIcon("images/tireur2.png");
+							cellule[i][j].setIcon(img);
 							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
 							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
 							cellule[i][j].setBorder(BorderFactory
@@ -180,7 +186,8 @@ public class TestGraphic extends JFrame {
 						// La cellule contient un piegeur
 						else if (plateau[i][j].getContenu() instanceof Piegeur) {
 							cellule[i][j] = new JLabel("p");
-							cellule[i][j].setOpaque(true);
+							ImageIcon img = new ImageIcon("images/piegeur2.png");
+							cellule[i][j].setIcon(img);
 							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
 							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
 							cellule[i][j].setBorder(BorderFactory
@@ -189,7 +196,8 @@ public class TestGraphic extends JFrame {
 						// La cellule contient un char
 						else {
 							cellule[i][j] = new JLabel("c");
-							cellule[i][j].setOpaque(true);
+							ImageIcon img = new ImageIcon("images/char2.png");
+							cellule[i][j].setIcon(img);
 							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
 							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
 							cellule[i][j].setBorder(BorderFactory
@@ -199,10 +207,7 @@ public class TestGraphic extends JFrame {
 				}
 				// Sinon
 				else {
-					cellule[i][j] = new JLabel();
-					cellule[i][j].setOpaque(true);
-					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
+					cellule[i][j] = new JLabel("");
 					cellule[i][j].setBorder(BorderFactory
 							.createLineBorder(Color.BLACK));
 				}
