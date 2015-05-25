@@ -31,10 +31,11 @@ public class MenuGraphic  {
 		fen.setPreferredSize(new Dimension(850,500));
 		fen.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		fen.setResizable(false);
-		
-		fen.getContentPane().setBackground(Color.black);
+
 		JLabel motd = new JLabel("VIRTUAL WAR ",JLabel.CENTER);
 		motd.setForeground(Color.LIGHT_GRAY);
+		motd.setBackground(new Color(25,15,2,255));
+		motd.setOpaque(true);
 		motd.setFont(new Font("arial", Font.PLAIN, 50));
 		
 		
@@ -47,7 +48,7 @@ public class MenuGraphic  {
 		JPanel panel = new JPanel();
 		
 		panel.setBackground(Color.BLACK);
-		panel.setLayout(new GridLayout(6,1));
+		panel.setLayout(new GridLayout(7,1));
 	
 		
 		JButton boutton1= new JButton();
@@ -172,12 +173,18 @@ public class MenuGraphic  {
 		});
 		
 		
-		
+		JLabel labs = new JLabel();
+		labs.setBackground(new Color(25,15,2,255));
+		labs.setOpaque(true);
 		JLabel labs1 = new JLabel();
+		labs1.setBackground(new Color(25,15,2,255));
+		labs1.setOpaque(true);
 		JLabel labs2= new JLabel();
+		labs2.setBackground(new Color(25,15,2,255));
+		labs2.setOpaque(true);
 		
 		panel.add(motd);
-	
+		panel.add(labs);
 		panel.add(boutton1);
 		panel.add(labs1);
 		panel.add(boutton2);
