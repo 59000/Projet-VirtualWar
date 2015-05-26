@@ -52,10 +52,18 @@ public class ConfigPlateau {
 
 		JButton valide = new JButton("Valider");
 		valide.setPreferredSize(new Dimension(75, 30));
-		valide.setFont(new Font("arial", Font.PLAIN, 40));
+		valide.setFont(new Font("arial", Font.PLAIN, 20));
 		valide.setBackground(new Color(0, 0, 0, 0));
 		valide.setOpaque(false);
 		valide.setForeground(Color.GREEN);
+		
+		
+		JButton retour = new JButton("Retour");
+		retour.setPreferredSize(new Dimension(75, 30));
+		retour.setFont(new Font("arial", Font.PLAIN, 20));
+		retour.setBackground(new Color(0, 0, 0, 0));
+		retour.setOpaque(false);
+		retour.setForeground(Color.RED);
 
 		JLabel lab = new JLabel("Configuration Rapide :");
 		lab.setForeground(Color.lightGray);
@@ -172,9 +180,17 @@ public class ConfigPlateau {
 		paninvi1.add(new PanelFond());
 		paninvi1.setBackground(new Color(0, 0, 0, 0));
 		paninvi1.setOpaque(false);
+		
+		JPanel panelValideRetour = new JPanel();
+		panelValideRetour.setLayout(new GridLayout(1,2));
+		panelValideRetour.setBackground(new Color(0,0,0,0));
+		panelValideRetour.setOpaque(false);
+		panelValideRetour.add(valide);
+		panelValideRetour.add(retour);
 
 		paninvi1.add(slider, BorderLayout.NORTH);
-		paninvi1.add(valide);
+		paninvi1.add(panelValideRetour);
+		
 		paninvi1.add(slider1, BorderLayout.SOUTH);
 
 		/** panneau plateau */
@@ -430,17 +446,17 @@ public class ConfigPlateau {
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					switch (MenuGraphic.choix) {
 					case 1:
-						fen.setVisible(false);
+						fen.dispose();
 						new ConfigEquipePvP();
 
 						break;
 					case 2:
-						fen.setVisible(false);
+						fen.dispose();
 						// new ConfigEquipePvIA();
 
 						break;
 					case 3:
-						fen.setVisible(false);
+						fen.dispose();
 						// new lancerlejeu
 
 						break;
@@ -449,7 +465,41 @@ public class ConfigPlateau {
 				}
 			}
 		});
-		;
+		retour.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getButton()== MouseEvent.BUTTON1){
+					fen.dispose();
+					new MenuGraphic();
+				}
+			}
+		});
 	}
 
 }
