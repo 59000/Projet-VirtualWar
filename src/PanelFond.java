@@ -10,7 +10,7 @@ public class PanelFond extends JPanel {
 	private Image image;
 
 	public PanelFond() {
-		image = (new ImageIcon("fond.png")).getImage();
+		image = (new ImageIcon("images/fond.png")).getImage();
 	}
 
 	public void paintComponent(Graphics g) {
