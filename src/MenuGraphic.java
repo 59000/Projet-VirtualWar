@@ -81,7 +81,7 @@ public class MenuGraphic {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					fen.setVisible(false);
+					fen.dispose();
 					choix =1;
 					new ConfigPlateau();
 
@@ -122,7 +122,7 @@ public class MenuGraphic {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					fen.setVisible(false);
+					fen.dispose();
 					choix =2;
 					new ConfigPlateau();
 				}
@@ -163,7 +163,7 @@ public class MenuGraphic {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					fen.setVisible(false);
+					fen.dispose();
 					choix=3;
 					 new ConfigPlateau();
 				}
