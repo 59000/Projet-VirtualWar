@@ -34,7 +34,6 @@ public class MenuGraphic {
 				(int) (hauteur_ecran * 0.30));
 		fen.setContentPane(new PanelFond());
 		fen.setPreferredSize(new Dimension(850, 500));
-		fen.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		fen.setResizable(false);
 
 		JLabel motd = new JLabel("VIRTUAL WAR ", JLabel.CENTER);
@@ -169,7 +168,7 @@ public class MenuGraphic {
 		
 		JButton regle = new JButton();
 		regle.setText("Les Regles");
-		regle.setPreferredSize(new Dimension(120,20));
+		regle.setPreferredSize(new Dimension(120,30));
 		
 		JPanel pan = new JPanel();
 		pan.setLayout(new BorderLayout());
