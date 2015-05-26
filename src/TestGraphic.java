@@ -45,12 +45,12 @@ public class TestGraphic extends JFrame {
 		// CrÃ©e les obstacles
 		// p.genere_obstacle(p.plateau[0][0]);
 		
-		p.plateau[2][2].setRobot(new Tireur(1, 0));
-		p.plateau[2][3].setRobot(new Tireur(2, 0));
-		p.plateau[2][4].setRobot(new Piegeur(1, 0));
-		p.plateau[2][5].setRobot(new Piegeur(2, 0));
-		p.plateau[2][6].setRobot(new Char(1, 0));
-		p.plateau[2][7].setRobot(new Char(2, 0));
+		p.plateau[2][2].deplaceSur(new Tireur(1, 0));
+		p.plateau[2][3].deplaceSur(new Tireur(2, 0));
+		p.plateau[2][4].deplaceSur(new Piegeur(1, 0));
+		p.plateau[2][5].deplaceSur(new Piegeur(2, 0));
+		p.plateau[2][6].deplaceSur(new Char(1, 0));
+		p.plateau[2][7].deplaceSur(new Char(2, 0));
 
 		// ParamÃ©tre la JFrame en une taille assez grande pour afficher le
 		// plateau
@@ -70,7 +70,7 @@ public class TestGraphic extends JFrame {
 	// | Methodes : |
 
 	public JPanel updatePanel(JLabel[][] cellule, Cellule[][] plateau) {
-		JPanel pan = new Panel();
+		JPanel pan = new JPanel();
 		pan.setLayout(new GridLayout(p.plateau.length, p.plateau[0].length));
 		pan.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
