@@ -3,6 +3,7 @@ package Menu;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridBagLayout;
@@ -43,12 +44,12 @@ public class MenuGraphic {
 		motd.setFont(new Font("arial", Font.PLAIN, 50));
 
 		JPanel panel = new JPanel();
-		panel.setLayout(new GridLayout(7, 1));
+		panel.setLayout(new GridLayout(8, 1));
 
 		JButton boutton1 = new JButton();
 		boutton1.setLayout(new GridLayout());
 		boutton1.setPreferredSize(new Dimension(200, 30));
-		boutton1.setText("PVP");
+		boutton1.setText("PvP");
 		boutton1.addMouseListener(new MouseListener() {
 
 			@Override
@@ -165,6 +166,11 @@ public class MenuGraphic {
 			}
 		});
 
+		
+		JButton regle = new JButton();
+		regle.setText("Les Regles");
+		regle.setPreferredSize(new Dimension(120,20));
+		
 		JPanel pan = new JPanel();
 		pan.setLayout(new BorderLayout());
 		pan.add(new PanelFond());
@@ -174,6 +180,19 @@ public class MenuGraphic {
 		JPanel pan2 = new JPanel();
 		pan2.setLayout(new BorderLayout());
 		pan2.add(new PanelFond());
+		JPanel pan3 = new JPanel();
+		pan3.setLayout(new GridLayout(1, 2));
+		
+		JPanel pan4 = new JPanel();
+		pan4.setLayout(new BorderLayout());
+		pan4.add(new PanelFond());
+		JPanel pan5 = new JPanel();
+		pan5.add(regle);
+		pan5.setBackground(new Color(35,25,15,255));
+		pan5.setOpaque(true);
+		
+		pan3.add(pan4);
+		pan3.add(pan5);
 
 		panel.add(motd);
 		panel.add(pan);
@@ -182,9 +201,13 @@ public class MenuGraphic {
 		panel.add(boutton2);
 		panel.add(pan2);
 		panel.add(boutton3);
+		panel.add(pan3);
 
+		
+		
 		fen.getContentPane().add(panel, BorderLayout.CENTER);
-
+		
+		
 		fen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		fen.pack();
 		fen.setVisible(true);
