@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -75,9 +74,49 @@ public class ConfigPlateau {
 				// TODO Auto-generated method stub
 				
 				 labelSlider.setText("Taille : "+slider.getValue());
-				 
 			}
 		});
+		slider.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if (slider.getValue()==5) {
+					petit.setEnabled(false);
+				}
+				else if (slider.getValue()==10) {
+					grand.setEnabled(false);
+				}
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				grand.setEnabled(true);
+				 petit.setEnabled(true);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		
 		
 		/**Slider 2 dans le panneau */
 		
@@ -93,7 +132,6 @@ public class ConfigPlateau {
 				// TODO Auto-generated method stub
 				
 				 labelSlider1.setText("Obstacle : "+slider1.getValue());
-				 
 			}
 		});
 	
@@ -165,7 +203,7 @@ public class ConfigPlateau {
 		
 	
 		
-		/** visibilitÃƒÂ© */
+		/** visibilite */
 		
 		fen.getContentPane().add(lab, BorderLayout.NORTH);
 		fen.getContentPane().add(panHautGauche);
@@ -213,7 +251,119 @@ public class ConfigPlateau {
 				// TODO Auto-generated method stub
 				if(e.getButton() == MouseEvent.BUTTON1){
 					petit.setEnabled(false);
+					grand.setEnabled(true);
+					slider.setValue(5);
 				}
+			}
+		});
+		
+		grand.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(e.getButton() == MouseEvent.BUTTON1){
+					grand.setEnabled(false);
+					petit.setEnabled(true);
+					slider.setValue(10);
+				}
+			}
+		});
+		
+		slider1.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if (slider1.getValue()>=70) {
+					encombre.setEnabled(false);
+				}
+				else if (slider1.getValue()<=10) {
+					degage.setEnabled(false);
+				}
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				grand.setEnabled(true);
+				 petit.setEnabled(true);
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
+		degage.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
 			}
 		});
 	}
