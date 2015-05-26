@@ -2,17 +2,15 @@ package Menu;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.io.IOException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -38,12 +36,14 @@ public class MenuGraphic {
 
 		JLabel motd = new JLabel("VIRTUAL WAR ", JLabel.CENTER);
 		motd.setForeground(Color.LIGHT_GRAY);
-		motd.setBackground(new Color(35, 25, 15, 255));
-		motd.setOpaque(true);
+		motd.setBackground(new Color(35, 25, 15, 0));
+		motd.setOpaque(false);
 		motd.setFont(new Font("arial", Font.PLAIN, 50));
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(8, 1));
+		panel.setBackground(new Color(35,25,15,0));
+		panel.setOpaque(false);
 
 		JButton boutton1 = new JButton();
 		boutton1.setLayout(new GridLayout());
@@ -169,30 +169,74 @@ public class MenuGraphic {
 		JButton regle = new JButton();
 		regle.setText("Les Regles");
 		regle.setPreferredSize(new Dimension(120,30));
+		regle.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				Desktop d = Desktop.getDesktop();
+			    try {
+			     d.open(new File("SFDvFinal_corigée.pdf"));
+			    } catch (IOException e1) {
+			     // TODO Auto-generated catch block
+			     e1.printStackTrace();
+			    }
+			}
+		});
 		
 		JPanel pan = new JPanel();
 		pan.setLayout(new BorderLayout());
 		pan.add(new PanelFond());
+		
 		JPanel pan1 = new JPanel();
 		pan1.setLayout(new BorderLayout());
 		pan1.add(new PanelFond());
+		
 		JPanel pan2 = new JPanel();
 		pan2.setLayout(new BorderLayout());
 		pan2.add(new PanelFond());
+		
 		JPanel pan3 = new JPanel();
 		pan3.setLayout(new GridLayout(1, 2));
+		pan3.setBackground(new Color(0,0,0,0));
+		pan3.setOpaque(false);
 		
 		JPanel pan4 = new JPanel();
 		pan4.setLayout(new BorderLayout());
 		pan4.add(new PanelFond());
 		JPanel pan5 = new JPanel();
 		pan5.add(regle);
-		pan5.setBackground(new Color(35,25,15,255));
-		pan5.setOpaque(true);
+		pan5.setBackground(new Color(0,0,0,0));
+		pan5.setOpaque(false);
 		
 		pan3.add(pan4);
 		pan3.add(pan5);
 
+		
 		panel.add(motd);
 		panel.add(pan);
 		panel.add(boutton1);
@@ -202,6 +246,7 @@ public class MenuGraphic {
 		panel.add(boutton3);
 		panel.add(pan3);
 
+		
 		
 		
 		fen.getContentPane().add(panel, BorderLayout.CENTER);
