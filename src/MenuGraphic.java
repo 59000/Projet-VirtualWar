@@ -23,7 +23,9 @@ public class MenuGraphic {
 	 * Cree un menu graphique avec 3 boutons disponibles et qui lance le mode de
 	 * jeu correspondant
 	 */
+	public static int choix;
 	public MenuGraphic() {
+		
 		final JFrame fen = new JFrame("VirtalWar");
 		Dimension ecran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int hauteur_ecran = (int) ecran.getHeight();
@@ -80,7 +82,8 @@ public class MenuGraphic {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					fen.setVisible(false);
-					Menu.joueurVsJoueur();
+					choix =1;
+					new ConfigPlateau();
 
 				}
 			}
@@ -120,7 +123,8 @@ public class MenuGraphic {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					fen.setVisible(false);
-					Menu.joueurVsIa();
+					choix =2;
+					new ConfigPlateau();
 				}
 			}
 		});
@@ -160,7 +164,8 @@ public class MenuGraphic {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON1) {
 					fen.setVisible(false);
-					Menu.iaVsIa();
+					choix=3;
+					 new ConfigPlateau();
 				}
 			}
 		});
