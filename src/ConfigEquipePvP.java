@@ -46,7 +46,7 @@ public class ConfigEquipePvP {
 		panGauche.add(equipeGauche,BorderLayout.NORTH);
 		
 		
-		JLabel labelTitreGauche = new JLabel("Nom :");
+		JLabel labelTitreGauche = new JLabel("Equipe 1 ",JLabel.CENTER);
 		
 		equipeGauche.add(labelTitreGauche);
 		
