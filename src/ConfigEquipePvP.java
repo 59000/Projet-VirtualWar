@@ -21,8 +21,10 @@ import javax.swing.SwingConstants;
 import Robot.*;
 
 public class ConfigEquipePvP {
-
-	static 	Robot[][] equipe = new Robot[2][5]; // Mettre autre chose que 5 lel
+	static int cptEquipe1;
+	static int cptEquipe2;
+	static 	Robot[] equipe1 ;
+	static 	Robot[] equipe2 ;
 
 	public ConfigEquipePvP() {
 		JFrame fen = new JFrame();
@@ -393,7 +395,12 @@ public class ConfigEquipePvP {
 		/** Combobox equipe droit */
 
 		JComboBox<Robot> droitR0 = new JComboBox<Robot>();
+		JComboBox<Robot> droitR1 = new JComboBox<Robot>();
+		JComboBox<Robot> droitR2 = new JComboBox<Robot>();
+		JComboBox<Robot> droitR3 = new JComboBox<Robot>();
+		JComboBox<Robot> droitR4 = new JComboBox<Robot>();
 
+		
 		((JLabel) droitR0.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
 		droitR0.addItem(null);
@@ -401,41 +408,209 @@ public class ConfigEquipePvP {
 		droitR0.addItem(new Piegeur(1, 0));
 		droitR0.addItem(new Char(1, 0));
 
-		JComboBox<Robot> droitR1 = new JComboBox<Robot>();
+		
 
 		((JLabel) droitR1.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
+		droitR1.setEnabled(false);
 		droitR1.addItem(null);
 		droitR1.addItem(new Tireur(1, 1));
 		droitR1.addItem(new Piegeur(1, 1));
 		droitR1.addItem(new Char(1, 1));
-
-		JComboBox<Robot> droitR2 = new JComboBox<Robot>();
+		droitR1.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(droitR0.getSelectedItem() != null){
+					droitR1.setEnabled(true);
+				}else{
+					droitR1.setEnabled(false);
+					droitR1.setSelectedItem(null);
+					droitR2.setEnabled(false);
+					droitR2.setSelectedItem(null);
+					droitR3.setEnabled(false);
+					droitR3.setSelectedItem(null);
+					droitR4.setEnabled(false);
+					droitR4.setSelectedItem(null);
+					
+				}
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 
 		((JLabel) droitR2.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
+		droitR2.setEnabled(false);
 		droitR2.addItem(null);
 		droitR2.addItem(new Tireur(1, 2));
 		droitR2.addItem(new Piegeur(1, 2));
 		droitR2.addItem(new Char(1, 2));
+		droitR2.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(droitR1.getSelectedItem() != null){
+					droitR2.setEnabled(true);
+				}else{
+					droitR2.setEnabled(false);
+					droitR2.setSelectedItem(null);
+					droitR3.setEnabled(false);
+					droitR3.setSelectedItem(null);
+					droitR4.setEnabled(false);
+					droitR4.setSelectedItem(null);
 
-		JComboBox<Robot> droitR3 = new JComboBox<Robot>();
+				}
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 
 		((JLabel) droitR3.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
+		droitR3.setEnabled(false);
 		droitR3.addItem(null);
 		droitR3.addItem(new Tireur(1, 3));
 		droitR3.addItem(new Piegeur(1, 3));
 		droitR3.addItem(new Char(1, 3));
+		droitR3.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(droitR2.getSelectedItem() != null){
+					droitR3.setEnabled(true);
+				}else{
+					droitR3.setEnabled(false);
+					droitR3.setSelectedItem(null);
+					droitR4.setEnabled(false);
+					droitR4.setSelectedItem(null);
 
-		JComboBox<Robot> droitR4 = new JComboBox<Robot>();
+
+				}
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		
 
 		((JLabel) droitR4.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
+		droitR4.setEnabled(false);
 		droitR4.addItem(null);
 		droitR4.addItem(new Tireur(1, 4));
 		droitR4.addItem(new Piegeur(1, 4));
 		droitR4.addItem(new Char(1, 4));
+		droitR4.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(droitR3.getSelectedItem() != null){
+					droitR4.setEnabled(true);
+				}else{
+					droitR4.setEnabled(false);
+					droitR4.setSelectedItem(null);
+
+
+
+				}
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		panDroit.add(equipeDroit, BorderLayout.NORTH);
 		equipeDroit.add(textNomEquipe2);
@@ -485,50 +660,100 @@ public class ConfigEquipePvP {
 				 * Mettre toutes les conditions pour jouer : mettre un nom
 				 * dequipe, avoir le meme nombre de robot de chaque cote
 				 */
-				int cptEquipe1 = 0;
-				int cptEquipe2 = 0;
-
+				 cptEquipe1 = 0;
+				 cptEquipe2 = 0;
+				 
 			
 				if (gaucheR0.getSelectedItem() != null) {
-					equipe[0][0] = (Robot) gaucheR0.getSelectedItem();
+					
 					cptEquipe1++;
+					equipe1 = new Robot[cptEquipe1];
+					equipe1[0] = (Robot) gaucheR0.getSelectedItem();
+					
 				}
 				if (gaucheR1.getSelectedItem() != null) {
-					equipe[0][1] = (Robot) gaucheR1.getSelectedItem();
+					
 					cptEquipe1++;
+					
+					equipe1 = new Robot[cptEquipe1];
+					
+					equipe1[0] = (Robot) gaucheR0.getSelectedItem();
+					equipe1[1] = (Robot) gaucheR1.getSelectedItem();
 				}
 				if (gaucheR2.getSelectedItem() != null) {
-					equipe[0][2] = (Robot) gaucheR2.getSelectedItem();
+					
 					cptEquipe1++;
+					
+					equipe1 = new Robot[cptEquipe1];
+					
+					equipe1[0] = (Robot) gaucheR0.getSelectedItem();
+					equipe1[1] = (Robot) gaucheR1.getSelectedItem();
+					equipe1[2] = (Robot) gaucheR2.getSelectedItem();
 				}
 				if (gaucheR3.getSelectedItem() != null) {
-					equipe[0][3] = (Robot) gaucheR3.getSelectedItem();
+					
 					cptEquipe1++;
+
+					equipe1 = new Robot[cptEquipe1];
+					
+					equipe1[0] = (Robot) gaucheR0.getSelectedItem();
+					equipe1[1] = (Robot) gaucheR1.getSelectedItem();
+					equipe1[2] = (Robot) gaucheR2.getSelectedItem();
+					equipe1[3] = (Robot) gaucheR3.getSelectedItem();
 				}
 				if (gaucheR4.getSelectedItem() != null) {
-					equipe[0][4] = (Robot) gaucheR4.getSelectedItem();
+					
 					cptEquipe1++;
+					
+					equipe1 = new Robot[cptEquipe1];
+					
+					equipe1[0] = (Robot) gaucheR0.getSelectedItem();
+					equipe1[1] = (Robot) gaucheR1.getSelectedItem();
+					equipe1[2] = (Robot) gaucheR2.getSelectedItem();
+					equipe1[3] = (Robot) gaucheR3.getSelectedItem();
+					equipe1[4] = (Robot) gaucheR4.getSelectedItem();
 				}
 
 				if (droitR0.getSelectedItem() != null) {
-					equipe[1][0] = (Robot) droitR0.getSelectedItem();
+					
 					cptEquipe2++;
+					
+					equipe2 = new Robot[cptEquipe2];
+					equipe2[0] = (Robot) droitR0.getSelectedItem();
 				}
 				if (droitR1.getSelectedItem() != null) {
-					equipe[1][1] = (Robot) droitR1.getSelectedItem();
+					
 					cptEquipe2++;
+					equipe2 = new Robot[cptEquipe2];
+					equipe2[0] = (Robot) droitR0.getSelectedItem();
+					equipe2[1] = (Robot) droitR1.getSelectedItem();
 				}
 				if (droitR2.getSelectedItem() != null) {
-					equipe[1][2] = (Robot) droitR2.getSelectedItem();
+					
 					cptEquipe2++;
+					equipe2 = new Robot[cptEquipe2];
+					equipe2[0] = (Robot) droitR0.getSelectedItem();
+					equipe2[1] = (Robot) droitR1.getSelectedItem();
+					equipe2[2] = (Robot) droitR2.getSelectedItem();
 				}
 				if (droitR3.getSelectedItem() != null) {
-					equipe[1][3] = (Robot) droitR3.getSelectedItem();
+					
 					cptEquipe2++;
+					equipe2 = new Robot[cptEquipe2];
+					equipe2[0] = (Robot) droitR0.getSelectedItem();
+					equipe2[1] = (Robot) droitR1.getSelectedItem();
+					equipe2[2] = (Robot) droitR2.getSelectedItem();
+					equipe2[3] = (Robot) droitR3.getSelectedItem();
 				}
 				if (droitR4.getSelectedItem() != null) {
-					equipe[1][4] = (Robot) droitR4.getSelectedItem();
+					
 					cptEquipe2++;
+					equipe2 = new Robot[cptEquipe2];
+					equipe2[0] = (Robot) droitR0.getSelectedItem();
+					equipe2[1] = (Robot) droitR1.getSelectedItem();
+					equipe2[2] = (Robot) droitR2.getSelectedItem();
+					equipe2[3] = (Robot) droitR3.getSelectedItem();
+					equipe2[4] = (Robot) droitR4.getSelectedItem();
 				}
 
 				if (cptEquipe1 == cptEquipe2
@@ -542,6 +767,7 @@ public class ConfigEquipePvP {
 						&& cptEquipe2 != 0
 						&& !textNomEquipe1.getText().equals(
 								textNomEquipe2.getText())) {
+					
 					fen.dispose();
 					new TestGraphic();
 				} else {
