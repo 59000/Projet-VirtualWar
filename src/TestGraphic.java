@@ -24,7 +24,7 @@ public class TestGraphic extends JFrame {
 	// | Attributs : |
 	/** Le plateau de jeu */
 	Plateau p;
-	/** Le plateau qui s'affichent ÃƒÂ  l'ÃƒÂ©cran */
+	/** Le plateau qui s'affichent a  l'ecran */
 	JLabel[][] cellule;
 
 	// | Constructeurs : |
@@ -33,16 +33,16 @@ public class TestGraphic extends JFrame {
 	 */
 	public TestGraphic() {
 		// Pourcentage d'obstacles
-		Cellule.pourcentage = 50;
-		// CrÃƒÂ©e le plateau (taille fixe pour test)
-		p = new Plateau(10, 10);
-		// CrÃƒÂ©e le plateau affichable en fonction du plateau de jeu
+		Cellule.pourcentage = ConfigPlateau.slider1.getValue();
+		// Cree le plateau (taille fixe pour test)
+		p = new Plateau(ConfigPlateau.slider.getValue(), ConfigPlateau.slider.getValue());
+		// Cree le plateau affichable en fonction du plateau de jeu
 		cellule = new JLabel[p.plateau.length][p.plateau[0].length];
 
 		// Place les bases
 		p.plateau[0][0].base = Constante.BASE1;
 		p.plateau[p.plateau.length - 1][p.plateau[0].length - 1].base = Constante.BASE2;
-		// CrÃƒÂ©e les obstacles
+		// Cree les obstacles
 		p.genere_obstacle(p.plateau[0][0]);
 		
 	/*	p.plateau[2][2].deplaceSur(new Tireur(1, 0));
@@ -55,11 +55,11 @@ public class TestGraphic extends JFrame {
 		p.plateau[5][5].setMine(1);
 		p.plateau[5][6].setMine(2);*/
 
-		// ParamÃƒÂ©tre la JFrame en une taille assez grande pour afficher le
+		// Parametre la JFrame en une taille assez grande pour afficher le
 		// plateau
 		this.setPreferredSize(new Dimension(p.plateau.length * 52,
 				p.plateau[0].length * 52));
-		// CrÃƒÂ©e la JPanel qui contient le plateau affichable
+		// Cree la JPanel qui contient le plateau affichable
 		JPanel pan = updatePanel(cellule, p.plateau);
 
 		// Parametre pour afficher le plateau
@@ -89,14 +89,14 @@ public class TestGraphic extends JFrame {
 	}
 
 	/**
-	 * Met ÃƒÂ  jour le plateau affichable ÃƒÂ  partir des informations du plateau
+	 * Met a  jour le plateau affichable a  partir des informations du plateau
 	 * de jeu
 	 * 
 	 * @param cellule
-	 *            : le plateau affichable ÃƒÂ  mettre ÃƒÂ  jour
+	 *            : le plateau affichable a  mettre a  jour
 	 * @param p
 	 *            : le plateau de jeu
-	 * @return cellule : le plateau affichable mis ÃƒÂ  jour
+	 * @return cellule : le plateau affichable mis a  jour
 	 */
 	public JLabel[][] updatePlateau(JLabel[][] cellule, Cellule[][] plateau) {
 		for (int i = 0; i < plateau.length; i++) {
@@ -151,7 +151,7 @@ public class TestGraphic extends JFrame {
 				}
 				// La cellule contient un robot
 				else if (plateau[i][j].getContenu() != null) {
-					// La cellule contient un robot de l'ÃƒÂ©quipe 1
+					// La cellule contient un robot de l'equipe 1
 					if (plateau[i][j].getContenu().getEquipe() == 1) {
 						// La cellue contient un tireur
 						if (plateau[i][j].getContenu() instanceof Tireur) {
@@ -184,7 +184,7 @@ public class TestGraphic extends JFrame {
 									.createLineBorder(Color.BLACK));
 						}
 					}
-					// La cellule contient un robot de l'ÃƒÂ©quipe 2
+					// La cellule contient un robot de l'equipe 2
 					else if (plateau[i][j].getContenu().getEquipe() == 2) {
 						// La cellue contient un tireur
 						if (plateau[i][j].getContenu() instanceof Tireur) {
@@ -230,9 +230,6 @@ public class TestGraphic extends JFrame {
 		return cellule;
 	}
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		new TestGraphic();
-	}
+
 
 }
