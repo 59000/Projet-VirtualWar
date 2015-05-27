@@ -666,14 +666,14 @@ public class ConfigEquipePvP {
 			
 				if (gaucheR0.getSelectedItem() != null) {
 					
-					cptEquipe1++;
+					cptEquipe1 = 1 ;
 					equipe1 = new Robot[cptEquipe1];
 					equipe1[0] = (Robot) gaucheR0.getSelectedItem();
 					
 				}
 				if (gaucheR1.getSelectedItem() != null) {
 					
-					cptEquipe1++;
+					cptEquipe1 = 2;
 					
 					equipe1 = new Robot[cptEquipe1];
 					
@@ -682,7 +682,7 @@ public class ConfigEquipePvP {
 				}
 				if (gaucheR2.getSelectedItem() != null) {
 					
-					cptEquipe1++;
+					cptEquipe1 = 3;
 					
 					equipe1 = new Robot[cptEquipe1];
 					
@@ -692,7 +692,7 @@ public class ConfigEquipePvP {
 				}
 				if (gaucheR3.getSelectedItem() != null) {
 					
-					cptEquipe1++;
+					cptEquipe1 = 4;
 
 					equipe1 = new Robot[cptEquipe1];
 					
@@ -703,7 +703,7 @@ public class ConfigEquipePvP {
 				}
 				if (gaucheR4.getSelectedItem() != null) {
 					
-					cptEquipe1++;
+					cptEquipe1 = 5;
 					
 					equipe1 = new Robot[cptEquipe1];
 					
@@ -716,21 +716,21 @@ public class ConfigEquipePvP {
 
 				if (droitR0.getSelectedItem() != null) {
 					
-					cptEquipe2++;
+					cptEquipe2 = 1;
 					
 					equipe2 = new Robot[cptEquipe2];
 					equipe2[0] = (Robot) droitR0.getSelectedItem();
 				}
 				if (droitR1.getSelectedItem() != null) {
 					
-					cptEquipe2++;
+					cptEquipe2 = 2;
 					equipe2 = new Robot[cptEquipe2];
 					equipe2[0] = (Robot) droitR0.getSelectedItem();
 					equipe2[1] = (Robot) droitR1.getSelectedItem();
 				}
 				if (droitR2.getSelectedItem() != null) {
 					
-					cptEquipe2++;
+					cptEquipe2 = 3;
 					equipe2 = new Robot[cptEquipe2];
 					equipe2[0] = (Robot) droitR0.getSelectedItem();
 					equipe2[1] = (Robot) droitR1.getSelectedItem();
@@ -738,7 +738,7 @@ public class ConfigEquipePvP {
 				}
 				if (droitR3.getSelectedItem() != null) {
 					
-					cptEquipe2++;
+					cptEquipe2 = 4;
 					equipe2 = new Robot[cptEquipe2];
 					equipe2[0] = (Robot) droitR0.getSelectedItem();
 					equipe2[1] = (Robot) droitR1.getSelectedItem();
@@ -747,7 +747,7 @@ public class ConfigEquipePvP {
 				}
 				if (droitR4.getSelectedItem() != null) {
 					
-					cptEquipe2++;
+					cptEquipe2 = 5;
 					equipe2 = new Robot[cptEquipe2];
 					equipe2[0] = (Robot) droitR0.getSelectedItem();
 					equipe2[1] = (Robot) droitR1.getSelectedItem();
