@@ -22,6 +22,8 @@ import Robot.*;
 
 public class ConfigEquipePvP {
 
+	static 	Robot[][] equipe = new Robot[2][5]; // Mettre autre chose que 5 lel
+
 	public ConfigEquipePvP() {
 		JFrame fen = new JFrame();
 		fen.setPreferredSize(new Dimension(700, 500));
@@ -102,6 +104,10 @@ public class ConfigEquipePvP {
 		/** Combobox equipe gauche */
 
 		JComboBox<Robot> gaucheR0 = new JComboBox<Robot>();
+		JComboBox<Robot> gaucheR1 = new JComboBox<Robot>();
+		JComboBox<Robot> gaucheR2 = new JComboBox<Robot>();
+		JComboBox<Robot> gaucheR3 = new JComboBox<Robot>();
+		JComboBox<Robot> gaucheR4 = new JComboBox<Robot>();
 
 		((JLabel) gaucheR0.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,41 +116,207 @@ public class ConfigEquipePvP {
 		gaucheR0.addItem(new Piegeur(0, 0));
 		gaucheR0.addItem(new Char(0, 0));
 
-		JComboBox<Robot> gaucheR1 = new JComboBox<Robot>();
+		
 
 		((JLabel) gaucheR1.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
+		gaucheR1.setEnabled(false);
 		gaucheR1.addItem(null);
 		gaucheR1.addItem(new Tireur(0, 1));
 		gaucheR1.addItem(new Piegeur(0, 1));
 		gaucheR1.addItem(new Char(0, 1));
+		
+		gaucheR1.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				if(gaucheR0.getSelectedItem() != null){
+					gaucheR1.setEnabled(true);
+				}else{
+					gaucheR1.setEnabled(false);
+					gaucheR1.setSelectedItem(null);
+					gaucheR2.setEnabled(false);
+					gaucheR2.setSelectedItem(null);
+					gaucheR3.setEnabled(false);
+					gaucheR3.setSelectedItem(null);
+					gaucheR4.setEnabled(false);
+					gaucheR4.setSelectedItem(null);
+				}
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				// TODO Auto-generated method stub
 
-		JComboBox<Robot> gaucheR2 = new JComboBox<Robot>();
+			}
+		});
+
+		
 
 		((JLabel) gaucheR2.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
+		gaucheR2.setEnabled(false);
 		gaucheR2.addItem(null);
 		gaucheR2.addItem(new Tireur(0, 2));
 		gaucheR2.addItem(new Piegeur(0, 2));
 		gaucheR2.addItem(new Char(0, 2));
+		gaucheR2.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(gaucheR1.getSelectedItem() != null){
+					gaucheR2.setEnabled(true);
+				}else{
+					gaucheR2.setEnabled(false);
+					gaucheR2.setSelectedItem(null);
+					gaucheR3.setEnabled(false);
+					gaucheR3.setSelectedItem(null);
+					gaucheR4.setEnabled(false);
+					gaucheR4.setSelectedItem(null);
+					
+				}
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
-		JComboBox<Robot> gaucheR3 = new JComboBox<Robot>();
+		
 
 		((JLabel) gaucheR3.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
+		gaucheR3.setEnabled(false);
 		gaucheR3.addItem(null);
 		gaucheR3.addItem(new Tireur(0, 3));
 		gaucheR3.addItem(new Piegeur(0, 3));
 		gaucheR3.addItem(new Char(0, 3));
+		gaucheR3.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(gaucheR2.getSelectedItem() != null){
+					gaucheR3.setEnabled(true);
+				}else{
+					gaucheR3.setEnabled(false);
+					gaucheR3.setSelectedItem(null);
+					gaucheR4.setEnabled(false);
+					gaucheR4.setSelectedItem(null);
+				}
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
-		JComboBox<Robot> gaucheR4 = new JComboBox<Robot>();
+		
 
 		((JLabel) gaucheR4.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
+		gaucheR4.setEnabled(false);
 		gaucheR4.addItem(null);
 		gaucheR4.addItem(new Tireur(0, 4));
 		gaucheR4.addItem(new Piegeur(0, 4));
 		gaucheR4.addItem(new Char(0, 4));
+		gaucheR4.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseReleased(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mousePressed(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseExited(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				// TODO Auto-generated method stub
+				if(gaucheR3.getSelectedItem() != null){
+					gaucheR4.setEnabled(true);
+				}else{
+					gaucheR4.setEnabled(false);
+					gaucheR4.setSelectedItem(null);
+				}
+			}
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 
 		equipeGauche.add(textNomEquipe1);
 		panGauche.add(equipeGauche, BorderLayout.NORTH);
@@ -316,7 +488,7 @@ public class ConfigEquipePvP {
 				int cptEquipe1 = 0;
 				int cptEquipe2 = 0;
 
-				Robot[][] equipe = new Robot[2][5];
+			
 				if (gaucheR0.getSelectedItem() != null) {
 					equipe[0][0] = (Robot) gaucheR0.getSelectedItem();
 					cptEquipe1++;
