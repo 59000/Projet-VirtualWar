@@ -24,6 +24,8 @@ import javax.swing.event.ChangeListener;
 public class ConfigPlateau {
 	JLabel labelSlider = new JLabel("Taille : 5");
 	JLabel labelSlider1 = new JLabel("Obstacle : 0");
+	static JSlider slider = new JSlider(5, 10);
+	static JSlider slider1 = new JSlider(0, 100);
 
 	public ConfigPlateau() {
 
@@ -70,7 +72,7 @@ public class ConfigPlateau {
 
 		/** Slider dans le panneau */
 
-		JSlider slider = new JSlider(5, 10);
+		
 		slider.setValue(5);
 		labelSlider.setForeground(Color.LIGHT_GRAY);
 
@@ -124,7 +126,7 @@ public class ConfigPlateau {
 
 		/** Slider 2 dans le panneau */
 
-		JSlider slider1 = new JSlider(0, 100);
+		
 		slider1.setValue(0);
 		labelSlider1.setForeground(Color.LIGHT_GRAY);
 
