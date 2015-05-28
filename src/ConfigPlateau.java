@@ -11,11 +11,13 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.event.ChangeEvent;
@@ -446,23 +448,40 @@ public class ConfigPlateau {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					switch (MenuGraphic.choix) {
-					case 1:
+					if(MenuGraphic.experimental.equals("2") && MenuGraphic.choix == 1){
+						JOptionPane.showMessageDialog(null, "Le jeu est lance dans la console");
 						fen.dispose();
-						new ConfigEquipePvP();
-
-						break;
-					case 2:
+						Menu.joueurVsJoueur();
+						
+					}else if(MenuGraphic.experimental.equals("2") && MenuGraphic.choix == 2){
+						JOptionPane.showMessageDialog(null, "Le jeu est lance dans la console");
 						fen.dispose();
-						// new ConfigEquipePvIA();
-
-						break;
-					case 3:
+						Menu.joueurVsIa();
+					}else if(MenuGraphic.experimental.equals("2") && MenuGraphic.choix == 3){
+						JOptionPane.showMessageDialog(null, "Le jeu est lance dans la console");
 						fen.dispose();
-						// new lancerlejeu
-
-						break;
-
+						Menu.iaVsIa();
+					}
+					else{
+						
+						switch (MenuGraphic.choix) {
+						case 1:
+							fen.dispose();
+							new ConfigEquipePvP();
+	
+							break;
+						case 2:
+							fen.dispose();
+							 new ConfigEquipePvIA();
+	
+							break;
+						case 3:
+							fen.dispose();
+							 new TestGraphic();
+	
+							break;
+	
+						}
 					}
 				}
 			}
@@ -497,6 +516,7 @@ public class ConfigPlateau {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if(e.getButton()== MouseEvent.BUTTON1){
+				
 					fen.dispose();
 					new MenuGraphic();
 				}
