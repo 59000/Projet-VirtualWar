@@ -2,6 +2,7 @@ package Robot;
 import java.util.List;
 
 import Constante.Constante;
+import Menu.MenuGraphic;
 import Plateau.Coordonnees;
 
 public class Tireur extends Robot {
@@ -85,7 +86,11 @@ public class Tireur extends Robot {
 	}
 
 	public String toString() {
-		return "Tireur " + super.toString()+"         ";
+		if(MenuGraphic.experimental.equals("2")){
+			return "Tireur " + super.toString()+"         ";
+		}
+		  
+		return "Tireur";
 	}
 
 }
