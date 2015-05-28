@@ -27,19 +27,10 @@ public class Menu {
 	public static void joueurVsIa() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
-		int taille = 0;
-		while (taille < 5 || taille > 10) {
-			System.out
-					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
-			taille = scan.nextInt();
-		}
-		int obs = -1;
-		while (obs < 0 || obs > 100) {
-			System.out
-					.println("Combien de pourcentages d'obstacles voulez vous ?");
-			obs = scan.nextInt();
-		}
-		Cellule.pourcentage = obs;
+		
+		int taille = ConfigPlateau.slider.getValue();		
+		
+		Cellule.pourcentage = ConfigPlateau.slider1.getValue();
 
 		Plateau p = new Plateau(taille, taille);
 
@@ -480,19 +471,10 @@ public class Menu {
 		Random r = new Random();
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
-		int taille = 0;
-		while (taille < 5 || taille > 10) {
-			System.out
-					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
-			taille = scan.nextInt();
-		}
-		int obs = -1;
-		while (obs < 0 || obs > 100) {
-			System.out
-					.println("Combien de pourcentages d'obstacles voulez vous ?");
-			obs = scan.nextInt();
-		}
-		Cellule.pourcentage = obs;
+		int taille = ConfigPlateau.slider.getValue();		
+		
+		Cellule.pourcentage = ConfigPlateau.slider1.getValue();
+		
 
 		Plateau p = new Plateau(taille, taille);
 
@@ -884,23 +866,12 @@ public class Menu {
 	public static void joueurVsJoueur() {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
-		int taille = 0;
-		while (taille < 5 || taille > 10) {
-			System.out
-					.println("Tout d'abord, veuillez fixez la taille du plateau de combat.");
-			
-			taille = scan.nextInt();
-		}
-		int obs = -1;
-		while (obs < 0 || obs > 100) {
-			System.out
-					.println("Combien de pourcentages d'obstacles voulez vous ?");
 		
-				obs = scan.nextInt();
-			
-			
-		}
-		Cellule.pourcentage = obs;
+		int taille = ConfigPlateau.slider.getValue();		
+		
+		Cellule.pourcentage = ConfigPlateau.slider1.getValue();
+		System.out.println(Cellule.pourcentage);
+
 
 		Plateau p = new Plateau(taille, taille);
 
