@@ -6,6 +6,8 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
@@ -14,6 +16,7 @@ import java.io.IOException;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class MenuGraphic {
@@ -24,6 +27,7 @@ public class MenuGraphic {
 	 * jeu correspondant
 	 */
 	public static int choix;
+	public static String experimental;
 	public MenuGraphic() {
 		
 		final JFrame fen = new JFrame("VirtalWar");
@@ -38,13 +42,13 @@ public class MenuGraphic {
 
 		JLabel motd = new JLabel("VIRTUAL WAR ", JLabel.CENTER);
 		motd.setForeground(Color.LIGHT_GRAY);
-		motd.setBackground(new Color(35, 25, 15, 0));
+		
 		motd.setOpaque(false);
 		motd.setFont(new Font("arial", Font.PLAIN, 50));
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(8, 1));
-		panel.setBackground(new Color(35,25,15,0));
+		
 		panel.setOpaque(false);
 
 		JButton boutton1 = new JButton();
@@ -81,9 +85,21 @@ public class MenuGraphic {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					fen.dispose();
-					choix =1;
-					new ConfigPlateau();
+					
+					experimental = JOptionPane.showInputDialog("Lancer le jeu en mode graphique (Alpha) ou en mode console \n 1 - Jeu graphique \n 2 - Jeu console");
+					if(experimental.equals("1")){
+						fen.dispose();
+						choix =1;
+						new ConfigPlateau();
+					}else if (experimental.equals("2")){
+						choix =1;
+						fen.dispose();
+						new ConfigPlateau();
+						
+					}else if (!experimental.equals("1")||!experimental.equals("2")){
+						fen.dispose();
+						new MenuGraphic();
+					}
 
 				}
 			}
@@ -122,9 +138,20 @@ public class MenuGraphic {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					fen.dispose();
-					choix =2;
-					new ConfigPlateau();
+					experimental = JOptionPane.showInputDialog("Lancer le jeu en mode graphique (Alpha) ou en mode console \n 1 - Jeu graphique \n 2 - Jeu console");
+					if(experimental.equals("1")){
+						fen.dispose();
+						choix =2;
+						new ConfigPlateau();
+					}else if (experimental.equals("2")){
+						choix =2;
+						fen.dispose();
+						new ConfigPlateau();
+						
+					}else if (!experimental.equals("1")||!experimental.equals("2")){
+						fen.dispose();
+						new MenuGraphic();
+					}
 				}
 			}
 		});
@@ -163,9 +190,20 @@ public class MenuGraphic {
 			public void mouseClicked(MouseEvent e) {
 				// TODO Auto-generated method stub
 				if (e.getButton() == MouseEvent.BUTTON1) {
-					fen.dispose();
-					choix=3;
-					 new ConfigPlateau();
+					experimental = JOptionPane.showInputDialog("Lancer le jeu en mode graphique (Alpha) ou en mode console \n 1 - Jeu graphique \n 2 - Jeu console");
+					if(experimental.equals("1")){
+						fen.dispose();
+						choix =3;
+						new ConfigPlateau();
+					}else if (experimental.equals("2")){
+						choix =3;
+						fen.dispose();
+						new ConfigPlateau();
+						
+					}else if (!experimental.equals("1")||!experimental.equals("2")){
+						fen.dispose();
+						new MenuGraphic();
+					}
 				}
 			}
 		});
@@ -213,6 +251,19 @@ public class MenuGraphic {
 			}
 		});
 		
+		JButton exit = new JButton();
+		exit.setText("Exit");
+		exit.setPreferredSize(new Dimension(120,30));
+		exit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				fen.dispose();
+				System.exit(0);
+			}
+		});
+		
 		JPanel pan = new JPanel();
 		pan.setLayout(new BorderLayout());
 		pan.add(new PanelFond());
@@ -227,15 +278,16 @@ public class MenuGraphic {
 		
 		JPanel pan3 = new JPanel();
 		pan3.setLayout(new GridLayout(1, 2));
-		pan3.setBackground(new Color(0,0,0,0));
+		
 		pan3.setOpaque(false);
 		
 		JPanel pan4 = new JPanel();
-		pan4.setLayout(new BorderLayout());
-		pan4.add(new PanelFond());
+		
+		pan4.add(exit);
+		pan4.setOpaque(false);
 		JPanel pan5 = new JPanel();
 		pan5.add(regle);
-		pan5.setBackground(new Color(0,0,0,0));
+		
 		pan5.setOpaque(false);
 		
 		pan3.add(pan4);
