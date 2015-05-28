@@ -2,6 +2,7 @@ package Robot;
 import java.util.List;
 
 import Constante.Constante;
+import Menu.MenuGraphic;
 import Plateau.Coordonnees;
 
 public class Char extends Robot {
@@ -89,7 +90,10 @@ public class Char extends Robot {
 
 	@Override
 	public String toString() {
-		return "Char   " + super.toString()+"         ";
+		if(MenuGraphic.experimental.equals("2")){
+		return "Char   " + super.toString()+"         "; //To String mode console
+		}
+		return "Char";
 	}
 
 }
