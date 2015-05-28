@@ -49,10 +49,18 @@
 			
 	
 	
+			if (MenuGraphic.choix == 1){
+				for (int i = 0; i < ConfigEquipePvP.equipe1.length ; i++) {
+					ConfigEquipePvP.equipe1[i].setCoord(new Coordonnees(0, 0));
+					ConfigEquipePvP.equipe2[i].setCoord(new Coordonnees(p.plateau.length - 1,p.plateau[0].length - 1));
+				}
+			}
 			
-			for (int i = 0; i < ConfigEquipePvP.equipe1.length ; i++) {
-				ConfigEquipePvP.equipe1[i].setCoord(new Coordonnees(0, 0));
-				ConfigEquipePvP.equipe2[i].setCoord(new Coordonnees(p.plateau.length - 1,p.plateau[0].length - 1));
+			else if(MenuGraphic.choix ==2){
+				for (int i = 0; i < ConfigEquipePvIA.equipe1.length ; i++) {
+					ConfigEquipePvIA.equipe1[i].setCoord(new Coordonnees(0, 0));
+					
+				}
 			}
 			
 	
@@ -286,9 +294,6 @@
 			return cellule;
 		}
 	
-		public static void main(String[] args) {
-			// TODO Auto-generated method stub
-			new TestGraphic();
-		}
+	
 	
 	}
