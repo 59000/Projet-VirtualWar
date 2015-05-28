@@ -2,6 +2,7 @@ package Robot;
 import java.util.List;
 
 import Constante.Constante;
+import Menu.MenuGraphic;
 import Plateau.Cellule;
 import Plateau.Coordonnees;
 
@@ -69,6 +70,8 @@ public class Piegeur extends Robot {
 		nbMine = Constante.NBMINE;
 	}
 	public String toString(){
+		
+		if(MenuGraphic.experimental.equals("2")){
 		String s;
 		if(nbMine == 10){
 			s="Piegeur" +super.toString()+" mines="+nbMine;
@@ -76,6 +79,8 @@ public class Piegeur extends Robot {
 		else{
 			s="Piegeur" +super.toString()+" mines="+nbMine+" ";
 		}
-		return s;
+		return s; //To string Console
+		}
+		return "Piegeur";
 	}
 }
