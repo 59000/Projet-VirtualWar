@@ -20,7 +20,7 @@ public class Cellule extends Coordonnees {
 	 */
 	protected Robot robot;
 	/** @param pourcentage */
-	public static double pourcentage = Constante.POURCENTAGEOBSTACLE;
+	public static int pourcentage ;
 	/** @param ran */
 	Random ran = new Random();
 	boolean obstacle = false;
@@ -81,7 +81,7 @@ public class Cellule extends Coordonnees {
 		this.robot.setEquipe(equipe);
 	}
 
-	/** Permet de CrÃƒÆ’Ã‚Â©e une base */
+	/** Permet de Creee une base */
 	void creeBase(boolean b) {
 
 		if (b) {
@@ -121,5 +121,5 @@ public class Cellule extends Coordonnees {
 			return false;
 		}
 		return true;
-	}	
+	}
 }
