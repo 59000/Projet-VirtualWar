@@ -28,6 +28,7 @@ public class Menu {
 		Scanner scan = new Scanner(System.in);
 		System.out.println("Bienvenue Dans VIRTUAL WAR !");
 		
+		
 		int taille = ConfigPlateau.slider.getValue();		
 		
 		Cellule.pourcentage = ConfigPlateau.slider1.getValue();
@@ -870,7 +871,7 @@ public class Menu {
 		int taille = ConfigPlateau.slider.getValue();		
 		
 		Cellule.pourcentage = ConfigPlateau.slider1.getValue();
-		System.out.println(Cellule.pourcentage);
+
 
 
 		Plateau p = new Plateau(taille, taille);
