@@ -36,13 +36,13 @@ public class ConfigPlateau {
 		JPanel panSlider = new JPanel();
 		JPanel panSlider1 = new JPanel();
 		Dimension ecran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-		JButton petit = new JButton("Petit");
+		final JButton petit = new JButton("Petit");
 		petit.setPreferredSize(new Dimension(100, 50));
-		JButton grand = new JButton("Grand");
+		final JButton grand = new JButton("Grand");
 		grand.setPreferredSize(new Dimension(100, 50));
-		JButton degage = new JButton("Degage");
+		final JButton degage = new JButton("Degage");
 		degage.setPreferredSize(new Dimension(100, 50));
-		JButton encombre = new JButton("Encombre");
+		final JButton encombre = new JButton("Encombre");
 		encombre.setPreferredSize(new Dimension(130, 50));
 		int hauteur_ecran = (int) ecran.getHeight();
 		int largeur_ecran = (int) ecran.getWidth();
