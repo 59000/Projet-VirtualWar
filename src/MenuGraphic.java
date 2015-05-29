@@ -243,7 +243,7 @@ public class MenuGraphic {
 				// TODO Auto-generated method stub
 				Desktop d = Desktop.getDesktop();
 			    try {
-			     d.open(new File("SFDvFinal_corigee.pdf"));
+			    	d.open(new File("images/SFDvFinal_corigee.pdf"));
 			    } catch (IOException e1) {
 			     // TODO Auto-generated catch block
 			     e1.printStackTrace();
