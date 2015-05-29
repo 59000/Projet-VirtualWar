@@ -4,21 +4,23 @@
 	import java.awt.Dimension;
 	import java.awt.GridLayout;
 	import java.awt.event.MouseEvent;
-	import java.awt.event.MouseListener;
+import java.awt.event.MouseListener;
 	
 	import javax.swing.BorderFactory;
-	import javax.swing.ImageIcon;
-	import javax.swing.JFrame;
-	import javax.swing.JLabel;
-	import javax.swing.JList;
-	import javax.swing.JPanel;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 	
 	import Constante.Constante;
-	import Plateau.Cellule;
-	import Plateau.Coordonnees;
-	import Plateau.Plateau;
-	import Robot.Piegeur;
-	import Robot.Tireur;
+import Plateau.Cellule;
+import Plateau.Coordonnees;
+import Plateau.Plateau;
+import Robot.Piegeur;
+import Robot.Tireur;
 	
 	@SuppressWarnings("serial")
 	public class TestGraphic extends JFrame {
@@ -51,19 +53,21 @@
 	
 			if (MenuGraphic.choix == 1){
 				for (int i = 0; i < ConfigEquipePvP.equipe1.length ; i++) {
-					ConfigEquipePvP.equipe1[i].setCoord(new Coordonnees(0, 0));
+					ConfigEquipePvP.equipe1[i].setCoord(new Coordonnees(1,1));
 					ConfigEquipePvP.equipe2[i].setCoord(new Coordonnees(p.plateau.length - 1,p.plateau[0].length - 1));
-				}
-			}
-			
-			else if(MenuGraphic.choix ==2){
-				for (int i = 0; i < ConfigEquipePvIA.equipe1.length ; i++) {
-					ConfigEquipePvIA.equipe1[i].setCoord(new Coordonnees(0, 0));
 					
 				}
 			}
 			
-	
+			else if(MenuGraphic.choix ==2){
+			    for (int i = 0; i < ConfigEquipePvIA.equipe1.length ; i++) {
+					ConfigEquipePvIA.equipe1[i].setCoord(new Coordonnees(0, 0));
+					
+				}
+				
+			}
+		
+				
 			
 					
 					
@@ -77,52 +81,40 @@
 			cellule[0][0].addMouseListener(new MouseListener() {
 				
 				@Override
-				public void mouseReleased(MouseEvent e) {
+				public void mouseReleased(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 					
 				}
 				
 				@Override
-				public void mousePressed(MouseEvent e) {
+				public void mousePressed(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 					
 				}
 				
 				@Override
-				public void mouseExited(MouseEvent e) {
+				public void mouseExited(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 					
 				}
 				
 				@Override
-				public void mouseEntered(MouseEvent e) {
+				public void mouseEntered(MouseEvent arg0) {
 					// TODO Auto-generated method stub
 					
 				}
 				
 				@Override
-				public void mouseClicked(MouseEvent e) {
+				public void mouseClicked(MouseEvent arg0) {
 					// TODO Auto-generated method stub
-					
-					JFrame fen1 = new JFrame();
-					fen1.setPreferredSize(new Dimension(200,200));
-					fen1.setLayout(new GridLayout(3,3));
-					
-					JPanel pan1 = new JPanel();
-					JPanel pan2 = new JPanel();
-					JPanel pan3 = new JPanel();
-					JPanel pan4 = new JPanel();
-					JPanel pan5 = new JPanel();
+			
 					
 					for (int i = 0; i < ConfigEquipePvP.equipe1.length; i++) {
 						
 						if(ConfigEquipePvP.equipe1[i].getCoord().equals(new Coordonnees(0, 0))){
-							 
+							
 						}
 					}
-					
-					
-					
 				}
 			});
 			
@@ -188,7 +180,7 @@
 					// La cellule est un obstavle
 					else if (plateau[i][j].estObstacle() == true) {
 						cellule[i][j] = new JLabel();
-						ImageIcon img = new ImageIcon("images/block.png");
+						ImageIcon img = new ImageIcon("images/Block.png");
 						cellule[i][j].setIcon(img);
 						cellule[i][j].setOpaque(true);
 						cellule[i][j].setBackground(Color.BLACK);
