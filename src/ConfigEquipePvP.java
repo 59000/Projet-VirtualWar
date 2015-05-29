@@ -27,7 +27,7 @@ public class ConfigEquipePvP {
 	static 	Robot[] equipe2 ;
 
 	public ConfigEquipePvP() {
-		JFrame fen = new JFrame();
+		final JFrame fen = new JFrame();
 		fen.setPreferredSize(new Dimension(700, 500));
 		Dimension ecran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 		int hauteur_ecran = (int) ecran.getHeight();
@@ -64,7 +64,7 @@ public class ConfigEquipePvP {
 		/** textfield equipe 1 */
 
 		final JTextField textNomEquipe1 = new JTextField(
-				"Equipe 1 : Entrez un nom ");
+				"Equipe 1 : Entrez un nom");
 		textNomEquipe1.setFont(new Font("arial", Font.PLAIN, 18));
 		textNomEquipe1.addMouseListener(new MouseListener() {
 
@@ -77,7 +77,9 @@ public class ConfigEquipePvP {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-
+				if(textNomEquipe1.getText().equals("Equipe 1 : Entrez un nom")){
+					textNomEquipe1.setText("");
+				}
 			}
 
 			@Override
@@ -95,7 +97,7 @@ public class ConfigEquipePvP {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				textNomEquipe1.setText("");
+				
 			}
 		});
 
@@ -105,11 +107,11 @@ public class ConfigEquipePvP {
 
 		/** Combobox equipe gauche */
 
-		JComboBox<Robot> gaucheR0 = new JComboBox<Robot>();
-		JComboBox<Robot> gaucheR1 = new JComboBox<Robot>();
-		JComboBox<Robot> gaucheR2 = new JComboBox<Robot>();
-		JComboBox<Robot> gaucheR3 = new JComboBox<Robot>();
-		JComboBox<Robot> gaucheR4 = new JComboBox<Robot>();
+		final JComboBox<Robot> gaucheR0 = new JComboBox<Robot>();
+		final JComboBox<Robot> gaucheR1 = new JComboBox<Robot>();
+		final JComboBox<Robot> gaucheR2 = new JComboBox<Robot>();
+		final JComboBox<Robot> gaucheR3 = new JComboBox<Robot>();
+		final JComboBox<Robot> gaucheR4 = new JComboBox<Robot>();
 
 		((JLabel) gaucheR0.getRenderer())
 				.setHorizontalAlignment(SwingConstants.CENTER);
@@ -319,7 +321,10 @@ public class ConfigEquipePvP {
 				
 			}
 		});
+		
 
+		
+		
 		equipeGauche.add(textNomEquipe1);
 		panGauche.add(equipeGauche, BorderLayout.NORTH);
 		equipeGauche.add(labelTitreGauche, BorderLayout.NORTH);
@@ -328,6 +333,7 @@ public class ConfigEquipePvP {
 		panGauche.add(gaucheR2);
 		panGauche.add(gaucheR3);
 		panGauche.add(gaucheR4);
+		
 
 		/** panneau droite */
 		JPanel panDroit = new JPanel();
@@ -353,7 +359,7 @@ public class ConfigEquipePvP {
 		/** titre equipe 2 */
 
 		final JTextField textNomEquipe2 = new JTextField(
-				"Equipe 2 : Entrez un nom ");
+				"Equipe 2 : Entrez un nom");
 		textNomEquipe2.setFont(new Font("arial", Font.PLAIN, 18));
 		textNomEquipe2.addMouseListener(new MouseListener() {
 
@@ -366,7 +372,9 @@ public class ConfigEquipePvP {
 			@Override
 			public void mousePressed(MouseEvent e) {
 				// TODO Auto-generated method stub
-
+				if(textNomEquipe2.getText().equals("Equipe 2 : Entrez un nom")){
+					textNomEquipe2.setText("");
+				}
 			}
 
 			@Override
@@ -384,7 +392,7 @@ public class ConfigEquipePvP {
 			@Override
 			public void mouseClicked(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				textNomEquipe2.setText("");
+				
 			}
 		});
 
@@ -394,11 +402,11 @@ public class ConfigEquipePvP {
 
 		/** Combobox equipe droit */
 
-		JComboBox<Robot> droitR0 = new JComboBox<Robot>();
-		JComboBox<Robot> droitR1 = new JComboBox<Robot>();
-		JComboBox<Robot> droitR2 = new JComboBox<Robot>();
-		JComboBox<Robot> droitR3 = new JComboBox<Robot>();
-		JComboBox<Robot> droitR4 = new JComboBox<Robot>();
+		final JComboBox<Robot> droitR0 = new JComboBox<Robot>();
+		final JComboBox<Robot> droitR1 = new JComboBox<Robot>();
+		final JComboBox<Robot> droitR2 = new JComboBox<Robot>();
+		final JComboBox<Robot> droitR3 = new JComboBox<Robot>();
+		final JComboBox<Robot> droitR4 = new JComboBox<Robot>();
 
 		
 		((JLabel) droitR0.getRenderer())
@@ -624,6 +632,7 @@ public class ConfigEquipePvP {
 		/** Boutton valider et retour */
 
 		JButton valider = new JButton("Valider");
+		valider.setPreferredSize(new Dimension(150,50));
 		valider.setBackground(new Color(0, 0, 0, 0));
 		valider.setOpaque(false);
 		valider.setForeground(Color.GREEN);
@@ -780,6 +789,7 @@ public class ConfigEquipePvP {
 		});
 
 		JButton retour = new JButton("Retour");
+		retour.setPreferredSize(new Dimension(150,50));
 		retour.setBackground(new Color(0, 0, 0, 0));
 		retour.setOpaque(false);
 		retour.setForeground(Color.RED);
@@ -823,20 +833,20 @@ public class ConfigEquipePvP {
 		panCentre.setOpaque(false);
 
 		JPanel panCentreValider = new JPanel();
-		panCentreValider.setLayout(new GridLayout(1, 3));
+	//	panCentreValider.setLayout(new GridLayout(1, 3));
 		panCentreValider.setBackground(new Color(0, 0, 0, 0));
 		panCentreValider.setOpaque(false);
-		panCentreValider.add(new PanelFond());
+		//panCentreValider.add(new PanelFond());
 		panCentreValider.add(valider);
-		panCentreValider.add(new PanelFond());
+		//panCentreValider.add(new PanelFond());
 
 		JPanel panCentreRetour = new JPanel();
-		panCentreRetour.setLayout(new GridLayout(1, 3));
+		//panCentreRetour.setLayout(new GridLayout(1, 3));
 		panCentreRetour.setBackground(new Color(0, 0, 0, 0));
 		panCentreRetour.setOpaque(false);
-		panCentreRetour.add(new PanelFond());
+	//	panCentreRetour.add(new PanelFond());
 		panCentreRetour.add(retour);
-		panCentreRetour.add(new PanelFond());
+		//panCentreRetour.add(new PanelFond());
 
 		panCentre.add(new PanelFond());
 		panCentre.add(new PanelFond());
@@ -849,7 +859,8 @@ public class ConfigEquipePvP {
 		panel.add(panGauche);
 		panel.add(panCentre);
 		panel.add(panDroit);
-
+		
+		
 		fen.getContentPane().add(panel);
 
 		fen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
