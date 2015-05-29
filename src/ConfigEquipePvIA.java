@@ -33,7 +33,7 @@ public class ConfigEquipePvIA{
 	
 
 		
-			JFrame fen = new JFrame();
+			final JFrame fen = new JFrame();
 			fen.setPreferredSize(new Dimension(700, 500));
 			Dimension ecran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
 			int hauteur_ecran = (int) ecran.getHeight();
@@ -111,11 +111,11 @@ public class ConfigEquipePvIA{
 
 			/** Combobox equipe gauche */
 
-			JComboBox<Robot> gaucheR0 = new JComboBox<Robot>();
-			JComboBox<Robot> gaucheR1 = new JComboBox<Robot>();
-			JComboBox<Robot> gaucheR2 = new JComboBox<Robot>();
-			JComboBox<Robot> gaucheR3 = new JComboBox<Robot>();
-			JComboBox<Robot> gaucheR4 = new JComboBox<Robot>();
+			final JComboBox<Robot> gaucheR0 = new JComboBox<Robot>();
+			final JComboBox<Robot> gaucheR1 = new JComboBox<Robot>();
+			final JComboBox<Robot> gaucheR2 = new JComboBox<Robot>();
+			final JComboBox<Robot> gaucheR3 = new JComboBox<Robot>();
+			final JComboBox<Robot> gaucheR4 = new JComboBox<Robot>();
 
 			((JLabel) gaucheR0.getRenderer())
 					.setHorizontalAlignment(SwingConstants.CENTER);
