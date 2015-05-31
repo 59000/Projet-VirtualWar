@@ -90,7 +90,7 @@ public class Tireur extends Robot {
 			return "Tireur " + super.toString()+"         ";
 		}
 		  
-		return "Tireur";
+		return "Tireur   ";
 	}
 
 }
