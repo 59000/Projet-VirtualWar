@@ -93,7 +93,7 @@ public class Char extends Robot {
 		if(MenuGraphic.experimental.equals("2")){
 		return "Char   " + super.toString()+"         "; //To String mode console
 		}
-		return "Char";
+		return "Char     ";
 	}
 
 }
