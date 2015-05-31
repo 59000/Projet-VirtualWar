@@ -1,11 +1,13 @@
 	package Menu;
 	
-	import java.awt.Color;
-	import java.awt.Dimension;
-	import java.awt.GridLayout;
-	import java.awt.event.MouseEvent;
+	import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-	
+
 	import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -14,7 +16,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.event.AncestorEvent;
 import javax.swing.event.AncestorListener;
-	
+
 	import Constante.Constante;
 import Plateau.Cellule;
 import Plateau.Coordonnees;
@@ -28,7 +30,7 @@ import Robot.Tireur;
 		// | Attributs : |
 		/** Le plateau de jeu */
 		Plateau p;
-		/** Le plateau qui s'affichent a  l'ecran */
+		/** Le plateau qui s'affichent aÂ  l'ecran */
 		JLabel[][] cellule;
 	
 		// | Constructeurs : |
@@ -36,6 +38,9 @@ import Robot.Tireur;
 		 * Constructeurs du menu
 		 */
 		public TestGraphic() {
+			Dimension tailleEcran = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+			int hauteur = (int)tailleEcran.getHeight();
+			int largeur = (int)tailleEcran.getWidth();
 			// Pourcentage d'obstacles
 			Cellule.pourcentage = ConfigPlateau.slider1.getValue();
 			// Cree le plateau (taille fixe pour test)
@@ -66,14 +71,62 @@ import Robot.Tireur;
 				}
 				
 			}
-		
-				
 			
+			// gestion des borderPanel
+			JPanel vieEquipe1 = new JPanel();
+			JPanel vieEquipe2 = new JPanel();
+			
+			
+			//parametrage de vieEquipe1
+			vieEquipe1.setPreferredSize(new Dimension(250,500));
+			vieEquipe1.setBackground(Color.RED);
+			BorderLayout layoutEquipe1 = new BorderLayout();
+			vieEquipe1.setLayout(layoutEquipe1);
+			JLabel nomEquipe1 = new JLabel(ConfigEquipePvP.textNomEquipe1.getText(), JLabel.CENTER);
+			nomEquipe1.setFont(new Font("Arial", Font.BOLD, 42));
+			vieEquipe1.add(nomEquipe1, layoutEquipe1.NORTH);
+			JLabel[] infoRobotEquipe1 = new JLabel[ConfigEquipePvP.equipe1.length];
+			JPanel pancentreEquipe1 = new JPanel();
+			pancentreEquipe1.setBackground(Color.green);
+			pancentreEquipe1.setLayout(null);
+			for (int i = 0; i < ConfigEquipePvP.equipe1.length ; i++) {
+				infoRobotEquipe1[i] = new JLabel(ConfigEquipePvP.equipe1[i].toString()+"    "+ConfigEquipePvP.equipe1[i].getEnergie());
+				infoRobotEquipe1[i].setFont(new Font("Arial", Font.BOLD, 24));	
+				infoRobotEquipe1[i].setBounds(10, (i*60+150),200,30);
+				pancentreEquipe1.add(infoRobotEquipe1[i]);
+				
+			}
+			
+			
+			vieEquipe1.add(pancentreEquipe1, layoutEquipe1.CENTER);
+			//paramtrage vieEquipe2
+			
+			vieEquipe2.setPreferredSize(new Dimension(250,500));
+			vieEquipe2.setBackground(Color.yellow);
+			BorderLayout layoutEquipe2 = new BorderLayout();
+			vieEquipe2.setLayout(layoutEquipe2);
+			System.out.println(ConfigEquipePvP.textNomEquipe2.getText());
+			JLabel nomEquipe2 = new JLabel(ConfigEquipePvP.textNomEquipe2.getText(), JLabel.CENTER);
+			nomEquipe2.setFont(new Font("Arial", Font.BOLD, 42));
+			vieEquipe2.add(nomEquipe2,layoutEquipe2.NORTH);
+			JLabel[] infoRobotEquipe2 = new JLabel[ConfigEquipePvP.equipe1.length];
+			JPanel pancentreEquipe2 = new JPanel();
+			pancentreEquipe2.setBackground(Color.PINK);
+			pancentreEquipe2.setLayout(null);
+			for (int i = 0; i < ConfigEquipePvP.equipe1.length ; i++) {
+				infoRobotEquipe2[i] = new JLabel(ConfigEquipePvP.equipe2[i].toString()+"    "+ConfigEquipePvP.equipe2[i].getEnergie());
+				infoRobotEquipe2[i].setFont(new Font("Arial", Font.BOLD, 24));	
+				infoRobotEquipe2[i].setBounds(10, (i*60+150),200,30);
+				pancentreEquipe2.add(infoRobotEquipe2[i]);
+				
+			}
+			
+			vieEquipe2.add(pancentreEquipe2, layoutEquipe2.CENTER);
 					
 					
 					
-			this.setPreferredSize(new Dimension(p.plateau.length * 52,
-					p.plateau[0].length * 52));
+			this.setPreferredSize(new Dimension(largeur,
+					hauteur));
 			// Cree la JPanel qui contient le plateau affichable
 			JPanel pan = updatePanel(cellule, p.plateau);
 	
@@ -119,7 +172,11 @@ import Robot.Tireur;
 			});
 			
 			// Parametre pour afficher le plateau
-			this.add(pan);
+			BorderLayout layout = new BorderLayout();
+			this.setLayout(layout);
+			this.getContentPane().add(vieEquipe1,layout.WEST);
+			this.getContentPane().add(pan, layout.CENTER);
+			this.getContentPane().add(vieEquipe2, layout.EAST);
 			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.pack();
 			this.setVisible(true);
@@ -145,14 +202,14 @@ import Robot.Tireur;
 		}
 	
 		/**
-		 * Met a  jour le plateau affichable a  partir des informations du plateau
+		 * Met aÂ  jour le plateau affichable aÂ  partir des informations du plateau
 		 * de jeu
 		 * 
 		 * @param cellule
-		 *            : le plateau affichable a  mettre a  jour
+		 *            : le plateau affichable aÂ  mettre aÂ  jour
 		 * @param p
 		 *            : le plateau de jeu
-		 * @return cellule : le plateau affichable mis a  jour
+		 * @return cellule : le plateau affichable mis aÂ  jour
 		 */
 		public JLabel[][] updatePlateau(JLabel[][] cellule, Cellule[][] plateau) {
 			for (int i = 0; i < plateau.length; i++) {
@@ -285,7 +342,7 @@ import Robot.Tireur;
 	
 			return cellule;
 		}
-	
+		
 	
 	
 	}
