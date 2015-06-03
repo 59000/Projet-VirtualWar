@@ -7,15 +7,21 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
+
+import org.omg.CORBA.SystemException;
 
 import Constante.Constante;
 import Plateau.Cellule;
@@ -25,7 +31,7 @@ import Robot.Piegeur;
 import Robot.Tireur;
 	
 	@SuppressWarnings("serial")
-	public class TestGraphic extends JFrame {
+	public class TestGraphic extends JWindow {
 	
 		// | Attributs : |
 		/** Le plateau de jeu */
@@ -81,7 +87,7 @@ import Robot.Tireur;
 		
 			
 			//parametrage de vieEquipe1
-			vieEquipe1.setPreferredSize(new Dimension(270,500));
+			vieEquipe1.setPreferredSize(new Dimension(270,hauteur));
 			vieEquipe1.setBackground(Color.RED);
 			BorderLayout layoutEquipe1 = new BorderLayout();
 			vieEquipe1.setLayout(layoutEquipe1);
@@ -112,19 +118,31 @@ import Robot.Tireur;
 				else{
 					infoRobotEquipe1[i] = new JLabel(ConfigEquipePvP.equipe1[i].toString()+"    "+ConfigEquipePvP.equipe1[i].getEnergie());
 				}	
-				infoRobotEquipe1[i].setFont(new Font("Arial", Font.BOLD, 24));
+				infoRobotEquipe1[i].setFont(new Font("Arial", Font.BOLD, 16));
 				infoRobotEquipe1[i].setForeground(Color.white);
 				infoRobotEquipe1[i].setBounds(10, (i*60+150),200,30);
 				pancentreEquipe1.add(infoRobotEquipe1[i]);
 				
 			}
 			
+			JButton quitter = new JButton("Quitter");
+			quitter.setBounds((int)(largeur*0.05), (int)(hauteur*0.95), 150, 25);
+			quitter.addActionListener(new ActionListener(
+					) {
+				
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					System.exit(0);
+				}
+			});
+			vieEquipe1.add(quitter);
 			
 			vieEquipe1.add(pancentreEquipe1, layoutEquipe1.CENTER);
 			//paramtrage vieEquipe2
 			
 			vieEquipe2.setOpaque(false);
-			vieEquipe2.setPreferredSize(new Dimension(270,500));
+			vieEquipe2.setPreferredSize(new Dimension(270,hauteur));
 			vieEquipe2.setBackground(Color.yellow);
 			BorderLayout layoutEquipe2 = new BorderLayout();
 			vieEquipe2.setLayout(layoutEquipe2);
@@ -152,7 +170,7 @@ import Robot.Tireur;
 					infoRobotEquipe2[i] = new JLabel(ConfigEquipePvP.equipe2[i].toString()+"    "+ConfigEquipePvP.equipe2[i].getEnergie());
 				}
 				
-				infoRobotEquipe2[i].setFont(new Font("Arial", Font.BOLD, 24));	
+				infoRobotEquipe2[i].setFont(new Font("Arial", Font.BOLD, 16));	
 				infoRobotEquipe2[i].setForeground(Color.white);
 				infoRobotEquipe2[i].setBounds(10, (i*60+150),200,30);
 				pancentreEquipe2.add(infoRobotEquipe2[i]);
@@ -232,8 +250,8 @@ import Robot.Tireur;
 			
 			this.getContentPane().add(pan, layout.CENTER);
 			this.setLocation((int)(tailleEcran.getWidth()*0.15), 0);
-			this.setResizable(false);
-			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			//this.setResizable(false);
+			//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.pack();
 			this.setVisible(true);
 	
