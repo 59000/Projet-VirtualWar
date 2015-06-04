@@ -54,7 +54,7 @@ public class MenuGraphic {
 		JButton boutton1 = new JButton();
 		boutton1.setLayout(new GridLayout());
 		boutton1.setPreferredSize(new Dimension(200, 30));
-		boutton1.setText("PvP");
+		boutton1.setText("Player Vs Player");
 		boutton1.addMouseListener(new MouseListener() {
 
 			@Override
@@ -108,7 +108,7 @@ public class MenuGraphic {
 		JButton boutton2 = new JButton();
 		boutton2.setLayout(new GridLayout());
 		boutton2.setPreferredSize(new Dimension(200, 30));
-		boutton2.setText("PvIA");
+		boutton2.setText("Player Vs Ia");
 		boutton2.addMouseListener(new MouseListener() {
 
 			@Override
@@ -159,7 +159,7 @@ public class MenuGraphic {
 		JButton boutton3 = new JButton();
 		boutton3.setLayout(new GridLayout());
 		boutton3.setPreferredSize(new Dimension(200, 30));
-		boutton3.setText("IAvIA");
+		boutton3.setText("Ia Vs Ia");
 		boutton3.addMouseListener(new MouseListener() {
 
 			@Override
