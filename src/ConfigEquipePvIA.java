@@ -1,5 +1,8 @@
 package Menu;
 
+import ia.Aleatoire;
+import ia.IA;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -27,8 +30,10 @@ public class ConfigEquipePvIA{
 	
 	static int cptEquipe1;
 	static 	Robot[] equipe1 ;
-
-	
+	static 	Robot[] equipe2;
+	static int cptEquipe2;
+	final static JTextField textNomEquipe1 = new JTextField(
+			"Equipe 1 : Entrez un nom ");
 	public ConfigEquipePvIA(){
 	
 
@@ -69,8 +74,7 @@ public class ConfigEquipePvIA{
 
 			/** textfield equipe 1 */
 
-			final JTextField textNomEquipe1 = new JTextField(
-					"Equipe 1 : Entrez un nom ");
+			
 			textNomEquipe1.setFont(new Font("arial", Font.PLAIN, 18));
 			textNomEquipe1.addMouseListener(new MouseListener() {
 
@@ -436,8 +440,10 @@ public class ConfigEquipePvIA{
 							&& !textNomEquipe1.getText().equals(
 									"Equipe 1 : Entrez un nom ")
 							&& !textNomEquipe1.getText().equals("")
-							) {
-						
+							&& textNomEquipe1.getText().length()<= 8) {
+						cptEquipe2 = cptEquipe1;
+						IA rahan = new Aleatoire(1);
+						equipe2 = rahan.constitution_equipes(cptEquipe2);
 						fen.dispose();
 						new TestGraphic();
 					} else {
@@ -486,6 +492,15 @@ public class ConfigEquipePvIA{
 					new ConfigPlateau();
 				}
 			});
+			
+			
+			
+			//Creation de l'equipe deux
+			
+			
+			
+			
+			
 
 			JPanel panCentre = new JPanel();
 			panCentre.setLayout(new GridLayout(7, 1));
