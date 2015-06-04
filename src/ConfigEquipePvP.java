@@ -847,5 +847,5 @@ public class ConfigEquipePvP {
 		fen.setVisible(true);
 
 	}
-
+	//commit
 }
