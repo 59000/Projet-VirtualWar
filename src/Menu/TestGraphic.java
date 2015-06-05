@@ -18,6 +18,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JWindow;
 
@@ -25,9 +26,11 @@ import Constante.Constante;
 import Plateau.Cellule;
 import Plateau.Coordonnees;
 import Plateau.Plateau;
+import Robot.Char;
 import Robot.Piegeur;
 import Robot.Robot;
 import Robot.Tireur;
+import Constante.gameState;
 
 @SuppressWarnings("serial")
 public class TestGraphic extends JWindow {
@@ -37,8 +40,9 @@ public class TestGraphic extends JWindow {
 	Plateau p;
 	/** Le plateau qui s'affichent aÂ  l'ecran */
 	JLabel[][] cellule;
-	Robot[] equipe1 ;
-	Robot[] equipe2; 
+	Robot[] equipe1;
+	Robot[] equipe2;
+
 	// | Constructeurs : |
 	/**
 	 * Constructeurs du menu
@@ -82,16 +86,15 @@ public class TestGraphic extends JWindow {
 			Random rdm = new Random();
 			IA ia1 = new Aleatoire(0);
 			IA ia2 = new Aleatoire(1);
-			int nombre = 1+rdm.nextInt(5);
-			 equipe1 = ia1.constitution_equipes(nombre); 
-			 equipe2 = ia2.constitution_equipes(nombre);
+			int nombre = 1 + rdm.nextInt(5);
+			equipe1 = ia1.constitution_equipes(nombre);
+			equipe2 = ia2.constitution_equipes(nombre);
 			for (int i = 0; i < equipe1.length; i++) {
 				equipe1[i].setCoord(new Coordonnees(0, 0));
-				equipe2[i].setCoord(new Coordonnees(
-						p.plateau.length - 1, p.plateau[0].length - 1));
+				equipe2[i].setCoord(new Coordonnees(p.plateau.length - 1,
+						p.plateau[0].length - 1));
 			}
 		}
-	
 
 		// gestion des borderPanel
 		JPanel vieEquipe1 = new JPanel();
@@ -172,7 +175,7 @@ public class TestGraphic extends JWindow {
 				infoRobotEquipe1[i].setBounds(45, (i * 60 + 150), 200, 30);
 				pancentreEquipe1.add(infoRobotEquipe1[i]);
 			}
-		}else {
+		} else {
 			for (int i = 0; i < equipe1.length; i++) {
 
 				if (equipe1[i] instanceof Piegeur) {
@@ -180,9 +183,8 @@ public class TestGraphic extends JWindow {
 					infoRobotEquipe1[i] = new JLabel(temp.toString() + "      "
 							+ temp.getEnergie() + "        " + temp.nbMine);
 				} else {
-					infoRobotEquipe1[i] = new JLabel(
-							equipe1[i].toString() + "       "
-									+ equipe1[i].getEnergie());
+					infoRobotEquipe1[i] = new JLabel(equipe1[i].toString()
+							+ "       " + equipe1[i].getEnergie());
 				}
 				infoRobotEquipe1[i].setFont(new Font("Arial", Font.BOLD, 16));
 				infoRobotEquipe1[i].setForeground(Color.white);
@@ -218,7 +220,7 @@ public class TestGraphic extends JWindow {
 					JLabel.CENTER);
 		} else if (MenuGraphic.choix == 2) {
 			nomEquipe2 = new JLabel("Ia", JLabel.CENTER);
-		}else{
+		} else {
 			nomEquipe2 = new JLabel("Ia 2", JLabel.CENTER);
 		}
 
@@ -231,7 +233,7 @@ public class TestGraphic extends JWindow {
 		} else if (MenuGraphic.choix == 2) {
 			infoRobotEquipe2 = new JLabel[ConfigEquipePvIA.equipe1.length];
 		} else {
-			//rien
+			// rien
 		}
 
 		JPanel pancentreEquipe2 = new JPanel();
@@ -289,9 +291,8 @@ public class TestGraphic extends JWindow {
 					infoRobotEquipe2[i] = new JLabel(temp.toString() + "      "
 							+ temp.getEnergie() + "        " + temp.nbMine);
 				} else {
-					infoRobotEquipe2[i] = new JLabel(
-						equipe2[i].toString() + "       "
-									+ equipe2[i].getEnergie());
+					infoRobotEquipe2[i] = new JLabel(equipe2[i].toString()
+							+ "       " + equipe2[i].getEnergie());
 				}
 
 				infoRobotEquipe2[i].setFont(new Font("Arial", Font.BOLD, 16));
@@ -305,16 +306,16 @@ public class TestGraphic extends JWindow {
 
 		WindowEquipe1.setContentPane(new PanelFond());
 		WindowEquipe1.add(vieEquipe1);
-		WindowEquipe1.setPreferredSize(new Dimension(
-				(int) (tailleEcran.getWidth() * 0.15), hauteur));
+		WindowEquipe1.setPreferredSize(new Dimension((int) (tailleEcran
+				.getWidth() * 0.15), hauteur));
 		WindowEquipe1.setLocation(0, 0);
 		WindowEquipe1.pack();
 		WindowEquipe1.setVisible(true);
 
 		WindowEquipe2.setContentPane(new PanelFond());
 		WindowEquipe2.add(vieEquipe2);
-		WindowEquipe2.setPreferredSize(new Dimension(
-				(int) (tailleEcran.getWidth() * 0.15), hauteur));
+		WindowEquipe2.setPreferredSize(new Dimension((int) (tailleEcran
+				.getWidth() * 0.15), hauteur));
 		WindowEquipe2.setLocation((int) (tailleEcran.getWidth() * 0.85), 0);
 		WindowEquipe2.pack();
 		WindowEquipe2.setVisible(true);
@@ -364,6 +365,9 @@ public class TestGraphic extends JWindow {
 			}
 		});
 
+		gameState.equipe1 = equipe1;
+		gameState.equipe2 = equipe2;
+
 		// Parametre pour afficher le plateau
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
@@ -374,6 +378,10 @@ public class TestGraphic extends JWindow {
 		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.pack();
 		this.setVisible(true);
+		
+		p.plateau[2][2].deplaceSur(new Char(0, 1));
+		
+		gameLoop();
 
 	}
 
@@ -395,9 +403,38 @@ public class TestGraphic extends JWindow {
 		return pan;
 	}
 
+	public void gameLoop() {
+		while (gameState.gameRunning) {
+			if (!verifyEquipeAlive(equipe1)) {
+				gameState.gameRunning = false;
+				JOptionPane.showMessageDialog(null, "L'�quipe  a gagn�e !");
+			} else if (!verifyEquipeAlive(equipe2)) {
+				gameState.gameRunning = false;
+				JOptionPane.showMessageDialog(null, "L'�quipe  a gagn�e !");
+			} else if (gameState.finTour) {
+				if (gameState.currentEquipe.equals(equipe1)) {
+					gameState.currentEquipe = equipe2;
+				} else {
+					gameState.currentEquipe = equipe1;
+				}
+			}
+			updatePlateau(cellule, p.plateau);
+		}
+	}
+
+	public boolean verifyEquipeAlive(Robot[] equipe) {
+		for (int i = 0; i < equipe.length; i++) {
+			if (equipe[i] != null) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	/**
-	 * Met aÃ‚Â  jour le plateau affichable aÃ‚Â  partir des informations du
-	 * plateau de jeu
+	 * Met aÃ‚Â  jour le plateau affichable aÃ‚Â  partir des
+	 * informations du plateau de jeu
 	 * 
 	 * @param cellule
 	 *            : le plateau affichable aÃ‚Â  mettre aÃ‚Â  jour
@@ -410,51 +447,28 @@ public class TestGraphic extends JWindow {
 			for (int j = 0; j < plateau[0].length; j++) {
 				// La cellule est une base de l'equipe 1
 				if (plateau[i][j].estBase() == 1) {
-					cellule[i][j] = new JLabel();
-					ImageIcon img = new ImageIcon("images/base.png");
-					cellule[i][j].setIcon(img);
-					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
-					cellule[i][j].setBorder(BorderFactory
-							.createLineBorder(Color.BLACK));
+					cellule[i][j] = new ClickableLabel("images/base.png", p, i,
+							j);
 				}
 				// La cellule est une base de l'equipe 2
 				else if (plateau[i][j].estBase() == 2) {
-					cellule[i][j] = new JLabel();
-					ImageIcon img = new ImageIcon("images/base2.png");
-					cellule[i][j].setIcon(img);
-					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
-					cellule[i][j].setBorder(BorderFactory
-							.createLineBorder(Color.BLACK));
+					cellule[i][j] = new ClickableLabel("images/base2.png", p,
+							i, j);
 				}
 				// La cellule est un obstavle
 				else if (plateau[i][j].estObstacle() == true) {
-					cellule[i][j] = new JLabel();
-					ImageIcon img = new ImageIcon("images/Block.png");
-					cellule[i][j].setIcon(img);
-					cellule[i][j].setOpaque(true);
-					cellule[i][j].setBackground(Color.BLACK);
+					cellule[i][j] = new ClickableLabel("images/Block.png", p,
+							i, j);
 				}
 				// La cellule est une mine de l'equipe 1
 				else if (plateau[i][j].contienMine() == 1) {
-					cellule[i][j] = new JLabel();
-					ImageIcon img = new ImageIcon("images/mine1.png");
-					cellule[i][j].setIcon(img);
-					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
-					cellule[i][j].setBorder(BorderFactory
-							.createLineBorder(Color.BLACK));
+					cellule[i][j] = new ClickableLabel("images/mine1.png", p,
+							i, j);
 				}
 				// La cellule est une mine de l'equipe 2
 				else if (plateau[i][j].contienMine() == 2) {
-					cellule[i][j] = new JLabel();
-					ImageIcon img = new ImageIcon("images/mine2.png");
-					cellule[i][j].setIcon(img);
-					cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-					cellule[i][j].setVerticalAlignment(JLabel.CENTER);
-					cellule[i][j].setBorder(BorderFactory
-							.createLineBorder(Color.BLACK));
+					cellule[i][j] = new ClickableLabel("images/mine2.png", p,
+							i, j);
 				}
 				// La cellule contient un robot
 				else if (plateau[i][j].getContenu() != null) {
@@ -462,74 +476,42 @@ public class TestGraphic extends JWindow {
 					if (plateau[i][j].getContenu().getEquipe() == 1) {
 						// La cellue contient un tireur
 						if (plateau[i][j].getContenu() instanceof Tireur) {
-							cellule[i][j] = new JLabel("T");
-							ImageIcon img = new ImageIcon("images/tireur1.png");
-							cellule[i][j].setIcon(img);
-							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
-							cellule[i][j].setBorder(BorderFactory
-									.createLineBorder(Color.BLACK));
+							cellule[i][j] = new ClickableLabel(
+									"images/tireur1.png", p, i, j);
 						}
 						// La cellule contient un piegeur
 						else if (plateau[i][j].getContenu() instanceof Piegeur) {
-							cellule[i][j] = new JLabel("P");
-							ImageIcon img = new ImageIcon("images/piegeur1.png");
-							cellule[i][j].setIcon(img);
-							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
-							cellule[i][j].setBorder(BorderFactory
-									.createLineBorder(Color.BLACK));
+							cellule[i][j] = new ClickableLabel(
+									"images/piegeur1.png", p, i, j);
 						}
 						// La cellule contient un char
 						else {
-							cellule[i][j] = new JLabel("C");
-							ImageIcon img = new ImageIcon("images/char1.png");
-							cellule[i][j].setIcon(img);
-							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
-							cellule[i][j].setBorder(BorderFactory
-									.createLineBorder(Color.BLACK));
+							cellule[i][j] = new ClickableLabel(
+									"images/char1.png", p, i, j);
 						}
 					}
 					// La cellule contient un robot de l'equipe 2
 					else if (plateau[i][j].getContenu().getEquipe() == 2) {
 						// La cellue contient un tireur
 						if (plateau[i][j].getContenu() instanceof Tireur) {
-							cellule[i][j] = new JLabel("t");
-							ImageIcon img = new ImageIcon("images/tireur2.png");
-							cellule[i][j].setIcon(img);
-							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
-							cellule[i][j].setBorder(BorderFactory
-									.createLineBorder(Color.BLACK));
+							cellule[i][j] = new ClickableLabel(
+									"images/tireur2.png", p, i, j);
 						}
 						// La cellule contient un piegeur
 						else if (plateau[i][j].getContenu() instanceof Piegeur) {
-							cellule[i][j] = new JLabel("p");
-							ImageIcon img = new ImageIcon("images/piegeur2.png");
-							cellule[i][j].setIcon(img);
-							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
-							cellule[i][j].setBorder(BorderFactory
-									.createLineBorder(Color.BLACK));
+							cellule[i][j] = new ClickableLabel(
+									"images/piegeur2.png", p, i, j);
 						}
 						// La cellule contient un char
 						else {
-							cellule[i][j] = new JLabel("c");
-							ImageIcon img = new ImageIcon("images/char2.png");
-							cellule[i][j].setIcon(img);
-							cellule[i][j].setHorizontalAlignment(JLabel.CENTER);
-							cellule[i][j].setVerticalAlignment(JLabel.CENTER);
-							cellule[i][j].setBorder(BorderFactory
-									.createLineBorder(Color.BLACK));
+							cellule[i][j] = new ClickableLabel(
+									"images/char2.png", p, i, j);
 						}
 					}
 				}
 				// Sinon
 				else {
-					cellule[i][j] = new JLabel("");
-					cellule[i][j].setBorder(BorderFactory
-							.createLineBorder(Color.BLACK));
+					cellule[i][j] = new ClickableLabel(null, p, i, j);
 				}
 			}
 		}

@@ -221,7 +221,7 @@ public class ConfigPlateau {
 		fen.getContentPane().add(panSlider);
 		fen.getContentPane().add(plateau);
 		fen.getContentPane().add(paninvi1);
-		fen.getContentPane().add(panSlider1);
+		fen.getContentPane().add(panSlider1);	
 
 		fen.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		fen.pack();
