@@ -15,7 +15,6 @@ import java.awt.event.MouseListener;
 import java.util.Random;
 
 import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -38,7 +37,7 @@ public class TestGraphic extends JWindow {
 	// | Attributs : |
 	/** Le plateau de jeu */
 	Plateau p;
-	/** Le plateau qui s'affichent aÂ  l'ecran */
+	/** Le plateau qui s'affichent aÃ‚Â  l'ecran */
 	JLabel[][] cellule;
 	Robot[] equipe1;
 	Robot[] equipe2;
@@ -121,7 +120,7 @@ public class TestGraphic extends JWindow {
 		nomEquipe1.setFont(new Font("Arial", Font.BOLD, 42));
 		nomEquipe1.setForeground(Color.white);
 
-		vieEquipe1.add(nomEquipe1, layoutEquipe1.NORTH);
+		vieEquipe1.add(nomEquipe1, BorderLayout.NORTH);
 		vieEquipe1.setOpaque(false);
 		JLabel[] infoRobotEquipe1 = new JLabel[42]; // la reponse a l'univers
 		if (MenuGraphic.choix == 1) {
@@ -206,7 +205,7 @@ public class TestGraphic extends JWindow {
 		});
 		vieEquipe1.add(quitter);
 
-		vieEquipe1.add(pancentreEquipe1, layoutEquipe1.CENTER);
+		vieEquipe1.add(pancentreEquipe1, BorderLayout.CENTER);
 		// paramtrage vieEquipe2
 
 		vieEquipe2.setOpaque(false);
@@ -226,7 +225,7 @@ public class TestGraphic extends JWindow {
 
 		nomEquipe2.setFont(new Font("Arial", Font.BOLD, 42));
 		nomEquipe2.setForeground(Color.white);
-		vieEquipe2.add(nomEquipe2, layoutEquipe2.NORTH);
+		vieEquipe2.add(nomEquipe2, BorderLayout.NORTH);
 		JLabel[] infoRobotEquipe2 = new JLabel[42];
 		if (MenuGraphic.choix == 1) {
 			infoRobotEquipe2 = new JLabel[ConfigEquipePvP.equipe1.length];
@@ -302,7 +301,7 @@ public class TestGraphic extends JWindow {
 			}
 		}
 
-		vieEquipe2.add(pancentreEquipe2, layoutEquipe2.CENTER);
+		vieEquipe2.add(pancentreEquipe2, BorderLayout.CENTER);
 
 		WindowEquipe1.setContentPane(new PanelFond());
 		WindowEquipe1.add(vieEquipe1);
@@ -365,14 +364,14 @@ public class TestGraphic extends JWindow {
 			}
 		});
 
-		gameState.equipe1 = equipe1;
-		gameState.equipe2 = equipe2;
+	/*	gameState.equipe1 = equipe1;
+		gameState.equipe2 = equipe2;*/
 
 		// Parametre pour afficher le plateau
 		BorderLayout layout = new BorderLayout();
 		this.setLayout(layout);
 
-		this.getContentPane().add(pan, layout.CENTER);
+		this.getContentPane().add(pan, BorderLayout.CENTER);
 		this.setLocation((int) (tailleEcran.getWidth() * 0.15), 0);
 		// this.setResizable(false);
 		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -381,7 +380,7 @@ public class TestGraphic extends JWindow {
 		
 		p.plateau[2][2].deplaceSur(new Char(0, 1));
 		
-		gameLoop();
+		//gameLoop();
 
 	}
 
@@ -402,15 +401,15 @@ public class TestGraphic extends JWindow {
 
 		return pan;
 	}
-
-	public void gameLoop() {
+	/** Permet de faire les tours de jeu */
+/*	public void gameLoop() {
 		while (gameState.gameRunning) {
 			if (!verifyEquipeAlive(equipe1)) {
 				gameState.gameRunning = false;
-				JOptionPane.showMessageDialog(null, "L'�quipe  a gagn�e !");
+				JOptionPane.showMessageDialog(null, "L'équipe  a gagnée !");
 			} else if (!verifyEquipeAlive(equipe2)) {
 				gameState.gameRunning = false;
-				JOptionPane.showMessageDialog(null, "L'�quipe  a gagn�e !");
+				JOptionPane.showMessageDialog(null, "L'équipe  a gagnée !");
 			} else if (gameState.finTour) {
 				if (gameState.currentEquipe.equals(equipe1)) {
 					gameState.currentEquipe = equipe2;
@@ -430,17 +429,17 @@ public class TestGraphic extends JWindow {
 		}
 
 		return false;
-	}
+	}*/
 
 	/**
-	 * Met aÃ‚Â  jour le plateau affichable aÃ‚Â  partir des
+	 * Met a  jour le plateau affichable a  partir des
 	 * informations du plateau de jeu
 	 * 
 	 * @param cellule
-	 *            : le plateau affichable aÃ‚Â  mettre aÃ‚Â  jour
+	 *            : le plateau affichable a  mettre a  jour
 	 * @param p
 	 *            : le plateau de jeu
-	 * @return cellule : le plateau affichable mis aÃ‚Â  jour
+	 * @return cellule : le plateau affichable mis a  jour
 	 */
 	public JLabel[][] updatePlateau(JLabel[][] cellule, Cellule[][] plateau) {
 		for (int i = 0; i < plateau.length; i++) {
